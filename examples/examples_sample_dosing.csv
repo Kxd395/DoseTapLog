@@ -1,0 +1,5 @@
+date,dose1_time,dose1_g,dose2_time,dose2_g,food_cutoff,alcohol,sedatives,morning_alertness_1to5,notes
+2025-10-24,23:00,3.0,02:45,3.0,21:00,false,false,4,"slept solid, easy morning"
+2025-10-25,23:05,3.6,02:50,2.4,21:00,false,false,3,"woke early for second dose"
+2025-10-26,22:55,3.0,03:10,3.0,20:45,false,false,2,"heavy morning"
+2025-10-27,23:10,3.6,02:35,2.4,21:00,false,false,4,"good alertness"
