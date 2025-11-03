@@ -15,6 +15,16 @@ final class TodayViewModel: ObservableObject {
     @Published var dose2DisabledReason: String = "Dose 2 available after window opens"
     @Published var prefs: LegacyAppPreferences
     
+    // MARK: - Wake Sheet State
+    @Published var showWakeSheet: Bool = false
+    @Published var wakeSheetType: WakeEventType = .alarm
+    
+    enum WakeEventType {
+        case alarm
+        case bathroom
+        case finalWake
+    }
+    
     // MARK: - Reset Night State
     @Published var showResetSheet: Bool = false
     @Published var showUndoResetBanner: Bool = false

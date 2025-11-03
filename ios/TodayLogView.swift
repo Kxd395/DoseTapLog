@@ -119,8 +119,15 @@ struct TodayLogView: View {
                         }
                         Text("Events").font(.footnote).foregroundStyle(.secondary)
                         HStack {
-                            Button("Alarm wake", action: vm.logAlarmWake).buttonStyle(.bordered)
-                            Button("Bathroom", action: vm.logBathroom).buttonStyle(.bordered)
+                            Button("Alarm wake") {
+                                vm.showAlarmWakeSheet()
+                            }
+                            .buttonStyle(.bordered)
+                            
+                            Button("Bathroom") {
+                                vm.showBathroomWakeSheet()
+                            }
+                            .buttonStyle(.bordered)
                         }
                         HStack {
                             Button("Undo last", action: vm.undoLast).buttonStyle(.bordered)
@@ -209,6 +216,21 @@ struct TodayLogView: View {
                     vm.performResetNight(mode: mode, reason: reason)
                     vm.showResetSheet = false
                 }
+            }
+            .sheet(isPresented: $vm.showWakeSheet) {
+                WakeSheetView(
+                    isPresented: $vm.showWakeSheet,
+                    isFinalPreset: vm.wakeSheetType == .finalWake,
+                    onConfirm: { reason, isFinal, wasInterrupted, time, note in
+                        vm.logWakeNow(
+                            reason: reason,
+                            isFinal: isFinal,
+                            wasAlarmInterrupted: wasInterrupted,
+                            overrideTime: time,
+                            note: note?.isEmpty == false ? note : nil
+                        )
+                    }
+                )
             }
             .onAppear {
                 // Initialize controller with modelContext on first appear

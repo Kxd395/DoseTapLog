@@ -65,12 +65,30 @@ extension TodayViewModel {
         )
     }
     
+    /// Show wake sheet for alarm wake with reason selection
+    func showAlarmWakeSheet() {
+        wakeSheetType = .alarm
+        showWakeSheet = true
+    }
+    
     /// Log bathroom wake (common shortcut)
     func logBathroomWake() {
         logWakeNow(
             reason: .bathroom,
             isFinal: false
         )
+    }
+    
+    /// Show wake sheet for bathroom wake with reason selection
+    func showBathroomWakeSheet() {
+        wakeSheetType = .bathroom
+        showWakeSheet = true
+    }
+    
+    /// Show wake sheet for final wake with reason selection
+    func showFinalWakeSheet() {
+        wakeSheetType = .finalWake
+        showWakeSheet = true
     }
     
     /// Check if wake happened during dose 2 window
