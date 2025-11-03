@@ -1,7 +1,0 @@
-- [ ] Dose 2 blocked outside 150–240 min
-- [ ] Final Wake cancels alarm
-- [ ] Snooze caps at 3
-- [ ] CSV HH:mm uses stored offset
-- [ ] 0.25g rounding only at display/save
-- [ ] HealthKit provenance set
-- [ ] Widget writes consumed

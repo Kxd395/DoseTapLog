@@ -8,7 +8,7 @@
 ## Executive Summary
 - Repository documentation consolidated: `README.md` is now the single source of truth with setup, architecture, and roadmap.
 - Secrets management formalized in `docs/SECRETS.md` with supporting `server/.env.example`.
-- Actionable engineering backlog captured in `docs/ops/ACTION_CHECKLIST.md`; verification workflow outlined in `docs/ops/EVERYTHING_WORKING.md`.
+- Actionable engineering backlog captured in `ACTION_CHECKLIST.md`; verification workflow outlined in `EVERYTHING_WORKING.md`.
 - Codebase still requires refactors identified in the checklist (SwiftUI view model, night anchoring fix, proxy modularization).
 
 ---
@@ -29,15 +29,15 @@
 3. Stand up lint/format tooling and CI pipelines across both stacks.
 4. Archive or update legacy review kit documents once refactors land.
 
-See `docs/ops/ACTION_CHECKLIST.md` for the authoritative task list.
+See `ACTION_CHECKLIST.md` for the authoritative task list.
 
 ---
 
 ## Documentation Index
 - `README.md` – canonical architecture/setup.
 - `docs/SECRETS.md` – secrets policy.
-- `docs/ops/START_HERE.md` – orientation.
-- `docs/ops/ACTION_CHECKLIST.md` – prioritized engineering tasks.
-- `docs/ops/EVERYTHING_WORKING.md` – verification log template.
+- `START_HERE.md` – orientation.
+- `ACTION_CHECKLIST.md` – prioritized engineering tasks.
+- `EVERYTHING_WORKING.md` – verification log template.
 
 Maintain this summary after major milestones to reflect reality. The README remains the SSOT; this file captures milestone context.

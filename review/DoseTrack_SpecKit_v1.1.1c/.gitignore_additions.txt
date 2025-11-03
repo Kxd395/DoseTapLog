@@ -1,2 +1,0 @@
-.specify/cache/
-.github/prompts/

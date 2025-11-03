@@ -64,7 +64,7 @@ Note any deviations or TODOs if rules are not yet enforced.
 ---
 
 ## 5. Outstanding Issues
-List open bugs or regressions uncovered during verification. Reference issue IDs or checklist items from `docs/ops/ACTION_CHECKLIST.md`.
+List open bugs or regressions uncovered during verification. Reference issue IDs or checklist items from `ACTION_CHECKLIST.md`.
 
 ---
 

@@ -1,5 +1,0 @@
-# Spec Kit quick sync
-/speckit.constitution Create a DoseTrack constitution with the clinical safety, privacy, UX, code quality, and clinician support principles from docs
-/speckit.specify Create a comprehensive specification for DoseTrack v1.1.1c describing product overview, personas, workflows, data model, guardrails, integrations, recommender, success metrics, and non-goals
-/speckit.plan Create a technical implementation plan covering stack, architecture, models, views, data flow, tests, capabilities, dependencies, and deployment
-/speckit.analyze

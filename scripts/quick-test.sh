@@ -81,9 +81,9 @@ fi
 echo ""
 echo "6️⃣  Checking documentation..."
 DOCS=(
-    "docs/ops/ACTION_CHECKLIST.md"
-    "docs/ops/FINAL_REVIEW_SUMMARY.md"
-    "docs/review-notes/CONSOLIDATED_REVIEW_INTEGRATION.md"
+    "ACTION_CHECKLIST.md"
+    "FINAL_REVIEW_SUMMARY.md"
+    "CONSOLIDATED_REVIEW_INTEGRATION.md"
 )
 
 for doc in "${DOCS[@]}"; do

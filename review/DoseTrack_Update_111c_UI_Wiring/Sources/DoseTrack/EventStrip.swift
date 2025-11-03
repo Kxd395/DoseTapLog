@@ -1,1 +1,0 @@
-// EventStrip is declared in SafetyBanner.swift module
