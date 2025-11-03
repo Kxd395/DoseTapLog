@@ -14,105 +14,149 @@ final class AppPreferences {
     
     // MARK: - Night Plan Defaults
     
+    @ObservationIgnored
     @AppStorage("plan_total_night_grams")
     var totalNightGrams: Double = 6.5
     
+    @ObservationIgnored
     @AppStorage("plan_split_strategy")
     var splitStrategy: String = "50-50"
     
+    @ObservationIgnored
     @AppStorage("plan_rounding_increment")
     var roundingIncrement: Double = 0.25
     
+    @ObservationIgnored
     @AppStorage("dose2_window_start_min")
     var windowStartMin: Int = 150
     
+    @ObservationIgnored
     @AppStorage("dose2_window_end_min")
     var windowEndMin: Int = 240
     
+    @ObservationIgnored
     @AppStorage("allow_tonight_only_edit")
     var allowTonightEdit: Bool = true
     
     // MARK: - Early Dose 2 Policy
     
+    @ObservationIgnored
     @AppStorage("allow_early_dose")
     var allowEarlyDose: Bool = false
     
+    @ObservationIgnored
     @AppStorage("max_early_minutes")
     var maxEarlyMinutes: Int = 15
     
+    @ObservationIgnored
     @AppStorage("early_require_reason")
     var earlyRequireReason: Bool = true
     
+    @ObservationIgnored
     @AppStorage("early_time_prior_defaults")
     var earlyTimePriorDefaults: String = "5,10"
     
+    // MARK: - Late Dose 2 Policy
+    
+    @ObservationIgnored
+    @AppStorage("allow_late_dose")
+    var allowLateDose: Bool = false
+    
+    @ObservationIgnored
+    @AppStorage("max_late_minutes")
+    var maxLateMinutes: Int = 30
+    
+    @ObservationIgnored
+    @AppStorage("late_require_reason")
+    var lateRequireReason: Bool = true
+    
     // MARK: - Notifications & Live Activity
     
+    @ObservationIgnored
     @AppStorage("notifications_live_activity_enabled")
     var liveActivityEnabled: Bool = true
     
+    @ObservationIgnored
     @AppStorage("notifications_window_start")
     var notifyWindowStart: Bool = true
     
+    @ObservationIgnored
     @AppStorage("notifications_halfway")
     var notifyHalfway: Bool = false
     
+    @ObservationIgnored
     @AppStorage("notifications_window_end")
     var notifyWindowEnd: Bool = true
     
+    @ObservationIgnored
     @AppStorage("notifications_quiet_start")
     var quietHoursStart: String?
     
+    @ObservationIgnored
     @AppStorage("notifications_quiet_end")
     var quietHoursEnd: String?
     
+    @ObservationIgnored
     @AppStorage("notifications_haptics_enabled")
     var hapticsEnabled: Bool = true
     
     // MARK: - Data Sources
     
+    @ObservationIgnored
     @AppStorage("health_sample_window_min")
     var healthSampleWindowMin: Int = 60
     
+    @ObservationIgnored
     @AppStorage("whoop_proxy_url")
     var whoopProxyURL: String = ""
     
+    @ObservationIgnored
     @AppStorage("whoop_api_key")
     var whoopAPIKey: String = ""
     
+    @ObservationIgnored
     @AppStorage("wake_source_preference")
     var wakeSourcePreference: String = "Health"
     
     // MARK: - Exports
     
+    @ObservationIgnored
     @AppStorage("export_include_timezone")
     var exportIncludeTimezone: Bool = true
     
+    @ObservationIgnored
     @AppStorage("export_filename_pattern")
     var exportFilenamePattern: String = "DoseTrack_yyyyMMdd.csv"
     
+    @ObservationIgnored
     @AppStorage("export_include_notes")
     var exportIncludeNotes: Bool = true
     
+    @ObservationIgnored
     @AppStorage("export_include_event_log")
     var exportIncludeEventLog: Bool = false
     
+    @ObservationIgnored
     @AppStorage("export_default_email")
     var exportDefaultEmail: String = ""
     
     // MARK: - Privacy & Retention
     
+    @ObservationIgnored
     @AppStorage("privacy_require_biometric")
     var requireBiometric: Bool = false
     
+    @ObservationIgnored
     @AppStorage("privacy_mask_widget_doses")
     var maskWidgetDoses: Bool = true
     
+    @ObservationIgnored
     @AppStorage("privacy_retention_days")
     var retentionDays: Int = 365
     
     // MARK: - Debug
     
+    @ObservationIgnored
     @AppStorage("debug_show_internals")
     var showInternals: Bool = false
     

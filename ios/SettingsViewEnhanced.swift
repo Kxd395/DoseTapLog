@@ -11,33 +11,34 @@ struct SettingsViewEnhanced: View {
     @Environment(\.dismiss) var dismiss
     @State private var showResetConfirm = false
     @State private var showPurgeConfirm = false
+    @Bindable var prefs = AppPreferences.shared
     
     var body: some View {
         NavigationStack {
             Form {
                 // MARK: - Section 1: Night Plan Defaults
                 Section("Night plan defaults") {
-                    Picker("Total night (g)", selection: $AppPreferencesEnhanced.shared.totalNightGrams) {
+                    Picker("Total night (g)", selection: $prefs.totalNightGrams) {
                         ForEach([3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0], id: \.self) { g in
                             Text(String(format: "%.1f g", g)).tag(g)
                         }
                     }
                     
-                    Picker("Split", selection: $AppPreferencesEnhanced.shared.splitStrategy) {
+                    Picker("Split", selection: $prefs.splitStrategy) {
                         Text("50/50").tag("50/50")
                         Text("60/40").tag("60/40")
                         Text("40/60").tag("40/60")
                     }
                     
-                    Picker("Rounding step", selection: $AppPreferencesEnhanced.shared.roundingStepG) {
+                    Picker("Rounding step", selection: $prefs.roundingStepG) {
                         Text("0.25 g").tag(0.25)
                         Text("0.5 g").tag(0.5)
                     }
                     
-                    Toggle("Allow editing tonight's plan", isOn: $AppPreferencesEnhanced.shared.allowTonightEdit)
+                    Toggle("Allow editing tonight's plan", isOn: $prefs.allowTonightEdit)
                     
                     // Live preview
-                    let (d1, d2) = AppPreferencesEnhanced.shared.calculateDoses()
+                    let (d1, d2) = prefs.calculateDoses()
                     HStack {
                         Text("Tonight's plan")
                         Spacer()
@@ -45,7 +46,7 @@ struct SettingsViewEnhanced: View {
                             .foregroundStyle(.secondary)
                     }
                     
-                    if AppPreferencesEnhanced.shared.planViolatesSafety {
+                    if prefs.planViolatesSafety {
                         Label("Plan violates safety guardrails", systemImage: "exclamationmark.triangle.fill")
                             .foregroundStyle(.red)
                     }
@@ -53,33 +54,33 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 2: Dose 2 Window
                 Section("Dose 2 window") {
-                    Stepper(value: $AppPreferencesEnhanced.shared.windowStartMin, in: 120...300, step: 5) {
-                        Text("Window starts at \(AppPreferencesEnhanced.shared.formatMinutes(AppPreferencesEnhanced.shared.windowStartMin))")
+                    Stepper(value: $prefs.windowStartMin, in: 120...300, step: 5) {
+                        Text("Window starts at \(prefs.formatMinutes(prefs.windowStartMin))")
                     }
                     
-                    Stepper(value: $AppPreferencesEnhanced.shared.windowEndMin, in: 150...360, step: 5) {
-                        Text("Window ends at \(AppPreferencesEnhanced.shared.formatMinutes(AppPreferencesEnhanced.shared.windowEndMin))")
+                    Stepper(value: $prefs.windowEndMin, in: 150...360, step: 5) {
+                        Text("Window ends at \(prefs.formatMinutes(prefs.windowEndMin))")
                     }
                     
-                    let duration = AppPreferencesEnhanced.shared.windowEndMin - AppPreferencesEnhanced.shared.windowStartMin
+                    let duration = prefs.windowEndMin - prefs.windowStartMin
                     HStack {
                         Text("Window duration")
                         Spacer()
-                        Text(AppPreferencesEnhanced.shared.formatMinutes(duration))
+                        Text(prefs.formatMinutes(duration))
                             .foregroundStyle(.secondary)
                     }
                 }
                 
                 // MARK: - Section 3: Early Dose 2 Policy
                 Section("Early dose 2 policy") {
-                    Toggle("Allow early Dose 2", isOn: $AppPreferencesEnhanced.shared.allowEarlyDose)
+                    Toggle("Allow early Dose 2", isOn: $prefs.allowEarlyDose)
                     
-                    if AppPreferencesEnhanced.shared.allowEarlyDose {
-                        Stepper(value: $AppPreferencesEnhanced.shared.maxEarlyMinutes, in: 0...60, step: 5) {
-                            Text("Max early: \(AppPreferencesEnhanced.shared.maxEarlyMinutes) minutes")
+                    if prefs.allowEarlyDose {
+                        Stepper(value: $prefs.maxEarlyMinutes, in: 0...60, step: 5) {
+                            Text("Max early: \(prefs.maxEarlyMinutes) minutes")
                         }
                         
-                        Toggle("Require reason for early dose", isOn: $AppPreferencesEnhanced.shared.requireEarlyReason)
+                        Toggle("Require reason for early dose", isOn: $prefs.requireEarlyReason)
                         
                         NavigationLink("Quick time-prior buttons") {
                             EarlyDoseQuickChoicesView()
@@ -89,21 +90,21 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 4: Notifications & Live Activity
                 Section("Notifications and Live Activity") {
-                    Toggle("Enable Live Activity", isOn: $AppPreferencesEnhanced.shared.liveActivityEnabled)
+                    Toggle("Enable Live Activity", isOn: $prefs.liveActivityEnabled)
                     
-                    Toggle("Notify at window start", isOn: $AppPreferencesEnhanced.shared.notifyAtStart)
-                    Toggle("Notify at halfway point", isOn: $AppPreferencesEnhanced.shared.notifyAtHalf)
-                    Toggle("Notify at window end", isOn: $AppPreferencesEnhanced.shared.notifyAtEnd)
+                    Toggle("Notify at window start", isOn: $prefs.notifyAtStart)
+                    Toggle("Notify at halfway point", isOn: $prefs.notifyAtHalf)
+                    Toggle("Notify at window end", isOn: $prefs.notifyAtEnd)
                     
-                    Stepper(value: $AppPreferencesEnhanced.shared.quietHoursStart, in: 0...23) {
-                        Text("Quiet hours start: \(AppPreferencesEnhanced.shared.quietHoursStart):00")
+                    Stepper(value: $prefs.quietHoursStart, in: 0...23) {
+                        Text("Quiet hours start: \(prefs.quietHoursStart):00")
                     }
                     
-                    Stepper(value: $AppPreferencesEnhanced.shared.quietHoursEnd, in: 0...23) {
-                        Text("Quiet hours end: \(AppPreferencesEnhanced.shared.quietHoursEnd):00")
+                    Stepper(value: $prefs.quietHoursEnd, in: 0...23) {
+                        Text("Quiet hours end: \(prefs.quietHoursEnd):00")
                     }
                     
-                    Toggle("Haptic feedback", isOn: $AppPreferencesEnhanced.shared.hapticsEnabled)
+                    Toggle("Haptic feedback", isOn: $prefs.hapticsEnabled)
                 }
                 
                 // MARK: - Section 5: Data Sources
@@ -121,22 +122,22 @@ struct SettingsViewEnhanced: View {
                         // TODO: Call HealthKitManager.requestAuthorization()
                     }
                     
-                    Stepper(value: $AppPreferencesEnhanced.shared.healthSampleWindowMin, in: 60...300, step: 15) {
-                        Text("Health sample window: \(AppPreferencesEnhanced.shared.healthSampleWindowMin) min")
+                    Stepper(value: $prefs.healthSampleWindowMin, in: 60...300, step: 15) {
+                        Text("Health sample window: \(prefs.healthSampleWindowMin) min")
                     }
                     
-                    TextField("WHOOP proxy URL", text: $AppPreferencesEnhanced.shared.whoopProxyURL)
+                    TextField("WHOOP proxy URL", text: $prefs.whoopProxyURL)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                     
-                    SecureField("WHOOP API key", text: $AppPreferencesEnhanced.shared.whoopAPIKey)
+                    SecureField("WHOOP API key", text: $prefs.whoopAPIKey)
                     
                     Button("Test WHOOP connection") {
                         // TODO: Call WHOOP proxy endpoint
                     }
-                    .disabled(AppPreferencesEnhanced.shared.whoopProxyURL.isEmpty)
+                    .disabled(prefs.whoopProxyURL.isEmpty)
                     
-                    Picker("Prefer wake source", selection: $AppPreferencesEnhanced.shared.wakeSourcePreference) {
+                    Picker("Prefer wake source", selection: $prefs.wakeSourcePreference) {
                         Text("HealthKit").tag("health")
                         Text("Manual entry").tag("manual")
                     }
@@ -144,57 +145,57 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 6: Exports
                 Section("Exports") {
-                    Toggle("Include timezone in CSV", isOn: $AppPreferencesEnhanced.shared.exportIncludeTimezone)
+                    Toggle("Include timezone in CSV", isOn: $prefs.exportIncludeTimezone)
                     
-                    TextField("Filename pattern", text: $AppPreferencesEnhanced.shared.exportFilenamePattern)
+                    TextField("Filename pattern", text: $prefs.exportFilenamePattern)
                         .textInputAutocapitalization(.never)
                     
                     Text("Available tokens: {nightKey}, {date}, {timezone}")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     
-                    Toggle("Include notes column", isOn: $AppPreferencesEnhanced.shared.exportIncludeNotes)
-                    Toggle("Include raw event log", isOn: $AppPreferencesEnhanced.shared.exportIncludeEventLog)
+                    Toggle("Include notes column", isOn: $prefs.exportIncludeNotes)
+                    Toggle("Include raw event log", isOn: $prefs.exportIncludeEventLog)
                     
-                    TextField("Default share email", text: $AppPreferencesEnhanced.shared.exportDefaultEmail)
+                    TextField("Default share email", text: $prefs.exportDefaultEmail)
                         .textInputAutocapitalization(.never)
                         .keyboardType(.emailAddress)
                 }
                 
                 // MARK: - Section 7: Privacy & Retention
                 Section("Privacy and retention") {
-                    Toggle("Require Face ID to open", isOn: $AppPreferencesEnhanced.shared.requireBiometric)
+                    Toggle("Require Face ID to open", isOn: $prefs.requireBiometric)
                     
-                    Toggle("Mask doses on widgets", isOn: $AppPreferencesEnhanced.shared.maskWidgetDoses)
+                    Toggle("Mask doses on widgets", isOn: $prefs.maskWidgetDoses)
                     
-                    Stepper(value: $AppPreferencesEnhanced.shared.retentionDays, in: 30...3650, step: 30) {
-                        Text("Keep data for \(AppPreferencesEnhanced.shared.retentionDays) days")
+                    Stepper(value: $prefs.retentionDays, in: 30...3650, step: 30) {
+                        Text("Keep data for \(prefs.retentionDays) days")
                     }
                     
                     Button("Purge old data now", role: .destructive) {
                         showPurgeConfirm = true
                     }
                     .confirmationDialog("Purge old data?", isPresented: $showPurgeConfirm) {
-                        Button("Delete data older than \(AppPreferencesEnhanced.shared.retentionDays) days", role: .destructive) {
+                        Button("Delete data older than \(prefs.retentionDays) days", role: .destructive) {
                             // TODO: Call DoseLogController.purgeOldData()
                         }
                         Button("Cancel", role: .cancel) {}
                     } message: {
-                        Text("This will permanently delete night records older than \(AppPreferencesEnhanced.shared.retentionDays) days.")
+                        Text("This will permanently delete night records older than \(prefs.retentionDays) days.")
                     }
                 }
                 
                 // MARK: - Section 7.5: Reset Night
                 Section {
-                    Toggle("Allow Hard Reset", isOn: $AppPreferencesEnhanced.shared.resetAllowHard)
+                    Toggle("Allow Hard Reset", isOn: $prefs.resetAllowHard)
                     
-                    Toggle("Require Face ID for Hard Reset", isOn: $AppPreferencesEnhanced.shared.resetRequireBiometricHard)
-                        .disabled(!AppPreferencesEnhanced.shared.resetAllowHard)
+                    Toggle("Require Face ID for Hard Reset", isOn: $prefs.resetRequireBiometricHard)
+                        .disabled(!prefs.resetAllowHard)
                     
-                    Toggle("Reason required", isOn: $AppPreferencesEnhanced.shared.resetReasonRequired)
+                    Toggle("Reason required", isOn: $prefs.resetReasonRequired)
                     
-                    Stepper(value: $AppPreferencesEnhanced.shared.resetUndoWindowSec, in: 10...120, step: 10) {
-                        Text("Undo window: \(AppPreferencesEnhanced.shared.resetUndoWindowSec) seconds")
+                    Stepper(value: $prefs.resetUndoWindowSec, in: 10...120, step: 10) {
+                        Text("Undo window: \(prefs.resetUndoWindowSec) seconds")
                     }
                 } header: {
                     Text("Reset Night")
@@ -209,7 +210,7 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 8: Debug & Developer
                 Section("Debug and developer") {
-                    Toggle("Show nightKey and offsets", isOn: $AppPreferencesEnhanced.shared.showInternals)
+                    Toggle("Show nightKey and offsets", isOn: $prefs.showInternals)
                     
                     Button("Simulate Dose 1 now") {
                         // TODO: Call DoseLogController test method
@@ -239,7 +240,7 @@ struct SettingsViewEnhanced: View {
                     }
                     .confirmationDialog("Reset all settings?", isPresented: $showResetConfirm) {
                         Button("Reset to defaults", role: .destructive) {
-                            AppPreferencesEnhanced.shared.resetToDefaults()
+                            prefs.resetToDefaults()
                         }
                         Button("Cancel", role: .cancel) {}
                     }
@@ -261,7 +262,7 @@ struct EarlyDoseQuickChoicesView: View {
     @State private var selectedButtons: Set<Int>
     
     init() {
-        let buttons = AppPreferencesEnhanced.shared.defaultEarlyButtons
+        let buttons = prefs.defaultEarlyButtons
         _selectedButtons = State(initialValue: Set(buttons))
     }
     
@@ -291,7 +292,7 @@ struct EarlyDoseQuickChoicesView: View {
     
     private func updatePreferences() {
         let sorted = selectedButtons.sorted()
-        AppPreferencesEnhanced.shared.earlyTimePriorDefaults = sorted.map(String.init).joined(separator: ",")
+        prefs.earlyTimePriorDefaults = sorted.map(String.init).joined(separator: ",")
     }
 }
 
