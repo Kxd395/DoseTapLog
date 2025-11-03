@@ -223,7 +223,7 @@ struct TodayLogView: View {
     private var nightContextLine: String {
         let df = DateFormatter(); df.dateFormat = "EEE, MMM d"; let today = df.string(from: Date())
         let tzMin = TimeZone.current.secondsFromGMT() / 60; let sign = tzMin >= 0 ? "+" : "-"; let absMin = abs(tzMin)
-        let tzStr = String(format: "UTC%@$%02d:%02d".replacingOccurrences(of: "@", with: sign), "", absMin / 60, absMin % 60)
+        let tzStr = String(format: "UTC%@%02d:%02d", sign, absMin / 60, absMin % 60)
         let key = vm.nightKey ?? "Key unknown"
         return "\(today) • \(tzStr) • \(key)"
     }
