@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/master.swiftdeps"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Tests/DoseLogTests.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/DoseLogTests.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/DoseLogTests.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/DoseLogTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/DoseLogTests.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/DoseLogTests.dia"
+  }
+}

@@ -1,14 +1,35 @@
-WHOOP proxy server add-ons for DoseTrack
+## DoseTrack WHOOP Proxy
 
-Summary
-- Adds simple rate limiting and a 7 day aggregates endpoint for sleep
-- Includes a pagination helper aligned to WHOOP collection APIs
+Express-based bridge that shields WHOOP API credentials behind a minimal service for the DoseTrack iOS client.
 
-Env
-- API_KEY: required header value for clients
-- WHOOP_BASE: default https://api.prod.whoop.com
-- WHOOP_TOKEN: bearer token for development only
+### Features
+- `/health` heartbeat plus `/api/sleep/latest` and `/api/aggregates/7days` endpoints.
+- API key enforcement (`x-api-key` header) and rate limiting via `express-rate-limit`.
+- Pagination helper that walks WHOOP sleep records using `nextToken`.
 
-Run
-- npm install express express-rate-limit node-fetch
-- node index.additions.js integration is manual per README
+### Configuration
+Copy `.env.example` to `.env` and populate the values (see `docs/SECRETS.md` for guidance):
+
+| Variable | Purpose |
+|----------|---------|
+| `API_KEY` | Shared secret required on every client request |
+| `WHOOP_TOKEN` | WHOOP developer bearer token used when proxying |
+| `WHOOP_BASE` | Optional override for WHOOP API base URL |
+| `PORT` | Local port (defaults to 3000) |
+| `RATE_LIMIT_WINDOW_MS` | Rate limiter window in ms |
+| `RATE_LIMIT_MAX` | Max requests per window |
+
+### Development
+```bash
+cd server
+npm install
+cp .env.example .env   # set secrets before running
+npm start
+```
+
+Run tests with:
+```bash
+npm test
+```
+
+> Planned improvements: convert to TypeScript, extract modular routes/services, add pagination guards, and introduce structured logging.

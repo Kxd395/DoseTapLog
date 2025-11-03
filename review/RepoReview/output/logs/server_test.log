@@ -1,0 +1,146 @@
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+
+added 79 packages, and audited 80 packages in 1s
+
+19 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> dosetrack-whoop-proxy@1.0.0 test
+> node test-server.js
+
+[34m
+============================================================[0m
+[34mDoseTrack WHOOP Proxy Server Tests[0m
+[34m============================================================[0m
+[34m
+🧪 Testing: Health Check[0m
+[0m   URL: http://localhost:3000/health[0m
+[0m   Status: 200 OK[0m
+[0m   Duration: 2ms[0m
+[32m   ✅ PASS[0m
+   Response:    {
+     "status": "ok",
+     "timestamp": "2025-11-02T16:59:19.991Z",
+     "service": "dosetrack-whoop-proxy",
+     "version": "1.0.0"
+   }
+[34m
+🧪 Testing: Latest Sleep - No Auth (should fail)[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 401 Unauthorized[0m
+[0m   Duration: 4ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "unauthorized",
+     "detail": "Invalid or missing x-api-key header"
+   }
+[34m
+🧪 Testing: Latest Sleep - Wrong API Key (should fail)[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 401 Unauthorized[0m
+[0m   Duration: 10ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "unauthorized",
+     "detail": "Invalid or missing x-api-key header"
+   }
+[34m
+🧪 Testing: Latest Sleep - With Auth[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 386ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "fetch_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+🧪 Testing: 7-Day Aggregates - With Auth[0m
+[0m   URL: http://localhost:3000/api/aggregates/7days[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 189ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "aggregate_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+🧪 Testing: Invalid Endpoint (should 404)[0m
+[0m   URL: http://localhost:3000/api/invalid[0m
+[0m   Status: 401 Unauthorized[0m
+[0m   Duration: 2ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "unauthorized",
+     "detail": "Invalid or missing x-api-key header"
+   }
+[34m
+🧪 Testing: Rate Limiting (5 rapid requests)[0m
+[34m
+🧪 Testing: Rate Limit Test 1/5[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 172ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "fetch_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+🧪 Testing: Rate Limit Test 2/5[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 184ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "fetch_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+🧪 Testing: Rate Limit Test 3/5[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 182ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "fetch_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+🧪 Testing: Rate Limit Test 4/5[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 245ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "fetch_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+🧪 Testing: Rate Limit Test 5/5[0m
+[0m   URL: http://localhost:3000/api/sleep/latest[0m
+[0m   Status: 500 Internal Server Error[0m
+[0m   Duration: 157ms[0m
+[31m   ❌ FAIL[0m
+   Error:    {
+     "error": "fetch_failed",
+     "detail": "WHOOP API error: 401 Unauthorized"
+   }
+[34m
+============================================================[0m
+[34mTest Summary[0m
+[34m============================================================[0m
+[32m
+✅ Passed: 1[0m
+[31m❌ Failed: 5[0m
+[34m📊 Total: 6[0m
+[33m
+⚠️  Note: 3 expected failures (auth/404 tests)[0m
+[33m
+⚠️  WHOOP_TOKEN not configured - API calls will fail with real WHOOP API[0m
+[33m   Set WHOOP_TOKEN in .env file for full integration testing[0m
+[34m
+============================================================
+[0m

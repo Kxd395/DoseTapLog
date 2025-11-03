@@ -1,12 +1,10 @@
-# Bundle contents
+# Bundle Contents
 
-- ios/
-  - Swift sources for app, model, HealthKit, rounding, recommender, CSV exporter, widget provider
-- server/
-  - index.additions.js for WHOOP pagination and aggregates, .env.example, README_server.md
-- docs/
-  - PRD_v1.2.md, v1.1.1b.md if provided
-- examples/
-  - examples_sample_dosing.csv if provided
+- `ios/` – SwiftUI app, SwiftData models, HealthKit wrapper, CSV exporter, widget provider, and XCTest target.
+- `server/` – Express proxy (`index.js`), environment template, tests, and README.
+- `docs/` – Product requirements, release history, `SECRETS.md`, operational docs (`docs/ops/`), design assets (`docs/design/`), product narrative, and review analyses (`docs/review-notes/`).
+- `examples/` – Sample data artifacts when provided.
+- `review/` – Consolidated and agent review kits (read-only reference).
+- `scripts/` – helper shell scripts (`demo-server.sh`, `quick-test.sh`, installation checks).
 
-See ROOT README for setup and wiring.
+Refer to the repository `README.md` for authoritative setup and architecture details.

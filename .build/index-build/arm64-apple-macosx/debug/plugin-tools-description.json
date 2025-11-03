@@ -1,0 +1,927 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.xctest/Contents/MacOS/DoseTrackPackageTests",
+      "packagePath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c",
+      "productName" : "DoseTrackPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.DoseTrack-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/sources",
+      "importPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/swift-version--51D483485192B567.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "DoseTrack",
+      "moduleOutputPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrack.swiftmodule",
+      "objects" : [
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppGroupStore.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppIntents+DoseLog.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferences.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced+LateDose.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CSVExporter.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Config.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CountdownRingView.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Date+UTC.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseLogController.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseTrackApp.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheet.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheetView.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EventStripView.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/HealthKitManager.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/LateDoseSheetView.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Models.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/NightPlanRecommender.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/ResetNightSheet.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Rounding+Display.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBanner.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBannerView.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SettingsViewEnhanced.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_CardStack.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_Checklist.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel+LateDose.swift.o",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/include/DoseTrack-Swift.h",
+        "-swift-version",
+        "5",
+        "-Xfrontend",
+        "-experimental-lazy-typecheck",
+        "-Xfrontend",
+        "-experimental-skip-all-function-bodies",
+        "-Xfrontend",
+        "-experimental-allow-module-with-compiler-errors",
+        "-Xfrontend",
+        "-empty-abi-descriptor",
+        "-plugin-path",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "dosetrack_v1_1_1c"
+      ],
+      "outputFileMapPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrack.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : true,
+      "sources" : [
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift"
+      ],
+      "tempsPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.DoseTrackPackageTests-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/sources",
+      "importPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/swift-version--51D483485192B567.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrackTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "DoseTrackPackageTests",
+      "moduleOutputPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrackPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/include/DoseTrackPackageTests-Swift.h",
+        "-Xfrontend",
+        "-experimental-lazy-typecheck",
+        "-Xfrontend",
+        "-experimental-skip-all-function-bodies",
+        "-Xfrontend",
+        "-experimental-allow-module-with-compiler-errors",
+        "-Xfrontend",
+        "-empty-abi-descriptor",
+        "-plugin-path",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "dosetrack_v1_1_1c"
+      ],
+      "outputFileMapPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrackPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : true,
+      "sources" : [
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.DoseTrackTests-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/sources",
+      "importPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Tests/DoseLogTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/swift-version--51D483485192B567.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrack.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "DoseTrackTests",
+      "moduleOutputPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrackTests.swiftmodule",
+      "objects" : [
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/DoseLogTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-Xfrontend",
+        "-experimental-lazy-typecheck",
+        "-Xfrontend",
+        "-experimental-skip-all-function-bodies",
+        "-Xfrontend",
+        "-experimental-allow-module-with-compiler-errors",
+        "-Xfrontend",
+        "-empty-abi-descriptor",
+        "-plugin-path",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "dosetrack_v1_1_1c"
+      ],
+      "outputFileMapPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules/DoseTrackTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : true,
+      "sources" : [
+        "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Tests/DoseLogTests.swift"
+      ],
+      "tempsPath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "DoseTrack" : [
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DoseTrack",
+      "-package-name",
+      "dosetrack_v1_1_1c",
+      "-c",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift",
+      "-I",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/include/DoseTrack-Swift.h",
+      "-swift-version",
+      "5",
+      "-Xfrontend",
+      "-experimental-lazy-typecheck",
+      "-Xfrontend",
+      "-experimental-skip-all-function-bodies",
+      "-Xfrontend",
+      "-experimental-allow-module-with-compiler-errors",
+      "-Xfrontend",
+      "-empty-abi-descriptor",
+      "-plugin-path",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "dosetrack_v1_1_1c",
+      "-driver-use-frontend-path",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "DoseTrackPackageTests" : [
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DoseTrackPackageTests",
+      "-package-name",
+      "dosetrack_v1_1_1c",
+      "-c",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/include/DoseTrackPackageTests-Swift.h",
+      "-Xfrontend",
+      "-experimental-lazy-typecheck",
+      "-Xfrontend",
+      "-experimental-skip-all-function-bodies",
+      "-Xfrontend",
+      "-experimental-allow-module-with-compiler-errors",
+      "-Xfrontend",
+      "-empty-abi-descriptor",
+      "-plugin-path",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "dosetrack_v1_1_1c",
+      "-driver-use-frontend-path",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "DoseTrackTests" : [
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DoseTrackTests",
+      "-package-name",
+      "dosetrack_v1_1_1c",
+      "-c",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Tests/DoseLogTests.swift",
+      "-I",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-Xfrontend",
+      "-experimental-lazy-typecheck",
+      "-Xfrontend",
+      "-experimental-skip-all-function-bodies",
+      "-Xfrontend",
+      "-experimental-allow-module-with-compiler-errors",
+      "-Xfrontend",
+      "-empty-abi-descriptor",
+      "-plugin-path",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "dosetrack_v1_1_1c",
+      "-driver-use-frontend-path",
+      "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "DoseTrack" : [
+
+    ],
+    "DoseTrackPackageTests" : [
+      "DoseTrackTests",
+      "DoseTrack"
+    ],
+    "DoseTrackTests" : [
+      "DoseTrack"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/sources"
+    },
+    "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackPackageTests.build/sources"
+    },
+    "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Tests/DoseLogTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrackTests.build/sources"
+    },
+    "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/swift-version--51D483485192B567.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/swift-version--51D483485192B567.txt"
+    }
+  }
+}

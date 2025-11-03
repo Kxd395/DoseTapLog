@@ -1,0 +1,1 @@
+// CountdownRing is declared in SafetyBanner.swift module

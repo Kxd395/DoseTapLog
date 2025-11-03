@@ -1,0 +1,201 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/master.swiftdeps"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppGroupStore.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppGroupStore.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppGroupStore~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppGroupStore.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppGroupStore.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppIntents+DoseLog.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppIntents+DoseLog.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppIntents+DoseLog~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppIntents+DoseLog.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppIntents+DoseLog.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferences.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferences.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferences~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferences.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferences.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced+LateDose.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced+LateDose.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced+LateDose~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced+LateDose.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced+LateDose.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/AppPreferencesEnhanced.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CSVExporter.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CSVExporter.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CSVExporter~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CSVExporter.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CSVExporter.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Config.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Config.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Config~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Config.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Config.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CountdownRingView.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CountdownRingView.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CountdownRingView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CountdownRingView.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/CountdownRingView.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Date+UTC.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Date+UTC.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Date+UTC~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Date+UTC.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Date+UTC.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseLogController.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseLogController.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseLogController~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseLogController.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseLogController.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseTrackApp.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseTrackApp.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseTrackApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseTrackApp.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/DoseTrackApp.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheet.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheet.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheet~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheet.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheet.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheetView.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheetView.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheetView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheetView.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EarlyDoseSheetView.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EventStripView.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EventStripView.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EventStripView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EventStripView.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/EventStripView.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/HealthKitManager.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/HealthKitManager.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/HealthKitManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/HealthKitManager.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/HealthKitManager.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/LateDoseSheetView.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/LateDoseSheetView.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/LateDoseSheetView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/LateDoseSheetView.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/LateDoseSheetView.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Models.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Models.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Models~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Models.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Models.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/NightPlanRecommender.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/NightPlanRecommender.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/NightPlanRecommender~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/NightPlanRecommender.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/NightPlanRecommender.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/ResetNightSheet.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/ResetNightSheet.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/ResetNightSheet~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/ResetNightSheet.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/ResetNightSheet.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Rounding+Display.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Rounding+Display.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Rounding+Display~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Rounding+Display.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/Rounding+Display.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBanner.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBanner.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBanner~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBanner.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBanner.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBannerView.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBannerView.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBannerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBannerView.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SafetyBannerView.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SettingsViewEnhanced.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SettingsViewEnhanced.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SettingsViewEnhanced~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SettingsViewEnhanced.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/SettingsViewEnhanced.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_CardStack.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_CardStack.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_CardStack~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_CardStack.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_CardStack.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_Checklist.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_Checklist.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_Checklist~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_Checklist.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayLogView_Checklist.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel+LateDose.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel+LateDose.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel+LateDose~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel+LateDose.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel+LateDose.dia"
+  },
+  "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift": {
+    "dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel.d",
+    "object": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel.swift.o",
+    "swiftmodule": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel.swiftdeps",
+    "diagnostics": "/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.build/index-build/arm64-apple-macosx/debug/DoseTrack.build/TodayViewModel.dia"
+  }
+}

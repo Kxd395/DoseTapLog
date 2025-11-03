@@ -1,0 +1,19 @@
+{
+  "name": "dosetrack-whoop-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "WHOOP API proxy for DoseTrack with rate limiting and aggregates",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "node test-server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.1.5",
+    "node-fetch": "^3.3.2",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5"
+  }
+}
