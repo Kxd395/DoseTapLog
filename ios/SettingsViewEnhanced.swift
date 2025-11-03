@@ -107,7 +107,102 @@ struct SettingsViewEnhanced: View {
                     }
                 }
                 
-                // MARK: - Section 4: Notifications & Live Activity
+                // MARK: - Section 4: Alarm Ladder
+                Section("Alarm ladder") {
+                    Picker("Alarm style", selection: $prefs.alarmStyleRaw) {
+                        ForEach(NightAlarmPlan.AlarmStyle.allCases, id: \.self) { style in
+                            Text(style.description).tag(style.rawValue)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    
+                    // Show consent warning for Strong style
+                    if prefs.alarmStyle == .strong && !prefs.strongAlarmConsent {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(.orange)
+                            Text("Strong style requires consent")
+                                .font(.caption)
+                        }
+                        
+                        Toggle("I consent to hard repeating alarms", isOn: $prefs.strongAlarmConsent)
+                            .font(.caption)
+                    }
+                    
+                    Stepper(value: $prefs.alarmBudgetPerNight, in: 1...5) {
+                        Text("Alarm budget: \(prefs.alarmBudgetPerNight) per night")
+                    }
+                    
+                    Stepper(value: $prefs.lateGraceMinutes, in: 0...30, step: 5) {
+                        Text("Late grace period: \(prefs.lateGraceMinutes) min")
+                    }
+                    
+                    if prefs.alarmStyle != .quiet {
+                        Stepper(value: $prefs.preWindowLeadMinutes, in: 0...60, step: 5) {
+                            if prefs.preWindowLeadMinutes == 0 {
+                                Text("Pre-window nudge: Off")
+                            } else {
+                                Text("Pre-window nudge: \(prefs.preWindowLeadMinutes) min before")
+                            }
+                        }
+                    }
+                    
+                    if prefs.alarmStyle == .strong {
+                        Divider()
+                        
+                        Toggle("Hard repeats after grace", isOn: $prefs.hardAfterEndEnabled)
+                        
+                        if prefs.hardAfterEndEnabled {
+                            Stepper(value: $prefs.hardRepeatMinutes, in: 5...30, step: 5) {
+                                Text("Hard repeat interval: \(prefs.hardRepeatMinutes) min")
+                            }
+                            
+                            Stepper(value: $prefs.hardMaxRepeats, in: 1...3) {
+                                Text("Max hard repeats: \(prefs.hardMaxRepeats)")
+                            }
+                        }
+                    }
+                    
+                    Picker("Focus mode policy", selection: $prefs.respectDNDRaw) {
+                        ForEach(AppPreferences.DNDPolicy.allCases, id: \.self) { policy in
+                            Text(policy.description).tag(policy.rawValue)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    
+                    if prefs.respectDND == .timeSensitive && !prefs.timeSensitiveConsent {
+                        HStack {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundStyle(.blue)
+                            Text("Time Sensitive requires system permission")
+                                .font(.caption)
+                        }
+                        
+                        Toggle("I consent to Time Sensitive notifications", isOn: $prefs.timeSensitiveConsent)
+                            .font(.caption)
+                    }
+                    
+                } footer: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Alarm ladder prevents alarm fatigue with budget-limited alerts.")
+                        
+                        if prefs.alarmStyle == .quiet {
+                            Text("Quiet: 1 alert at window open only.")
+                        } else if prefs.alarmStyle == .normal {
+                            Text("Normal: Up to 3 alerts (open, closing, end).")
+                        } else if prefs.alarmStyle == .strong {
+                            Text("Strong: Up to 5 alerts including hard repeats after grace. Requires consent.")
+                        }
+                        
+                        if prefs.respectDND == .timeSensitive {
+                            Text("Time Sensitive interruption breaks through most Focus modes but requires system permission.")
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                }
+                
+                // MARK: - Section 5: Notifications & Live Activity
                 Section("Notifications and Live Activity") {
                     Toggle("Enable Live Activity", isOn: $prefs.liveActivityEnabled)
                     
@@ -126,7 +221,7 @@ struct SettingsViewEnhanced: View {
                     Toggle("Haptic feedback", isOn: $prefs.hapticsEnabled)
                 }
                 
-                // MARK: - Section 5: Data Sources
+                // MARK: - Section 6: Data Sources
                 Section("Data sources") {
                     // Health permissions status (read-only)
                     HStack {

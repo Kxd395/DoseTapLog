@@ -12,6 +12,23 @@ import Observation
 @Observable
 final class AppPreferences {
     
+    // MARK: - Supporting Types
+    
+    /// Do Not Disturb / Focus mode policy
+    enum DNDPolicy: String, Codable, CaseIterable {
+        case off = "off"                    // Always interrupt
+        case timeSensitive = "timeSensitive" // Use Time Sensitive interruption
+        case ask = "ask"                    // Ask user on first alarm
+        
+        var description: String {
+            switch self {
+            case .off: return "Always notify (ignore Focus)"
+            case .timeSensitive: return "Time Sensitive (requires permission)"
+            case .ask: return "Ask me"
+            }
+        }
+    }
+    
     // MARK: - Night Plan Defaults
     
     @ObservationIgnored
@@ -70,6 +87,60 @@ final class AppPreferences {
     @AppStorage("late_require_reason")
     var lateRequireReason: Bool = true
     
+    @ObservationIgnored
+    @AppStorage("late_grace_minutes")
+    var lateGraceMinutes: Int = 15
+    
+    // MARK: - Alarm Ladder Policy
+    
+    @ObservationIgnored
+    @AppStorage("alarm_style")
+    var alarmStyleRaw: String = NightAlarmPlan.AlarmStyle.normal.rawValue
+    
+    /// Alarm style with type safety
+    var alarmStyle: NightAlarmPlan.AlarmStyle {
+        get { NightAlarmPlan.AlarmStyle(rawValue: alarmStyleRaw) ?? .normal }
+        set { alarmStyleRaw = newValue.rawValue }
+    }
+    
+    @ObservationIgnored
+    @AppStorage("alarm_budget_per_night")
+    var alarmBudgetPerNight: Int = 3
+    
+    @ObservationIgnored
+    @AppStorage("pre_window_lead_minutes")
+    var preWindowLeadMinutes: Int = 0  // 0 = disabled
+    
+    @ObservationIgnored
+    @AppStorage("hard_after_end_enabled")
+    var hardAfterEndEnabled: Bool = false
+    
+    @ObservationIgnored
+    @AppStorage("hard_repeat_minutes")
+    var hardRepeatMinutes: Int = 15
+    
+    @ObservationIgnored
+    @AppStorage("hard_max_repeats")
+    var hardMaxRepeats: Int = 3
+    
+    @ObservationIgnored
+    @AppStorage("respect_dnd")
+    var respectDNDRaw: String = DNDPolicy.timeSensitive.rawValue
+    
+    /// DND policy with type safety
+    var respectDND: DNDPolicy {
+        get { DNDPolicy(rawValue: respectDNDRaw) ?? .timeSensitive }
+        set { respectDNDRaw = newValue.rawValue }
+    }
+    
+    @ObservationIgnored
+    @AppStorage("notifications_time_sensitive_consent")
+    var timeSensitiveConsent: Bool = false
+    
+    @ObservationIgnored
+    @AppStorage("strong_alarm_consent")
+    var strongAlarmConsent: Bool = false
+    
     // MARK: - Notifications & Live Activity
     
     @ObservationIgnored
@@ -80,13 +151,31 @@ final class AppPreferences {
     @AppStorage("notifications_window_start")
     var notifyWindowStart: Bool = true
     
+    /// Alias for compatibility
+    var notifyAtStart: Bool {
+        get { notifyWindowStart }
+        set { notifyWindowStart = newValue }
+    }
+    
     @ObservationIgnored
     @AppStorage("notifications_halfway")
     var notifyHalfway: Bool = false
     
+    /// Alias for compatibility
+    var notifyAtHalf: Bool {
+        get { notifyHalfway }
+        set { notifyHalfway = newValue }
+    }
+    
     @ObservationIgnored
     @AppStorage("notifications_window_end")
     var notifyWindowEnd: Bool = true
+    
+    /// Alias for compatibility
+    var notifyAtEnd: Bool {
+        get { notifyWindowEnd }
+        set { notifyWindowEnd = newValue }
+    }
     
     @ObservationIgnored
     @AppStorage("notifications_quiet_start")
@@ -99,6 +188,17 @@ final class AppPreferences {
     @ObservationIgnored
     @AppStorage("notifications_haptics_enabled")
     var hapticsEnabled: Bool = true
+    
+    /// Computed property for window duration
+    var windowStartMinutes: Int {
+        get { windowStartMin }
+        set { windowStartMin = newValue }
+    }
+    
+    var windowEndMinutes: Int {
+        get { windowEndMin }
+        set { windowEndMin = newValue }
+    }
     
     // MARK: - Data Sources
     
