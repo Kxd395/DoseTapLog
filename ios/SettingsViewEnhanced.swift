@@ -88,6 +88,25 @@ struct SettingsViewEnhanced: View {
                     }
                 }
                 
+                // MARK: - Section 3b: Late Dose 2 Policy
+                Section("Late dose 2 policy") {
+                    Toggle("Allow late Dose 2", isOn: $prefs.allowLateDose)
+                    
+                    if prefs.allowLateDose {
+                        Stepper(value: $prefs.maxLateMinutes, in: 0...90, step: 5) {
+                            Text("Max late: \(prefs.maxLateMinutes) minutes")
+                        }
+                        
+                        Toggle("Require reason for late dose", isOn: $prefs.lateRequireReason)
+                    }
+                } footer: {
+                    if prefs.allowLateDose {
+                        Text("Late doses are logged after the dosing window closes. Maximum recommended: 30-60 minutes.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                
                 // MARK: - Section 4: Notifications & Live Activity
                 Section("Notifications and Live Activity") {
                     Toggle("Enable Live Activity", isOn: $prefs.liveActivityEnabled)

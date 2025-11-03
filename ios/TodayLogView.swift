@@ -81,9 +81,41 @@ struct TodayLogView: View {
                             Button("In bed now", action: vm.logInBedNow).buttonStyle(.bordered)
                             Button("Dose 1 now") { vm.logDose1Now(grams: vm.prefs.planDose1G) }.buttonStyle(.borderedProminent)
                         }
+                        
+                        // Override Banner (if armed for early/late)
+                        if let message = vm.bannerMessage {
+                            HStack {
+                                Image(systemName: bannerIcon(for: vm.bannerStyle))
+                                    .foregroundStyle(bannerColor(for: vm.bannerStyle))
+                                Text(message)
+                                    .font(.footnote)
+                                Spacer()
+                            }
+                            .padding(8)
+                            .background(bannerColor(for: vm.bannerStyle).opacity(0.1))
+                            .cornerRadius(8)
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                        }
+                        
                         HStack {
-                            Button("Dose 2 now", action: vm.tryLogDose2).buttonStyle(.borderedProminent).disabled(!vm.dose2Enabled)
+                            Button("Dose 2 now") {
+                                vm.tryLogDose2Tapped()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(!vm.evaluateDose2Gate().enabled)
+                            .onLongPressGesture {
+                                vm.longPressDose2()
+                            }
+                            
                             Button("Final wake", action: vm.logFinalWake).buttonStyle(.bordered)
+                        }
+                        
+                        // Helper text for Dose 2
+                        let gate = vm.evaluateDose2Gate()
+                        if !gate.enabled {
+                            Text(gate.reason)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                         Text("Events").font(.footnote).foregroundStyle(.secondary)
                         HStack {
@@ -143,7 +175,29 @@ struct TodayLogView: View {
             .toolbar { ToolbarItem(placement: .topBarTrailing) { Button { showSettings = true } label: { Image(systemName: "gearshape") } } }
             .sheet(isPresented: $showSettings) { SettingsViewEnhanced() }
             .sheet(isPresented: $vm.showEarlyDoseSheet) {
-                EarlyDoseSheet(minutes: $vm.earlyMinutesRequested, reason: $vm.earlyReason, allowed: 0...vm.prefs.maxEarlyMinutes, quickChoices: vm.prefs.defaultEarlyButtons, requireReason: vm.prefs.requireEarlyReason, onConfirm: vm.confirmEarlyDose2, onCancel: { vm.showEarlyDoseSheet = false })
+                EarlyDoseSheetView(
+                    isPresented: $vm.showEarlyDoseSheet,
+                    minutesEarly: vm.evaluateDose2Gate().minutesOffset,
+                    dose2Grams: vm.prefs.planDose2G,
+                    requireReason: AppPreferences.shared.earlyRequireReason,
+                    timePriorOptions: AppPreferences.shared.earlyTimePriorOptions,
+                    onConfirm: { reason, timePrior in
+                        vm.confirmEarlyDose2(reason: reason, timePriorMin: timePrior)
+                    }
+                )
+            }
+            .sheet(isPresented: $vm.showLateDoseSheet) {
+                LateDoseSheetView(
+                    isPresented: $vm.showLateDoseSheet,
+                    dose2Grams: vm.prefs.planDose2G,
+                    minutesAfterWindow: vm.evaluateDose2Gate().minutesOffset,
+                    requireReason: AppPreferences.shared.lateRequireReason,
+                    quickChoices: [5, 10, 15, 20, 30],
+                    maxLateMinutes: AppPreferences.shared.maxLateMinutes,
+                    onConfirm: { reason, minutesLate in
+                        vm.confirmLateDose2(reason: reason)
+                    }
+                )
             }
             .sheet(isPresented: $vm.showResetSheet) {
                 ResetNightSheet(
@@ -172,6 +226,26 @@ struct TodayLogView: View {
         let tzStr = String(format: "UTC%@$%02d:%02d".replacingOccurrences(of: "@", with: sign), "", absMin / 60, absMin % 60)
         let key = vm.nightKey ?? "Key unknown"
         return "\(today) • \(tzStr) • \(key)"
+    }
+    
+    // MARK: - Banner Helpers
+    
+    private func bannerIcon(for style: TodayViewModel.BannerStyle) -> String {
+        switch style {
+        case .info: return "info.circle.fill"
+        case .warning: return "exclamationmark.triangle.fill"
+        case .error: return "xmark.circle.fill"
+        case .success: return "checkmark.circle.fill"
+        }
+    }
+    
+    private func bannerColor(for style: TodayViewModel.BannerStyle) -> Color {
+        switch style {
+        case .info: return .blue
+        case .warning: return .orange
+        case .error: return .red
+        case .success: return .green
+        }
     }
 }
 
