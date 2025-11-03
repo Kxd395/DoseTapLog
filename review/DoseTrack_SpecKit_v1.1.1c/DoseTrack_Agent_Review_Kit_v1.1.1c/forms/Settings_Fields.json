@@ -1,0 +1,16 @@
+{
+  "prefs.alarm.enabled": true,
+  "prefs.alarm.defaultHour": 7,
+  "prefs.alarm.defaultMinute": 30,
+  "prefs.alarm.snoozeMinutes": 7,
+  "prefs.alarm.maxSnoozes": 3,
+  "prefs.alarm.shiftThresholdMin": 45,
+  "prefs.alarm.shiftByMin": 15,
+  "prefs.bedtime.hour": 23,
+  "prefs.bedtime.minute": 30,
+  "prefs.total_grams": 6.5,
+  "prefs.dose2_wake_tolerance_min": 120,
+  "bundle_id_app": "com.jefferson.dosetrack",
+  "bundle_id_widget": "com.jefferson.dosetrack.widget",
+  "app_group_id": "group.com.jefferson.dosetrack"
+}

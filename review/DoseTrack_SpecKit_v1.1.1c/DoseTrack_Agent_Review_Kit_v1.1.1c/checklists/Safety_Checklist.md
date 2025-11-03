@@ -1,0 +1,5 @@
+- [ ] Per-dose 1.5–4.5g enforced
+- [ ] Total 3.0–9.0g enforced
+- [ ] Window 150–240 enforced
+- [ ] Local-only privacy
+- [ ] Proxy gated and limited

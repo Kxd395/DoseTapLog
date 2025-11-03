@@ -1,0 +1,1 @@
+// SettingsView is declared in EarlyDoseSheet.swift module
