@@ -53,6 +53,7 @@
 		A0000034 /* LateDose2Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000034 /* LateDose2Sheet.swift */; };
 		A0000035 /* Dose2InfoSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000035 /* Dose2InfoSheets.swift */; };
 		A0000036 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000036 /* PrimaryButton.swift */; };
+		A0000037 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000037 /* NotificationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		B0000034 /* LateDose2Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateDose2Sheet.swift; sourceTree = "<group>"; };
 		B0000035 /* Dose2InfoSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2InfoSheets.swift; sourceTree = "<group>"; };
 		B0000036 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		B0000037 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 				B0000019 /* LateDoseSheetView.swift */,
 				B0000034 /* LateDose2Sheet.swift */,
 				B0000020 /* NightPlanRecommender.swift */,
+				B0000037 /* NotificationHelper.swift */,
 				B0000036 /* PrimaryButton.swift */,
 				B0000021 /* ResetNightSheet.swift */,
 				B0000022 /* Rounding+Display.swift */,
@@ -290,6 +293,7 @@
 				A0000034 /* LateDose2Sheet.swift in Sources */,
 				8089AFE22EB94EEF008532AA /* NightAlarmPlan.swift in Sources */,
 				A0000020 /* NightPlanRecommender.swift in Sources */,
+				A0000037 /* NotificationHelper.swift in Sources */,
 				A0000036 /* PrimaryButton.swift in Sources */,
 				A0000021 /* ResetNightSheet.swift in Sources */,
 				A0000022 /* Rounding+Display.swift in Sources */,

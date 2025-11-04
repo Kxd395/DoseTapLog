@@ -607,6 +607,9 @@ struct NightCardViewModern: View {
         
         try? modelContext.save()
         
+        // Cancel any pending window start reminder since Dose 2 is now logged
+        NotificationHelper.shared.cancelWindowStartReminder()
+        
         // Haptic
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
@@ -732,9 +735,29 @@ struct NightCardViewModern: View {
     }
     
     private func scheduleWindowStartReminder() {
-        // TODO: Schedule notification for window start time
-        print("Schedule reminder for window start")
-        showWhyDose2Disabled = false
+        guard let night = night, let d1 = night.dose1TimeUTC else {
+            print("⚠️ Cannot schedule reminder: no Dose 1 logged")
+            showWhyDose2Disabled = false
+            return
+        }
+        
+        let windowStartTime = d1.addingTimeInterval(Double(prefs.windowStartMin) * 60)
+        
+        Task {
+            let success = await NotificationHelper.shared.scheduleWindowStartReminder(at: windowStartTime)
+            
+            await MainActor.run {
+                if success {
+                    // Show confirmation
+                    print("✅ Reminder scheduled for \(windowStartTime)")
+                    // Could add a toast/banner here
+                } else {
+                    // Permission denied - could show settings prompt
+                    print("⚠️ Failed to schedule reminder - check notification permissions")
+                }
+                showWhyDose2Disabled = false
+            }
+        }
     }
 }
 
