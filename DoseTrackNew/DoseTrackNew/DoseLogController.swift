@@ -42,21 +42,21 @@ final class DoseLogController: DoseLogControllering {
     }
 
     func logDose1(at date: Date, gramsOverride: Double?) {
-        var log = fetchOrCreateCurrentNight()
+        let log = fetchOrCreateCurrentNight()
         log.dose1TimeUTC = date
         if let g = gramsOverride { log.dose1Grams = safeDisplayGrams(g) }
         try? context.save()
     }
 
     func logDose2(at date: Date, gramsOverride: Double?) {
-        var log = fetchOrCreateCurrentNight()
+        let log = fetchOrCreateCurrentNight()
         log.dose2TimeUTC = date
         if let g = gramsOverride { log.dose2Grams = safeDisplayGrams(g) }
         try? context.save()
     }
 
     func setFinalWake(_ date: Date, provenance: String) {
-        var log = fetchOrCreateCurrentNight()
+        let log = fetchOrCreateCurrentNight()
         log.finalWakeTimeUTC = date
         log.finalWakeProvenance = provenance
         try? context.save()

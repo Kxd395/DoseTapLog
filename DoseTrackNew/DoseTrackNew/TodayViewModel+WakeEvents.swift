@@ -24,7 +24,7 @@ extension TodayViewModel {
                     note: String? = nil) {
         ensureNightKeyMintedIfNeeded()
         
-        guard let nightKey = nightKey else {
+        guard nightKey != nil else {
             print("⚠️ Cannot log wake: no night key")
             return
         }
@@ -137,7 +137,7 @@ extension DoseLogController {
                  wasAlarmInterrupted: Bool,
                  note: String?) {
         
-        let eventType: String = isFinal ? "final_wake" : "alarm_wake"
+        _ = isFinal ? "final_wake" : "alarm_wake"
         
         // Store wake event in event_log with context
         // This would integrate with your existing event logging system
@@ -149,7 +149,7 @@ extension DoseLogController {
         print("📝 Logged wake: \(reason.label), final: \(isFinal), interrupted: \(wasAlarmInterrupted)")
         
         // If using SwiftData/CoreData, create LoggedEvent with wake context
-        let event = LoggedEvent(
+        _ = LoggedEvent(
             kind: isFinal ? .finalWake : .alarmWake,
             timestampUTC: timestampUTC,
             detail: reason.label

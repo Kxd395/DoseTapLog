@@ -26,7 +26,6 @@
 		A0000003 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000003 /* Config.swift */; };
 		A0000004 /* DoseLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000004 /* DoseLogController.swift */; };
 		A0000005 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000005 /* TodayViewModel.swift */; };
-		A0000006 /* TodayLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000006 /* TodayLogView.swift */; };
 		A0000007 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000007 /* HealthKitManager.swift */; };
 		A0000008 /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000008 /* CSVExporter.swift */; };
 		A0000009 /* Date+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000009 /* Date+UTC.swift */; };
@@ -45,9 +44,9 @@
 		A0000023 /* SafetyBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000023 /* SafetyBanner.swift */; };
 		A0000024 /* SafetyBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000024 /* SafetyBannerView.swift */; };
 		A0000025 /* SettingsViewEnhanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000025 /* SettingsViewEnhanced.swift */; };
-		A0000026 /* TodayLogView_CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000026 /* TodayLogView_CardStack.swift */; };
-		A0000027 /* TodayLogView_Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000027 /* TodayLogView_Checklist.swift */; };
 		A0000028 /* TodayViewModel+LateDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000028 /* TodayViewModel+LateDose.swift */; };
+		A0000029 /* TodayViewModel+WakeEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000029 /* TodayViewModel+WakeEvents.swift */; };
+		A0000030 /* WakeReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000030 /* WakeReason.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,7 +69,6 @@
 		B0000003 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		B0000004 /* DoseLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseLogController.swift; sourceTree = "<group>"; };
 		B0000005 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
-		B0000006 /* TodayLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLogView.swift; sourceTree = "<group>"; };
 		B0000007 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B0000008 /* CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExporter.swift; sourceTree = "<group>"; };
 		B0000009 /* Date+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+UTC.swift"; sourceTree = "<group>"; };
@@ -89,9 +87,9 @@
 		B0000023 /* SafetyBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyBanner.swift; sourceTree = "<group>"; };
 		B0000024 /* SafetyBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyBannerView.swift; sourceTree = "<group>"; };
 		B0000025 /* SettingsViewEnhanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewEnhanced.swift; sourceTree = "<group>"; };
-		B0000026 /* TodayLogView_CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLogView_CardStack.swift; sourceTree = "<group>"; };
-		B0000027 /* TodayLogView_Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLogView_Checklist.swift; sourceTree = "<group>"; };
 		B0000028 /* TodayViewModel+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayViewModel+LateDose.swift"; sourceTree = "<group>"; };
+		B0000029 /* TodayViewModel+WakeEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayViewModel+WakeEvents.swift"; sourceTree = "<group>"; };
+		B0000030 /* WakeReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeReason.swift; sourceTree = "<group>"; };
 		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,9 +137,8 @@
 				8089AFE32EB952D8008532AA /* project.pbxproj */,
 				B0000005 /* TodayViewModel.swift */,
 				B0000028 /* TodayViewModel+LateDose.swift */,
-				B0000006 /* TodayLogView.swift */,
-				B0000026 /* TodayLogView_CardStack.swift */,
-				B0000027 /* TodayLogView_Checklist.swift */,
+				B0000029 /* TodayViewModel+WakeEvents.swift */,
+				B0000030 /* WakeReason.swift */,
 				B0000007 /* HealthKitManager.swift */,
 				B0000008 /* CSVExporter.swift */,
 				B0000009 /* Date+UTC.swift */,
@@ -246,7 +243,6 @@
 				A0000003 /* Config.swift in Sources */,
 				A0000004 /* DoseLogController.swift in Sources */,
 				A0000005 /* TodayViewModel.swift in Sources */,
-				A0000006 /* TodayLogView.swift in Sources */,
 				A0000007 /* HealthKitManager.swift in Sources */,
 				A0000008 /* CSVExporter.swift in Sources */,
 				A0000009 /* Date+UTC.swift in Sources */,
@@ -277,10 +273,10 @@
 				A0000023 /* SafetyBanner.swift in Sources */,
 				A0000024 /* SafetyBannerView.swift in Sources */,
 				A0000025 /* SettingsViewEnhanced.swift in Sources */,
-				A0000026 /* TodayLogView_CardStack.swift in Sources */,
 				8089AFE12EB94EEF008532AA /* NightServiceDay.swift in Sources */,
-				A0000027 /* TodayLogView_Checklist.swift in Sources */,
 				A0000028 /* TodayViewModel+LateDose.swift in Sources */,
+				A0000029 /* TodayViewModel+WakeEvents.swift in Sources */,
+				A0000030 /* WakeReason.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

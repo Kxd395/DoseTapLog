@@ -27,6 +27,12 @@ struct ThreeCardPlanningView: View {
                 .pickerStyle(.segmented)
                 .padding()
                 
+                // Build label
+                Text("Build 1.1.2")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom, 8)
+                
                 // Selected card
                 TabView(selection: $selectedHorizon) {
                     ForEach(PlanningHorizon.allCases, id: \.self) { horizon in

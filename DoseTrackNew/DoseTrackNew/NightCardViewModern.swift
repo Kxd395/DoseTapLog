@@ -25,9 +25,6 @@ struct NightCardViewModern: View {
     var body: some View {
         ScrollView {
             VStack(spacing: DT.gap) {
-                // Header
-                headerRow
-                
                 if let night = night {
                     // Plan card
                     planCard(night)
@@ -59,34 +56,6 @@ struct NightCardViewModern: View {
         }
         .background(Palette.bg.ignoresSafeArea())
         .preferredColorScheme(.dark)
-    }
-    
-    // MARK: - Header
-    
-    private var headerRow: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("DoseTrack")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundStyle(Palette.text)
-                
-                Text("Build 1.1.2")
-                    .font(.caption2)
-                    .foregroundStyle(Palette.dim)
-            }
-            
-            Spacer()
-            
-            Button {
-                // Open settings
-            } label: {
-                Image(systemName: "gearshape.fill")
-                    .foregroundStyle(Palette.dim)
-                    .padding(10)
-                    .background(.ultraThinMaterial, in: Circle())
-            }
-        }
     }
     
     // MARK: - Plan Card
@@ -315,11 +284,11 @@ struct NightCardViewModern: View {
                 .init(
                     title: "Dose 2",
                     icon: "pills.circle.fill",
-                    disabled: !dose2Enabled(night),
-                    caption: dose2DisabledCaption(night),
                     action: {
                         tryLogDose2(night)
-                    }
+                    },
+                    disabled: !dose2Enabled(night),
+                    caption: dose2DisabledCaption(night)
                 ),
                 .init(title: "Final wake", icon: "sunrise.fill", action: {
                     logFinalWake(night)
@@ -335,9 +304,9 @@ struct NightCardViewModern: View {
                 .init(title: "Bathroom", icon: "figure.walk", action: {
                     logBathroom(night)
                 }),
-                .init(title: "Reset night", icon: "arrow.counterclockwise", tone: Palette.danger, action: {
+                .init(title: "Reset night", icon: "arrow.counterclockwise", action: {
                     resetNight(night)
-                })
+                }, tone: Palette.danger)
             ]
         )
     }
@@ -420,10 +389,11 @@ struct NightCardViewModern: View {
     // MARK: - Helper Methods
     
     private func perDoseSafe(_ night: DoseLog) -> Bool {
+        let perDoseMin = 1.5, perDoseMax = 4.5  // Safety constants from AppPreferencesEnhanced
         let d1 = night.dose1Grams ?? 0
         let d2 = night.dose2Grams ?? 0
-        return d1 >= prefs.perDoseMinG && d1 <= prefs.perDoseMaxG &&
-               d2 >= prefs.perDoseMinG && d2 <= prefs.perDoseMaxG
+        return d1 >= perDoseMin && d1 <= perDoseMax &&
+               d2 >= perDoseMin && d2 <= perDoseMax
     }
     
     private func plannedTotal(_ night: DoseLog) -> Double {
