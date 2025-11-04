@@ -1,0 +1,14 @@
+Command line invocation:
+    /Applications/_Development/Xcode.app/Contents/Developer/usr/bin/xcodebuild -list
+
+Resolve Package Graph
+2025-11-03 07:10:04.804 xcodebuild[88857:3155185] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+
+
+Resolved source packages:
+  DoseTrack: /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+
+Information about workspace "DoseTrack_v1.1":
+    Schemes:
+        DoseTrack
+

@@ -26,17 +26,8 @@ extension TodayViewModel {
         return max(0, Int(afterWindow))
     }
     
-    /// True if before window but within early dose eligibility
-    var isBeforeWindowButEligibleEarly: Bool {
-        guard let d1 = dose1TimeUTC else { return false }
-        guard dose2TimeUTC == nil else { return false }
-        guard AppPreferences.shared.allowEarlyDose else { return false }
-        
-        let elapsedMinutes = Date().timeIntervalSince(d1) / 60.0
-        let earlyThreshold = Double(windowStartMinutes - AppPreferences.shared.maxEarlyMinutes)
-        
-        return elapsedMinutes >= earlyThreshold && elapsedMinutes < Double(windowStartMinutes)
-    }
+    // Note: isBeforeWindowButEligibleEarly is defined in TodayViewModel.swift main class
+    // Do NOT redeclare here - it causes compilation errors
     
     // MARK: - Late Dose Methods
     
@@ -47,7 +38,7 @@ extension TodayViewModel {
             return
         }
         
-        guard AppPreferences.shared.allowLateDose else {
+        guard AppPreferencesEnhanced.shared.allowLateDose else {
             print("⚠️ Late dose logging is disabled in settings")
             return
         }
@@ -119,8 +110,8 @@ extension TodayViewModel {
         
         // Case 2: Before window (early override required)
         if elapsedMinutes < Double(windowStartMinutes) {
-            if AppPreferences.shared.allowEarlyDose {
-                let earlyThreshold = Double(windowStartMinutes - AppPreferences.shared.maxEarlyMinutes)
+            if AppPreferencesEnhanced.shared.allowEarlyDose {
+                let earlyThreshold = Double(windowStartMinutes - AppPreferencesEnhanced.shared.maxEarlyMinutes)
                 if elapsedMinutes >= earlyThreshold {
                     print("⏰ Early dose eligible - presenting sheet")
                     showEarlyDoseSheet = true
@@ -137,7 +128,7 @@ extension TodayViewModel {
         
         // Case 3: After window (late override required)
         if elapsedMinutes > Double(windowEndMinutes) {
-            if AppPreferences.shared.allowLateDose {
+            if AppPreferencesEnhanced.shared.allowLateDose {
                 print("⏰ Late dose eligible - parent should show late dose sheet")
                 // Parent view should check isAfterWindow and present LateDoseSheetView
                 return
@@ -173,7 +164,7 @@ extension TodayViewModel {
 ///
 /// ```swift
 /// // Show late dose button when window expired
-/// if vm.isAfterWindow && AppPreferences.shared.allowLateDose {
+/// if vm.isAfterWindow && AppPreferencesEnhanced.shared.allowLateDose {
 ///     Button("Log Dose 2 (late)") {
 ///         showLateDoseSheet = true
 ///     }
@@ -187,9 +178,9 @@ extension TodayViewModel {
 ///         isPresented: $showLateDoseSheet,
 ///         dose2Grams: vm.prefs.planDose2G,
 ///         minutesAfterWindow: vm.minutesAfterWindow,
-///         requireReason: AppPreferences.shared.lateRequireReason,
-///         quickChoices: AppPreferences.shared.lateQuickChoices,
-///         maxLateMinutes: AppPreferences.shared.maxLateMinutes,
+///         requireReason: AppPreferencesEnhanced.shared.lateRequireReason,
+///         quickChoices: AppPreferencesEnhanced.shared.lateQuickChoices,
+///         maxLateMinutes: AppPreferencesEnhanced.shared.maxLateMinutes,
 ///         onConfirm: { reason, minutesLate in
 ///             vm.confirmLateDose(reason: reason, minutesLate: minutesLate)
 ///         }

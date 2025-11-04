@@ -1,0 +1,617 @@
+//
+//  SettingsViewEnhanced.swift
+//  DoseTrack
+//
+//  Enhanced Settings screen with 7 sections (complete spec coverage)
+//
+
+import SwiftUI
+
+struct SettingsViewEnhanced: View {
+    @Environment(\.dismiss) var dismiss
+    @State private var showResetConfirm = false
+    @State private var showPurgeConfirm = false
+    
+    // Access AppPreferencesEnhanced directly (it uses @AppStorage which already provides bindings)
+    private var prefs: AppPreferencesEnhanced { AppPreferencesEnhanced.shared }
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                // MARK: - Section 1: Night Plan Defaults
+                Section {
+                    Picker("Total night (g)", selection: Binding(
+                        get: { prefs.totalNightGrams },
+                        set: { prefs.totalNightGrams = $0 }
+                    )) {
+                        ForEach([3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0], id: \.self) { g in
+                            Text(String(format: "%.1f g", g)).tag(g)
+                        }
+                    }
+                    
+                    Picker("Split", selection: Binding(
+                        get: { prefs.splitStrategy },
+                        set: { prefs.splitStrategy = $0 }
+                    )) {
+                        Text("50/50").tag("50/50")
+                        Text("60/40").tag("60/40")
+                        Text("40/60").tag("40/60")
+                    }
+                    
+                    Picker("Rounding step", selection: Binding(
+                        get: { prefs.roundingStepG },
+                        set: { prefs.roundingStepG = $0 }
+                    )) {
+                        Text("0.25 g").tag(0.25)
+                        Text("0.5 g").tag(0.5)
+                    }
+                    
+                    Toggle("Allow editing tonight's plan", isOn: Binding(
+                        get: { prefs.allowTonightEdit },
+                        set: { prefs.allowTonightEdit = $0 }
+                    ))
+                    
+                    // Live preview
+                    let d1 = prefs.planDose1G
+                    let d2 = prefs.planDose2G
+                    HStack {
+                        Text("Tonight's plan")
+                        Spacer()
+                        Text(String(format: "%.2fg + %.2fg", d1, d2))
+                            .foregroundStyle(.secondary)
+                    }
+                } header: {
+                    Text("Night plan defaults")
+                }
+                
+                // MARK: - Section 2: Dose 2 Window
+                Section {
+                    Stepper(value: Binding(
+                        get: { prefs.windowStartMin },
+                        set: { prefs.windowStartMin = $0 }
+                    ), in: 120...300, step: 5) {
+                        Text("Window starts at \(formatMinutes(prefs.windowStartMin))")
+                    }
+                    
+                    Stepper(value: Binding(
+                        get: { prefs.windowEndMin },
+                        set: { prefs.windowEndMin = $0 }
+                    ), in: 150...360, step: 5) {
+                        Text("Window ends at \(formatMinutes(prefs.windowEndMin))")
+                    }
+                    
+                    let duration = prefs.windowEndMin - prefs.windowStartMin
+                    HStack {
+                        Text("Window duration")
+                        Spacer()
+                        Text(formatMinutes(duration))
+                            .foregroundStyle(.secondary)
+                    }
+                } header: {
+                    Text("Dose 2 window")
+                }
+                
+                // MARK: - Section 3: Early Dose 2 Policy
+                Section {
+                    Toggle("Allow early Dose 2", isOn: Binding(
+                        get: { prefs.allowEarlyDose },
+                        set: { prefs.allowEarlyDose = $0 }
+                    ))
+                    
+                    if prefs.allowEarlyDose {
+                        Stepper(value: Binding(
+                            get: { prefs.maxEarlyMinutes },
+                            set: { prefs.maxEarlyMinutes = $0 }
+                        ), in: 0...60, step: 5) {
+                            Text("Max early: \(prefs.maxEarlyMinutes) minutes")
+                        }
+                        
+                        Toggle("Require reason for early dose", isOn: Binding(
+                            get: { prefs.requireEarlyReason },
+                            set: { prefs.requireEarlyReason = $0 }
+                        ))
+                        
+                        NavigationLink {
+                            EarlyDoseQuickChoicesView()
+                        } label: {
+                            Text("Quick time-prior buttons")
+                        }
+                    }
+                } header: {
+                    Text("Early dose 2 policy")
+                }
+                
+                //  MARK: - Section 3b: Late Dose 2 Policy
+                Section {
+                    Toggle("Allow late Dose 2", isOn: Binding(
+                        get: { prefs.allowLateDose },
+                        set: { prefs.allowLateDose = $0 }
+                    ))
+                    
+                    if prefs.allowLateDose {
+                        Stepper(value: Binding(
+                            get: { prefs.maxLateMinutes },
+                            set: { prefs.maxLateMinutes = $0 }
+                        ), in: 0...90, step: 5) {
+                            Text("Max late: \(prefs.maxLateMinutes) minutes")
+                        }
+                        
+                        Toggle("Require reason for late dose", isOn: Binding(
+                            get: { prefs.lateRequireReason },
+                            set: { prefs.lateRequireReason = $0 }
+                        ))
+                    }
+                } header: {
+                    Text("Late dose 2 policy")
+                } footer: {
+                    if prefs.allowLateDose {
+                        Text("Late doses are logged after the dosing window closes. Maximum recommended: 30-60 minutes.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                
+                // MARK: - Section 4: Alarm Ladder
+                Section {
+                    Picker("Alarm style", selection: Binding(
+                        get: { prefs.alarmStyleRaw },
+                        set: { prefs.alarmStyleRaw = $0 }
+                    )) {
+                        ForEach(NightAlarmPlan.AlarmStyle.allCases, id: \.self) { style in
+                            Text(style.description).tag(style.rawValue)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    
+                    // Show consent warning for Strong style
+                    if prefs.alarmStyle == .strong && !prefs.strongAlarmConsent {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(.orange)
+                            Text("Strong style requires consent")
+                                .font(.caption)
+                        }
+                        
+                        Toggle("I consent to hard repeating alarms", isOn: Binding(
+                            get: { prefs.strongAlarmConsent },
+                            set: { prefs.strongAlarmConsent = $0 }
+                        ))
+                            .font(.caption)
+                    }
+                    
+                    Stepper(value: Binding(
+                        get: { prefs.alarmBudgetPerNight },
+                        set: { prefs.alarmBudgetPerNight = $0 }
+                    ), in: 1...5) {
+                        Text("Alarm budget: \(prefs.alarmBudgetPerNight) per night")
+                    }
+                    
+                    Stepper(value: Binding(
+                        get: { prefs.lateGraceMinutes },
+                        set: { prefs.lateGraceMinutes = $0 }
+                    ), in: 0...30, step: 5) {
+                        Text("Late grace period: \(prefs.lateGraceMinutes) min")
+                    }
+                    
+                    if prefs.alarmStyle != .quiet {
+                        Stepper(value: Binding(
+                            get: { prefs.preWindowLeadMinutes },
+                            set: { prefs.preWindowLeadMinutes = $0 }
+                        ), in: 0...60, step: 5) {
+                            if prefs.preWindowLeadMinutes == 0 {
+                                Text("Pre-window nudge: Off")
+                            } else {
+                                Text("Pre-window nudge: \(prefs.preWindowLeadMinutes) min before")
+                            }
+                        }
+                    }
+                    
+                    if prefs.alarmStyle == .strong {
+                        Divider()
+                        
+                        Toggle("Hard repeats after grace", isOn: Binding(
+                            get: { prefs.hardAfterEndEnabled },
+                            set: { prefs.hardAfterEndEnabled = $0 }
+                        ))
+                        
+                        if prefs.hardAfterEndEnabled {
+                            Stepper(value: Binding(
+                                get: { prefs.hardRepeatMinutes },
+                                set: { prefs.hardRepeatMinutes = $0 }
+                            ), in: 5...30, step: 5) {
+                                Text("Hard repeat interval: \(prefs.hardRepeatMinutes) min")
+                            }
+                            
+                            Stepper(value: Binding(
+                                get: { prefs.hardMaxRepeats },
+                                set: { prefs.hardMaxRepeats = $0 }
+                            ), in: 1...3) {
+                                Text("Max hard repeats: \(prefs.hardMaxRepeats)")
+                            }
+                        }
+                    }
+                    
+                    Picker("Focus mode policy", selection: Binding(
+                        get: { prefs.respectDNDRaw },
+                        set: { prefs.respectDNDRaw = $0 }
+                    )) {
+                        ForEach(AppPreferencesEnhanced.DNDPolicy.allCases, id: \.self) { policy in
+                            Text(policy.description).tag(policy.rawValue)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    
+                    if prefs.respectDND == .timeSensitive && !prefs.timeSensitiveConsent {
+                        HStack {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundStyle(.blue)
+                            Text("Time Sensitive requires system permission")
+                                .font(.caption)
+                        }
+                        
+                        Toggle("I consent to Time Sensitive notifications", isOn: Binding(
+                            get: { prefs.timeSensitiveConsent },
+                            set: { prefs.timeSensitiveConsent = $0 }
+                        ))
+                            .font(.caption)
+                    }
+                    
+                } footer: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Alarm ladder prevents alarm fatigue with budget-limited alerts.")
+                        
+                        if prefs.alarmStyle == .quiet {
+                            Text("Quiet: 1 alert at window open only.")
+                        } else if prefs.alarmStyle == .normal {
+                            Text("Normal: Up to 3 alerts (open, closing, end).")
+                        } else if prefs.alarmStyle == .strong {
+                            Text("Strong: Up to 5 alerts including hard repeats after grace. Requires consent.")
+                        }
+                        
+                        if prefs.respectDND == .timeSensitive {
+                            Text("Time Sensitive interruption breaks through most Focus modes but requires system permission.")
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                } header: {
+                    Text("Alarm ladder")
+                }
+                
+                // MARK: - Section 5: Notifications & Live Activity
+                Section {
+                    Toggle("Enable Live Activity", isOn: Binding(
+                        get: { prefs.liveActivityEnabled },
+                        set: { prefs.liveActivityEnabled = $0 }
+                    ))
+                    
+                    Toggle("Notify at window start", isOn: Binding(
+                        get: { prefs.notifyAtStart },
+                        set: { prefs.notifyAtStart = $0 }
+                    ))
+                    Toggle("Notify at halfway point", isOn: Binding(
+                        get: { prefs.notifyAtHalf },
+                        set: { prefs.notifyAtHalf = $0 }
+                    ))
+                    Toggle("Notify at window end", isOn: Binding(
+                        get: { prefs.notifyAtEnd },
+                        set: { prefs.notifyAtEnd = $0 }
+                    ))
+                    
+                    // quietHoursStart/End are stored as Strings in "HH:mm" format
+                    // But for Stepper we need Int. Need helper computed properties.
+                    let qhStart = extractHour(from: prefs.quietHoursStart)
+                    let qhEnd = extractHour(from: prefs.quietHoursEnd)
+                    
+                    Stepper(value: Binding(
+                        get: { qhStart },
+                        set: { prefs.quietHoursStart = formatHour($0) }
+                    ), in: 0...23) {
+                        Text("Quiet hours start: \(qhStart):00")
+                    }
+                    
+                    Stepper(value: Binding(
+                        get: { qhEnd },
+                        set: { prefs.quietHoursEnd = formatHour($0) }
+                    ), in: 0...23) {
+                        Text("Quiet hours end: \(qhEnd):00")
+                    }
+                    
+                    Toggle("Haptic feedback", isOn: Binding(
+                        get: { prefs.hapticsEnabled },
+                        set: { prefs.hapticsEnabled = $0 }
+                    ))
+                } header: {
+                    Text("Notifications and Live Activity")
+                }
+                
+                // MARK: - Section 6: Data Sources
+                Section {
+                    // Health permissions status (read-only)
+                    HStack {
+                        Text("HealthKit permissions")
+                        Spacer()
+                        // TODO: Get actual status from HealthKitManager
+                        Text("Authorized")
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    Button("Recheck Health permissions") {
+                        // TODO: Call HealthKitManager.requestAuthorization()
+                    }
+                    
+                    Stepper(value: Binding(
+                        get: { prefs.healthSampleWindowMin },
+                        set: { prefs.healthSampleWindowMin = $0 }
+                    ), in: 60...300, step: 15) {
+                        Text("Health sample window: \(prefs.healthSampleWindowMin) min")
+                    }
+                    
+                    TextField("WHOOP proxy URL", text: Binding(
+                        get: { prefs.whoopProxyURL },
+                        set: { prefs.whoopProxyURL = $0 }
+                    ))
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                    
+                    SecureField("WHOOP API key", text: Binding(
+                        get: { prefs.whoopAPIKey },
+                        set: { prefs.whoopAPIKey = $0 }
+                    ))
+                    
+                    Button("Test WHOOP connection") {
+                        // TODO: Call WHOOP proxy endpoint
+                    }
+                    .disabled(prefs.whoopProxyURL.isEmpty)
+                    
+                    Picker("Prefer wake source", selection: Binding(
+                        get: { prefs.wakeSourcePreference },
+                        set: { prefs.wakeSourcePreference = $0 }
+                    )) {
+                        Text("HealthKit").tag("health")
+                        Text("Manual entry").tag("manual")
+                    }
+                } header: {
+                    Text("Data sources")
+                }
+                
+                // MARK: - Section 6: Exports
+                Section {
+                    Toggle("Include timezone in CSV", isOn: Binding(
+                        get: { prefs.exportIncludeTimezone },
+                        set: { prefs.exportIncludeTimezone = $0 }
+                    ))
+                    
+                    TextField("Filename pattern", text: Binding(
+                        get: { prefs.exportFilenamePattern },
+                        set: { prefs.exportFilenamePattern = $0 }
+                    ))
+                        .textInputAutocapitalization(.never)
+                    
+                    Text("Available tokens: {nightKey}, {date}, {timezone}")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    
+                    Toggle("Include notes column", isOn: Binding(
+                        get: { prefs.exportIncludeNotes },
+                        set: { prefs.exportIncludeNotes = $0 }
+                    ))
+                    Toggle("Include raw event log", isOn: Binding(
+                        get: { prefs.exportIncludeEventLog },
+                        set: { prefs.exportIncludeEventLog = $0 }
+                    ))
+                    
+                    TextField("Default share email", text: Binding(
+                        get: { prefs.exportDefaultEmail },
+                        set: { prefs.exportDefaultEmail = $0 }
+                    ))
+                        .textInputAutocapitalization(.never)
+                        .keyboardType(.emailAddress)
+                } header: {
+                    Text("Exports")
+                }
+                
+                // MARK: - Section 7: Privacy & Retention
+                Section {
+                    Toggle("Require Face ID to open", isOn: Binding(
+                        get: { prefs.requireBiometric },
+                        set: { prefs.requireBiometric = $0 }
+                    ))
+                    
+                    Toggle("Mask doses on widgets", isOn: Binding(
+                        get: { prefs.maskWidgetDoses },
+                        set: { prefs.maskWidgetDoses = $0 }
+                    ))
+                    
+                    Stepper(value: Binding(
+                        get: { prefs.retentionDays },
+                        set: { prefs.retentionDays = $0 }
+                    ), in: 30...3650, step: 30) {
+                        Text("Keep data for \(prefs.retentionDays) days")
+                    }
+                    
+                    Button("Purge old data now", role: .destructive) {
+                        showPurgeConfirm = true
+                    }
+                    .confirmationDialog("Purge old data?", isPresented: $showPurgeConfirm) {
+                        Button("Delete data older than \(prefs.retentionDays) days", role: .destructive) {
+                            // TODO: Call DoseLogController.purgeOldData()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    } message: {
+                        Text("This will permanently delete night records older than \(prefs.retentionDays) days.")
+                    }
+                } header: {
+                    Text("Privacy and retention")
+                }
+                
+                // MARK: - Section 7.5: Reset Night
+                Section {
+                    Toggle("Allow Hard Reset", isOn: Binding(
+                        get: { prefs.resetAllowHard },
+                        set: { prefs.resetAllowHard = $0 }
+                    ))
+                    
+                    Toggle("Require Face ID for Hard Reset", isOn: Binding(
+                        get: { prefs.resetRequireBiometricHard },
+                        set: { prefs.resetRequireBiometricHard = $0 }
+                    ))
+                        .disabled(!prefs.resetAllowHard)
+                    
+                    Toggle("Reason required", isOn: Binding(
+                        get: { prefs.resetReasonRequired },
+                        set: { prefs.resetReasonRequired = $0 }
+                    ))
+                    
+                    Stepper(value: Binding(
+                        get: { prefs.resetUndoWindowSec },
+                        set: { prefs.resetUndoWindowSec = $0 }
+                    ), in: 10...120, step: 10) {
+                        Text("Undo window: \(prefs.resetUndoWindowSec) seconds")
+                    }
+                } header: {
+                    Text("Reset Night")
+                } footer: {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("• Soft reset closes tonight and starts fresh (reversible)")
+                        Text("• Hard reset closes and deletes tonight's data (permanent)")
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                }
+                
+                // MARK: - Section 8: Debug & Developer
+                Section {
+                    Toggle("Show nightKey and offsets", isOn: Binding(
+                        get: { prefs.showInternals },
+                        set: { prefs.showInternals = $0 }
+                    ))
+                    
+                    Button("Simulate Dose 1 now") {
+                        // TODO: Call DoseLogController test method
+                    }
+                    
+                    Button("Force window open") {
+                        // TODO: Call DoseLogController test method
+                    }
+                    
+                    NavigationLink("View event log") {
+                        EventLogView()
+                    }
+                    
+                    // Schema version (read-only)
+                    HStack {
+                        Text("Schema version")
+                        Spacer()
+                        Text("1.1.1c")
+                            .foregroundStyle(.secondary)
+                    }
+                } header: {
+                    Text("Debug and developer")
+                }
+                
+                // MARK: - Reset Button
+                Section {
+                    Button("Reset all settings to defaults", role: .destructive) {
+                        showResetConfirm = true
+                    }
+                    .confirmationDialog("Reset all settings?", isPresented: $showResetConfirm) {
+                        Button("Reset to defaults", role: .destructive) {
+                            prefs.resetToDefaults()
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    }
+                }
+            }
+            .navigationTitle("Settings")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { dismiss() }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Helper Functions
+    
+    private func formatMinutes(_ minutes: Int) -> String {
+        let h = minutes / 60
+        let m = minutes % 60
+        if h == 0 {
+            return "\(m)m"
+        } else if m == 0 {
+            return "\(h)h"
+        } else {
+            return "\(h)h \(m)m"
+        }
+    }
+    
+    private func extractHour(from timeString: String) -> Int {
+        // timeString is in "HH:mm" format like "22:00"
+        let components = timeString.split(separator: ":")
+        return Int(components.first ?? "0") ?? 0
+    }
+    
+    private func formatHour(_ hour: Int) -> String {
+        // Return "HH:mm" format
+        return String(format: "%02d:00", hour)
+    }
+}
+
+// MARK: - Supporting Views
+
+struct EarlyDoseQuickChoicesView: View {
+    @State private var selectedButtons: Set<Int>
+    private var prefs: AppPreferencesEnhanced { AppPreferencesEnhanced.shared }
+    
+    init() {
+        let buttons = AppPreferencesEnhanced.shared.defaultEarlyButtons
+        _selectedButtons = State(initialValue: Set(buttons))
+    }
+    
+    var body: some View {
+        List {
+            ForEach([5, 10, 15, 20, 30], id: \.self) { minutes in
+                HStack {
+                    Text("\(minutes) minutes")
+                    Spacer()
+                    Image(systemName: selectedButtons.contains(minutes) ? "checkmark.circle.fill" : "circle")
+                        .foregroundStyle(selectedButtons.contains(minutes) ? .blue : .secondary)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    if selectedButtons.contains(minutes) {
+                        selectedButtons.remove(minutes)
+                    } else {
+                        selectedButtons.insert(minutes)
+                    }
+                    updatePreferences()
+                }
+            }
+        }
+        .navigationTitle("Quick choices")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func updatePreferences() {
+        let sorted = selectedButtons.sorted()
+        prefs.earlyTimePriorDefaults = sorted.map(String.init).joined(separator: ",")
+    }
+}
+
+struct EventLogView: View {
+    var body: some View {
+        List {
+            Text("Event log viewer - TODO")
+                .foregroundStyle(.secondary)
+        }
+        .navigationTitle("Event log")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    SettingsViewEnhanced()
+}

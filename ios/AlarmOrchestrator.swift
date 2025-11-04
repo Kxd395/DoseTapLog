@@ -15,7 +15,7 @@ import UserNotifications
 import os.log
 
 /// Protocol for alarm scheduling (mockable for testing)
-protocol AlarmOrchestrating {
+protocol AlarmOrchestrating: Sendable {
     /// Arm all alarms for a night based on plan and budget
     func arm(for plan: NightAlarmPlan, style: NightAlarmPlan.AlarmStyle) async throws -> NightAlarmPlan
     
@@ -29,7 +29,7 @@ protocol AlarmOrchestrating {
     func markDelivered(identifier: String, nightKey: String) async
     
     /// Check if user interacted recently (suppress next alert)
-    func recordInteraction(nightKey: String)
+    func recordInteraction(nightKey: String) async
     
     /// Get pending notification count for night
     func pendingCount(forNightKey nightKey: String) async -> Int
@@ -39,7 +39,6 @@ protocol AlarmOrchestrating {
 actor AlarmOrchestrator: AlarmOrchestrating {
     private let center: UNUserNotificationCenter
     private let logger = Logger(subsystem: "com.dosetrack", category: "AlarmOrchestrator")
-    private let appPreferences: AppPreferences
     
     /// Track last interaction time per night
     private var lastInteractionTime: [String: Date] = [:]
@@ -48,11 +47,14 @@ actor AlarmOrchestrator: AlarmOrchestrating {
     private let interactionSuppressionWindow: TimeInterval = 5 * 60
     
     init(
-        center: UNUserNotificationCenter = .current(),
-        preferences: AppPreferences = .shared
+        center: UNUserNotificationCenter = .current()
     ) {
         self.center = center
-        self.appPreferences = preferences
+    }
+    
+    /// Access preferences non-isolated (reads from shared instance on-demand)
+    nonisolated private var appPreferences: AppPreferences {
+        AppPreferences.shared
     }
     
     // MARK: - Arming

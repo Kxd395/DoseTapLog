@@ -516,29 +516,26 @@ final class DoseLogController: DoseLogControllering {
         // TODO: Implement durable pending action queue
         logger.warning("🔄 Pending action enqueued (queue not yet implemented): \(action)")
     }
-    
-    // MARK: - Existing Methods (Preserved)
-    
-    private func logDose1(at date: Date, gramsOverride: Double?) {
-        logDose1Now(grams: gramsOverride ?? AppPreferencesEnhanced.shared.planDose1G)
-    }
-
-    private func logDose2(at date: Date, gramsOverride: Double?) {
-        logDose2Now(grams: gramsOverride ?? AppPreferencesEnhanced.shared.planDose2G, overrideEarlyMinutes: nil, overrideReason: nil)
-    }
-    
-    func setFinalWake(_ date: Date, provenance: String) {
-        logFinalWakeNow(provenance: provenance)
-    }
 }
 
 // MARK: - Supporting Types
 
-enum PendingActionKind {
+enum PendingActionKind: CustomStringConvertible {
     case inBedNow
     case dose1Now(grams: Double)
     case dose2Now(grams: Double)
     case bathroomNow
     case alarmWakeNow
     case finalWakeNow(provenance: String)
+    
+    var description: String {
+        switch self {
+        case .inBedNow: return "inBedNow"
+        case .dose1Now(let g): return "dose1Now(\(g)g)"
+        case .dose2Now(let g): return "dose2Now(\(g)g)"
+        case .bathroomNow: return "bathroomNow"
+        case .alarmWakeNow: return "alarmWakeNow"
+        case .finalWakeNow(let prov): return "finalWakeNow(\(prov))"
+        }
+    }
 }

@@ -302,7 +302,8 @@ final class AppPreferences {
     }
     
     // MARK: - Codable Compatibility (for review bundle's TodayViewModel)
-    
+    // NOTE: Commented out because LegacyAppPreferences is now in AppPreferencesEnhanced.swift
+    /*
     /// Create a lightweight struct compatible with review bundle's AppPreferences protocol
     func toLegacyStruct() -> LegacyAppPreferences {
         LegacyAppPreferences(
@@ -329,10 +330,12 @@ final class AppPreferences {
         default: return .fiftyFifty
         }
     }
+    */
 }
 
 // MARK: - Legacy Compatibility Struct
-
+// NOTE: This is commented out because AppPreferencesEnhanced.swift has the canonical definition
+/*
 /// Lightweight struct compatible with review bundle's TodayViewModel
 struct LegacyAppPreferences: Codable, Equatable {
     var totalNightG: Double
@@ -377,3 +380,4 @@ struct LegacyAppPreferences: Codable, Equatable {
         }
     }
 }
+*/

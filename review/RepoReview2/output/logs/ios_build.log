@@ -1,0 +1,1043 @@
+Command line invocation:
+    /Applications/_Development/Xcode.app/Contents/Developer/usr/bin/xcodebuild -scheme DoseTrack -destination "platform=iOS Simulator,id=A260D359-E23B-4152-8BFC-91CD9C6ACC1E" clean build
+
+Resolve Package Graph
+2025-11-03 07:11:19.889 xcodebuild[90677:3159546] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+
+
+Resolved source packages:
+  DoseTrack: /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:A260D359-E23B-4152-8BFC-91CD9C6ACC1E, OS:17.2, name:iPhone 15 }
+{ platform:iOS Simulator, arch:x86_64, id:A260D359-E23B-4152-8BFC-91CD9C6ACC1E, OS:17.2, name:iPhone 15 }
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+** CLEAN SUCCEEDED **
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:A260D359-E23B-4152-8BFC-91CD9C6ACC1E, OS:17.2, name:iPhone 15 }
+{ platform:iOS Simulator, arch:x86_64, id:A260D359-E23B-4152-8BFC-91CD9C6ACC1E, OS:17.2, name:iPhone 15 }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (2 targets)
+    Target 'DoseTrack' in project 'DoseTrack'
+        ➜ Explicit dependency on target 'DoseTrack' in project 'DoseTrack'
+    Target 'DoseTrack' in project 'DoseTrack' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 111c10572e12c1b0b4a5fd3ed4362f66
+Build description path: /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/XCBuildData/111c10572e12c1b0b4a5fd3ed4362f66.xcbuilddata
+ClangStatCache /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk /Users/kevindialmb/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-52bbade31dfd1f3e760fc2f57ab025c3.sdkstatcache
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -o /Users/kevindialmb/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-52bbade31dfd1f3e760fc2f57ab025c3.sdkstatcache
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator/PackageFrameworks
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-create-build-directory /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator/PackageFrameworks
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.modulemap (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.modulemap
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.DependencyStaticMetadataFileList (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.DependencyMetadataFileList (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.LinkFileList (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.LinkFileList
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-OutputFileMap.json (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.SwiftFileList (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.SwiftFileList
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.SwiftConstValuesFileList (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack_const_extract_protocols.json (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    write-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack_const_extract_protocols.json
+
+Copy /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/DoseTrack.modulemap /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.modulemap (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DoseTrack.modulemap /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator
+
+SwiftDriver DoseTrack normal arm64 com.apple.xcode.tools.swift.compiler (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    builtin-SwiftDriver -- /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name DoseTrack -Onone -enforce-exclusivity\=checked @/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.SwiftFileList -DSWIFT_PACKAGE -DDEBUG -DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -DXcode -plugin-path /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator -Isystem /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator -F /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/kevindialmb/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-52bbade31dfd1f3e760fc2f57ab025c3.sdkstatcache -output-file-map /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -package-name dosetrack_v1_1_1c -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack_const_extract_protocols.json -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DerivedSources-normal/arm64 -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DerivedSources/arm64 -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-Swift.h -working-directory /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode -experimental-emit-module-separately -disable-cmo
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_stddef-2S48NZY6EYWAPZO60WBX5C10.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/SwiftShims-3XIV34KW50RJGZNLD0FGRP1RD.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_AvailabilityInternal-29M9WFVPP0S7M3DW7C40SIV6J.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_stdbool-7R6OUMI4TA94N3ZVG242B4WQA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/ptrcheck-BUTBHY1L69ODTRA5MC4FFWDLL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_SwiftConcurrencyShims-EJSLI5JFYYTEBYRHUYIQHSPM7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/ptrauth-8WXHCKICHZ45QC9DYHJ0LKQSI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_float-3OBR91VNY6LCBFCFRY30QPL94.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/DeveloperToolsSupport-93Y8WDXQRAZ6YT1POP4OQB1Z9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_stdarg-5HOTZKC2FP8LDEIQM8HN0PGCB.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_DarwinFoundation1-EPXBCYUTVNTPSZBTF4YG8APME.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_limits-A3KJHMMAKQ7Q5R6E0CGHDSGCX.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_DarwinFoundation2-ARGHZUGC5LYPSYVG4M8PTRNU8.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/ExtensionFoundation-23KMA1TPEUJ8CZ1F2ESMFF2YO.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/sys_types-6H5JEOBB62GEJ6ARDVJ8HLWLR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_tgmath-869XCJ6GDPKBI0T7F6F63I830.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_stdint-95SBZ157AGZTVZGGLSU85X9XP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_intrinsics-DZY4TEQGKQ5O48UZDRAOM7P8T.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_stdatomic-CHBEJNXK0VLQ2MQZODC69HAE7.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_DarwinFoundation3-5CY7NW41IVT7JQBJAWT8HYH3J.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_Builtin_inttypes-14HHXMRVTROZJ8GCM4SOE12J9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Darwin-5MS1ZRDFP8XKOBN24X1W37RV5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/simd-21V1RPJIE18IQ78K453PX88W1.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/MachO-5D0O6GIR8SQ5FRVVC4VMB892N.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/ObjectiveC-DTXC79DT5F16I84AW9TF93IT9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/os_object-7CT74J4URLQGZEKA3HRL8J9M.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/os_workgroup-1BTHS4RAAA01GB4OQ2CWTZF0G.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Dispatch-GZSR9J5MVU8961YSE3N05NYW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Spatial-6M3UOQB89PNBMB3Y9M30X4EDT.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/XPC-88OG0HB06IRABDSRVOC1BI11F.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreFoundation-B0H8QQRW2BF0Z0O6XGWMLNTEN.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/dnssd-9MOUXXU1QBMJVAQZKTU7M6FLZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/os-5314ZF92CBWF6EVGS1CR4L4QK.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Security-AR89QU01Z5QPMWFO1LF994P6M.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreGraphics-1RVSZD4T8CYP70NNQ5RZWM1W6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CFNetwork-9ARHR7TOPAL7FK2202P1DTKAX.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Foundation-63J8AFWYN6RQI5NV3CYJK4GJV.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreText-8J14ZUNLCHVFTMQLO01MLKT7G.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/ImageIO-658BZ37GBH1S3Y7WSNUVI0HE2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Accessibility-CHJMJ9DBGJPXMW0I3HBEVSDK1.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/IOSurface-6UC3QJ4S6CDMOBXFK16M14Z22.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/DataDetection-576YOFECSBNZRCRFE93UW81WT.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/LocalAuthentication-78FAPVBYLKMWUNAU653KA8JXL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreData-EXJ1H3RNU3LNVROW57FHHVI6S.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/OSLog-6AULTLC3FXGP94J7UEJPB6VIM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/UserNotifications-BQEL0BSK5T1GESWZLEAXH5GX1.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Network-55NIPMITPIL3MLJ05DB0Z2Z19.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/_LocationEssentials-GC8YL7BTY5XLXT3MIPVEJUMC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/AppIntents-CJDJAZNGA7JM7Y9ONSLES67FH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/RelevanceKit-EA32EE7XERTWULKN83KANRD4E.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/UniformTypeIdentifiers-7X25KPGCENZP2XXUDU0AO52PI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/FileProvider-6CJYWRR0OTTM3GJUUSNVZJNOB.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/UIUtilities-BIPQRTW76PX1POJUPDTKMORW2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreLocation-AXYXFKG6C759VP9R7Q953D4IZ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreTransferable-5ZABCBIQ161D6ZZUOFIQW8770.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Metal-BYQKGFD4Q90FXENWS6NQ18K7U.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Symbols-5NBYGCCNLVO2UYV6BY3MN6VQH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/OpenGLES-2DI7IXA3GCYRPYQV6UK4C0US.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/HealthKit-EV8X9U6WOTL13YLWE8YMC99OQ.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreSpotlight-DHIK0YHSUHVNGVMW68Z6AKOD6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreVideo-A6DQK5FOWZD8ROO1BUWK89S0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/CoreImage-1SJ7TZ745T2LXFH4SZ339HIKO.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/QuartzCore-EIBQUJR3QXUJNQUAARL8LMA26.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/SwiftUICore-6QNAM6TTWL5XH257COIM96NVT.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/UIKit-C7X9IN33JL39VMYZVXZ28AY7H.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/SwiftUI-F2URNVAYUMAHY5IIVZETRJNLO.pcm
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ DoseTrack (in target 'DoseTrack' from project 'DoseTrack')
+
+EmitSwiftModule normal arm64 (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift:39:26: error: conformance of 'AlarmOrchestrator' to protocol 'AlarmOrchestrating' crosses into actor-isolated code and can cause data races
+actor AlarmOrchestrator: AlarmOrchestrating {
+                         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift:39:7: note: mark all declarations used in the conformance 'nonisolated'
+actor AlarmOrchestrator: AlarmOrchestrating {
+      ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift:39:26: note: turn data races into runtime errors with '@preconcurrency'
+actor AlarmOrchestrator: AlarmOrchestrating {
+                         ^
+                         @preconcurrency 
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift:218:10: note: actor-isolated instance method 'recordInteraction(nightKey:)' cannot satisfy nonisolated requirement
+    func recordInteraction(nightKey: String) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift:380:26: error: cannot find 'suite' in scope
+        guard let data = suite.data(forKey: legacyKey),
+                         ^~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift:380:45: error: cannot find 'legacyKey' in scope
+        guard let data = suite.data(forKey: legacyKey),
+                                            ^~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift:388:51: error: value of type 'AppPreferences' has no member 'roundingStepG'
+        if let val = legacy.roundingStepG { prefs.roundingStepG = val }
+                                            ~~~~~ ^~~~~~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift:393:56: error: value of type 'AppPreferences' has no member 'requireEarlyReason'
+        if let val = legacy.requireEarlyReason { prefs.requireEarlyReason = val }
+                                                 ~~~~~ ^~~~~~~~~~~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift:412:9: error: cannot find 'suite' in scope
+        suite.removeObject(forKey: legacyKey)
+        ^~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift:412:36: error: cannot find 'legacyKey' in scope
+        suite.removeObject(forKey: legacyKey)
+                                   ^~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:11:9: error: non-static property 'allowLateDose' declared inside an extension cannot have a wrapper
+    var allowLateDose: Bool = true
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:11:9: error: extensions must not contain stored properties
+    var allowLateDose: Bool = true
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:15:9: error: non-static property 'lateRequireReason' declared inside an extension cannot have a wrapper
+    var lateRequireReason: Bool = true
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:15:9: error: extensions must not contain stored properties
+    var lateRequireReason: Bool = true
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:19:9: error: non-static property 'maxLateMinutes' declared inside an extension cannot have a wrapper
+    var maxLateMinutes: Int = 120
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:19:9: error: extensions must not contain stored properties
+    var maxLateMinutes: Int = 120
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:23:9: error: non-static property 'lateQuickChoicesCSV' declared inside an extension cannot have a wrapper
+    var lateQuickChoicesCSV: String = "5,10,15,30"
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift:23:9: error: extensions must not contain stored properties
+    var lateQuickChoicesCSV: String = "5,10,15,30"
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15totalNightGrams18ObservationTrackedfMp_.swift:7:91: error: invalid redeclaration of synthesized property '_totalNightGrams'
+    @AppStorage("plan_total_night_grams", store: suite)  @ObservationIgnored private  var _totalNightGrams: Double = 6.5
+                                                                                          ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15totalNightGrams10ObservablefMr_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'totalNightGrams' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15totalNightGrams10ObservablefMr_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'totalNightGrams' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:22:9: note: '_totalNightGrams' synthesized for property wrapper backing storage
+    var totalNightGrams: Double = 6.5
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13splitStrategy18ObservationTrackedfMp_.swift:1:84: error: invalid redeclaration of synthesized property '_splitStrategy'
+@AppStorage("plan_split_strategy", store: suite)  @ObservationIgnored private  var _splitStrategy: String = "50/50" // "50/50", "60/40", "40/60" // "50/50", "60/40", "40/60" // "50/50", "60/40", "40/60"
+                                                                                   ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13splitStrategy10ObservablefMr3_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'splitStrategy' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13splitStrategy10ObservablefMr3_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'splitStrategy' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:25:9: note: '_splitStrategy' synthesized for property wrapper backing storage
+    var splitStrategy: String = "50/50" // "50/50", "60/40", "40/60"
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13roundingStepG18ObservationTrackedfMp_.swift:1:85: error: invalid redeclaration of synthesized property '_roundingStepG'
+@AppStorage("plan_rounding_step_g", store: suite)  @ObservationIgnored private  var _roundingStepG: Double = 0.25
+                                                                                    ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13roundingStepG10ObservablefMr4_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'roundingStepG' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13roundingStepG10ObservablefMr4_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'roundingStepG' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:28:9: note: '_roundingStepG' synthesized for property wrapper backing storage
+    var roundingStepG: Double = 0.25
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14windowStartMin18ObservationTrackedfMp_.swift:1:86: error: invalid redeclaration of synthesized property '_windowStartMin'
+@AppStorage("plan_window_start_min", store: suite)  @ObservationIgnored private  var _windowStartMin: Int = 150
+                                                                                     ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14windowStartMin10ObservablefMr5_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'windowStartMin' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14windowStartMin10ObservablefMr5_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'windowStartMin' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:31:9: note: '_windowStartMin' synthesized for property wrapper backing storage
+    var windowStartMin: Int = 150
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC12windowEndMin18ObservationTrackedfMp_.swift:1:84: error: invalid redeclaration of synthesized property '_windowEndMin'
+@AppStorage("plan_window_end_min", store: suite)  @ObservationIgnored private  var _windowEndMin: Int = 240
+                                                                                   ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC12windowEndMin10ObservablefMr6_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'windowEndMin' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC12windowEndMin10ObservablefMr6_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'windowEndMin' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:34:9: note: '_windowEndMin' synthesized for property wrapper backing storage
+    var windowEndMin: Int = 240
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC16allowTonightEdit18ObservationTrackedfMp_.swift:1:88: error: invalid redeclaration of synthesized property '_allowTonightEdit'
+@AppStorage("plan_allow_tonight_edit", store: suite)  @ObservationIgnored private  var _allowTonightEdit: Bool = true
+                                                                                       ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC16allowTonightEdit10ObservablefMr7_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'allowTonightEdit' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC16allowTonightEdit10ObservablefMr7_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'allowTonightEdit' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:37:9: note: '_allowTonightEdit' synthesized for property wrapper backing storage
+    var allowTonightEdit: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC010allowEarlyA018ObservationTrackedfMp_.swift:7:87: error: invalid redeclaration of synthesized property '_allowEarlyDose'
+    @AppStorage("early_allow_dose_2", store: suite)  @ObservationIgnored private  var _allowEarlyDose: Bool = false
+                                                                                      ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC010allowEarlyA010ObservablefMr8_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'allowEarlyDose' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC010allowEarlyA010ObservablefMr8_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'allowEarlyDose' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:42:9: note: '_allowEarlyDose' synthesized for property wrapper backing storage
+    var allowEarlyDose: Bool = false
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15maxEarlyMinutes18ObservationTrackedfMp_.swift:1:82: error: invalid redeclaration of synthesized property '_maxEarlyMinutes'
+@AppStorage("early_max_minutes", store: suite)  @ObservationIgnored private  var _maxEarlyMinutes: Int = 15
+                                                                                 ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15maxEarlyMinutes10ObservablefMr9_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'maxEarlyMinutes' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15maxEarlyMinutes10ObservablefMr9_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'maxEarlyMinutes' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:45:9: note: '_maxEarlyMinutes' synthesized for property wrapper backing storage
+    var maxEarlyMinutes: Int = 15
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18requireEarlyReason18ObservationTrackedfMp_.swift:1:85: error: invalid redeclaration of synthesized property '_requireEarlyReason'
+@AppStorage("early_require_reason", store: suite)  @ObservationIgnored private  var _requireEarlyReason: Bool = true
+                                                                                    ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18requireEarlyReason10ObservablefMr10_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'requireEarlyReason' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18requireEarlyReason10ObservablefMr10_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'requireEarlyReason' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:48:9: note: '_requireEarlyReason' synthesized for property wrapper backing storage
+    var requireEarlyReason: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC22earlyTimePriorDefaults18ObservationTrackedfMp_.swift:1:90: error: invalid redeclaration of synthesized property '_earlyTimePriorDefaults'
+@AppStorage("early_time_prior_defaults", store: suite)  @ObservationIgnored private  var _earlyTimePriorDefaults: String = "5,10" // Comma-separated list // Comma-separated list // Comma-separated list
+                                                                                         ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC22earlyTimePriorDefaults10ObservablefMr11_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'earlyTimePriorDefaults' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC22earlyTimePriorDefaults10ObservablefMr11_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'earlyTimePriorDefaults' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:51:9: note: '_earlyTimePriorDefaults' synthesized for property wrapper backing storage
+    var earlyTimePriorDefaults: String = "5,10" // Comma-separated list
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC19liveActivityEnabled18ObservationTrackedfMp_.swift:7:90: error: invalid redeclaration of synthesized property '_liveActivityEnabled'
+    @AppStorage("live_activity_enabled", store: suite)  @ObservationIgnored private  var _liveActivityEnabled: Bool = true
+                                                                                         ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC19liveActivityEnabled10ObservablefMr12_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'liveActivityEnabled' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC19liveActivityEnabled10ObservablefMr12_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'liveActivityEnabled' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:56:9: note: '_liveActivityEnabled' synthesized for property wrapper backing storage
+    var liveActivityEnabled: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13notifyAtStart18ObservationTrackedfMp_.swift:1:80: error: invalid redeclaration of synthesized property '_notifyAtStart'
+@AppStorage("notify_at_start", store: suite)  @ObservationIgnored private  var _notifyAtStart: Bool = true
+                                                                               ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13notifyAtStart10ObservablefMr13_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'notifyAtStart' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13notifyAtStart10ObservablefMr13_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'notifyAtStart' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:59:9: note: '_notifyAtStart' synthesized for property wrapper backing storage
+    var notifyAtStart: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC12notifyAtHalf18ObservationTrackedfMp_.swift:1:79: error: invalid redeclaration of synthesized property '_notifyAtHalf'
+@AppStorage("notify_at_half", store: suite)  @ObservationIgnored private  var _notifyAtHalf: Bool = false
+                                                                              ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC12notifyAtHalf10ObservablefMr14_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'notifyAtHalf' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC12notifyAtHalf10ObservablefMr14_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'notifyAtHalf' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:62:9: note: '_notifyAtHalf' synthesized for property wrapper backing storage
+    var notifyAtHalf: Bool = false
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC11notifyAtEnd18ObservationTrackedfMp_.swift:1:78: error: invalid redeclaration of synthesized property '_notifyAtEnd'
+@AppStorage("notify_at_end", store: suite)  @ObservationIgnored private  var _notifyAtEnd: Bool = true
+                                                                             ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC11notifyAtEnd10ObservablefMr15_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'notifyAtEnd' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC11notifyAtEnd10ObservablefMr15_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'notifyAtEnd' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:65:9: note: '_notifyAtEnd' synthesized for property wrapper backing storage
+    var notifyAtEnd: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15quietHoursStart18ObservationTrackedfMp_.swift:1:82: error: invalid redeclaration of synthesized property '_quietHoursStart'
+@AppStorage("quiet_hours_start", store: suite)  @ObservationIgnored private  var _quietHoursStart: Int = 22 // 10 PM // 10 PM // 10 PM
+                                                                                 ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15quietHoursStart10ObservablefMr16_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'quietHoursStart' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15quietHoursStart10ObservablefMr16_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'quietHoursStart' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:68:9: note: '_quietHoursStart' synthesized for property wrapper backing storage
+    var quietHoursStart: Int = 22 // 10 PM
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13quietHoursEnd18ObservationTrackedfMp_.swift:1:80: error: invalid redeclaration of synthesized property '_quietHoursEnd'
+@AppStorage("quiet_hours_end", store: suite)  @ObservationIgnored private  var _quietHoursEnd: Int = 7 // 7 AM // 7 AM // 7 AM
+                                                                               ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13quietHoursEnd10ObservablefMr17_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'quietHoursEnd' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13quietHoursEnd10ObservablefMr17_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'quietHoursEnd' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:71:9: note: '_quietHoursEnd' synthesized for property wrapper backing storage
+    var quietHoursEnd: Int = 7 // 7 AM
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14hapticsEnabled18ObservationTrackedfMp_.swift:1:80: error: invalid redeclaration of synthesized property '_hapticsEnabled'
+@AppStorage("haptics_enabled", store: suite)  @ObservationIgnored private  var _hapticsEnabled: Bool = true
+                                                                               ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14hapticsEnabled10ObservablefMr18_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'hapticsEnabled' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14hapticsEnabled10ObservablefMr18_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'hapticsEnabled' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:74:9: note: '_hapticsEnabled' synthesized for property wrapper backing storage
+    var hapticsEnabled: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21healthSampleWindowMin18ObservationTrackedfMp_.swift:7:93: error: invalid redeclaration of synthesized property '_healthSampleWindowMin'
+    @AppStorage("health_sample_window_min", store: suite)  @ObservationIgnored private  var _healthSampleWindowMin: Int = 120
+                                                                                            ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21healthSampleWindowMin10ObservablefMr19_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'healthSampleWindowMin' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21healthSampleWindowMin10ObservablefMr19_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'healthSampleWindowMin' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:79:9: note: '_healthSampleWindowMin' synthesized for property wrapper backing storage
+    var healthSampleWindowMin: Int = 120
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13whoopProxyURL18ObservationTrackedfMp_.swift:1:80: error: invalid redeclaration of synthesized property '_whoopProxyURL'
+@AppStorage("whoop_proxy_url", store: suite)  @ObservationIgnored private  var _whoopProxyURL: String = ""
+                                                                               ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13whoopProxyURL10ObservablefMr20_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'whoopProxyURL' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13whoopProxyURL10ObservablefMr20_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'whoopProxyURL' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:82:9: note: '_whoopProxyURL' synthesized for property wrapper backing storage
+    var whoopProxyURL: String = ""
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC11whoopAPIKey18ObservationTrackedfMp_.swift:1:78: error: invalid redeclaration of synthesized property '_whoopAPIKey'
+@AppStorage("whoop_api_key", store: suite)  @ObservationIgnored private  var _whoopAPIKey: String = ""
+                                                                             ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC11whoopAPIKey10ObservablefMr21_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'whoopAPIKey' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC11whoopAPIKey10ObservablefMr21_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'whoopAPIKey' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:85:9: note: '_whoopAPIKey' synthesized for property wrapper backing storage
+    var whoopAPIKey: String = ""
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC20wakeSourcePreference18ObservationTrackedfMp_.swift:1:87: error: invalid redeclaration of synthesized property '_wakeSourcePreference'
+@AppStorage("wake_source_preference", store: suite)  @ObservationIgnored private  var _wakeSourcePreference: String = "health" // "health", "manual" // "health", "manual" // "health", "manual"
+                                                                                      ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC20wakeSourcePreference10ObservablefMr22_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'wakeSourcePreference' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC20wakeSourcePreference10ObservablefMr22_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'wakeSourcePreference' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:88:9: note: '_wakeSourcePreference' synthesized for property wrapper backing storage
+    var wakeSourcePreference: String = "health" // "health", "manual"
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportIncludeTimezone18ObservationTrackedfMp_.swift:7:92: error: invalid redeclaration of synthesized property '_exportIncludeTimezone'
+    @AppStorage("export_include_timezone", store: suite)  @ObservationIgnored private  var _exportIncludeTimezone: Bool = true
+                                                                                           ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportIncludeTimezone10ObservablefMr23_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportIncludeTimezone' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportIncludeTimezone10ObservablefMr23_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportIncludeTimezone' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:93:9: note: '_exportIncludeTimezone' synthesized for property wrapper backing storage
+    var exportIncludeTimezone: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportFilenamePattern18ObservationTrackedfMp_.swift:1:88: error: invalid redeclaration of synthesized property '_exportFilenamePattern'
+@AppStorage("export_filename_pattern", store: suite)  @ObservationIgnored private  var _exportFilenamePattern: String = "dosetrack_{nightKey}"
+                                                                                       ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportFilenamePattern10ObservablefMr24_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportFilenamePattern' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportFilenamePattern10ObservablefMr24_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportFilenamePattern' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:96:9: note: '_exportFilenamePattern' synthesized for property wrapper backing storage
+    var exportFilenamePattern: String = "dosetrack_{nightKey}"
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18exportIncludeNotes18ObservationTrackedfMp_.swift:1:85: error: invalid redeclaration of synthesized property '_exportIncludeNotes'
+@AppStorage("export_include_notes", store: suite)  @ObservationIgnored private  var _exportIncludeNotes: Bool = true
+                                                                                    ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18exportIncludeNotes10ObservablefMr25_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportIncludeNotes' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18exportIncludeNotes10ObservablefMr25_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportIncludeNotes' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:99:9: note: '_exportIncludeNotes' synthesized for property wrapper backing storage
+    var exportIncludeNotes: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportIncludeEventLog18ObservationTrackedfMp_.swift:1:89: error: invalid redeclaration of synthesized property '_exportIncludeEventLog'
+@AppStorage("export_include_event_log", store: suite)  @ObservationIgnored private  var _exportIncludeEventLog: Bool = false
+                                                                                        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportIncludeEventLog10ObservablefMr26_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportIncludeEventLog' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC21exportIncludeEventLog10ObservablefMr26_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportIncludeEventLog' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:102:9: note: '_exportIncludeEventLog' synthesized for property wrapper backing storage
+    var exportIncludeEventLog: Bool = false
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18exportDefaultEmail18ObservationTrackedfMp_.swift:1:85: error: invalid redeclaration of synthesized property '_exportDefaultEmail'
+@AppStorage("export_default_email", store: suite)  @ObservationIgnored private  var _exportDefaultEmail: String = ""
+                                                                                    ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18exportDefaultEmail10ObservablefMr27_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportDefaultEmail' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18exportDefaultEmail10ObservablefMr27_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'exportDefaultEmail' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:105:9: note: '_exportDefaultEmail' synthesized for property wrapper backing storage
+    var exportDefaultEmail: String = ""
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC16requireBiometric18ObservationTrackedfMp_.swift:7:86: error: invalid redeclaration of synthesized property '_requireBiometric'
+    @AppStorage("require_biometric", store: suite)  @ObservationIgnored private  var _requireBiometric: Bool = false
+                                                                                     ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC16requireBiometric10ObservablefMr28_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'requireBiometric' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC16requireBiometric10ObservablefMr28_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'requireBiometric' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:110:9: note: '_requireBiometric' synthesized for property wrapper backing storage
+    var requireBiometric: Bool = false
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15maskWidgetDoses18ObservationTrackedfMp_.swift:1:82: error: invalid redeclaration of synthesized property '_maskWidgetDoses'
+@AppStorage("mask_widget_doses", store: suite)  @ObservationIgnored private  var _maskWidgetDoses: Bool = false
+                                                                                 ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15maskWidgetDoses10ObservablefMr29_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'maskWidgetDoses' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC15maskWidgetDoses10ObservablefMr29_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'maskWidgetDoses' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:113:9: note: '_maskWidgetDoses' synthesized for property wrapper backing storage
+    var maskWidgetDoses: Bool = false
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13retentionDays18ObservationTrackedfMp_.swift:1:79: error: invalid redeclaration of synthesized property '_retentionDays'
+@AppStorage("retention_days", store: suite)  @ObservationIgnored private  var _retentionDays: Int = 365
+                                                                              ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13retentionDays10ObservablefMr30_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'retentionDays' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13retentionDays10ObservablefMr30_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'retentionDays' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:116:9: note: '_retentionDays' synthesized for property wrapper backing storage
+    var retentionDays: Int = 365
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14resetAllowHard18ObservationTrackedfMp_.swift:7:84: error: invalid redeclaration of synthesized property '_resetAllowHard'
+    @AppStorage("reset_allow_hard", store: suite) @ObservationIgnored private  var _resetAllowHard: Bool = true
+                                                                                   ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14resetAllowHard10ObservablefMr31_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetAllowHard' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC14resetAllowHard10ObservablefMr31_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetAllowHard' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:121:9: note: '_resetAllowHard' synthesized for property wrapper backing storage
+    var resetAllowHard: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC25resetRequireBiometricHard18ObservationTrackedfMp_.swift:1:92: error: invalid redeclaration of synthesized property '_resetRequireBiometricHard'
+@AppStorage("reset_require_biometric_hard", store: suite) @ObservationIgnored private  var _resetRequireBiometricHard: Bool = false
+                                                                                           ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC25resetRequireBiometricHard10ObservablefMr32_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetRequireBiometricHard' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC25resetRequireBiometricHard10ObservablefMr32_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetRequireBiometricHard' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:124:9: note: '_resetRequireBiometricHard' synthesized for property wrapper backing storage
+    var resetRequireBiometricHard: Bool = false
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC19resetReasonRequired18ObservationTrackedfMp_.swift:1:85: error: invalid redeclaration of synthesized property '_resetReasonRequired'
+@AppStorage("reset_reason_required", store: suite) @ObservationIgnored private  var _resetReasonRequired: Bool = true
+                                                                                    ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC19resetReasonRequired10ObservablefMr33_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetReasonRequired' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC19resetReasonRequired10ObservablefMr33_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetReasonRequired' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:127:9: note: '_resetReasonRequired' synthesized for property wrapper backing storage
+    var resetReasonRequired: Bool = true
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18resetUndoWindowSec18ObservationTrackedfMp_.swift:1:85: error: invalid redeclaration of synthesized property '_resetUndoWindowSec'
+@AppStorage("reset_undo_window_sec", store: suite) @ObservationIgnored private  var _resetUndoWindowSec: Int = 30
+                                                                                    ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18resetUndoWindowSec10ObservablefMr34_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetUndoWindowSec' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC18resetUndoWindowSec10ObservablefMr34_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'resetUndoWindowSec' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:130:9: note: '_resetUndoWindowSec' synthesized for property wrapper backing storage
+    var resetUndoWindowSec: Int = 30
+        ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13showInternals18ObservationTrackedfMp_.swift:7:83: error: invalid redeclaration of synthesized property '_showInternals'
+    @AppStorage("show_internals", store: suite)  @ObservationIgnored private  var _showInternals: Bool = false
+                                                                                  ^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13showInternals10ObservablefMr35_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'showInternals' here
+@ObservationTracked
+^
+@__swiftmacro_9DoseTrack22AppPreferencesEnhancedC13showInternals10ObservablefMr35_.swift:1:1: note: in expansion of macro 'ObservationTracked' on property 'showInternals' here
+@ObservationTracked
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift:135:9: note: '_showInternals' synthesized for property wrapper backing storage
+    var showInternals: Bool = false
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:522:18: error: invalid redeclaration of 'logDose1(at:gramsOverride:)'
+    private func logDose1(at date: Date, gramsOverride: Double?) {
+                 ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:44:10: note: 'logDose1(at:gramsOverride:)' previously declared here
+    func logDose1(at date: Date, gramsOverride: Double?) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:44:10: note: 'logDose1(at:gramsOverride:)' previously declared here
+    func logDose1(at date: Date, gramsOverride: Double?) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:526:18: error: invalid redeclaration of 'logDose2(at:gramsOverride:)'
+    private func logDose2(at date: Date, gramsOverride: Double?) {
+                 ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:51:10: note: 'logDose2(at:gramsOverride:)' previously declared here
+    func logDose2(at date: Date, gramsOverride: Double?) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:51:10: note: 'logDose2(at:gramsOverride:)' previously declared here
+    func logDose2(at date: Date, gramsOverride: Double?) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:530:10: error: invalid redeclaration of 'setFinalWake(_:provenance:)'
+    func setFinalWake(_ date: Date, provenance: String) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:58:10: note: 'setFinalWake(_:provenance:)' previously declared here
+    func setFinalWake(_ date: Date, provenance: String) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift:58:10: note: 'setFinalWake(_:provenance:)' previously declared here
+    func setFinalWake(_ date: Date, provenance: String) {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift:5:26: error: 'EarlyReason' is ambiguous for type lookup in this context
+    @Binding var reason: EarlyReason
+                         ^~~~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift:144:6: note: found this candidate
+enum EarlyReason: String, CaseIterable, Codable {
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:193:6: note: found this candidate
+enum EarlyReason: String, CaseIterable, Identifiable { case couldNotSleepAgain = "Could not sleep again", shiftSchedule = "Shift schedule", other = "Other"; var id: String { rawValue } }
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift:34:39: error: type 'AppPreferences' has no member 'load'
+    @State var prefs = AppPreferences.load()
+                       ~~~~~~~~~~~~~~ ^~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift:19:40: error: 'EarlyReason' is ambiguous for type lookup in this context
+    @State private var selectedReason: EarlyReason = .couldNotSleep
+                                       ^~~~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift:144:6: note: found this candidate
+enum EarlyReason: String, CaseIterable, Codable {
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:193:6: note: found this candidate
+enum EarlyReason: String, CaseIterable, Identifiable { case couldNotSleepAgain = "Could not sleep again", shiftSchedule = "Shift schedule", other = "Other"; var id: String { rawValue } }
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift:144:6: error: invalid redeclaration of 'EarlyReason'
+enum EarlyReason: String, CaseIterable, Codable {
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:193:6: note: 'EarlyReason' previously declared here
+enum EarlyReason: String, CaseIterable, Identifiable { case couldNotSleepAgain = "Could not sleep again", shiftSchedule = "Shift schedule", other = "Other"; var id: String { rawValue } }
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:193:6: note: 'EarlyReason' previously declared here
+enum EarlyReason: String, CaseIterable, Identifiable { case couldNotSleepAgain = "Could not sleep again", shiftSchedule = "Shift schedule", other = "Other"; var id: String { rawValue } }
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift:61:16: error: invalid redeclaration of 'EventRow'
+private struct EventRow: View {
+               ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift:335:8: note: 'EventRow' previously declared here
+struct EventRow: View {
+       ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift:335:8: note: 'EventRow' previously declared here
+struct EventRow: View {
+       ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift:164:12: error: type 'NightAlarmPlan.AlarmEvent' does not conform to protocol 'Decodable'
+    struct AlarmEvent: Codable {
+           ^
+Swift.Decodable.init:2:1: note: protocol requires initializer 'init(from:)' with type 'Decodable'
+init(from decoder: any Decoder) throws}
+^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift:168:13: note: cannot automatically synthesize 'Decodable' because 'AlarmType?' does not conform to 'Decodable'
+        let alarmType: AlarmType?
+            ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift:164:12: error: type 'NightAlarmPlan.AlarmEvent' does not conform to protocol 'Encodable'
+    struct AlarmEvent: Codable {
+           ^
+Swift.Encodable.encode:2:6: note: protocol requires function 'encode(to:)' with type 'Encodable'
+func encode(to encoder: any Encoder) throws}
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift:168:13: note: cannot automatically synthesize 'Encodable' because 'AlarmType?' does not conform to 'Encodable'
+        let alarmType: AlarmType?
+            ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift:275:13: error: type 'StubController' does not conform to protocol 'DoseLogControllering'
+final class StubController: DoseLogControllering {
+            ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift:275:13: note: add stubs for conformance
+final class StubController: DoseLogControllering {
+            ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:204:10: note: protocol requires function 'logDose2Now(grams:overrideKind:overrideMinutes:overrideReason:)' with type '(Double, String?, Int?, String?) -> ()'
+    func logDose2Now(grams: Double, overrideKind: String?, overrideMinutes: Int?, overrideReason: String?) // Late dose support
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:324:20: error: non-static property 'showEarlyDoseSheet' declared inside an extension cannot have a wrapper
+    @Published var showEarlyDoseSheet: Bool = false
+    ~~~~~~~~~~     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:324:20: error: extensions must not contain stored properties
+    @Published var showEarlyDoseSheet: Bool = false
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:324:20: error: invalid redeclaration of 'showEarlyDoseSheet'
+    @Published var showEarlyDoseSheet: Bool = false
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:11:20: note: 'showEarlyDoseSheet' previously declared here
+    @Published var showEarlyDoseSheet: Bool = false
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:11:20: note: 'showEarlyDoseSheet' previously declared here
+    @Published var showEarlyDoseSheet: Bool = false
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:325:20: error: non-static property 'showLateDoseSheet' declared inside an extension cannot have a wrapper
+    @Published var showLateDoseSheet: Bool = false
+    ~~~~~~~~~~     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:325:20: error: extensions must not contain stored properties
+    @Published var showLateDoseSheet: Bool = false
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:326:20: error: non-static property 'bannerMessage' declared inside an extension cannot have a wrapper
+    @Published var bannerMessage: String?
+    ~~~~~~~~~~     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:326:20: error: extensions must not contain stored properties
+    @Published var bannerMessage: String?
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:327:20: error: non-static property 'bannerStyle' declared inside an extension cannot have a wrapper
+    @Published var bannerStyle: BannerStyle = .info
+    ~~~~~~~~~~     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift:327:20: error: extensions must not contain stored properties
+    @Published var bannerStyle: BannerStyle = .info
+                   ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift:30:9: error: invalid redeclaration of 'isBeforeWindowButEligibleEarly'
+    var isBeforeWindowButEligibleEarly: Bool {
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:75:9: note: 'isBeforeWindowButEligibleEarly' previously declared here
+    var isBeforeWindowButEligibleEarly: Bool {
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:75:9: note: 'isBeforeWindowButEligibleEarly' previously declared here
+    var isBeforeWindowButEligibleEarly: Bool {
+        ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift:94:10: error: invalid redeclaration of 'tryLogDose2()'
+    func tryLogDose2() {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:118:10: note: 'tryLogDose2()' previously declared here
+    func tryLogDose2() {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:118:10: note: 'tryLogDose2()' previously declared here
+    func tryLogDose2() {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+WakeEvents.swift:60:10: error: invalid redeclaration of 'logAlarmWake()'
+    func logAlarmWake() {
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:132:10: note: 'logAlarmWake()' previously declared here
+    func logAlarmWake() { controller.logAlarmWakeNow(); refreshFromStore() }
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:132:10: note: 'logAlarmWake()' previously declared here
+    func logAlarmWake() { controller.logAlarmWakeNow(); refreshFromStore() }
+         ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+WakeEvents.swift:129:35: error: cannot find type 'UINotificationFeedbackGenerator' in scope
+    private func haptics(_ style: UINotificationFeedbackGenerator.FeedbackType) {
+                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:13:33: error: 'EarlyReason' is ambiguous for type lookup in this context
+    @Published var earlyReason: EarlyReason = .couldNotSleepAgain
+                                ^~~~~~~~~~~
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift:144:6: note: found this candidate
+enum EarlyReason: String, CaseIterable, Codable {
+     ^
+/Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift:193:6: note: found this candidate
+enum EarlyReason: String, CaseIterable, Identifiable { case couldNotSleepAgain = "Could not sleep again", shiftSchedule = "Shift schedule", other = "Other"; var id: String { rawValue } }
+     ^
+
+Failed frontend command:
+/Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -emit-module -experimental-skip-non-inlinable-function-bodies-without-types /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+WakeEvents.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WakeReason.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WakeSheetView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WindowState.swift -target arm64-apple-ios17.0-simulator -disable-cross-import-overlay-search -swift-module-cross-import AppIntents /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/SwiftUI.swiftoverlay -swift-module-cross-import AppIntents /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/UIKit.swiftoverlay -swift-module-cross-import AppIntents /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/SwiftUI.swiftoverlay -swift-module-cross-import AppIntents /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/System/Library/Frameworks/AppIntents.framework/Modules/AppIntents.swiftcrossimport/UIKit.swiftoverlay -swift-module-cross-import RelevanceKit /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/RelevanceKit.framework/Modules/RelevanceKit.swiftcrossimport/MapKit.swiftoverlay -swift-module-cross-import RelevanceKit /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/System/Library/Frameworks/RelevanceKit.framework/Modules/RelevanceKit.swiftcrossimport/MapKit.swiftoverlay -swift-module-cross-import SwiftData /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/System/Library/Frameworks/SwiftData.framework/Modules/SwiftData.swiftcrossimport/CoreData.swiftoverlay -swift-module-cross-import SwiftData /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/System/Library/Frameworks/SwiftData.framework/Modules/SwiftData.swiftcrossimport/SwiftUI.swiftoverlay -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libAppIntentsMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#AppIntentsMacros -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libFoundationMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#FoundationMacros -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libObservationMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#ObservationMacros -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libPreviewsMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#PreviewsMacros -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftDataMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftDataMacros -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftMacros -load-resolved-plugin /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/swift/host/plugins/libSwiftUIMacros.dylib\#/Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/swift-plugin-server\#SwiftUIMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk -I /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator -Isystem /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator -F /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/_Development/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.0.sdk/Developer/Library/Frameworks -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=4 -module-cache-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -profile-generate -profile-coverage-mapping -swift-version 5 -enforce-exclusivity\=checked -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -const-gather-protocols-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack_const_extract_protocols.json -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /Users/kevindialmb/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode -enable-anonymous-context-mangled-names -file-compilation-dir /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc /Users/kevindialmb/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator26.0-23A339-52bbade31dfd1f3e760fc2f57ab025c3.sdkstatcache -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/swift-overrides.hmap -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DerivedSources-normal/arm64 -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DerivedSources/arm64 -Xcc -I/Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name DoseTrack -package-name dosetrack_v1_1_1c -frontend-parseable-output -disable-clang-spi -target-sdk-version 26.0 -target-sdk-name iphonesimulator26.0 -clang-target arm64-apple-ios26.0-simulator -in-process-plugin-server-path /Applications/_Development/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -emit-module-doc-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.swiftdoc -emit-module-source-info-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.swiftsourceinfo -emit-objc-header-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-Swift.h -serialize-diagnostics-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-primary-emit-module.dia -emit-dependencies-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack-primary-emit-module.d -o /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.swiftmodule -emit-abi-descriptor-path /Users/kevindialmb/Library/Developer/Xcode/DerivedData/DoseTrack_v1.1-daapowanhyjajcckamlreoxtljbp/Build/Intermediates.noindex/DoseTrack.build/Debug-iphonesimulator/DoseTrack.build/Objects-normal/arm64/DoseTrack.abi.json
+SwiftCompile normal arm64 Compiling\ TodayLogView_CardStack.swift,\ TodayLogView_Checklist.swift,\ TodayViewModel+Dose2Override.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift (in target 'DoseTrack' from project 'DoseTrack')
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_CardStack.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView_Checklist.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+Dose2Override.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ EarlyDoseSheet.swift,\ EarlyDoseSheetView.swift,\ EventStripView.swift,\ HealthKitManager.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheet.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EarlyDoseSheetView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/EventStripView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/HealthKitManager.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ ResetNightSheet.swift,\ Rounding+Display.swift,\ SafetyBanner.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/ResetNightSheet.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Rounding+Display.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBanner.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ WakeReason.swift,\ WakeSheetView.swift,\ WindowState.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WakeReason.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WakeSheetView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WindowState.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WakeReason.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WakeSheetView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/WindowState.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ SafetyBannerView.swift,\ SettingsViewEnhanced.swift,\ TodayLogView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift (in target 'DoseTrack' from project 'DoseTrack')
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SafetyBannerView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/SettingsViewEnhanced.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayLogView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ LateDoseSheetView.swift,\ Models.swift,\ NightAlarmPlan.swift,\ NightPlanRecommender.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/LateDoseSheetView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Models.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightAlarmPlan.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/NightPlanRecommender.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ TodayViewModel+LateDose.swift,\ TodayViewModel+WakeEvents.swift,\ TodayViewModel.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+WakeEvents.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+LateDose.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel+WakeEvents.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/TodayViewModel.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ CountdownRingView.swift,\ Date+UTC.swift,\ DoseLogController.swift,\ DoseTrackApp.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CountdownRingView.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Date+UTC.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseLogController.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/DoseTrackApp.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ AlarmOrchestrator.swift,\ AppGroupStore.swift,\ AppIntents+DoseLog.swift,\ AppPreferences.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AlarmOrchestrator.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppGroupStore.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppIntents+DoseLog.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferences.swift (in target 'DoseTrack' from project 'DoseTrack')
+    cd /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/.swiftpm/xcode
+    
+
+SwiftCompile normal arm64 Compiling\ AppPreferencesEnhanced+LateDose.swift,\ AppPreferencesEnhanced.swift,\ CSVExporter.swift,\ Config.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced+LateDose.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/AppPreferencesEnhanced.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/CSVExporter.swift /Users/kevindialmb/Downloads/DoseTrack_v1.1.1c/ios/Config.swift (in target 'DoseTrack' from project 'DoseTrack')
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	EmitSwiftModule normal arm64 (in target 'DoseTrack' from project 'DoseTrack')
+	SwiftEmitModule normal arm64 Emitting\ module\ for\ DoseTrack (in target 'DoseTrack' from project 'DoseTrack')
+	Building workspace DoseTrack_v1.1 with scheme DoseTrack
+(3 failures)

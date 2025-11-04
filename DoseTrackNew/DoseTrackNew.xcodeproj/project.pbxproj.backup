@@ -1,0 +1,483 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */; };
+		8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCF2EB944A2008532AA /* WindowBar.swift */; };
+		8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */; };
+		8089AFD32EB944A2008532AA /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCA2EB944A2008532AA /* ActionButtons.swift */; };
+		8089AFD42EB944A2008532AA /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCB2EB944A2008532AA /* DesignTokens.swift */; };
+		8089AFD52EB944A2008532AA /* StatusChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCD2EB944A2008532AA /* StatusChip.swift */; };
+		8089AFD72EB945D7008532AA /* NightServiceDay 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFD62EB945D7008532AA /* NightServiceDay 2.swift */; };
+		8089AFDA2EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */; };
+		8089AFDB2EB9467F008532AA /* AppPreferencesEnhanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */; };
+		8089AFDD2EB94764008532AA /* WeeklySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFDC2EB94764008532AA /* WeeklySchedule.swift */; };
+		8089AFDF2EB9484C008532AA /* NightAlarmPlan 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFDE2EB9484C008532AA /* NightAlarmPlan 2.swift */; };
+		A0000001 /* DoseTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000001 /* DoseTrackApp.swift */; };
+		A0000002 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000002 /* Models.swift */; };
+		A0000003 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000003 /* Config.swift */; };
+		A0000004 /* DoseLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000004 /* DoseLogController.swift */; };
+		A0000005 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000005 /* TodayViewModel.swift */; };
+		A0000006 /* TodayLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000006 /* TodayLogView.swift */; };
+		A0000007 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000007 /* HealthKitManager.swift */; };
+		A0000008 /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000008 /* CSVExporter.swift */; };
+		A0000009 /* Date+UTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000009 /* Date+UTC.swift */; };
+		A0000010 /* AppGroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000010 /* AppGroupStore.swift */; };
+		A0000011 /* AppIntents+DoseLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000011 /* AppIntents+DoseLog.swift */; };
+		A0000012 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000012 /* AppPreferences.swift */; };
+		A0000014 /* AppPreferences+LateDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000014 /* AppPreferences+LateDose.swift */; };
+		A0000015 /* CountdownRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000015 /* CountdownRingView.swift */; };
+		A0000016 /* EarlyDoseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000016 /* EarlyDoseSheet.swift */; };
+		A0000017 /* EarlyDoseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000017 /* EarlyDoseSheetView.swift */; };
+		A0000018 /* EventStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000018 /* EventStripView.swift */; };
+		A0000019 /* LateDoseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000019 /* LateDoseSheetView.swift */; };
+		A0000020 /* NightPlanRecommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000020 /* NightPlanRecommender.swift */; };
+		A0000021 /* ResetNightSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000021 /* ResetNightSheet.swift */; };
+		A0000022 /* Rounding+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000022 /* Rounding+Display.swift */; };
+		A0000023 /* SafetyBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000023 /* SafetyBanner.swift */; };
+		A0000024 /* SafetyBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000024 /* SafetyBannerView.swift */; };
+		A0000025 /* SettingsViewEnhanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000025 /* SettingsViewEnhanced.swift */; };
+		A0000026 /* TodayLogView_CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000026 /* TodayLogView_CardStack.swift */; };
+		A0000027 /* TodayLogView_Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000027 /* TodayLogView_Checklist.swift */; };
+		A0000028 /* TodayViewModel+LateDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000028 /* TodayViewModel+LateDose.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8089AFCA2EB944A2008532AA /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
+		8089AFCB2EB944A2008532AA /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightCardViewModern.swift; sourceTree = "<group>"; };
+		8089AFCD2EB944A2008532AA /* StatusChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusChip.swift; sourceTree = "<group>"; };
+		8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCardPlanningView.swift; sourceTree = "<group>"; };
+		8089AFCF2EB944A2008532AA /* WindowBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowBar.swift; sourceTree = "<group>"; };
+		8089AFD62EB945D7008532AA /* NightServiceDay 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NightServiceDay 2.swift"; sourceTree = "<group>"; };
+		8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesEnhanced.swift; sourceTree = "<group>"; };
+		8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppPreferencesEnhanced+LateDose.swift"; sourceTree = "<group>"; };
+		8089AFDC2EB94764008532AA /* WeeklySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySchedule.swift; sourceTree = "<group>"; };
+		8089AFDE2EB9484C008532AA /* NightAlarmPlan 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NightAlarmPlan 2.swift"; sourceTree = "<group>"; };
+		B0000001 /* DoseTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseTrackApp.swift; sourceTree = "<group>"; };
+		B0000002 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B0000003 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		B0000004 /* DoseLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseLogController.swift; sourceTree = "<group>"; };
+		B0000005 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		B0000006 /* TodayLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLogView.swift; sourceTree = "<group>"; };
+		B0000007 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		B0000008 /* CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExporter.swift; sourceTree = "<group>"; };
+		B0000009 /* Date+UTC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+UTC.swift"; sourceTree = "<group>"; };
+		B0000010 /* AppGroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupStore.swift; sourceTree = "<group>"; };
+		B0000011 /* AppIntents+DoseLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppIntents+DoseLog.swift"; sourceTree = "<group>"; };
+		B0000012 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
+		B0000014 /* AppPreferences+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppPreferences+LateDose.swift"; sourceTree = "<group>"; };
+		B0000015 /* CountdownRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownRingView.swift; sourceTree = "<group>"; };
+		B0000016 /* EarlyDoseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlyDoseSheet.swift; sourceTree = "<group>"; };
+		B0000017 /* EarlyDoseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlyDoseSheetView.swift; sourceTree = "<group>"; };
+		B0000018 /* EventStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStripView.swift; sourceTree = "<group>"; };
+		B0000019 /* LateDoseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateDoseSheetView.swift; sourceTree = "<group>"; };
+		B0000020 /* NightPlanRecommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightPlanRecommender.swift; sourceTree = "<group>"; };
+		B0000021 /* ResetNightSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetNightSheet.swift; sourceTree = "<group>"; };
+		B0000022 /* Rounding+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rounding+Display.swift"; sourceTree = "<group>"; };
+		B0000023 /* SafetyBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyBanner.swift; sourceTree = "<group>"; };
+		B0000024 /* SafetyBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyBannerView.swift; sourceTree = "<group>"; };
+		B0000025 /* SettingsViewEnhanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewEnhanced.swift; sourceTree = "<group>"; };
+		B0000026 /* TodayLogView_CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLogView_CardStack.swift; sourceTree = "<group>"; };
+		B0000027 /* TodayLogView_Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayLogView_Checklist.swift; sourceTree = "<group>"; };
+		B0000028 /* TodayViewModel+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayViewModel+LateDose.swift"; sourceTree = "<group>"; };
+		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F0000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D0000001 = {
+			isa = PBXGroup;
+			children = (
+				D0000002 /* DoseTrackNew */,
+				D0000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0000002 /* DoseTrackNew */ = {
+			isa = PBXGroup;
+			children = (
+				8089AFDC2EB94764008532AA /* WeeklySchedule.swift */,
+				8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */,
+				8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */,
+				8089AFCA2EB944A2008532AA /* ActionButtons.swift */,
+				8089AFCB2EB944A2008532AA /* DesignTokens.swift */,
+				8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */,
+				8089AFCD2EB944A2008532AA /* StatusChip.swift */,
+				8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */,
+				8089AFCF2EB944A2008532AA /* WindowBar.swift */,
+				B0000100 /* Info.plist */,
+				B0000001 /* DoseTrackApp.swift */,
+				B0000002 /* Models.swift */,
+				B0000003 /* Config.swift */,
+				B0000004 /* DoseLogController.swift */,
+				B0000005 /* TodayViewModel.swift */,
+				B0000028 /* TodayViewModel+LateDose.swift */,
+				B0000006 /* TodayLogView.swift */,
+				B0000026 /* TodayLogView_CardStack.swift */,
+				B0000027 /* TodayLogView_Checklist.swift */,
+				B0000007 /* HealthKitManager.swift */,
+				B0000008 /* CSVExporter.swift */,
+				B0000009 /* Date+UTC.swift */,
+				B0000010 /* AppGroupStore.swift */,
+				B0000011 /* AppIntents+DoseLog.swift */,
+				B0000012 /* AppPreferences.swift */,
+				B0000014 /* AppPreferences+LateDose.swift */,
+				B0000015 /* CountdownRingView.swift */,
+				B0000016 /* EarlyDoseSheet.swift */,
+				B0000017 /* EarlyDoseSheetView.swift */,
+				B0000018 /* EventStripView.swift */,
+				8089AFDE2EB9484C008532AA /* NightAlarmPlan 2.swift */,
+				B0000019 /* LateDoseSheetView.swift */,
+				B0000020 /* NightPlanRecommender.swift */,
+				B0000021 /* ResetNightSheet.swift */,
+				B0000022 /* Rounding+Display.swift */,
+				B0000023 /* SafetyBanner.swift */,
+				B0000024 /* SafetyBannerView.swift */,
+				B0000025 /* SettingsViewEnhanced.swift */,
+				8089AFD62EB945D7008532AA /* NightServiceDay 2.swift */,
+			);
+			path = DoseTrackNew;
+			sourceTree = "<group>";
+		};
+		D0000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0000001 /* DoseTrackNew.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E0000001 /* DoseTrackNew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E0000002 /* Build configuration list for PBXNativeTarget "DoseTrackNew" */;
+			buildPhases = (
+				E0000003 /* Sources */,
+				F0000001 /* Frameworks */,
+				E0000004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DoseTrackNew;
+			productName = DoseTrackNew;
+			productReference = C0000001 /* DoseTrackNew.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P0000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					E0000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = P0000002 /* Build configuration list for PBXProject "DoseTrackNew" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D0000001;
+			productRefGroup = D0000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E0000001 /* DoseTrackNew */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E0000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E0000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000001 /* DoseTrackApp.swift in Sources */,
+				8089AFDF2EB9484C008532AA /* NightAlarmPlan 2.swift in Sources */,
+				A0000002 /* Models.swift in Sources */,
+				A0000003 /* Config.swift in Sources */,
+				A0000004 /* DoseLogController.swift in Sources */,
+				A0000005 /* TodayViewModel.swift in Sources */,
+				A0000006 /* TodayLogView.swift in Sources */,
+				A0000007 /* HealthKitManager.swift in Sources */,
+				A0000008 /* CSVExporter.swift in Sources */,
+				A0000009 /* Date+UTC.swift in Sources */,
+				A0000010 /* AppGroupStore.swift in Sources */,
+				8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */,
+				8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */,
+				8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */,
+				8089AFDA2EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift in Sources */,
+				8089AFDB2EB9467F008532AA /* AppPreferencesEnhanced.swift in Sources */,
+				8089AFD32EB944A2008532AA /* ActionButtons.swift in Sources */,
+				8089AFD42EB944A2008532AA /* DesignTokens.swift in Sources */,
+				8089AFD52EB944A2008532AA /* StatusChip.swift in Sources */,
+				A0000011 /* AppIntents+DoseLog.swift in Sources */,
+				A0000012 /* AppPreferences.swift in Sources */,
+				A0000014 /* AppPreferences+LateDose.swift in Sources */,
+				A0000015 /* CountdownRingView.swift in Sources */,
+				A0000016 /* EarlyDoseSheet.swift in Sources */,
+				A0000017 /* EarlyDoseSheetView.swift in Sources */,
+				8089AFDD2EB94764008532AA /* WeeklySchedule.swift in Sources */,
+				A0000018 /* EventStripView.swift in Sources */,
+				A0000019 /* LateDoseSheetView.swift in Sources */,
+				A0000020 /* NightPlanRecommender.swift in Sources */,
+				A0000021 /* ResetNightSheet.swift in Sources */,
+				A0000022 /* Rounding+Display.swift in Sources */,
+				A0000023 /* SafetyBanner.swift in Sources */,
+				A0000024 /* SafetyBannerView.swift in Sources */,
+				A0000025 /* SettingsViewEnhanced.swift in Sources */,
+				A0000026 /* TodayLogView_CardStack.swift in Sources */,
+				8089AFD72EB945D7008532AA /* NightServiceDay 2.swift in Sources */,
+				A0000027 /* TodayLogView_Checklist.swift in Sources */,
+				A0000028 /* TodayViewModel+LateDose.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		G0000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		G0000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		H0000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DoseTrackNew/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KevinDial.DoseTrackNew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		H0000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DoseTrackNew/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.KevinDial.DoseTrackNew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E0000002 /* Build configuration list for PBXNativeTarget "DoseTrackNew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				H0000001 /* Debug */,
+				H0000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		P0000002 /* Build configuration list for PBXProject "DoseTrackNew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				G0000001 /* Debug */,
+				G0000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P0000001 /* Project object */;
+}

@@ -1,0 +1,11 @@
+
+> dosetrack-whoop-proxy@1.0.0 test
+> node test-server.js
+
+[31m❌ Server is not running at http://localhost:3000[0m
+[33m
+Please start the server first:[0m
+[33m   cd server[0m
+[33m   npm start[0m
+[33m
+Then run this test script again.[0m

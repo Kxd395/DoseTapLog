@@ -1,23 +1,24 @@
 # DoseTrack v1.1.1c
 
-**📍 Location:** `README.md` (Project Root)  
-**📚 Quick Links:** [Documentation Index](docs/DOCUMENTATION_INDEX.md) | [Product Description](docs/PRODUCT_DESCRIPTION.md) | [PRD](docs/PRD_v1.2.md) | [Testing Guide](docs/ops/TESTING_GUIDE_COMPLETE.md)
+**📍 Location:** `README.md` (Project Root - SSOT)  
+**📚 Quick Links:** [Product Description](docs/PRODUCT_DESCRIPTION.md) | [PRD](docs/PRD_v1.2.md) | [TODO](docs/ops/TODO.md) | [Testing Guide](docs/ops/TESTING_GUIDE.md)
 
 ---
 
 Single source of truth for the DoseTrack bundle: a local-first iOS sleep dosing app with a companion WHOOP proxy service.
 
-**📊 Status:** ✅ BUILD SUCCEEDED (Nov 2, 2025)  
-**🎯 Latest Features:** 
-- ⭐ Dose 2 Flexible Gating System (State Machine + Confirmations)
-- ✅ Night Flow Integration (Widgets + Services + Live Activities)
-- ✅ EventLog System (Search, Filter, Export)
-- ✅ Widget Extension Support
+**📊 Status:** ✅ MODERN UI ACTIVE (Nov 3, 2025)  
+**🎯 Current Work:** 
+- ⭐ Modern Dark Mode UI (Three-card planning view)
+- ✅ Night Turnover Integration Complete
+- ✅ Dose 2 Gating System (State Machine + Confirmations)
+- 🚧 50-item Production Roadmap (see [TODO.md](docs/ops/TODO.md))
 
-**📚 Documentation:** 
+**📚 Essential Docs:** 
+- **Start Here:** [`docs/ops/START_HERE.md`](docs/ops/START_HERE.md) - Setup & onboarding
 - **Product Overview:** [`docs/PRODUCT_DESCRIPTION.md`](docs/PRODUCT_DESCRIPTION.md)
-- **Technical Spec:** [`.specify/memory/spec.md`](.specify/memory/spec.md)
-- **Complete Index:** [`docs/DOCUMENTATION_INDEX.md`](docs/DOCUMENTATION_INDEX.md)
+- **Task List:** [`docs/ops/TODO.md`](docs/ops/TODO.md) - 50 items to production
+- **Latest Review:** [`docs/review-notes/update3.md`](docs/review-notes/update3.md) - UI/UX feedback
 
 ---
 
@@ -155,20 +156,23 @@ DoseTrack_v1.1.1c/
 │  ├─ TodayLogView.swift
 │  └─ Tests/DoseLogTests.swift
 │
-├─ DoseTrackIOS/ .................... Active Xcode project ⭐
-│  ├─ DoseTrackIOS.xcodeproj
-│  └─ DoseTrackIOS/
+├─ DoseTrackNew/ .................... Active Xcode project ⭐ CURRENT
+│  ├─ DoseTrackNew.xcodeproj
+│  └─ DoseTrackNew/
 │     ├─ DoseTrackApp.swift ......... App entry point
-│     ├─ TodayLogView.swift ......... Main screen (ViewModel pattern)
-│     ├─ EventLogView.swift ......... Event history UI
-│     ├─ Dose2Gate.swift ............ State machine (NEW)
-│     ├─ Dose2Button.swift .......... Gating UI component (NEW)
-│     ├─ TodayWidgets.swift ......... UI components (rings, banners)
-│     ├─ NightFlowServices.swift .... Window + notification logic
-│     ├─ DoseWindowActivity.swift ... Live Activity support
-│     ├─ AppIntents+*.swift ......... Siri shortcuts
-│     ├─ EventLog.swift ............. SwiftData model
-│     ├─ DoseLogController.swift .... Persistence layer
+│     ├─ ThreeCardPlanningView.swift  Main screen (Last/Tonight/Tomorrow)
+│     ├─ NightCardViewModern.swift .. Modern dark UI card (NEW)
+│     ├─ TodayViewModel.swift ....... Business logic
+│     ├─ Models.swift ............... SwiftData models
+│     ├─ DoseLogController.swift .... Persistence + lifecycle
+│     ├─ NightPlanRecommender.swift . Dose split logic
+│     ├─ DesignTokens.swift ......... Dark mode palette (NEW)
+│     ├─ WindowBar.swift ............ Compact progress bar (NEW)
+│     ├─ StatusChip.swift ........... Modern status indicators (NEW)
+│     ├─ ActionButtons.swift ........ Primary/secondary buttons (NEW)
+│     ├─ AppPreferencesEnhanced.swift Settings + observations
+│     ├─ NightAlarmPlan.swift ....... Notification scheduling
+│     ├─ NightServiceDay.swift ...... Day turnover logic
 │     └─ Widget/ .................... Widget extension
 │
 ├─ server/ .......................... Node.js WHOOP proxy
@@ -178,19 +182,24 @@ DoseTrack_v1.1.1c/
 │  └─ README_server.md .............. Server setup guide
 │
 ├─ docs/ ............................ Documentation
-│  ├─ DOCUMENTATION_INDEX.md ........ Complete doc index (NEW)
-│  ├─ PRODUCT_DESCRIPTION.md ........ Product narrative
-│  ├─ PRD_v1.2.md ................... Requirements
-│  ├─ SECRETS.md .................... API keys & config (private)
+│  ├─ PRODUCT_DESCRIPTION.md ........ Product narrative (SSOT)
+│  ├─ PRD_v1.2.md ................... Requirements (SSOT)
+│  ├─ SECRETS.md .................... API keys & config (private, never commit)
+│  ├─ CONTENTS.md ................... Documentation index
 │  ├─ design/
-│  │  ├─ DOSE2_LOGIC_FLOW.md ........ Dose 2 logic diagrams (NEW)
+│  │  ├─ ModernUI.md ................ Design system spec (NEW)
 │  │  ├─ LOGIC_MAP.md ............... System logic flows
 │  │  └─ UI_UX_ASCII.md ............. UI specifications
-│  └─ ops/
-│     ├─ START_HERE.md .............. Setup guide
-│     ├─ TESTING_GUIDE_COMPLETE.md .. Test procedures
-│     ├─ DOSE2_GATING_COMPLETE.md ... Dose 2 implementation (NEW)
-│     └─ NIGHT_FLOW_INTEGRATION_COMPLETE.md .. Night flow features
+│  ├─ ops/ ⭐ OPERATIONAL DOCS (4 active files)
+│  │  ├─ TODO.md .................... 50-item production roadmap (SSOT)
+│  │  ├─ START_HERE.md .............. Setup & onboarding guide
+│  │  ├─ TESTING_GUIDE.md ........... Test procedures
+│  │  ├─ VERIFICATION_CHECKLIST.md .. Release checklist
+│  │  └─ archive/ ................... Historical docs (85+ files)
+│  └─ review-notes/
+│     ├─ update3.md ................. Latest UI/UX review (Nov 3, 2025)
+│     ├─ SPEC_KIT_REVIEW.md ......... Spec Kit analysis
+│     └─ archive/ ................... Older reviews
 │
 ├─ examples/ ........................ Sample data
 │  └─ examples_sample_dosing.csv .... CSV schema example
@@ -221,14 +230,14 @@ DoseTrack_v1.1.1c/
 
 1. **Open project:**
    ```bash
-   cd DoseTrackIOS
-   open DoseTrackIOS.xcodeproj
+   cd DoseTrackNew
+   open DoseTrackNew.xcodeproj
    ```
 
 2. **Set bundle IDs:**
-   - App: `AxxessPhilly.DoseTrackIOS`
-   - Widget: `AxxessPhilly.DoseTrackIOS.DoseWidgetExtension`
-   - App Group: `group.AxxessPhilly.DoseTrackIOS`
+   - App: `com.jefferson.dosetrack`
+   - Widget: `com.jefferson.dosetrack.widget`
+   - App Group: `group.com.jefferson.dosetrack`
 
 3. **Enable capabilities:**
    - HealthKit (read Sleep Analysis)
@@ -242,15 +251,18 @@ DoseTrack_v1.1.1c/
 5. **Build and run:**
    ```bash
    # From command line
-   xcodebuild build -scheme DoseTrackIOS -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
+   cd DoseTrackNew
+   xcodebuild build -scheme DoseTrackNew -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
    
    # Or use Xcode: Product > Run (⌘R)
    ```
 
 6. **Run tests:**
    ```bash
-   xcodebuild test -scheme DoseTrackIOS -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
+   xcodebuild test -scheme DoseTrackNew -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
    ```
+
+**See also:** [`docs/ops/START_HERE.md`](docs/ops/START_HERE.md) for detailed setup
 
 ### WHOOP proxy
 
@@ -354,39 +366,155 @@ Sensitive configuration is documented in `docs/SECRETS.md`. Highlights:
 
 Follow that document before committing or distributing builds.
 
+## 6. Key Features ⭐ v1.1.1c
+
+### Modern UI (November 2025)
+- **Dark Mode First** - Custom palette (#0F1117 background)
+- **Three-Card Planning** - Last Night / Tonight / Tomorrow navigation
+- **Compact WindowBar** - Replaces large countdown ring
+- **Status Chips** - Modern rounded indicators for safety bounds and totals
+- **Build 1.1.2** - Visible version indicator
+
+### Night Turnover System
+- **Service Cutoff** - Automatic day rollover at local noon
+- **Lifecycle States** - Planned → Active → AwaitWake → Closed/Abandoned
+- **Timezone Safety** - DST and travel detection
+
+### Dose 2 Gating
+- **Window Enforcement** - 210-245 min after Dose 1 (configurable)
+- **Early/Late Overrides** - Require reason + minutes with validation
+- **State Machine** - 6 states (WaitD1, BeforeWindow, InWindow, AfterWindow, Late, Logged)
+
+### Data & Export
+- **SwiftData Models** - On-device storage with lifecycle tracking
+- **CSV Export** - Clinician-ready format with timestamps
+- **Audit Trail** - Override tracking (type, minutes, reason)
+
+### Integrations
+- **HealthKit** - Auto-import sleep wake times
+- **Widgets** - Home screen tonight's plan
+- **Live Activities** - Dynamic Island support (planned)
+- **WHOOP Proxy** - Optional Node.js service for sleep data
+
 ---
 
-## 6. Development Workflow
+## 7. Documentation Map
+
+### For New Developers
+1. **Start:** [`docs/ops/START_HERE.md`](docs/ops/START_HERE.md)
+2. **Architecture:** This README (you are here)
+3. **Setup:** Section 4 above + START_HERE.md
+4. **Testing:** [`docs/ops/TESTING_GUIDE.md`](docs/ops/TESTING_GUIDE.md)
+
+### For Product/Clinical
+1. **Overview:** [`docs/PRODUCT_DESCRIPTION.md`](docs/PRODUCT_DESCRIPTION.md)
+2. **Requirements:** [`docs/PRD_v1.2.md`](docs/PRD_v1.2.md)
+3. **UI Specs:** [`docs/design/UI_UX_ASCII.md`](docs/design/UI_UX_ASCII.md)
+4. **Latest Review:** [`docs/review-notes/update3.md`](docs/review-notes/update3.md)
+
+### For Active Development
+1. **Task List:** [`docs/ops/TODO.md`](docs/ops/TODO.md) - 50 items
+2. **Design System:** [`docs/design/ModernUI.md`](docs/design/ModernUI.md)
+3. **Secrets:** [`docs/SECRETS.md`](docs/SECRETS.md) (never commit!)
+4. **Release Checklist:** [`docs/ops/VERIFICATION_CHECKLIST.md`](docs/ops/VERIFICATION_CHECKLIST.md)
+
+### Constitutional Principles
+See [`.specify/memory/constitution.md`](.specify/memory/constitution.md):
+1. **Safety First** - Dose limits enforced
+2. **Local-First Privacy** - No cloud sync
+3. **Clinician-Ready Data** - Export with full audit trail
+
+---
+
+## 8. Development Workflow
+
 | Task | Command |
 |------|---------|
-| Run proxy | `npm start` (inside `server/`) |
-| Proxy tests | `npm test` (add integration mocks) |
-| iOS unit tests | `xcodebuild test -scheme DoseTrack -destination "platform=iOS Simulator,name=iPhone 15"` |
-| Lint (planned) | `swift-format`, `swiftlint`, `eslint`/`biome` (see TODO) |
-| Regenerate CSV export sample | `swift Run` helper (to be added) |
+| Open project | `cd DoseTrackNew && open DoseTrackNew.xcodeproj` |
+| Build | `⌘R` in Xcode or `xcodebuild build -scheme DoseTrackNew` |
+| Run tests | `⌘U` in Xcode or `xcodebuild test -scheme DoseTrackNew` |
+| Run proxy | `cd server && npm start` |
+| Quick test | `./scripts/quick-test.sh` |
+| View TODO | `cat docs/ops/TODO.md` |
 
-Planned improvements include continuous integration, automated linting, and SwiftFormat onboarding. Track open tasks in `docs/ops/ACTION_CHECKLIST.md`.
+### Active Work (November 2025)
+
+**Current Sprint:** UI Polish & Foundations
+- ✅ Modern UI integrated (dark mode, three-card view)
+- 🚧 Window status pill + next alert chip (Item 1)
+- 🚧 Dose 2 disabled reason caption (Item 2)
+- 🚧 Safety chips - planned vs logged (Item 3)
+
+**Next Sprint:** State Machine & Testing
+- ClockProvider & time abstractions (Item 27)
+- Authoritative state chart (Item 26)
+- Unit tests - state transitions (Item 37)
+
+**See:** [`docs/ops/TODO.md`](docs/ops/TODO.md) for complete 50-item roadmap
 
 ---
 
-## 7. Current Gaps & Roadmap
-- **SwiftUI architecture:** introduce a `TodayLogViewModel`, main-actor guarantees, and robust error surfacing for HealthKit + persistence.
-- **Night anchoring logic:** fix current off-by-one behavior after midnight and add regression tests.
-- **Proxy hardening:** modularize the code, validate config on boot, add pagination guards and request metrics.
-- **Secrets management:** adopt 1Password/Bitwarden vault for WHOOP credentials, encode API key rotation playbook.
-- **Testing:** build out XCTest coverage (recommender, CSV exporter, controller) and HTTP contract tests with mocked WHOOP responses.
+## 9. Current Gaps & Roadmap
+
+### High Priority (1-2 weeks)
+- **Window Status Indicators** - Live countdown pills (HH:MM:SS)
+- **Disabled Button Explanations** - "Opens in 17m" captions
+- **Data Source Chips** - Health/WHOOP/Notifications status
+- **Time Abstractions** - ClockProvider for testable time logic
+
+### Medium Priority (2-4 weeks)
+- **Settings Enhancements** - Split options, derived times, alarm styles
+- **Wake Event Sheets** - Log wake at… with seconds precision
+- **Haptics & Polish** - Feedback on actions, long-press edits
+- **Accessibility** - VoiceOver, Dynamic Type XXL support
+
+### Foundation Work (Ongoing)
+- **State Chart Documentation** - Lifecycle transitions + guards
+- **Feature Flags** - Kill switches for Tonight features
+- **Audit Trail** - Soft delete + edit provenance
+- **Background Tasks** - Service cutoff rollover at noon
+
+### Testing & Quality
+- **Unit Tests** - ≥80% coverage target
+- **UI Tests** - Critical user flows
+- **DST/Timezone Tests** - ±1h and ±3h edge cases
+- **Performance** - <400ms cold start, <16ms render
+
+**See:** [`docs/ops/TODO.md`](docs/ops/TODO.md) for complete breakdown
 
 ---
 
-## 8. Document Index
-- `docs/SECRETS.md` – secret and configuration management (new SSOT companion).
-- `docs/PRODUCT_DESCRIPTION.md` – consolidated narrative for v1.2 scope.
-- `docs/design/UI_UX_ASCII.md` – ASCII schematics of key UI surfaces.
-- `docs/design/LOGIC_MAP.md` – system logic and data flow diagrams.
-- `docs/ops/START_HERE.md` – quickstart orientation pointing back to this README.
-- `docs/ops/ACTION_CHECKLIST.md` – prioritized engineering tasks aligned with the roadmap.
-- `docs/ops/EVERYTHING_WORKING.md` – verification log template; run tests and update before releases.
-- `docs/PRD_v1.2.md` – product requirements.
-- `docs/v1.1.1b.md` – historical release notes.
+## 10. Document Index
 
-Treat this README as the authoritative source for architecture and setup. Update it whenever implementation details change.
+### Essential (SSOT)
+- **README.md** (this file) - Architecture & setup
+- `docs/PRODUCT_DESCRIPTION.md` - Product narrative
+- `docs/PRD_v1.2.md` - Requirements
+- `docs/ops/TODO.md` - 50-item task list
+- `docs/SECRETS.md` - Configuration (never commit!)
+
+### Operational
+- `docs/ops/START_HERE.md` - New developer onboarding
+- `docs/ops/TESTING_GUIDE.md` - QA procedures
+- `docs/ops/VERIFICATION_CHECKLIST.md` - Release gates
+- `docs/ops/archive/` - Historical docs (85+ files)
+
+### Design & Specs
+- `docs/design/ModernUI.md` - Design system
+- `docs/design/UI_UX_ASCII.md` - UI schematics
+- `docs/design/LOGIC_MAP.md` - System flows
+- `.specify/memory/constitution.md` - Core principles
+- `.specify/memory/spec.md` - Technical spec
+
+### Reviews & Analysis
+- `docs/review-notes/update3.md` - Latest UI review (Nov 3, 2025)
+- `docs/review-notes/SPEC_KIT_REVIEW.md` - Spec Kit analysis
+- `docs/review-notes/archive/` - Older reviews
+
+---
+
+**Treat this README as the authoritative source for architecture and setup. Update it whenever implementation details change.**
+
+**Last Updated:** November 3, 2025  
+**Version:** 1.1.1c (Build 1.1.2)  
+**Active Project:** DoseTrackNew/DoseTrackNew.xcodeproj

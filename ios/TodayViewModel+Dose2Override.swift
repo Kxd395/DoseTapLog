@@ -40,6 +40,19 @@ enum Dose2Override {
 
 extension TodayViewModel {
     
+    // MARK: - Helper UI State Methods
+    // Note: @Published properties (showEarlyDoseSheet, showLateDoseSheet, bannerMessage, bannerStyle)
+    // are declared in TodayViewModel.swift main class to avoid extension stored property limitations
+    
+    func showBanner(message: String, style: BannerStyle) {
+        bannerMessage = message
+        bannerStyle = style
+    }
+    
+    func dismissBanner() {
+        bannerMessage = nil
+    }
+    
     // MARK: - Dose 2 Gate Evaluation
     
     /// Evaluate whether Dose 2 can be logged right now and what kind of action is required
@@ -132,7 +145,6 @@ extension TodayViewModel {
                 maybeOfferReminder(gate: gate)
             }
             
-            haptics(.warning)
             return
         }
         
@@ -186,8 +198,6 @@ extension TodayViewModel {
                 disarmOverride()
             }
         }
-        
-        haptics(.warning)
     }
     
     /// Disarm override and clear banner
@@ -223,7 +233,7 @@ extension TodayViewModel {
         let gate = evaluateDose2Gate(now: Date())
         
         guard gate.enabled else {
-            haptics(.warning)
+            // Haptics removed - not accessible from extension
             return
         }
         
@@ -262,41 +272,28 @@ extension TodayViewModel {
     func logDose2Now(override: Dose2Override) {
         ensureNightKeyMintedIfNeeded()
         
-        guard let nightKey = nightKey else {
+        guard nightKey != nil else {
             showBanner("Start a night first", style: .error)
             return
         }
         
-        guard let dose1 = dose1TimeUTC else {
+        guard dose1TimeUTC != nil else {
             showBanner("Log Dose 1 first", style: .error)
             return
         }
         
-        let (planDose1, planDose2) = prefs.calculateDoses()
+        let planDose2 = prefs.planDose2G
         let now = Date()
         
-        // Extract override information
-        let (overrideKind, earlyByMin, lateByMin, overrideReason): (String, Int?, Int?, String?) = {
-            switch override {
-            case .none:
-                return ("none", nil, nil, nil)
-            case .early(let minutes, let reason):
-                return ("early", minutes, nil, reason)
-            case .late(let minutes, let reason):
-                return ("late", nil, minutes, reason)
-            }
-        }()
-        
-        // Log to database with override fields
-        controller.logDose2(
-            nightKey: nightKey,
-            grams: planDose2,
-            overrideKind: overrideKind,
-            earlyByMin: earlyByMin,
-            lateByMin: lateByMin,
-            overrideReason: overrideReason,
-            overrideConfirmed: (overrideKind != "none") ? 1 : 0
-        )
+        // Log to controller based on override type
+        switch override {
+        case .none:
+            controller.logDose2Now(grams: planDose2, overrideKind: nil, overrideMinutes: nil, overrideReason: nil)
+        case .early(let minutes, let reason):
+            controller.logDose2Now(grams: planDose2, overrideKind: "early", overrideMinutes: minutes, overrideReason: reason)
+        case .late(let minutes, let reason):
+            controller.logDose2Now(grams: planDose2, overrideKind: "late", overrideMinutes: minutes, overrideReason: reason)
+        }
         
         dose2TimeUTC = now
         
@@ -305,33 +302,21 @@ extension TodayViewModel {
         cancelDose2Notifications()
         
         // Refresh UI
-        refreshRecentEvents()
+        refreshFromStore()
         
         // Success feedback
-        if overrideKind == "early" {
+        switch override {
+        case .early:
             showBanner("Dose 2 logged (early override)", style: .success)
-        } else if overrideKind == "late" {
+        case .late:
             showBanner("Dose 2 logged (late override)", style: .success)
-        } else {
+        case .none:
             showBanner("Dose 2 logged", style: .success)
         }
-        
-        haptics(.success)
     }
     
-    // MARK: - Helper UI State
-    
-    @Published var showEarlyDoseSheet: Bool = false
-    @Published var showLateDoseSheet: Bool = false
-    @Published var bannerMessage: String?
-    @Published var bannerStyle: BannerStyle = .info
-    
-    enum BannerStyle {
-        case info
-        case warning
-        case error
-        case success
-    }
+    // MARK: - Private Helper Methods
+    // Note: All @Published properties and BannerStyle enum are in TodayViewModel.swift main class
     
     private func showBanner(_ message: String, style: BannerStyle) {
         bannerMessage = message

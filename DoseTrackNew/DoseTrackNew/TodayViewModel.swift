@@ -10,10 +10,32 @@ final class TodayViewModel: ObservableObject {
     @Published var finalWakeTimeUTC: Date?
     @Published var showEarlyDoseSheet: Bool = false
     @Published var earlyMinutesRequested: Int = 0
-    @Published var earlyReason: EarlyReason = .couldNotSleep
+    @Published var earlyReason: EarlyReason = .couldNotSleep  // References EarlyReason from EarlyDoseSheetView.swift
     @Published var lastEvents: [LoggedEvent] = []
     @Published var dose2DisabledReason: String = "Dose 2 available after window opens"
     @Published var prefs: LegacyAppPreferences
+    
+    // MARK: - Dose 2 Override Sheet State
+    @Published var showLateDoseSheet: Bool = false
+    @Published var bannerMessage: String?
+    @Published var bannerStyle: BannerStyle = .info
+    
+    enum BannerStyle {
+        case info
+        case warning
+        case error
+        case success
+    }
+    
+    // MARK: - Wake Sheet State
+    @Published var showWakeSheet: Bool = false
+    @Published var wakeSheetType: WakeEventType = .alarm
+    
+    enum WakeEventType {
+        case alarm
+        case bathroom
+        case finalWake
+    }
     
     // MARK: - Reset Night State
     @Published var showResetSheet: Bool = false
@@ -24,7 +46,7 @@ final class TodayViewModel: ObservableObject {
     
     init(controller: DoseLogControllering, prefs: LegacyAppPreferences? = nil) {
         self.controller = controller
-        self.prefs = prefs ?? AppPreferences.shared.toLegacyStruct()
+        self.prefs = prefs ?? AppPreferencesEnhanced.shared.toLegacyStruct()
         refreshFromStore()
     }
     
@@ -62,6 +84,11 @@ final class TodayViewModel: ObservableObject {
         guard let e = elapsedSinceDose1Min else { return false }
         return e >= Double(windowStartMinutes) && e <= Double(windowEndMinutes)
     }
+    var isBeforeWindowButEligibleEarly: Bool {
+        guard prefs.allowEarlyDose, let e = elapsedSinceDose1Min else { return false }
+        let minToStart = Double(windowStartMinutes) - e
+        return minToStart > 0 && minToStart <= Double(prefs.maxEarlyMinutes)
+    }
     var isWindowExpired: Bool {
         guard let e = elapsedSinceDose1Min else { return false }
         return e > Double(windowEndMinutes)
@@ -72,6 +99,40 @@ final class TodayViewModel: ObservableObject {
         if isBeforeWindowButEligibleEarly { return true }
         return false
     }
+    
+    /// Caption shown under Dose 2 button when disabled
+    var dose2DisabledCaption: String? {
+        // If already logged, don't show caption
+        if dose2TimeUTC != nil { return nil }
+        
+        // If Dose 1 not logged yet
+        guard let e = elapsedSinceDose1Min else {
+            return "Log Dose 1 to start the window"
+        }
+        
+        // If within window or early eligible, button is enabled so no caption
+        if isWithinWindow || isBeforeWindowButEligibleEarly {
+            return nil
+        }
+        
+        // Before window
+        if e < Double(windowStartMinutes) {
+            let remainingMinutes = Int(Double(windowStartMinutes) - e)
+            let hours = remainingMinutes / 60
+            let mins = remainingMinutes % 60
+            
+            let timeStr = hours > 0 ? "\(hours)h \(mins)m" : "\(mins)m"
+            return "Opens in \(timeStr) (\(windowStartMinutes)–\(windowEndMinutes) min after Dose 1)"
+        }
+        
+        // After window expired
+        let expiredMinutes = Int(e - Double(windowEndMinutes))
+        let hours = expiredMinutes / 60
+        let mins = expiredMinutes % 60
+        let timeStr = hours > 0 ? "\(hours)h \(mins)m" : "\(mins)m"
+        return "Window expired \(timeStr) ago"
+    }
+    
     var dose2ReasonText: String {
         guard let e = elapsedSinceDose1Min else { return "Log Dose 1 to start the window" }
         if isWithinWindow { return "Window closes in \(formatMinutes(Int(Double(windowEndMinutes) - e)))" }
@@ -100,12 +161,15 @@ final class TodayViewModel: ObservableObject {
         refreshFromStore()
         controller.startLiveActivityIfEnabled(prefs: prefs, dose1UTC: dose1TimeUTC ?? nowUTC, windowStartMin: windowStartMinutes, windowEndMin: windowEndMinutes)
     }
+    
+    // tryLogDose2() moved to TodayViewModel+LateDose.swift extension
+    // logAlarmWake() moved to TodayViewModel+WakeEvents.swift extension
+    
     func confirmEarlyDose2() {
         controller.logDose2Now(grams: prefs.planDose2G, overrideEarlyMinutes: earlyMinutesRequested, overrideReason: earlyReason.rawValue)
         controller.endLiveActivity(); showEarlyDoseSheet = false; refreshFromStore()
     }
     func logFinalWake() { controller.logFinalWakeNow(provenance: "Manual"); refreshFromStore() }
-    func logAlarmWake() { controller.logAlarmWakeNow(); refreshFromStore() }
     func logBathroom() { controller.logBathroomNow(); refreshFromStore() }
     func undoLast() { controller.undoLastEvent(); refreshFromStore() }
     
@@ -136,7 +200,7 @@ final class TodayViewModel: ObservableObject {
             self.showUndoResetBanner = true
             
             // Auto-hide undo banner after window expires
-            let undoWindow = Double(AppPreferences.shared.resetUndoWindowSec)
+            let undoWindow = Double(AppPreferencesEnhanced.shared.resetUndoWindowSec)
             DispatchQueue.main.asyncAfter(deadline: .now() + undoWindow) {
                 self.showUndoResetBanner = false
                 self.pendingResetBatchId = nil
@@ -160,11 +224,10 @@ final class TodayViewModel: ObservableObject {
         refreshFromStore()
     }
     
-    private func ensureNightKeyMintedIfNeeded() { if nightKey == nil { controller.mintNightKeyIfNeeded() } }
     func formatMinutes(_ minutes: Int) -> String { let h = minutes / 60; let m = minutes % 60; return h == 0 ? "\(m)m" : "\(h)h \(m)m" }
 }
 
-// Moved to AppPreferences.swift - using LegacyAppPreferences for compatibility
+// EarlyReason moved to EarlyDoseSheetView.swift to avoid duplicate declarations
 
 struct LoggedEvent: Identifiable, Equatable { enum Kind: String { case inBed, dose1, bathroom, dose2, alarmWake, finalWake }
     let id = UUID(); let kind: Kind; let timestampUTC: Date; let detail: String }

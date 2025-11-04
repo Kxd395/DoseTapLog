@@ -26,6 +26,11 @@ final class DoseLog {
     var dose2OverrideKind: String? // "late" or "early"
     var dose2OverrideMinutes: Int? // How many minutes late/early
     var dose2OverrideReason: String? // User-provided reason
+    
+    // Lifecycle state tracking
+    var lifecycleState: String = "planned" // NightLifecycleState raw value
+    var autoClosedAt: Date? // When the night was auto-closed at cutoff
+    var plannedDose1Time: Date? // Suggested/planned Dose 1 time (before logging)
 
     init(nightKey: String, nightStartUTC: Date, timezoneOffsetMinutes: Int) {
         self.nightKey = nightKey
@@ -69,5 +74,48 @@ final class DoseLog {
         let ma = morningAlertness.map(String.init) ?? ""
         let n = notes ?? ""
         return [nightDate, bt, d1t, d1g, d2t, d2g, d2Override, d2OverrideKind, d2OverrideMin, d2OverrideReason, wakes, fwt, ma, n].joined(separator: ",")
+    }
+    
+    // MARK: - Lifecycle State Helpers
+    
+    var currentLifecycleState: NightLifecycleState {
+        get {
+            NightLifecycleState(rawValue: lifecycleState) ?? .planned
+        }
+        set {
+            lifecycleState = newValue.rawValue
+        }
+    }
+    
+    /// Determine lifecycle state from logged events (for migration/repair)
+    func inferLifecycleState() -> NightLifecycleState {
+        if isClosedByReset {
+            return .abandoned
+        }
+        
+        if let _ = finalWakeTimeUTC {
+            return .closed
+        }
+        
+        if let _ = autoClosedAt {
+            return .closed
+        }
+        
+        if let d2 = dose2TimeUTC {
+            // Dose 2 logged, waiting for final wake
+            return .awaitWake
+        }
+        
+        if let d1 = dose1TimeUTC {
+            // Dose 1 logged, determine if window is open/closed
+            // This requires window settings - default to active for now
+            return .active
+        }
+        
+        if let _ = bedtimeUTC {
+            return .armed
+        }
+        
+        return .planned
     }
 }

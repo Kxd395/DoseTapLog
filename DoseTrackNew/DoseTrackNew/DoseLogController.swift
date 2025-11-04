@@ -158,7 +158,7 @@ final class DoseLogController: DoseLogControllering {
     
     func logInBedNow() {
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             let now = Date()
             
             if log.bedtimeUTC == nil {
@@ -180,7 +180,7 @@ final class DoseLogController: DoseLogControllering {
     
     func logDose1Now(grams: Double) {
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             let now = Date()
             
             log.dose1TimeUTC = now
@@ -191,7 +191,7 @@ final class DoseLogController: DoseLogControllering {
             updateLastEvent(kind: .dose1, timestamp: now)
             
             // Start Live Activity if enabled
-            let prefs = AppPreferences.shared.toLegacyStruct()
+            let prefs = AppPreferencesEnhanced.shared.toLegacyStruct()
             if prefs.liveActivityEnabled {
                 startLiveActivityIfEnabled(
                     prefs: prefs,
@@ -219,7 +219,7 @@ final class DoseLogController: DoseLogControllering {
     
     func logDose2Now(grams: Double, overrideKind: String?, overrideMinutes: Int?, overrideReason: String?) {
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             let now = Date()
             
             log.dose2TimeUTC = now
@@ -257,7 +257,7 @@ final class DoseLogController: DoseLogControllering {
     
     func logFinalWakeNow(provenance: String) {
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             let now = Date()
             
             log.finalWakeTimeUTC = now
@@ -274,7 +274,7 @@ final class DoseLogController: DoseLogControllering {
     
     func logAlarmWakeNow() {
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             let now = Date()
             
             // Store alarm wake in notes or dedicated field
@@ -292,7 +292,7 @@ final class DoseLogController: DoseLogControllering {
     
     func logBathroomNow() {
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             let now = Date()
             
             log.bathroomWakeTimesUTC.append(now)
@@ -327,7 +327,7 @@ final class DoseLogController: DoseLogControllering {
         }
         
         do {
-            var log = fetchOrCreateCurrentNight()
+            let log = fetchOrCreateCurrentNight()
             
             switch kind {
             case .inBed:

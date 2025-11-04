@@ -26,17 +26,8 @@ extension TodayViewModel {
         return max(0, Int(afterWindow))
     }
     
-    /// True if before window but within early dose eligibility
-    var isBeforeWindowButEligibleEarly: Bool {
-        guard let d1 = dose1TimeUTC else { return false }
-        guard dose2TimeUTC == nil else { return false }
-        guard AppPreferencesEnhanced.shared.allowEarlyDose else { return false }
-        
-        let elapsedMinutes = Date().timeIntervalSince(d1) / 60.0
-        let earlyThreshold = Double(windowStartMinutes - AppPreferencesEnhanced.shared.maxEarlyMinutes)
-        
-        return elapsedMinutes >= earlyThreshold && elapsedMinutes < Double(windowStartMinutes)
-    }
+    // Note: isBeforeWindowButEligibleEarly is defined in TodayViewModel.swift main class
+    // Do NOT redeclare here - it causes compilation errors
     
     // MARK: - Late Dose Methods
     

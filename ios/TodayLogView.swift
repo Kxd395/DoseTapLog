@@ -280,6 +280,7 @@ final class StubController: DoseLogControllering {
     func logInBedNow() {}
     func logDose1Now(grams: Double) {}
     func logDose2Now(grams: Double, overrideEarlyMinutes: Int?, overrideReason: String?) {}
+    func logDose2Now(grams: Double, overrideKind: String?, overrideMinutes: Int?, overrideReason: String?) {} // Late dose support
     func logFinalWakeNow(provenance: String) {}
     func logAlarmWakeNow() {}
     func logBathroomNow() {}

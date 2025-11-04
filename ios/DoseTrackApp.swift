@@ -5,7 +5,7 @@ import SwiftData
 struct DoseTrackApp: App {
     var body: some Scene {
         WindowGroup {
-            TodayLogView()
+            ThreeCardPlanningView()
         }
         .modelContainer(for: [DoseLog.self])
     }

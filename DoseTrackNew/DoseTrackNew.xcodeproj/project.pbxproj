@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */; };
+		8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCF2EB944A2008532AA /* WindowBar.swift */; };
+		E7B701002EB94000008532AA /* WindowPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6694AD22EB94000008532AA /* WindowPill.swift */; };
+		F27864512EB94000008532AA /* NextAlertChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25315D52EB94000008532AA /* NextAlertChip.swift */; };
+		8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */; };
+		8089AFD32EB944A2008532AA /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCA2EB944A2008532AA /* ActionButtons.swift */; };
+		8089AFD42EB944A2008532AA /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCB2EB944A2008532AA /* DesignTokens.swift */; };
+		8089AFD52EB944A2008532AA /* StatusChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCD2EB944A2008532AA /* StatusChip.swift */; };
+		8089AFDA2EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */; };
+		8089AFDB2EB9467F008532AA /* AppPreferencesEnhanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */; };
+		8089AFDD2EB94764008532AA /* WeeklySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFDC2EB94764008532AA /* WeeklySchedule.swift */; };
+		8089AFE12EB94EEF008532AA /* NightServiceDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFE02EB94EEF008532AA /* NightServiceDay.swift */; };
+		8089AFE22EB94EEF008532AA /* NightAlarmPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */; };
+		8089AFE42EB952D8008532AA /* project.pbxproj in Resources */ = {isa = PBXBuildFile; fileRef = 8089AFE32EB952D8008532AA /* project.pbxproj */; };
 		A0000001 /* DoseTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000001 /* DoseTrackApp.swift */; };
 		A0000002 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000002 /* Models.swift */; };
 		A0000003 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000003 /* Config.swift */; };
@@ -37,6 +51,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8089AFCA2EB944A2008532AA /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
+		8089AFCB2EB944A2008532AA /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
+		8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightCardViewModern.swift; sourceTree = "<group>"; };
+		8089AFCD2EB944A2008532AA /* StatusChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusChip.swift; sourceTree = "<group>"; };
+		8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCardPlanningView.swift; sourceTree = "<group>"; };
+		8089AFCF2EB944A2008532AA /* WindowBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowBar.swift; sourceTree = "<group>"; };
+		E6694AD22EB94000008532AA /* WindowPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPill.swift; sourceTree = "<group>"; };
+		D25315D52EB94000008532AA /* NextAlertChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAlertChip.swift; sourceTree = "<group>"; };
+		8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesEnhanced.swift; sourceTree = "<group>"; };
+		8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppPreferencesEnhanced+LateDose.swift"; sourceTree = "<group>"; };
+		8089AFDC2EB94764008532AA /* WeeklySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySchedule.swift; sourceTree = "<group>"; };
+		8089AFE02EB94EEF008532AA /* NightServiceDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightServiceDay.swift; sourceTree = "<group>"; };
+		8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightAlarmPlan.swift; sourceTree = "<group>"; };
+		8089AFE32EB952D8008532AA /* project.pbxproj */ = {isa = PBXFileReference; lastKnownFileType = text.pbxproject; path = project.pbxproj; sourceTree = "<group>"; };
 		B0000001 /* DoseTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseTrackApp.swift; sourceTree = "<group>"; };
 		B0000002 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B0000003 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -90,11 +118,25 @@
 		D0000002 /* DoseTrackNew */ = {
 			isa = PBXGroup;
 			children = (
-				B0000100 /* Info.plist */,
-				B0000001 /* DoseTrackApp.swift */,
-				B0000002 /* Models.swift */,
+				8089AFDC2EB94764008532AA /* WeeklySchedule.swift */,
+				8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */,
+				8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */,
+				8089AFCA2EB944A2008532AA /* ActionButtons.swift */,
+				8089AFCB2EB944A2008532AA /* DesignTokens.swift */,
+				8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */,
+				8089AFCD2EB944A2008532AA /* StatusChip.swift */,
+				8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */,
+				8089AFCF2EB944A2008532AA /* WindowBar.swift */,
+				E6694AD22EB94000008532AA /* WindowPill.swift */,
+				D25315D52EB94000008532AA /* NextAlertChip.swift */,
+			B0000100 /* Info.plist */,
+			B0000001 /* DoseTrackApp.swift */,
+			8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */,
+			8089AFE02EB94EEF008532AA /* NightServiceDay.swift */,
+			B0000002 /* Models.swift */,
 				B0000003 /* Config.swift */,
 				B0000004 /* DoseLogController.swift */,
+				8089AFE32EB952D8008532AA /* project.pbxproj */,
 				B0000005 /* TodayViewModel.swift */,
 				B0000028 /* TodayViewModel+LateDose.swift */,
 				B0000006 /* TodayLogView.swift */,
@@ -188,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8089AFE42EB952D8008532AA /* project.pbxproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,14 +251,26 @@
 				A0000008 /* CSVExporter.swift in Sources */,
 				A0000009 /* Date+UTC.swift in Sources */,
 				A0000010 /* AppGroupStore.swift in Sources */,
+				8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */,
+				8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */,
+				E7B701002EB94000008532AA /* WindowPill.swift in Sources */,
+				F27864512EB94000008532AA /* NextAlertChip.swift in Sources */,
+				8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */,
+				8089AFDA2EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift in Sources */,
+				8089AFDB2EB9467F008532AA /* AppPreferencesEnhanced.swift in Sources */,
+				8089AFD32EB944A2008532AA /* ActionButtons.swift in Sources */,
+				8089AFD42EB944A2008532AA /* DesignTokens.swift in Sources */,
+				8089AFD52EB944A2008532AA /* StatusChip.swift in Sources */,
 				A0000011 /* AppIntents+DoseLog.swift in Sources */,
 				A0000012 /* AppPreferences.swift in Sources */,
 				A0000014 /* AppPreferences+LateDose.swift in Sources */,
 				A0000015 /* CountdownRingView.swift in Sources */,
 				A0000016 /* EarlyDoseSheet.swift in Sources */,
 				A0000017 /* EarlyDoseSheetView.swift in Sources */,
+				8089AFDD2EB94764008532AA /* WeeklySchedule.swift in Sources */,
 				A0000018 /* EventStripView.swift in Sources */,
 				A0000019 /* LateDoseSheetView.swift in Sources */,
+				8089AFE22EB94EEF008532AA /* NightAlarmPlan.swift in Sources */,
 				A0000020 /* NightPlanRecommender.swift in Sources */,
 				A0000021 /* ResetNightSheet.swift in Sources */,
 				A0000022 /* Rounding+Display.swift in Sources */,
@@ -223,6 +278,7 @@
 				A0000024 /* SafetyBannerView.swift in Sources */,
 				A0000025 /* SettingsViewEnhanced.swift in Sources */,
 				A0000026 /* TodayLogView_CardStack.swift in Sources */,
+				8089AFE12EB94EEF008532AA /* NightServiceDay.swift in Sources */,
 				A0000027 /* TodayLogView_Checklist.swift in Sources */,
 				A0000028 /* TodayViewModel+LateDose.swift in Sources */,
 			);
