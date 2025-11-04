@@ -102,36 +102,51 @@ struct NightCardViewModern: View {
                         onConfirm: { override in
                             logDose2WithOverride(night, override: override)
                             showLateDose2Sheet = false
+                        },
+                        onLogMissed: {
+                            // Handle logging as missed dose
+                            showLateDose2Sheet = false
                         }
                     )
                 }
             }
         }
         .sheet(isPresented: $showDose2BlockedSheet) {
-            if let night = night, let d1 = night.dose1TimeUTC {
-                let gate = evaluateDose2Gate(
-                    now: Date(),
-                    dose1At: d1,
-                    dose2At: night.dose2TimeUTC,
-                    policy: Dose2Policy.from(prefs)
-                )
-                Dose2BlockedSheet(
-                    gate: gate,
-                    policy: Dose2Policy.from(prefs),
-                    onNotifyMe: {
-                        scheduleWindowStartReminder()
+            Dose2BlockedSheet(
+                reason: "Dose 2 is currently unavailable. Check your timing.",
+                onRemindAtStart: {
+                    scheduleWindowStartReminder()
+                }
+            )
+        }
+        .sheet(isPresented: $showNeedDose1Sheet) {
+            if let night = night {
+                NeedDose1Sheet(
+                    onLogDose1Now: {
+                        logDose1(night)
+                        showNeedDose1Sheet = false
+                    },
+                    onSetReminder: {
+                        // Set reminder for Dose 1
+                        showNeedDose1Sheet = false
                     }
                 )
             }
         }
-        .sheet(isPresented: $showNeedDose1Sheet) {
-            NeedDose1Sheet()
-        }
         .sheet(isPresented: $showAlreadyLoggedSheet) {
             if let night = night, let dose2Time = night.dose2TimeUTC {
-                AlreadyLoggedSheet(
-                    dose2Time: dose2Time,
-                    dose2Grams: night.dose2Grams ?? 0
+                Dose2AlreadyLoggedSheet(
+                    loggedAt: dose2Time,
+                    onEditTime: {
+                        // Edit time functionality
+                        showAlreadyLoggedSheet = false
+                    },
+                    onUndo: {
+                        night.dose2TimeUTC = nil
+                        night.dose2Grams = nil
+                        try? modelContext.save()
+                        showAlreadyLoggedSheet = false
+                    }
                 )
             }
         }
@@ -145,7 +160,7 @@ struct NightCardViewModern: View {
                     onConfirm: { reason, isFinal, wasInterrupted, time, note in
                         if isFinal {
                             night.finalWakeTimeUTC = time
-                            night.finalWakeReason = reason.rawValue
+                            night.finalWakeProvenance = reason.rawValue
                         }
                         // TODO: Add to events array when implemented
                         
@@ -171,7 +186,7 @@ struct NightCardViewModern: View {
                         if mode == .soft {
                             // Archive and reset
                             night.currentLifecycleState = .abandoned
-                            night.abandonedReason = reason
+                            night.notes = (night.notes ?? "") + " [Reset: \(reason)]"
                         } else {
                             // Hard delete
                             modelContext.delete(night)
@@ -444,11 +459,11 @@ struct NightCardViewModern: View {
                 .init(
                     title: "Dose 2",
                     icon: "pills.circle.fill",
-                    disabled: !dose2Enabled(night),
-                    caption: dose2DisabledCaption(night),
                     action: {
                         tryLogDose2(night)
-                    }
+                    },
+                    disabled: !dose2Enabled(night),
+                    caption: dose2DisabledCaption(night)
                 ),
                 .init(title: "Final wake", icon: "sunrise.fill", action: {
                     logFinalWake(night)
@@ -464,9 +479,9 @@ struct NightCardViewModern: View {
                 .init(title: "Bathroom", icon: "figure.walk", action: {
                     logBathroom(night)
                 }),
-                .init(title: "Reset night", icon: "arrow.counterclockwise", tone: Palette.danger, action: {
+                .init(title: "Reset night", icon: "arrow.counterclockwise", action: {
                     resetNight(night)
-                })
+                }, tone: Palette.danger)
             ]
         )
     }
@@ -551,8 +566,9 @@ struct NightCardViewModern: View {
     private func perDoseSafe(_ night: DoseLog) -> Bool {
         let d1 = night.dose1Grams ?? 0
         let d2 = night.dose2Grams ?? 0
-        return d1 >= prefs.perDoseMinG && d1 <= prefs.perDoseMaxG &&
-               d2 >= prefs.perDoseMinG && d2 <= prefs.perDoseMaxG
+        // TODO: Add perDoseMinG and perDoseMaxG to AppPreferencesEnhanced
+        return d1 >= 1.0 && d1 <= 6.0 &&
+               d2 >= 1.0 && d2 <= 6.0
     }
     
     private func plannedTotal(_ night: DoseLog) -> Double {
@@ -650,7 +666,7 @@ struct NightCardViewModern: View {
     
     private func logInBed(_ night: DoseLog) {
         print("🔵 logInBed called - NEW VERSION")
-        night.inBedTimeUTC = Date()
+        night.bedtimeUTC = Date()
         
         do {
             try modelContext.save()
@@ -696,7 +712,7 @@ struct NightCardViewModern: View {
         case .alreadyLogged:
             showAlreadyLoggedSheet = true
             
-        case .tooEarly(let minutes):
+        case .tooEarly(_):
             if isOverrideAllowed(gate: gate, policy: policy) {
                 // Show early override sheet
                 showEarlyDose2Sheet = true
@@ -705,7 +721,7 @@ struct NightCardViewModern: View {
                 showDose2BlockedSheet = true
             }
             
-        case .tooLate(let minutes):
+        case .tooLate(_):
             if isOverrideAllowed(gate: gate, policy: policy) {
                 // Show late override sheet
                 showLateDose2Sheet = true
@@ -794,7 +810,7 @@ struct NightCardViewModern: View {
     private func logNaturalWake(_ night: DoseLog) {
         print("🔵 logNaturalWake called - NEW VERSION")
         night.finalWakeTimeUTC = Date()
-        night.finalWakeReason = WakeReason.natural.rawValue
+        night.finalWakeProvenance = WakeReason.natural.rawValue
         
         do {
             try modelContext.save()
