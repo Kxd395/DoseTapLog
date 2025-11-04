@@ -11,9 +11,15 @@ struct ThreeCardPlanningView: View {
     @State private var showSettings = false
     @State private var showTimeZoneRebasePrompt = false
     @State private var lastRefreshDate = Date()
+    @State private var showCutoffToast = false
+    @State private var cutoffToastDate = ""
     
     private let prefs = AppPreferencesEnhanced.shared
     private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
+    
+    private var turnoverController: NightTurnoverController {
+        NightTurnoverController(modelContext: modelContext, preferences: prefs)
+    }
     
     var body: some View {
         NavigationStack {
@@ -56,13 +62,45 @@ struct ThreeCardPlanningView: View {
             .alert("Time Zone Changed", isPresented: $showTimeZoneRebasePrompt) {
                 timeZoneRebaseAlert
             }
+            .overlay(alignment: .top) {
+                if showCutoffToast {
+                    cutoffToastView
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .zIndex(100)
+                }
+            }
             .onReceive(timer) { _ in
                 checkForCutoffCrossing()
                 checkForTimeZoneChange()
             }
             .onAppear {
                 checkForCutoffCrossing()
-                mintTonightIfNeeded()
+                turnoverController.mintTonightIfNeeded()
+            }
+        }
+    }
+    
+    // MARK: - Cutoff Toast UI
+    
+    private var cutoffToastView: some View {
+        VStack {
+            HStack(spacing: 12) {
+                Image(systemName: "moon.stars.fill")
+                    .foregroundStyle(.yellow)
+                Text("Tonight prepared • \(cutoffToastDate)")
+                    .font(.subheadline.weight(.medium))
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+            .shadow(radius: 8)
+            .padding(.top, 8)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                withAnimation {
+                    showCutoffToast = false
+                }
             }
         }
     }
@@ -85,70 +123,14 @@ struct ThreeCardPlanningView: View {
         
         guard hasCrossed else { return }
         
-        // Auto-close any lingering nights from yesterday
-        autoCloseLingeringNights()
+        // Use controller to handle turnover
+        let changesMade = turnoverController.handleCutoffCrossing()
         
-        // Mint tonight if it doesn't exist
-        mintTonightIfNeeded()
-        
-        // Show toast
-        showCutoffCrossedToast()
+        if changesMade {
+            showCutoffCrossedToast()
+        }
         
         lastRefreshDate = Date()
-    }
-    
-    /// Auto-close nights that should have been closed at previous cutoff
-    private func autoCloseLingeringNights() {
-        let lastNightKey = NightServiceDay.lastNightKey(cutoffHour: prefs.cutoffHourLocal)
-        
-        // Find any nights before last night that aren't closed
-        let lingeringNights = allNights.filter { night in
-            night.nightKey < lastNightKey &&
-            night.currentLifecycleState != .closed &&
-            night.currentLifecycleState != .abandoned
-        }
-        
-        for night in lingeringNights {
-            night.currentLifecycleState = .closed
-            night.autoClosedAt = Date()
-            print("Auto-closed lingering night: \(night.nightKey)")
-        }
-        
-        if !lingeringNights.isEmpty {
-            try? modelContext.save()
-        }
-    }
-    
-    /// Mint a planned "Tonight" session if it doesn't exist
-    private func mintTonightIfNeeded() {
-        let tonightKey = NightServiceDay.tonightKey(cutoffHour: prefs.cutoffHourLocal)
-        
-        // Check if tonight already exists
-        if allNights.contains(where: { $0.nightKey == tonightKey }) {
-            return
-        }
-        
-        // Create new planned night for tonight
-        let now = Date()
-        let tzOffset = TimeZone.current.secondsFromGMT(for: now) / 60
-        let newNight = DoseLog(
-            nightKey: tonightKey,
-            nightStartUTC: now,
-            timezoneOffsetMinutes: tzOffset
-        )
-        newNight.currentLifecycleState = .planned
-        
-        // Set planned Dose 1 time from weekly schedule
-        let schedule = prefs.weeklySchedule
-        newNight.plannedDose1Time = schedule.suggestedDose1Time(
-            for: now,
-            cutoffHour: prefs.cutoffHourLocal
-        )
-        
-        modelContext.insert(newNight)
-        try? modelContext.save()
-        
-        print("Minted tonight: \(tonightKey)")
     }
     
     private func showCutoffCrossedToast() {
@@ -160,9 +142,10 @@ struct ThreeCardPlanningView: View {
         let keyFormatter = DateFormatter()
         keyFormatter.dateFormat = "yyyy-MM-dd"
         if let date = keyFormatter.date(from: tonightKey) {
-            let dateString = formatter.string(from: date)
-            print("✅ Tonight prepared • \(dateString)")
-            // TODO: Show actual toast UI
+            cutoffToastDate = formatter.string(from: date)
+            withAnimation {
+                showCutoffToast = true
+            }
         }
     }
     
@@ -210,24 +193,15 @@ struct ThreeCardPlanningView: View {
     private func rebaseTonightPlan(action: RebaseAction) {
         guard let tonight = nightFor(.tonight) else { return }
         
-        switch action {
-        case .local:
-            // Recompute planned Dose 1 time in local timezone
-            let schedule = prefs.weeklySchedule
-            tonight.plannedDose1Time = schedule.suggestedDose1Time(
-                cutoffHour: prefs.cutoffHourLocal
-            )
-            try? modelContext.save()
-            print("Rebased tonight to local time")
-            
-        case .keepHome:
-            // Don't adjust - planned time stays in home timezone
-            print("Keeping home time")
-            
-        case .manual:
-            // User will adjust via plan editor
-            break
-        }
+        let currentTZ = TimeZone.current
+        let previousTZ = TimeZone(identifier: prefs.lastKnownTimeZone) ?? currentTZ
+        
+        // Use controller to handle timezone change
+        turnoverController.handleTimeZoneChange(
+            from: previousTZ,
+            to: currentTZ,
+            action: action
+        )
     }
 }
 
