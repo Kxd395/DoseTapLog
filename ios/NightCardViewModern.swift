@@ -649,6 +649,7 @@ struct NightCardViewModern: View {
     // MARK: - Action Handlers (Stubs)
     
     private func logInBed(_ night: DoseLog) {
+        print("🔵 logInBed called - NEW VERSION")
         night.inBedTimeUTC = Date()
         
         do {
@@ -779,16 +780,19 @@ struct NightCardViewModern: View {
     }
     
     private func logFinalWake(_ night: DoseLog) {
+        print("🔵 logFinalWake called - NEW VERSION")
         wakeSheetIsFinal = true
         showWakeSheet = true
     }
     
     private func logAlarmWake(_ night: DoseLog) {
+        print("🔵 logAlarmWake called - NEW VERSION")
         wakeSheetIsFinal = false
         showWakeSheet = true
     }
     
     private func logNaturalWake(_ night: DoseLog) {
+        print("🔵 logNaturalWake called - NEW VERSION")
         night.finalWakeTimeUTC = Date()
         night.finalWakeReason = WakeReason.natural.rawValue
         
@@ -802,6 +806,7 @@ struct NightCardViewModern: View {
     }
     
     private func logBathroom(_ night: DoseLog) {
+        print("🔵 logBathroom called - NEW VERSION")
         // Log bathroom event (non-final wake)
         // TODO: Add to events array when implemented
         UINotificationFeedbackGenerator().notificationOccurred(.success)
@@ -809,6 +814,7 @@ struct NightCardViewModern: View {
     }
     
     private func resetNight(_ night: DoseLog) {
+        print("🔵 resetNight called - NEW VERSION")
         showResetNightSheet = true
     }
 }
