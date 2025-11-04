@@ -119,16 +119,16 @@ extension Array {
 
 #Preview("Primary Buttons") {
     VStack(spacing: 12) {
-        PrimaryActionButton(title: "In bed", icon: "moon.fill", action: { })
-        PrimaryActionButton(title: "Dose 1", icon: "pills.fill", action: { })
-        PrimaryActionButton(
+        PrimaryButton(title: "In bed", icon: "moon.fill", action: { })
+        PrimaryButton(title: "Dose 1", icon: "pills.fill", action: { })
+        PrimaryButton(
             title: "Dose 2",
             icon: "pills.circle.fill",
             action: { },
-            disabled: true,
+            enabled: false,
             caption: "Opens in 1h 17m (210–245 min after Dose 1)"
         )
-        PrimaryActionButton(title: "Final wake", icon: "sunrise.fill", action: { })
+        PrimaryButton(title: "Final wake", icon: "sunrise.fill", action: { })
     }
     .padding()
     .background(Palette.bg)
