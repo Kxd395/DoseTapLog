@@ -26,6 +26,10 @@
 	<string>DoseTrack needs access to read your sleep data to help track medication timing.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>DoseTrack needs to write sleep data to track your medication sessions.</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.dosetrack.cutoff.rollover</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
