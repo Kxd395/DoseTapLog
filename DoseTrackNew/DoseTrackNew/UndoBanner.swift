@@ -18,6 +18,7 @@ struct UndoBanner: View {
             Image(systemName: "arrow.uturn.backward.circle.fill")
                 .font(.title2)
                 .foregroundStyle(.orange)
+                .accessibilityHidden(true)
             
             // Message
             VStack(alignment: .leading, spacing: 2) {
@@ -27,6 +28,8 @@ struct UndoBanner: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Logged \(actionName). Undo available for \(secondsRemaining) seconds")
             
             Spacer()
             
@@ -42,6 +45,8 @@ struct UndoBanner: View {
                             .fill(.orange)
                     )
             }
+            .accessibilityLabel("Undo")
+            .accessibilityHint("Restores the previous state before logging \(actionName)")
         }
         .padding(DT.md)
         .background(
@@ -50,6 +55,7 @@ struct UndoBanner: View {
                 .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
         )
         .padding(.horizontal, DT.gap)
+        .accessibilityElement(children: .contain)
     }
 }
 

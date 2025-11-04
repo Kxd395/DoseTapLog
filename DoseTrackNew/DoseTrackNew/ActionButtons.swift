@@ -27,6 +27,8 @@ struct SecondaryActionButton: View {
                 .foregroundStyle(tone)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(title)
+        .accessibilityHint("Tap to \(title.lowercased())")
     }
 }
 

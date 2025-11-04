@@ -46,6 +46,9 @@ struct PrimaryButton: View {
             }
             .buttonStyle(.plain)
             .disabled(!enabled)
+            .accessibilityLabel(title)
+            .accessibilityHint(enabled ? "Tap to \(title.lowercased())" : (caption ?? "Currently disabled"))
+            .accessibilityAddTraits(enabled ? [] : .isButton)
             
             // Show caption when disabled
             if !enabled, let caption = caption {
@@ -53,7 +56,7 @@ struct PrimaryButton: View {
                     .font(.footnote)
                     .foregroundStyle(Palette.dim)
                     .multilineTextAlignment(.center)
-                    .accessibilityHint(caption)
+                    .accessibilityHidden(true) // Already in button hint
             }
         }
     }
