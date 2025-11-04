@@ -16,8 +16,11 @@ struct NightCardViewModern: View {
     let modelContext: ModelContext
     
     @State private var showPlanEditor = false
-    @State private var showEarlyDoseSheet = false
-    @State private var showLateDoseSheet = false
+    @State private var showEarlyDose2Sheet = false
+    @State private var showLateDose2Sheet = false
+    @State private var showDose2BlockedSheet = false
+    @State private var showNeedDose1Sheet = false
+    @State private var showAlreadyLoggedSheet = false
     @State private var showWakeSheet = false
     
     private let prefs = AppPreferencesEnhanced.shared
@@ -59,6 +62,77 @@ struct NightCardViewModern: View {
         }
         .background(Palette.bg.ignoresSafeArea())
         .preferredColorScheme(.dark)
+        .sheet(isPresented: $showEarlyDose2Sheet) {
+            if let night = night, let d1 = night.dose1TimeUTC {
+                let gate = evaluateDose2Gate(
+                    now: Date(),
+                    dose1At: d1,
+                    dose2At: night.dose2TimeUTC,
+                    policy: Dose2Policy.from(prefs)
+                )
+                if case .tooEarly(let minutes) = gate {
+                    EarlyDose2Sheet(
+                        minutesEarly: minutes,
+                        policy: Dose2Policy.from(prefs),
+                        onConfirm: { override in
+                            logDose2WithOverride(night, override: override)
+                            showEarlyDose2Sheet = false
+                        },
+                        onRemindAtStart: {
+                            scheduleWindowStartReminder()
+                        }
+                    )
+                }
+            }
+        }
+        .sheet(isPresented: $showLateDose2Sheet) {
+            if let night = night, let d1 = night.dose1TimeUTC {
+                let gate = evaluateDose2Gate(
+                    now: Date(),
+                    dose1At: d1,
+                    dose2At: night.dose2TimeUTC,
+                    policy: Dose2Policy.from(prefs)
+                )
+                if case .tooLate(let minutes) = gate {
+                    LateDose2Sheet(
+                        minutesLate: minutes,
+                        policy: Dose2Policy.from(prefs),
+                        onConfirm: { override in
+                            logDose2WithOverride(night, override: override)
+                            showLateDose2Sheet = false
+                        }
+                    )
+                }
+            }
+        }
+        .sheet(isPresented: $showDose2BlockedSheet) {
+            if let night = night, let d1 = night.dose1TimeUTC {
+                let gate = evaluateDose2Gate(
+                    now: Date(),
+                    dose1At: d1,
+                    dose2At: night.dose2TimeUTC,
+                    policy: Dose2Policy.from(prefs)
+                )
+                Dose2BlockedSheet(
+                    gate: gate,
+                    policy: Dose2Policy.from(prefs),
+                    onNotifyMe: {
+                        scheduleWindowStartReminder()
+                    }
+                )
+            }
+        }
+        .sheet(isPresented: $showNeedDose1Sheet) {
+            NeedDose1Sheet()
+        }
+        .sheet(isPresented: $showAlreadyLoggedSheet) {
+            if let night = night, let dose2Time = night.dose2TimeUTC {
+                AlreadyLoggedSheet(
+                    dose2Time: dose2Time,
+                    dose2Grams: night.dose2Grams ?? 0
+                )
+            }
+        }
     }
     
     // MARK: - Header
@@ -527,8 +601,109 @@ struct NightCardViewModern: View {
         print("Log Dose 1")
     }
     
+    // MARK: - Dose 2 Gate Logic
+    
     private func tryLogDose2(_ night: DoseLog) {
-        print("Try log Dose 2")
+        let policy = Dose2Policy.from(prefs)
+        let gate = evaluateDose2Gate(
+            now: Date(),
+            dose1At: night.dose1TimeUTC,
+            dose2At: night.dose2TimeUTC,
+            policy: policy
+        )
+        
+        switch gate {
+        case .ready:
+            // Log immediately (within window)
+            logDose2Now(night)
+            
+        case .needDose1:
+            showNeedDose1Sheet = true
+            
+        case .alreadyLogged:
+            showAlreadyLoggedSheet = true
+            
+        case .tooEarly(let minutes):
+            if isOverrideAllowed(gate: gate, policy: policy) {
+                // Show early override sheet
+                showEarlyDose2Sheet = true
+            } else {
+                // Blocked - too early beyond limit
+                showDose2BlockedSheet = true
+            }
+            
+        case .tooLate(let minutes):
+            if isOverrideAllowed(gate: gate, policy: policy) {
+                // Show late override sheet
+                showLateDose2Sheet = true
+            } else {
+                // Blocked - too late beyond limit
+                showDose2BlockedSheet = true
+            }
+        }
+    }
+    
+    /// Log Dose 2 immediately (no override)
+    private func logDose2Now(_ night: DoseLog) {
+        night.dose2TimeUTC = Date()
+        night.dose2Grams = prefs.planDose2G
+        night.dose2IsOverride = false
+        
+        do {
+            try modelContext.save()
+            
+            // Success haptic
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            
+            print("✅ Logged Dose 2: \(night.dose2Grams ?? 0)g")
+            
+            // Cancel any scheduled window start notifications
+            NotificationHelper.shared.cancelWindowStartReminder()
+            
+        } catch {
+            print("❌ Failed to log Dose 2: \(error)")
+        }
+    }
+    
+    /// Log Dose 2 with override (early/late)
+    private func logDose2WithOverride(_ night: DoseLog, override: Dose2Override) {
+        night.dose2TimeUTC = Date()
+        night.dose2Grams = prefs.planDose2G
+        night.dose2IsOverride = true
+        night.dose2OverrideKind = override.kind.rawValue
+        night.dose2OverrideMinutes = override.minutes
+        night.dose2OverrideReason = override.reason
+        
+        do {
+            try modelContext.save()
+            
+            // Heavy impact haptic for overrides
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            
+            print("⚠️ Logged Dose 2 with \(override.kind.rawValue) override: \(override.minutes)m, reason: \(override.reason)")
+            
+            // Cancel notifications
+            NotificationHelper.shared.cancelWindowStartReminder()
+            
+        } catch {
+            print("❌ Failed to log Dose 2 override: \(error)")
+        }
+    }
+    
+    /// Schedule notification for window start
+    private func scheduleWindowStartReminder() {
+        guard let night = night, let d1 = night.dose1TimeUTC else { return }
+        
+        let windowStartTime = d1.addingTimeInterval(Double(prefs.windowStartMin * 60))
+        
+        Task {
+            let success = await NotificationHelper.shared.scheduleWindowStartReminder(at: windowStartTime)
+            if success {
+                print("✅ Scheduled window start reminder for \(windowStartTime)")
+            } else {
+                print("❌ Failed to schedule window start reminder")
+            }
+        }
     }
     
     private func logFinalWake(_ night: DoseLog) {
