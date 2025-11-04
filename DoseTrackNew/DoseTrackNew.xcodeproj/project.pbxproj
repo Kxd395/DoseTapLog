@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65E3703E5B444936A8B30538 /* Dose2OverrideSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */; };
 		8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */; };
 		8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCF2EB944A2008532AA /* WindowBar.swift */; };
 		8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2OverrideSheet.swift; sourceTree = "<group>"; };
 		8089AFCA2EB944A2008532AA /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
 		8089AFCB2EB944A2008532AA /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
 		8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightCardViewModern.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		D0000002 /* DoseTrackNew */ = {
 			isa = PBXGroup;
 			children = (
+				2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */,
 				8089AFDC2EB94764008532AA /* WeeklySchedule.swift */,
 				8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */,
 				8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */,
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E3703E5B444936A8B30538 /* Dose2OverrideSheet.swift in Sources */,
 				A0000001 /* DoseTrackApp.swift in Sources */,
 				A0000002 /* Models.swift in Sources */,
 				A0000003 /* Config.swift in Sources */,

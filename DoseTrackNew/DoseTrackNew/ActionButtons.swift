@@ -45,6 +45,7 @@ struct ActionGrid: View {
         var disabled: Bool = false
         var tone: Color = Palette.text
         var caption: String? = nil
+        var longPressAction: (() -> Void)? = nil  // Optional long-press handler
     }
     
     var body: some View {
@@ -59,7 +60,8 @@ struct ActionGrid: View {
                                 icon: first.icon,
                                 action: first.action,
                                 enabled: !first.disabled,
-                                caption: first.caption
+                                caption: first.caption,
+                                longPressAction: first.longPressAction
                             )
                         }
                         if let second = primaryActions[safe: row * 2 + 1] {
@@ -68,7 +70,8 @@ struct ActionGrid: View {
                                 icon: second.icon,
                                 action: second.action,
                                 enabled: !second.disabled,
-                                caption: second.caption
+                                caption: second.caption,
+                                longPressAction: second.longPressAction
                             )
                         }
                     }

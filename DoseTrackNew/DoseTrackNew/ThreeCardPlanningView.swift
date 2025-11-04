@@ -12,7 +12,7 @@ struct ThreeCardPlanningView: View {
     @State private var showTimeZoneRebasePrompt = false
     @State private var lastRefreshDate = Date()
     
-    private let prefs = AppPreferencesEnhanced.shared
+    @StateObject private var prefs = AppPreferencesEnhanced.shared
     private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -20,8 +20,13 @@ struct ThreeCardPlanningView: View {
             VStack(spacing: 0) {
                 // Title row with settings gear
                 HStack {
-                    Text("DoseTrack")
-                        .font(.largeTitle.bold())
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("DoseTrack")
+                            .font(.largeTitle.bold())
+                        Text("Build 1.1.2")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
                     Spacer()
                     Button {
                         showSettings = true

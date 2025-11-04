@@ -18,7 +18,7 @@ struct EarlyDose2Sheet: View {
     @State private var customReason: String = ""
     @State private var timePriorMinutes: Int = 0  // 0 = Now
     
-    private let prefs = AppPreferencesEnhanced.shared
+    @StateObject private var prefs = AppPreferencesEnhanced.shared
     
     var body: some View {
         NavigationStack {

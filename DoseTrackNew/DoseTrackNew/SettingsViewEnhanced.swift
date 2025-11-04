@@ -33,7 +33,7 @@ struct SettingsViewEnhanced: View {
     @AppStorage("plan_window_end_min", store: suite) 
     private var windowEndMin: Int = 240
     
-    @AppStorage("early_allow", store: suite) 
+    @AppStorage("early_allow_dose_2", store: suite) 
     private var allowEarlyDose: Bool = false
     
     @AppStorage("early_max_minutes", store: suite) 
@@ -151,8 +151,17 @@ struct SettingsViewEnhanced: View {
                     
                     Toggle("Allow editing tonight's plan", isOn: $allowTonightEdit)
                     
-                    // Live preview
-                    let (d1, d2) = prefs.calculateDoses()
+                    // Live preview (calculate directly from local @AppStorage values)
+                    let splitFraction: (first: Double, second: Double) = {
+                        switch splitStrategy {
+                        case "60/40": return (0.6, 0.4)
+                        case "40/60": return (0.4, 0.6)
+                        default: return (0.5, 0.5)
+                        }
+                    }()
+                    let d1 = AppPreferencesEnhanced.round(totalNightGrams * splitFraction.first, step: roundingStepG)
+                    let d2 = AppPreferencesEnhanced.round(totalNightGrams * splitFraction.second, step: roundingStepG)
+                    
                     HStack {
                         Text("Tonight's plan")
                         Spacer()
@@ -160,7 +169,13 @@ struct SettingsViewEnhanced: View {
                             .foregroundStyle(.secondary)
                     }
                     
-                    if prefs.planViolatesSafety {
+                    let perDoseMin = 1.5, perDoseMax = 4.5
+                    let nightlyMin = 3.0, nightlyMax = 9.0
+                    let violatesSafety = d1 < perDoseMin || d1 > perDoseMax ||
+                                        d2 < perDoseMin || d2 > perDoseMax ||
+                                        totalNightGrams < nightlyMin || totalNightGrams > nightlyMax
+                    
+                    if violatesSafety {
                         Label("Plan violates safety guardrails", systemImage: "exclamationmark.triangle.fill")
                             .foregroundStyle(.red)
                     }

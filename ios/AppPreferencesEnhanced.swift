@@ -7,34 +7,49 @@
 //
 
 import SwiftUI
+import Combine
 
 /// AppPreferences: Single source of truth for all user preferences.
 /// Uses @AppStorage with App Group UserDefaults for automatic persistence and widget/extension access.
-/// Note: @AppStorage already provides SwiftUI reactivity, so @Observable is not needed (and causes conflicts)
-final class AppPreferencesEnhanced {
+/// ObservableObject allows views to reactively observe changes from any source (Settings, widgets, etc.)
+final class AppPreferencesEnhanced: ObservableObject {
     static let shared = AppPreferencesEnhanced()
     private static let suite = UserDefaults(suiteName: "group.com.jefferson.dosetrack")!
     private static let legacyKey = "AppPreferences.v1"
     
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Night Plan Defaults
     
     @AppStorage("plan_total_night_grams", store: suite) 
-    var totalNightGrams: Double = 6.5
+    var totalNightGrams: Double = 6.5 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_split_strategy", store: suite) 
-    var splitStrategy: String = "50/50" // "50/50", "60/40", "40/60"
+    var splitStrategy: String = "50/50" {
+        didSet { objectWillChange.send() }
+    } // "50/50", "60/40", "40/60"
     
     @AppStorage("plan_rounding_step_g", store: suite) 
-    var roundingStepG: Double = 0.25
+    var roundingStepG: Double = 0.25 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_window_start_min", store: suite) 
-    var windowStartMin: Int = 150
+    var windowStartMin: Int = 150 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_window_end_min", store: suite) 
-    var windowEndMin: Int = 240
+    var windowEndMin: Int = 240 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_allow_tonight_edit", store: suite) 
-    var allowTonightEdit: Bool = true
+    var allowTonightEdit: Bool = true {
+        didSet { objectWillChange.send() }
+    }
     
     // MARK: - Service-Day Cutoff & Planning Horizon
     
@@ -86,6 +101,42 @@ final class AppPreferencesEnhanced {
     
     @AppStorage("late_dose_quick_choices", store: suite)
     var lateQuickChoicesCSV: String = "5,10,15,30"
+    
+    // MARK: - Hard No-Wake Guard (NEW)
+    
+    @AppStorage("guard_workday_buffer_min", store: suite)
+    var workdayNoWakeBufferMin: Int = 180 // 3 hours default
+    
+    @AppStorage("guard_offday_buffer_min", store: suite)
+    var offdayNoWakeBufferMin: Int = 120 // 2 hours default
+    
+    @AppStorage("guard_allow_override", store: suite)
+    var allowGuardOverride: Bool = true
+    
+    @AppStorage("guard_require_reason", store: suite)
+    var guardRequireReason: Bool = true
+    
+    // MARK: - Soft-Wake Dose 2 Alarms (NEW)
+    
+    @AppStorage("dose2_alarm_enabled", store: suite)
+    var dose2AlarmEnabled: Bool = true
+    
+    @AppStorage("dose2_alarm_style_raw", store: suite)
+    var dose2AlarmStyleRaw: String = "soft" // "off", "banner", "soft", "strong"
+    
+    var dose2AlarmStyle: Dose2AlarmStyle {
+        get { Dose2AlarmStyle(rawValue: dose2AlarmStyleRaw) ?? .soft }
+        set { dose2AlarmStyleRaw = newValue.rawValue }
+    }
+    
+    @AppStorage("dose2_break_quiet_hours", store: suite)
+    var breakQuietHoursForDose2: Bool = false
+    
+    @AppStorage("dose2_mid_ping_enabled", store: suite)
+    var dose2MidPingEnabled: Bool = false
+    
+    @AppStorage("dose2_snooze_options", store: suite)
+    var dose2SnoozeOptionsCSV: String = "5,10,15" // minutes
     
     // MARK: - Notifications & Live Activity
     

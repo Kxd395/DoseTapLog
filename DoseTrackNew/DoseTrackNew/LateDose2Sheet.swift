@@ -17,7 +17,7 @@ struct LateDose2Sheet: View {
     @State private var selectedReason: Dose2LateReason = .other
     @State private var customReason: String = ""
     
-    private let prefs = AppPreferencesEnhanced.shared
+    @StateObject private var prefs = AppPreferencesEnhanced.shared
     
     var body: some View {
         NavigationStack {

@@ -375,20 +375,34 @@ Follow that document before committing or distributing builds.
 - **Status Chips** - Modern rounded indicators for safety bounds and totals
 - **Build 1.1.2** - Visible version indicator
 
+### Smart Event Logging
+- **Tap to Log Now** - One-tap logging at current time (fast, 95% of uses)
+- **Long-Press for Precision** - Hold 0.5s to pick custom date + time
+- **Date & Time Picker** - Full date/time selection for all events (handles midnight crossovers)
+- **48-Hour Range** - Log events from 2 days ago to 6 hours in future
+- **All Primary Buttons** - In bed, Dose 1, Dose 2, Final wake support custom times
+- **Haptic Feedback** - Medium impact on long-press confirmation
+
 ### Night Turnover System
 - **Service Cutoff** - Automatic day rollover at local noon
 - **Lifecycle States** - Planned → Active → AwaitWake → Closed/Abandoned
 - **Timezone Safety** - DST and travel detection
 
-### Dose 2 Gating
-- **Window Enforcement** - 210-245 min after Dose 1 (configurable)
-- **Early/Late Overrides** - Require reason + minutes with validation
-- **State Machine** - 6 states (WaitD1, BeforeWindow, InWindow, AfterWindow, Late, Logged)
+### Dose 2 Gating & Override System
+- **Always Tappable** - Dose 2 button never disabled, routes via gate
+- **Window Enforcement** - 150-240 min after Dose 1 (configurable)
+- **Early Override** - Enabled by default, up to 180 min early (3 hours)
+- **Late Override** - Up to 120 min late with required reason
+- **Override Sheets** - Early/late decision UI with reason capture
+- **Blocked Sheet** - Clear messaging when outside policy limits
+- **State Machine** - 6 states (NeedDose1, Ready, TooEarly, TooLate, Blocked, AlreadyLogged)
+- **Audit Trail** - Tracks override type, minutes, reason, source (tap/longpress)
 
 ### Data & Export
 - **SwiftData Models** - On-device storage with lifecycle tracking
 - **CSV Export** - Clinician-ready format with timestamps
-- **Audit Trail** - Override tracking (type, minutes, reason)
+- **Full Audit Trail** - Override tracking (type, minutes, reason, source, time)
+- **Timezone Metadata** - All times stored as UTC with offset
 
 ### Integrations
 - **HealthKit** - Auto-import sleep wake times

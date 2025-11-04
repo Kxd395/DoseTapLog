@@ -16,6 +16,7 @@ struct PrimaryButton: View {
     let action: () -> Void
     var enabled: Bool = true
     var caption: String? = nil
+    var longPressAction: (() -> Void)? = nil  // Optional long-press handler
     
     var body: some View {
         VStack(spacing: 4) {
@@ -46,8 +47,18 @@ struct PrimaryButton: View {
             }
             .buttonStyle(.plain)
             .disabled(!enabled)
+            .simultaneousGesture(
+                // Add long-press gesture if handler provided
+                longPressAction != nil ? LongPressGesture(minimumDuration: 0.5)
+                    .onEnded { _ in
+                        if enabled {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                            longPressAction?()
+                        }
+                    } : nil
+            )
             .accessibilityLabel(title)
-            .accessibilityHint(enabled ? "Tap to \(title.lowercased())" : (caption ?? "Currently disabled"))
+            .accessibilityHint(enabled ? (longPressAction != nil ? "Tap to \(title.lowercased()), or press and hold to choose time" : "Tap to \(title.lowercased())") : (caption ?? "Currently disabled"))
             .accessibilityAddTraits(enabled ? [] : .isButton)
             
             // Show caption when disabled

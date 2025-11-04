@@ -7,34 +7,49 @@
 //
 
 import SwiftUI
+import Combine
 
 /// AppPreferences: Single source of truth for all user preferences.
 /// Uses @AppStorage with App Group UserDefaults for automatic persistence and widget/extension access.
-/// Note: @AppStorage already provides SwiftUI reactivity, so @Observable is not needed (and causes conflicts)
-final class AppPreferencesEnhanced {
+/// ObservableObject allows views to reactively observe changes from any source (Settings, widgets, etc.)
+final class AppPreferencesEnhanced: ObservableObject {
     static let shared = AppPreferencesEnhanced()
     private static let suite = UserDefaults(suiteName: "group.com.jefferson.dosetrack")!
     private static let legacyKey = "AppPreferences.v1"
     
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Night Plan Defaults
     
     @AppStorage("plan_total_night_grams", store: suite) 
-    var totalNightGrams: Double = 6.5
+    var totalNightGrams: Double = 6.5 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_split_strategy", store: suite) 
-    var splitStrategy: String = "50/50" // "50/50", "60/40", "40/60"
+    var splitStrategy: String = "50/50" {
+        didSet { objectWillChange.send() }
+    } // "50/50", "60/40", "40/60"
     
     @AppStorage("plan_rounding_step_g", store: suite) 
-    var roundingStepG: Double = 0.25
+    var roundingStepG: Double = 0.25 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_window_start_min", store: suite) 
-    var windowStartMin: Int = 150
+    var windowStartMin: Int = 150 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_window_end_min", store: suite) 
-    var windowEndMin: Int = 240
+    var windowEndMin: Int = 240 {
+        didSet { objectWillChange.send() }
+    }
     
     @AppStorage("plan_allow_tonight_edit", store: suite) 
-    var allowTonightEdit: Bool = true
+    var allowTonightEdit: Bool = true {
+        didSet { objectWillChange.send() }
+    }
     
     // MARK: - Service-Day Cutoff & Planning Horizon
     
@@ -62,10 +77,10 @@ final class AppPreferencesEnhanced {
     // MARK: - Early Dose 2 Policy
     
     @AppStorage("early_allow_dose_2", store: suite) 
-    var allowEarlyDose: Bool = false
+    var allowEarlyDose: Bool = true  // Changed to true by default
     
     @AppStorage("early_max_minutes", store: suite) 
-    var maxEarlyMinutes: Int = 15
+    var maxEarlyMinutes: Int = 180  // Increased from 15 to 180 minutes (3 hours)
     
     @AppStorage("early_require_reason", store: suite) 
     var requireEarlyReason: Bool = true
@@ -270,8 +285,8 @@ final class AppPreferencesEnhanced {
         windowEndMin = 240
         allowTonightEdit = true
         
-        allowEarlyDose = false
-        maxEarlyMinutes = 15
+        allowEarlyDose = true  // Allow early by default
+        maxEarlyMinutes = 180  // 3 hours max early
         requireEarlyReason = true
         earlyTimePriorDefaults = "5,10"
         

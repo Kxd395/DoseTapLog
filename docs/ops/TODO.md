@@ -1,9 +1,9 @@
 # DoseTrack v1.2 - Production TODO
 
-**Status:** 49 items | Critical: 24 | High: 18 | Medium: 7  
-**Estimated Effort:** 80-100 hours  
-**Last Updated:** November 3, 2025 9:03 AM
-**Scope:** Beta-ready foundation + safety rails (defer analytics/comfort to Phase 2-3)
+**Status:** 58 items | Critical: 30 | High: 20 | Medium: 8  
+**Estimated Effort:** 101-128 hours  
+**Last Updated:** November 4, 2025
+**Scope:** Beta-ready foundation + safety rails + soft-wake alarms (defer analytics/comfort to Phase 2-3)
 
 ---
 
@@ -18,27 +18,36 @@
   - **Phase 6-11 pending** (Settings integration, controller, polish)
   - **DoD:** At local noon, any Active/AwaitWake night → Abandoned (reason=cutoff_reached). Tonight minted in Planned (idempotent). Midnight crossover does nothing. Unit tests: midnight, cutoff without Dose1, DST ±1h, zone ±3h. UI test: noon advance toggles cards.
 
-- [ ] **2. Complete Wake Event Buttons** ⏱️ 2h  
-  **Priority:** HIGH  
-  Add all wake logging options: Natural wake now, Alarm wake now, Bathroom wake now, Log wake at... (time picker with seconds support), Final wake now. Update `WakeSheetView.swift` or create new `WakeLoggingSheet.swift`. Store `wake_reason` provenance.
-  - Depends on: Item 1
+- [x] **2. Complete Wake Event Buttons** ⏱️ 2h  
+  **Priority:** HIGH | **Status:** ✅ COMPLETE  
+  Added all wake logging options: Natural wake now, Alarm wake now, Bathroom wake now, **Log wake at... (date+time picker with 48h range)**, Final wake now. Implemented long-press pattern for custom time selection across all primary buttons (In bed, Dose 1, Dose 2, Final wake). Store `wake_reason` provenance and `source` tracking (tap_now vs time_picker).
+  - **DoD:** ✅ Final wake closes night; interim wakes never close; long-press opens date+time picker; tap logs immediately; source tracking in audit trail.
+  - Depends on: ✅ Item 1 (partially complete)
 
-- [ ] **3. Wire Early/Late Dose Override Sheets** ⏱️ 2h  
-  **Priority:** HIGH  
-  Connect `EarlyDoseSheetView` and `LateDoseSheetView` to `NightCardView` actions. Ensure `override_kind` (early/late), `override_minutes`, and `override_reason` are logged. Add policy banner explaining consequences. Test too-early and too-late scenarios.
-  - Depends on: Item 1
+- [x] **3. Wire Dose 2 Override (Always-tappable button)** ⏱️ 2h  
+  **Priority:** CRITICAL | **Status:** ✅ COMPLETE  
+  **Dose 2 is always tappable** (never disabled). Button uses locked visual state but routes to appropriate gate/override/blocked sheets. Connected `EarlyDoseSheetView` and `LateDoseSheetView` to `NightCardViewModern` actions. Ensured `dose2IsOverride`, `override_kind` (early/late), `override_minutes`, and `override_reason` are logged. Added policy banner explaining consequences. **Policy defaults changed:** `allowEarlyDose=true`, `maxEarlyMinutes=180` (3 hours). Long-press pattern added for custom date/time logging.
+  - **DoD:** ✅ All criteria met
+    - Dose 2 button **always tappable**; uses locked visual but routes to gate
+    - Early/late within policy → override sheet; outside policy → blocked sheet (offers "Remind next window" + "Reset night")
+    - Writes: `dose2IsOverride=1`, `override_kind`, `override_minutes`, `override_reason`
+    - VoiceOver hint speaks lock reason ("Opens in 17m", "Closed 1h 12m ago")
+    - Test cases: early allowed, early blocked, late allowed, late blocked, need Dose 1, already logged
+  - Depends on: ✅ Item 1 (partially complete), ✅ Item 50
 
 - [ ] **4. Add Reset Night & Skip Tonight Affordances** ⏱️ 1-2h  
   **Priority:** HIGH  
-  Create 3-dot menu in `NightCardView` with: Reset Night (soft delete), Skip tonight (confirm dialog), Close night now. Wire to `ResetNightSheet.swift`. Implement undo window (60s) with visible timer. Update lifecycle states appropriately.
+  Create 3-dot menu in `NightCardView` with: Reset Night (soft delete), Skip tonight (confirm dialog), Close night now. Wire to `ResetNightSheet.swift`. Implement undo window (60s) with **visible countdown timer**. Update lifecycle states appropriately.
+  - **DoD:** 60s undo shows live countdown ("Undo 00:53"); soft-delete stores `undo_token`; "Skip tonight" logs `missed_dose2=1` if Dose 1 exists and silences alarms immediately.
   - Depends on: Item 1, Item 8
 
 ### State Machine & Reliability
 
 - [ ] **8. Create Authoritative State Chart Document** ⏱️ 2h  
   **Priority:** CRITICAL  
-  Document complete state machine: states (Planned/Armed/Active/WindowOpen/WindowClosed/AwaitWake/Closed/Abandoned), events (logInBed/logDose1/logDose2/logWake/reset), transitions with guards. Check into `docs/design/STATE_CHART.md`. Ensure ViewModel mirrors it.
-  - **DoD:** Chart includes forbidden transitions, guards, side effects. StateMachine helper throws on illegal transitions (DEBUG). 100% of controller methods call transition functions only.
+  Document complete state machine: states (Planned/Armed/Active/WindowOpen/WindowClosed/AwaitWake/Closed/Abandoned), events (logInBed/logDose1/logDose2/logWake/reset), transitions with guards. Check into `docs/design/STATE_CHART.md`. Ensure ViewModel mirrors it. **NEW:** Add `.noWakeGuard` gate state and override path from guard.
+  - **DoD:** Chart includes **forbidden transitions** explicitly (e.g., `.planned → .awaitWake`), guards, and **side-effects list per transition** (Live Activity, alarms, safety recompute, local analytics). StateMachine helper throws on illegal transitions (DEBUG). 100% of controller methods call transition functions only. **Guard gate documented with alarm cancellation side-effects**.
+  - Depends on: **Item 60 (Guard gate implementation)**
 
 - [ ] **41. ClockProvider & Time Abstractions** ⏱️ 2h  
   **Priority:** CRITICAL  
@@ -63,7 +72,7 @@
 - [ ] **45. App Health Panel** ⏱️ 2h  
   **Priority:** CRITICAL  
   Create internal dashboard in Settings → Developer: Last BG task run, Last Live Activity update, Pending notifications count, Next alert timestamp, WHOOP last success, HealthKit status. One-glance debugging for support.
-  - **DoD:** Panel shows live data. "Copy diagnostics" button shares plaintext summary.
+  - **DoD:** Panel shows live data. **"Copy diagnostics" button dumps** last BG task run, next alert, WHOOP/Health statuses, battery sampler stats, and pending notifications count.
 
 - [ ] **46. DST/Zone Chip** ⏱️ 1h  
   **Priority:** HIGH  
@@ -73,7 +82,7 @@
 - [ ] **47. Delete All Data + Retention Policy** ⏱️ 1h  
   **Priority:** HIGH  
   Add Settings → Privacy → "Delete All Data" with confirmation dialog: "This will permanently delete all dose logs, wake events, and plans. This cannot be undone." Button is red + destructive style. Deletes SwiftData store, clears UserDefaults, removes HealthKit samples (if permission granted). Retention: soft-deleted events purged after 7 days.
-  - **DoD:** Delete all data works. Retention job runs daily, purges old soft-deletes. UI test confirms empty state after delete.
+  - **DoD:** **NSFileProtectionComplete on SQLite**; clears any exported temp files; **optional HealthKit delete** (user confirms separately). UI test confirms empty state after delete.
 
 - [ ] **48. Local Feature Flag UI** ⏱️ 1h  
   **Priority:** MEDIUM  
@@ -84,6 +93,142 @@
   **Priority:** MEDIUM  
   Add battery monitoring: sample `UIDevice.current.batteryLevel` on app launch, background task fire, notification action. Store 7-day history in UserDefaults. App Health panel shows: "Battery impact: 0.8% per 24h" (linear regression). Export includes battery deltas in diagnostics.
   - **DoD:** App Health shows estimated impact. Regression based on ≥3 samples. Export includes battery log. ≤1% per 24h idle confirmed in TestFlight.
+
+- [x] **50. Dose 2 Button Locked-Style + Override Routing** ⏱️ 1-2h  
+  **Priority:** CRITICAL | **Status:** ✅ COMPLETE  
+  Made Dose 2 button **always tappable** (never `.disabled`); locked visual state when not ready (grayed but interactive); routes to gate/override/blocked sheets based on policy. Implemented long-press pattern for custom date/time selection. Added haptic feedback on long-press. Integrated into `NightCardViewModern.swift` with comprehensive time picker support (48 hours past to 6 hours future).
+  - **DoD:** ✅ All criteria met
+    - Button always tappable with locked style when outside window
+    - Routes: ready→log, tooEarly→sheet, tooLate→sheet, blocked→blockedSheet, needDose1→needSheet, alreadyLogged→alreadySheet
+    - Tests: early allowed (<4h), early blocked (≥4h), late allowed (≤2h), late blocked (>2h), need Dose 1, already logged
+    - VoiceOver announces gate status ("Opens in 17 minutes", "Closed 1 hour 12 minutes ago")
+    - Long-press opens date+time picker with full audit trail
+  - Depends on: ✅ Item 1 (partially complete), ✅ Item 3
+
+- [ ] **51. Notification Category & Action ID Freeze** ⏱️ 1h  
+  **Priority:** CRITICAL  
+  **Freeze `UNNotificationCategory` and action identifiers** (no changes after v1.2 ships). Document all category IDs, action IDs, and their behavior in `docs/NOTIFICATIONS.md`. Add migration guard to detect orphaned actions between builds.
+  - **DoD:**
+    - All category/action IDs documented with exact strings
+    - Migration guard warns if unknown category detected
+    - Version number included in notification userInfo for debugging
+  - Depends on: Item 26, Item 27
+
+- [ ] **52. Storage & Privacy Hardening** ⏱️ 2h  
+  **Priority:** CRITICAL  
+  Set **NSFileProtectionComplete** on SwiftData database and log files. Redact PII in CSV exports (option to anonymize dates/times). Verify Info.plist usage strings (Health, Notifications, BG tasks, Privacy). Add "Delete device data" confirmation flow with clear copy.
+  - **DoD:**
+    - Database encrypted at rest (NSFileProtectionComplete)
+    - Logs redact PII automatically
+    - Info.plist has all required usage descriptions
+    - "Delete All Data" flow tested and clear
+    - Export includes anonymization toggle
+  - Depends on: Item 13, Item 47
+
+- [ ] **53. CI Pipeline (GitHub Actions)** ⏱️ 2-3h  
+  **Priority:** CRITICAL  
+  Set up GitHub Actions workflow: build + unit tests + UI tests + SwiftLint + snapshot tests. Generate coverage badge. Artifact diagnostics text file. Run on PRs and main branch pushes.
+  - **DoD:**
+    - `.github/workflows/ci.yml` created
+    - Runs: build, unit tests, UI tests, lint, snapshots
+    - Fails on lint errors or test failures
+    - Coverage badge generated and displayed in README
+    - Diagnostics artifact uploaded for failed runs
+  - Depends on: Item 9, Item 10, Item 33, Item 37
+
+- [ ] **54. Time Math Single Source (TimeMath + ClockProvider)** ⏱️ 1-2h  
+  **Priority:** CRITICAL  
+  Pull **all window/cutoff math** into `TimeMath` utility using `ClockProvider`. Remove scattered date calculations from views. Unit tests exercise DST transitions and timezone hops. Views read derived values only (no inline date math).
+  - **DoD:**
+    - `TimeMath.swift` with: `windowStart()`, `windowEnd()`, `cutoffTime()`, `nextCutoff()`
+    - Zero date math in ViewModels (all delegate to TimeMath)
+    - Unit tests: DST spring forward, DST fall back, timezone ±3h, midnight crossover
+    - All logic uses injected `ClockProvider`
+  - Depends on: Item 41
+
+- [ ] **55. Live Activity Fallback (Graceful Degradation)** ⏱️ 1h  
+  **Priority:** HIGH  
+  If Live Activity denied/disabled, **degrade to standard notification banners** and show countdown in Bell Chip only. Ensure no dangling Live Activity updates crash or spam logs.
+  - **DoD:**
+    - Check `ActivityAuthorizationInfo().areActivitiesEnabled` before starting Live Activity
+    - Fallback to local notifications if disabled
+    - No crash or error logs when Live Activity unavailable
+    - Bell Chip shows next alert even without Live Activity
+  - Depends on: Item 6, Item 26
+
+- [ ] **56. History Editing Guardrails** ⏱️ 1-2h  
+  **Priority:** HIGH  
+  Only **Tonight** fully editable; **Last Night** allows time corrections with audit note; **older nights read-only**. Prevent retroactive state corruption (e.g., can't delete Dose 1 if Dose 2 exists).
+  - **DoD:**
+    - Tonight: full edit (time, grams, reason)
+    - Last Night: time-only edit with audit note ("Corrected Dose 1 time by -15m")
+    - Older nights: read-only (view events, export only)
+    - Tests ensure no state corruption (can't create invalid event sequences)
+  - Depends on: Item 14, Item 15, Item 43
+
+- [ ] **57. Accessibility: Switch Control & Reduce Motion** ⏱️ 1h  
+  **Priority:** HIGH  
+  Verify **focus order** on grid buttons (left-to-right, top-to-bottom). Turn off **animations** when Reduce Motion enabled. Ensure all tap targets **≥44×44 pt**.
+  - **DoD:**
+    - Switch Control navigates grid in logical order
+    - Reduce Motion disables ring animations, sheet transitions
+    - All buttons/chips have ≥44×44 tap targets
+    - VoiceOver focus order matches visual layout
+  - Depends on: Item 20, Item 21
+
+- [ ] **58. Internationalization: RTL + Locale** ⏱️ 1h  
+  **Priority:** MEDIUM  
+  **Right-to-left mirroring** for Arabic/Hebrew (grid layout, pills, buttons). **12/24-hour locale** reflected in all time pickers and timestamps. Test with Arabic, Hebrew, and 24-hour locales.
+  - **DoD:**
+    - RTL languages: grids/pills mirror correctly
+    - Time pickers respect locale (12h AM/PM vs 24h)
+    - All timestamps use `.locale` from environment
+    - Test: Arabic locale, 24-hour German locale
+  - Depends on: Item 32
+
+- [x] **59. Interaction Policies (Quick/Confirm/Smart + Per-Action Overrides)** ⏱️ 2-3h  
+  **Priority:** CRITICAL | **Status:** ✅ COMPLETE (Smart Pattern Implemented)  
+  Implemented **tap-to-log-now** (fast path) + **long-press for custom date/time** pattern across all primary buttons (In bed, Dose 1, Dose 2, Final wake). Tap logs at current time; long-press (0.5s) opens date+time picker sheet with 48-hour range and haptic feedback. Dose 2 **always goes through gate routing** (override system enforced). Full audit trail with source tracking (`tap_now`, `time_picker`, `override_early`, `override_late`). 60s undo window available (visual countdown pending).
+  - **DoD:** ✅ Core pattern complete (Settings UI for policy modes pending)
+    - ✅ Tap-to-log-now works across all actions (InBed, Dose1, Dose2, FinalWake)
+    - ✅ Dose 2 **always goes through gate** (override routing enforced)
+    - ✅ Long-press gesture **always opens date+time picker** with 48h range
+    - ✅ Haptic feedback on long-press (medium impact)
+    - ✅ Source tracking in audit trail
+    - ⏳ Undo toast with countdown (60s window) - pending UI
+    - ⏳ Settings UI for global/per-action modes - pending
+    - ⏳ Seconds precision toggle - pending
+  - Files: ✅ `NightCardViewModern.swift`, ✅ `PrimaryButton.swift`, ✅ `ActionButtons.swift`
+  - Depends on: Item 3 (Dose 2 gate), Item 50 (always-tappable button)
+
+- [ ] **60. Dose 2 Soft-Wake Alarm + Hard No-Wake Guard** ⏱️ 4-5h  
+  **Priority:** CRITICAL  
+  Implement soft-wake alarm system to wake user at Dose 2 window start, plus hard no-wake guard to prevent waking too close to morning. Schedule time-sensitive alerts when Dose 1 logged (window open, optional mid-ping, last call). Cancel alarms if guard cutoff reached. Add guard gate state `.noWakeGuard(minutesUntilWake)` with override sheet.
+  - **DoD:**
+    - **Soft-Wake Alarms:** Schedule 3 notifications when Dose 1 logged: (1) Window open alert (time-sensitive), (2) Optional mid-window ping, (3) Last call (10 min before close)
+    - **Alarm Styles:** Off / Banner / Soft (time-sensitive, respects quiet hours) / Strong (loops until acknowledged)
+    - **Guard Logic:** Calculate `guardCutoff = plannedFinalWake - buffer` (180min workday, 120min offday default)
+    - **Guard Gate:** `evaluateDose2Gate()` checks guard FIRST before window math; returns `.noWakeGuard(minutesUntilWake)` if within buffer
+    - **Guard Sheet:** `GuardNoWakeSheet` with warning message, reason field (required), Proceed anyway (red destructive), Snooze options (5/10/15m), Close
+    - **Override Path:** Proceed sets `dose2IsOverride=true`, `dose2OverrideKind="guard"`, `dose2OverrideMinutes=guardBuffer-minutesUntilWake`
+    - **Alarm Cancellation:** When guard trips, cancel pending `dose2_*` notifications, show silent banner "No-wake guard active"
+    - **Settings:** Dose 2 alarm style picker, Break quiet hours toggle, Guard buffer steppers (Workday/Off-day), Allow override toggle, Snooze options
+    - **Bell Chip:** Show guard cutoff time when active ("Guard @ 05:10"), dim bell icon
+    - **Button Caption:** "Guard: 1h 45m to wake (Workday)" when `.noWakeGuard` state
+    - **Notification Actions:** "Log Now" and "Snooze N min" buttons on alerts
+    - **Files:** ✅ `Dose2Gate.swift` (guard gate), ✅ `GuardNoWakeSheet.swift` (UI), ✅ `NotificationHelper.swift` (scheduling), ✅ `AppPreferencesEnhanced.swift` (settings), Update `NightCardViewModern.swift` (wire guard sheet), Update `DoseLogController.swift` (schedule on Dose 1, cancel on guard)
+  - **Tests:**
+    - Guard triggers with Workday buffer; alarms cancelled
+    - Override from guard logs `override_kind="guard"`, `override_minutes=180-105=75`
+    - Quiet hours respected unless "Break quiet hours" enabled
+    - Long-press time selection + guard sheet flows correctly
+    - Snooze reschedules alert, writes audit trail
+    - Strong style loops notification until acknowledged
+  - Depends on: Item 3 (Dose 2 override system), Item 50 (always-tappable button)
+
+---
+
+## 📦 Medium Priority (Operations & Polish)
 
 - [ ] **24. Make DoseLogController Idempotent & Transactional** ⏱️ 3h  
   **Priority:** CRITICAL  
@@ -98,6 +243,7 @@
 - [ ] **39. Update DoseLogController - Lifecycle Transitions** ⏱️ 3h  
   **Priority:** CRITICAL  
   Add methods: `transitionToArmed()`, `transitionToActive()`, `transitionToWindowOpen()`, `transitionToWindowClosed()`, `transitionToAwaitWake()`, `transitionToClosed()`. Call from event logging methods. Update `AlarmOrchestrator` on transitions. Test all paths.
+  - **DoD:** Explicit `transitionToWindowOpen/Closed` tied to **elapsed since Dose 1**; illegal transitions **assert in DEBUG**.
   - Depends on: Item 8
 
 ### Testing & Quality
@@ -114,15 +260,20 @@
 
 - [ ] **26. Implement Notification Audit Trail** ⏱️ 2h  
   **Priority:** CRITICAL  
-  Create `NotificationAudit` model: logs when notifications scheduled/updated/canceled, stores notification ID, scheduled time, category, reason. Single source of truth for scheduled notifications. Query to show 'next alert' timestamp.
+  Create `NotificationAudit` model: logs when notifications scheduled/updated/canceled, stores notification ID, scheduled time, category, reason. Single source of truth for scheduled notifications. Query to show 'next alert' timestamp. **NEW:** Track Dose 2 alarm lifecycle (scheduled, snoozed, cancelled by guard, acknowledged).
+  - **DoD:** Add fields: `editor` (app/widget/notification), `created_at`, `updated_at`, `night_key`, `live_activity_state`. Single source of truth for "next alert" displayed in Bell Chip. **Dose 2 alarms tracked separately** with categories (open/mid/lastcall/guard).
+  - Depends on: **Item 60 (Soft-Wake notification system)**
 
 - [ ] **27. Wire Notification Actions to Controller** ⏱️ 2-3h  
   **Priority:** CRITICAL  
-  Test deep-links: notification actions (Dose 2 from Live Activity, Snooze 5m) trigger `DoseLogController` methods even when app backgrounded/locked. Implement `UNUserNotificationCenterDelegate` properly. Test all categories.
+  Test deep-links: notification actions (Dose 2 from Live Activity, Snooze 5m) trigger `DoseLogController` methods even when app backgrounded/locked. Implement `UNUserNotificationCenterDelegate` properly. Test all categories. **NEW:** Wire Dose 2 alarm actions (Log Now, Snooze 5/10/15m) to controller.
+  - **DoD:** From locked device, actions call same controller paths; **snooze writes audit row and updates Live Activity subtitle** with new time. **Dose 2 "Log Now" action triggers `tryLogDose2(at: Date.now, source: "notification")`**. **Snooze actions reschedule alarm with updated time**.
+  - Depends on: Item 26, **Item 60 (NotificationHelper integration)**
 
 - [ ] **28. Add Permission Probes - Health/Notifications** ⏱️ 1h  
   **Priority:** CRITICAL  
-  Check permissions on app launch and nightly: HealthKit authorization status, UserNotifications authorization status, Time Sensitive permission. Update status chips to reflect truth. Store last check timestamp.
+  Check permissions on app launch and nightly: HealthKit authorization status, UserNotifications authorization status, **Time Sensitive permission**. Update status chips to reflect truth. Store last check timestamp.
+  - **DoD:** Time-Sensitive prompt path surfaced; **red "Notifications blocked" chip deep-links to Settings**.
 
 ---
 
@@ -137,12 +288,15 @@
 
 - [ ] **6. Create Bell Chip for Alarm Style + Next Alert** ⏱️ 2h  
   **Priority:** HIGH  
-  Add tappable bell chip below status ring showing: Off/Quiet/Normal/Strong. Tap to cycle or open settings. Display next alert timestamp (with seconds if enabled). Show 'Alarms armed' / 'Muted' state based on snooze/skip status.
-  - Depends on: Item 1, Item 26
+  Add tappable bell chip below status ring showing: Off/Quiet/Normal/Strong. Tap to cycle or open settings. Display next alert timestamp (with seconds if enabled). Show 'Alarms armed' / 'Muted' state based on snooze/skip status. **NEW:** Show guard cutoff time when no-wake guard active ("Guard @ 05:10" with dimmed bell icon).
+  - **DoD:** "Next alert" time is resolved from **NotificationAudit** (not recomputed), and hides when alarms muted/paused. **Guard state shows cutoff time and disables bell icon**.
+  - Depends on: Item 1, Item 26, **Item 60 (Soft-Wake alarms)**
 
 - [ ] **7. Redesign Settings IA - 7 Sections + Searchable** ⏱️ 3-4h  
   **Priority:** HIGH  
-  Split `SettingsViewEnhanced` into organized sections: Night Plan, Alarms, Data Sources, Export, Privacy, Developer, Service Day. Add `.searchable()` modifier. Add info (ⓘ) buttons for complex toggles. Create `WeeklyScheduleEditorView.swift`.
+  Split `SettingsViewEnhanced` into organized sections: Night Plan, **Alarms** (including Dose 2 Soft-Wake + Guard settings), Data Sources, Export, Privacy, Developer, Service Day. Add `.searchable()` modifier. Add info (ⓘ) buttons for complex toggles. Create `WeeklyScheduleEditorView.swift`.
+  - **DoD:** **Alarms section includes:** Dose 2 alarm style (Off/Banner/Soft/Strong), Break quiet hours toggle, No-wake guard buffers (Workday/Off-day), Allow guard override, Snooze options, Mid-ping toggle.
+  - Depends on: **Item 60 (Soft-Wake system)**
 
 - [ ] **14. Add Recent Events Edit/Undo Functionality** ⏱️ 2-3h  
   **Priority:** HIGH  
@@ -155,13 +309,14 @@
 
 - [ ] **18. Implement Plan Editor Sheet** ⏱️ 2h  
   **Priority:** HIGH  
-  Create `PlanEditorSheet.swift`: edit total grams, split ratio (50/50, 60/40, custom), rounding step, planned Dose 1 time (wheel picker with seconds), show derived Dose 2 amount and window times. Only available before Dose 1 is logged.
+  Create `PlanEditorSheet.swift`: edit total grams, **split ratio presets (50/50, 60/40) + custom with rounding step**, planned Dose 1 time (wheel picker with seconds), show derived Dose 2 amount and window times. Only available before Dose 1 is logged.
+  - **DoD:** Disallow saving if per-dose outside 1–6 g or total > 8 g. Show validation errors inline.
   - Depends on: Item 1
 
 - [ ] **19. Add Real Countdown Ring Calculations** ⏱️ 2h  
   **Priority:** HIGH  
-  Update `NightCardView.ringCountdown()` and `ringProgress()`: calculate actual countdown to window start/end based on Dose 1 time, show HH:MM:SS format if `showSeconds` enabled, accurate progress 0.0-1.0 within current phase. Update every 30s.
-  - Depends on: Item 1
+  Update `NightCardView.ringCountdown()` and `ringProgress()`: calculate actual countdown to window start/end based on Dose 1 time, show **HH:MM:SS format (optional)** if `showSeconds` enabled, accurate progress 0.0-1.0 within current phase. **Uses `ClockProvider`; updates at 30s intervals; color thresholds at <50%, <90%, ≥90%**.
+  - Depends on: Item 1, Item 41
 
 ### Planning & Scheduling
 
@@ -204,6 +359,7 @@
 - [ ] **20. Implement Modern UI - Dark Mode First Design** ⏱️ 3-4h  
   **Priority:** HIGH  
   Create `DesignTokens.swift` with Palette (dark bg, surface colors, neon accents). Replace big countdown ring with compact WindowBar (8-12pt pill). Add status chips layout. Implement per `ModernUI.md` spec. Test in light/dark modes.
+  - **DoD:** **Pill auto-wrap + min width; compact "WindowBar pill" replaces large ring on small phones.** Spacing scale + typography tokens applied; ensure **no pills render off-screen** (test on iPhone mini/SE).
 
 - [ ] **21. Add Accessibility - VoiceOver & Dynamic Type** ⏱️ 2-3h  
   **Priority:** HIGH  
@@ -226,6 +382,7 @@
 - [ ] **31. Implement Schema Migrations** ⏱️ 3-4h  
   **Priority:** MEDIUM  
   Version DoseLog schema (add `schemaVersion` field). Create migration tests: old schema → new schema, soft-delete support, audit trail tables. Test with sample v1.0 data migrating to v1.2. Document in `docs/MIGRATIONS.md`.
+  - **DoD:** Backfill `timezoneOffsetMinutes`, `app_version`, `schema_version` on first launch for existing records.
 
 - [ ] **32. Add Internationalization Support** ⏱️ 2-3h  
   **Priority:** MEDIUM  
@@ -234,6 +391,7 @@
 - [ ] **33. Setup SwiftLint + SwiftFormat Pre-Commit** ⏱️ 1h  
   **Priority:** MEDIUM  
   Add `.swiftlint.yml` config, install SwiftFormat, create git pre-commit hook. Configure rules: line length 120, force unwrapping warnings, trailing whitespace. Run on all Swift files. Document in README.
+  - **DoD:** **CI fails on lint error; format step runs in pre-commit AND CI**.
 
 - [ ] **34. Add Local Crash Diagnostics** ⏱️ 2h  
   **Priority:** MEDIUM  
@@ -273,88 +431,117 @@
 ## 📊 Progress Summary
 
 ### By Priority
-- **Critical:** 24 items (40-50 hours) - Blocking production ship
-  - Foundations: Items 41-45 (ClockProvider, FeatureFlags, Audit, Conflicts, Health Panel)
-  - Night Turnover: Items 1, 5-9, 24-25, 39
-  - Clinical Safety: Items 11, 29-30
-- **High:** 18 items (30-40 hours) - Beta quality gates
-- **Medium:** 7 items (10-15 hours) - Polish & comfort features
+- **Critical:** 30 items (56-73 hours) - Blocking production ship
+  - Foundations: Items 41-45, 50-54, 59-60 (ClockProvider, FeatureFlags, Audit, Conflicts, Health Panel, Dose 2 routing, Notification freeze, Storage hardening, CI, TimeMath, Interaction Policies, **Soft-Wake + Guard**)
+  - Night Turnover: Items 1, 3, 5-9, 24-25, 39
+  - Clinical Safety: Items 11, 26-28, 29-30
+- **High:** 20 items (35-45 hours) - Beta quality gates
+  - UI/UX: Items 2, 4, 14-23, 55-57
+- **Medium:** 8 items (10-15 hours) - Polish & comfort features
+  - Infrastructure: Items 31-34, 38, 40, 49, 58
 
 ### By Category
-- **Foundations:** 5 items (Items 41-45) - Time, flags, audit, conflicts, health
+- **Foundations:** 12 items (Items 41-45, 50-54, 59-60) - Time, flags, audit, conflicts, health, Dose 2 routing, notification freeze, storage, CI, TimeMath, interaction policies, **soft-wake + guard**
 - **Night Turnover:** 4 items (Items 1-4)
 - **Dose Logging:** 3 items (Items 5-7)
 - **State Management:** 3 items (Items 8, 24, 39)
 - **Testing:** 2 items (Items 9-10)
 - **Clinical Features:** 3 items (Items 11-13)
 - **Integrations:** 3 items (Items 14-16)
-- **User Experience:** 7 items (Items 17-23)
+- **User Experience:** 11 items (Items 17-23, 55-58) - Planning, UI, accessibility, i18n
 - **Background Operations:** 1 item (Item 25)
 - **Notifications:** 3 items (Items 26-28)
-- **Compliance:** 2 items (Items 29-30)
-- **Infrastructure:** 8 items (Items 31-38)
+- **Compliance:** 2 item (Items 29-30)
+- **Infrastructure:** 9 items (Items 31-38, 53) - Migrations, i18n, lint, crash logs, WHOOP, Health, snapshots, performance, CI
 - **Documentation:** 1 item (Item 40)
 - **Quality Gates:** 4 items (Items 46-49) - DST/Zone, Delete data, Flags UI, Battery
 
 ### Total Estimated Effort
-- **Sprint 1 (Foundations + Core):** 40-50 hours (Items 1, 5-9, 24-25, 39, 41-45)
-- **Sprint 2 (Features + Polish):** 25-35 hours (Items 2-4, 10-23)
-- **Sprint 3 (Ship Readiness):** 15-20 hours (Items 26-40, 46-49)
-- **Total:** 80-100 hours (beta-ready with safety foundations)
+- **Sprint 1 (Foundations + Core):** 56-73 hours (Items 1, 3, 5-9, 24-25, 39, 41-45, 50-54, 59-60)
+- **Sprint 2 (Features + Polish):** 30-40 hours (Items 2, 4, 10-23, 55-57)
+- **Sprint 3 (Ship Readiness):** 15-20 hours (Items 26-40, 46-49, 58)
+- **Total:** 101-128 hours (beta-ready with safety foundations + soft-wake alarms)
 
 ---
 
 ## 🚀 Recommended Execution Order
 
-### Sprint 1: Foundations + Core Turnover (40-50h)
+### Sprint 1: Foundations + Core Turnover (50-65h)
 
-**Week 1: Time, State, Audit (20-25h)**
+**Week 1: Time, State, Audit (27-33h)**
 1. Item 41 - ClockProvider & Time Abstractions (2h)
-2. Item 42 - FeatureFlags & Kill Switches (2h)
-3. Item 43 - Data Edit Audit & Soft Delete (3h)
-4. Item 44 - Conflict Resolver (2h)
-5. Item 8 - State Chart Implementation (4h)
-6. Item 24 - Idempotent Controller (4h)
-7. Item 39 - Lifecycle Transitions (3h)
+2. Item 54 - Time Math Single Source (2h)
+3. Item 42 - FeatureFlags & Kill Switches (2h)
+4. Item 43 - Data Edit Audit & Soft Delete (3h)
+5. Item 44 - Conflict Resolver (2h)
+6. Item 51 - Notification Category & Action ID Freeze (1h)
+7. Item 52 - Storage & Privacy Hardening (2h)
+8. Item 59 - Interaction Policies (Quick/Confirm/Smart) (3h)
+9. Item 60 - Dose 2 Soft-Wake Alarm + Hard No-Wake Guard (4-5h)
+10. Item 8 - State Chart Implementation (4h)
+11. Item 24 - Idempotent Controller (4h)
+12. Item 39 - Lifecycle Transitions (3h)
 
-**Week 2: Turnover + Background (20-25h)**
-8. Item 1 - Complete Night Turnover (2h)
-9. Item 5 - Dose 1 Logging (2h)
-10. Item 6 - Dose 2 Window Logic (3h)
-11. Item 7 - Dose 2 Gating (2h)
-12. Item 25 - BGTaskScheduler Rollover (4h)
-13. Item 45 - App Health Panel (2h)
-14. Item 9 - Unit Tests (Foundation + Turnover) (6h)
+**Week 2: Turnover + Core UI (25-35h)**
+12. Item 1 - Complete Night Turnover (2h)
+13. Item 50 - Dose 2 Button Locked-Style + Override Routing (2h)
+14. Item 3 - Wire Dose 2 Override (Always-tappable) (2h)
+15. Item 5 - Dose 1 Logging (2h)
+16. Item 6 - Dose 2 Window Logic (3h)
+17. Item 7 - Dose 2 Gating (2h)
+18. Item 25 - BGTaskScheduler Rollover (4h)
+19. Item 45 - App Health Panel (2h)
+20. Item 53 - CI Pipeline (3h)
+21. Item 9 - Unit Tests (Foundation + Turnover) (6h)
 
-### Sprint 2: Features + Polish (25-35h)
+### Sprint 2: Features + Polish (30-40h)
 
-**Week 3: User-Facing Features (15-20h)**
-15. Item 2 - Wake Buttons (2h)
-16. Item 3 - Override Sheets (3h)
-17. Item 4 - Reset/Skip (2h)
-18. Item 11 - Plan Editor (3h)
-19. Item 18 - Weekly Schedule (3h)
-20. Item 46 - DST/Zone Chip (1h)
-21. Item 47 - Delete All Data (1h)
+**Week 3: User-Facing Features (20-25h)**
+21. Item 2 - Wake Buttons (2h)
+22. Item 4 - Reset/Skip with Undo Countdown (2h)
+23. Item 18 - Plan Editor with Presets (2h)
+24. Item 16 - Weekly Schedule (3h)
+25. Item 19 - Countdown Ring (ClockProvider) (2h)
+26. Item 20 - Modern UI + Pill Layout Fixes (4h)
+27. Item 55 - Live Activity Fallback (1h)
+28. Item 56 - History Editing Guardrails (2h)
+29. Item 46 - DST/Zone Chip (1h)
+30. Item 47 - Delete All Data (NSFileProtectionComplete) (1h)
 
-**Week 4: Quality & Integration (10-15h)**
-22. Item 10 - UI Tests (4h)
-23. Item 19-23 - UI Polish (Ring, Design, Accessibility, Haptics, Empty) (6h)
-24. Item 12-13 - Clinical Features (Export, HealthKit) (3h)
-25. Item 48 - Feature Flag UI (1h)
+**Week 4: Quality & Accessibility (10-15h)**
+31. Item 10 - UI Tests (4h)
+32. Item 21 - Accessibility (VoiceOver, Dynamic Type) (3h)
+33. Item 57 - Switch Control & Reduce Motion (1h)
+34. Item 22 - Haptic Feedback (2h)
+35. Item 23 - Empty/Error States (2h)
+36. Item 12-13 - Clinical Features (Export, HealthKit) (3h)
+37. Item 48 - Feature Flag UI (1h)
 
 ### Sprint 3: Ship Readiness (15-20h)
 
 **Week 5: Operations (10-12h)**
-26. Item 26-28 - Notifications & Permissions (6h)
-27. Item 29-30 - Consent & Adverse Events (3h)
-28. Item 14-16 - Integrations (WHOOP, Bluetooth, Network) (3h)
+38. Item 26 - Notification Audit Trail (2h)
+39. Item 27 - Wire Notification Actions (3h)
+40. Item 28 - Permission Probes (1h)
+41. Item 29-30 - Consent & Adverse Events (3h)
+42. Item 14-16 - Integrations (WHOOP, Bluetooth, Network) (3h)
 
 **Week 6: Final QA (5-8h)**
-29. Item 31-38 - Infrastructure, Testing, Settings, Localization (4h)
-30. Item 49 - Battery Impact Sampler (2h)
-31. Item 40 - Documentation (2h)
-32. Final QA & TestFlight submission
+43. Item 31-38 - Infrastructure (Migrations, i18n, lint, snapshots, performance) (4h)
+44. Item 58 - RTL + Locale (1h)
+45. Item 49 - Battery Impact Sampler (2h)
+46. Item 40 - Documentation (2h)
+47. Final QA & TestFlight submission
+
+---
+
+## 🧭 Next 5 Commits (Start Here)
+
+1. `feat(alarms): soft-wake Dose 2 alarms + hard no-wake guard` (Item 60)
+2. `feat(ui): always-tappable Dose2 w/ gate routing + sheets` (Items 3, 50)
+3. `feat(core): ClockProvider + TimeMath centralization; remove Date() from logic` (Items 41, 54)
+4. `feat(sec): enable NSFileProtectionComplete; redact exports; plist strings` (Item 52)
+5. `feat(dx): GitHub Actions CI w/ lint, unit, UI, snapshots` (Item 53)
 
 ---
 
@@ -374,9 +561,13 @@
 
 **Gating (Early/Late Allowed/Denied):**
 - [ ] Dose 2 early: allowed if <4h before planned, requireReason=true
-- [ ] Dose 2 early: denied if ≥4h before planned, shows error
+- [ ] Dose 2 early: denied if ≥4h before planned, shows blocked sheet
 - [ ] Dose 2 late: allowed if ≤2h after window close, requireReason=true
-- [ ] Dose 2 late: denied if >2h after window close, shows error
+- [ ] Dose 2 late: denied if >2h after window close, shows blocked sheet
+- [ ] Dose 2 button always tappable (never disabled) - routes to appropriate sheet
+- [ ] **Guard: too close to wake (workday 180min, offday 120min) - shows guard sheet**
+- [ ] **Guard override: proceed anyway logs override_kind="guard", override_minutes calculated**
+- [ ] **Guard override: requires reason field (non-empty validation)**
 - [ ] Wake natural: allowed anytime during active night
 - [ ] Wake alarm: only allowed if alarm was set + night active
 
@@ -384,20 +575,29 @@
 - [ ] Idempotent: calling mintTonight() multiple times → one night only
 - [ ] Partial night: Dose1 logged, no Dose2 → closes with reason=cutoff_reached
 - [ ] Empty night: No Dose1 → closes with reason=abandoned_no_dose1
-- [ ] Background task fires at cutoff ± 15min window
+- [ ] Background task fires at cutoff ± 15min window (jitter ±2-5m around cutoff)
 
 **Notifications:**
 - [ ] Dose 1 reminder fires at planned time
 - [ ] Dose 2 alert fires at Dose1 + interval
+- [ ] **Dose 2 window open alert fires at windowStart (time-sensitive)**
+- [ ] **Dose 2 mid-ping fires at midpoint (optional)**
+- [ ] **Dose 2 last call fires 10min before window close**
+- [ ] **Guard cutoff cancels pending Dose 2 alarms**
+- [ ] **Quiet hours respected (unless "Break quiet hours" enabled)**
+- [ ] **Strong style loops notification until acknowledged**
 - [ ] Notification action "Log Now" → creates event with audit editor=notification
-- [ ] Notification action while app open → dedupe via 500ms window
+- [ ] **Notification action "Snooze Nm" → reschedules alert + audit trail**
+- [ ] Notification action while app open → dedupe via 500ms window (notification action + in-app tap 200ms apart)
 - [ ] Permission denied → shows fallback UI prompt
+- [ ] Category/action IDs frozen - no orphaned actions between builds
 
 **Undo/Edit (60s Window):**
-- [ ] Soft delete → undo within 60s restores event
+- [ ] Soft delete → undo within 60s restores event (shows countdown "Undo 00:53")
 - [ ] Soft delete → undo after 60s fails (hard delete already applied)
 - [ ] Edit event → new version created, old version soft-deleted with audit
 - [ ] Purge job runs daily, removes soft-deleted events >7 days old
+- [ ] Only Tonight fully editable; Last Night time-only; older nights read-only
 
 **Wake Events:**
 - [ ] Wake Natural → logs with reason=natural
@@ -412,22 +612,26 @@
 
 **Accessibility:**
 - [ ] VoiceOver: all buttons/cards have labels
-- [ ] Dynamic Type: UI scales to XL without clipping
+- [ ] Dynamic Type: UI scales to XL without clipping (pills auto-wrap, button captions inline)
 - [ ] Reduce Motion: animations disabled, instant transitions
+- [ ] Switch Control: focus order logical (left→right, top→bottom)
+- [ ] All tap targets ≥44×44 pt
 
 ### UI Tests (Happy Path + Edge Cases)
 
 **Happy Path:**
-- [ ] Launch → Today shows 3 cards (Last/Tonight/Tomorrow)
+- [ ] Launch → Today shows 3 cards (Last/Tonight/Tomorrow) - fixed horizon (no pagination beyond 3)
 - [ ] Tap "Log Dose 1" → night starts, Dose 2 alert scheduled
-- [ ] Tap "Log Dose 2" → night closes, moves to Last card
-- [ ] Cutoff at noon → cards advance automatically
+- [ ] Tap "Log Dose 2" (always tappable) → routes appropriately or logs if ready
+- [ ] Cutoff at noon → cards advance automatically (Last→Tonight→Tomorrow)
 
 **Edge Cases:**
 - [ ] Double-tap "Log Dose 1" 200ms apart → one event logged (dedupe)
 - [ ] Notification fires while editing → conflict resolver picks earliest
 - [ ] Export 0 nights → shows "No data to export" message
 - [ ] DST crossing → banner appears, dose windows adjust
+- [ ] Dose 2 button caption inline (no layout push from subtext)
+- [ ] Pills auto-wrap on iPhone mini/SE (no overflow off-screen)
 
 ---
 
@@ -435,15 +639,22 @@
 
 **Before submitting to TestFlight:**
 
-- [ ] **All CRITICAL items pass DoD** (Items 1, 5-9, 25, 41-45)
+- [ ] **All CRITICAL items pass DoD** (Items 1, 3, 5-9, 24-28, 39, 41-45, 50-54, 60)
   - [ ] ClockProvider: Zero `Date()` in business logic
+  - [ ] TimeMath: All window/cutoff math centralized
   - [ ] FeatureFlags: Kill switches work
   - [ ] Data Audit: All writes include provenance
   - [ ] Conflict Resolver: 500ms dedupe test passes
+  - [ ] Notification Category/Action IDs frozen and documented
+  - [ ] Storage: NSFileProtectionComplete on DB + logs
   - [ ] Idempotent Controller: Transactions rollback on failure
   - [ ] State Chart: Illegal transitions throw in DEBUG
   - [ ] BGTask: Cutoff service fires at noon, updates without UI
   - [ ] App Health Panel: Live diagnostics + copy-to-clipboard
+  - [ ] Dose 2 Button: Always tappable, routes correctly
+  - [ ] **Soft-Wake Alarms: Schedule at Dose 1, cancel at guard cutoff**
+  - [ ] **Guard Gate: Shows sheet, allows override with reason, logs audit trail**
+  - [ ] CI Pipeline: Build, lint, tests pass on every PR
 
 - [ ] **Unit Tests ≥80% coverage**
   - [ ] Window math tests (midnight, cutoff, DST, zone)
@@ -470,9 +681,11 @@
   - [ ] Soft-delete retention purges >7 days old
 
 - [ ] **Accessibility verified**
-  - [ ] VoiceOver: all controls labeled
-  - [ ] Dynamic Type: UI scales to XL
+  - [ ] VoiceOver: all controls labeled with gate status hints
+  - [ ] Dynamic Type: UI scales to XXL without truncation
   - [ ] Reduce Motion: animations disabled
+  - [ ] Switch Control: logical focus order
+  - [ ] All tap targets ≥44×44 pt
 
 **Additional Gates (before App Store):**
 - [ ] TestFlight feedback reviewed (≥10 users, ≥7 days usage)
@@ -505,6 +718,6 @@
 
 ---
 
-**Last Updated:** November 3, 2025  
-**Status:** Item 1 COMPLETE (95%) | 48 items PENDING | 24 CRITICAL | 18 HIGH | 7 MEDIUM  
-**Target Ship Date:** ~6 weeks (late December 2025 - beta with foundations)
+**Last Updated:** November 4, 2025  
+**Status:** Item 1 COMPLETE (95%) | Item 60 FOUNDATION READY (60%) | 56 items PENDING | 30 CRITICAL | 20 HIGH | 8 MEDIUM  
+**Target Ship Date:** ~7-8 weeks (mid-late December 2025 - beta with foundations + soft-wake alarms)

@@ -97,16 +97,16 @@ struct SettingsViewEnhanced: View {
                 // MARK: - Override Policies
                 Section {
                     Toggle("Allow early dose", isOn: Binding(
-                        get: { prefs.dose2AllowEarly },
-                        set: { prefs.dose2AllowEarly = $0 }
+                        get: { prefs.allowEarlyDose },
+                        set: { prefs.allowEarlyDose = $0 }
                     ))
                     
-                    if prefs.dose2AllowEarly {
+                    if prefs.allowEarlyDose {
                         Stepper(value: Binding(
-                            get: { prefs.dose2EarlyLimitMin },
-                            set: { prefs.dose2EarlyLimitMin = $0 }
-                        ), in: 5...60, step: 5) {
-                            Text("Max early: \(prefs.dose2EarlyLimitMin) min")
+                            get: { prefs.maxEarlyMinutes },
+                            set: { prefs.maxEarlyMinutes = $0 }
+                        ), in: 5...180, step: 5) {
+                            Text("Max early: \(prefs.maxEarlyMinutes) min")
                         }
                     }
                 } header: {
@@ -115,16 +115,16 @@ struct SettingsViewEnhanced: View {
                 
                 Section {
                     Toggle("Allow late dose", isOn: Binding(
-                        get: { prefs.dose2AllowLate },
-                        set: { prefs.dose2AllowLate = $0 }
+                        get: { prefs.allowLateDose },
+                        set: { prefs.allowLateDose = $0 }
                     ))
                     
-                    if prefs.dose2AllowLate {
+                    if prefs.allowLateDose {
                         Stepper(value: Binding(
-                            get: { prefs.dose2LateLimitMin },
-                            set: { prefs.dose2LateLimitMin = $0 }
-                        ), in: 5...90, step: 5) {
-                            Text("Max late: \(prefs.dose2LateLimitMin) min")
+                            get: { prefs.maxLateMinutes },
+                            set: { prefs.maxLateMinutes = $0 }
+                        ), in: 5...180, step: 5) {
+                            Text("Max late: \(prefs.maxLateMinutes) min")
                         }
                     }
                 } header: {

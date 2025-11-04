@@ -98,7 +98,9 @@ DoseTrack Documentation Structure
 
 | Document | Purpose | Status | Location |
 |----------|---------|--------|----------|
-| **DOSE2_LOGIC_FLOW.md** | Dose 2 gating logic with ASCII | ⭐ NEW | `docs/design/` |
+| **MAIN_SCREEN_LOGIC_MAP.md** | Complete main screen logic & data flow | ⭐ NEW | `docs/design/` |
+| **MAIN_SCREEN_NAVIGATION_MAP.md** | Visual navigation & breadcrumbs | ⭐ NEW | `docs/design/` |
+| **DOSE2_LOGIC_FLOW.md** | Dose 2 gating logic with ASCII | ✅ Current | `docs/design/` |
 | **LOGIC_MAP.md** | System-wide logic flows | ✅ Current | `docs/design/` |
 | **UI_UX_ASCII.md** | UI wireframes & specs | ✅ Current | `docs/design/` |
 
@@ -419,5 +421,7 @@ docs/design/UI_UX_ASCII.md
 - [Product Description](PRODUCT_DESCRIPTION.md)
 - [PRD v1.2](PRD_v1.2.md)
 - [Start Here Guide](ops/START_HERE.md)
+- [Main Screen Logic Map](design/MAIN_SCREEN_LOGIC_MAP.md) ⭐ NEW
+- [Main Screen Navigation Map](design/MAIN_SCREEN_NAVIGATION_MAP.md) ⭐ NEW
 - [Dose 2 Logic Flow](design/DOSE2_LOGIC_FLOW.md)
 - [Testing Guide](ops/TESTING_GUIDE_COMPLETE.md)

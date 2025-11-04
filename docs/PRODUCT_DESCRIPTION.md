@@ -29,14 +29,16 @@ This document consolidates the current product definition, combining the v1.1.1c
 ---
 
 ## 4. Functional Scope
-| Area | Current (v1.1.1c) | Spec Patch v1.2 Phase A |
-|------|------------------|--------------------------|
-| Night plan | Deterministic split 40–60%, adaptive to recovery score | Same logic; refine with physiology data (Phase A seeds) |
-| Logging | Dose 1 & Dose 2 buttons, bathroom wakes, notes | Adds structured Morning Survey (alertness scale, bathroom counts) |
+| Area | Current (v1.1.1c) | Latest Enhancements (Nov 2025) |
+|------|------------------|--------------------------------|
+| Night plan | Deterministic split 40–60%, adaptive to recovery score | Same logic; refine with physiology data |
+| Logging | Dose 1 & Dose 2 buttons, bathroom wakes, notes | **Tap-to-log-now** + **Long-press for custom date/time** on all primary buttons |
+| Time Precision | Tap logs at current time | **Date & time picker** (48hr past to 6hr future) for missed/backdated events |
+| Override System | Basic early/late gates | **Always-tappable Dose 2**, early override enabled by default (180min), full audit trail |
 | Data sources | HealthKit final wake | Adds WHOOP-derived recovery/sleep aggregates via proxy |
-| Export | CSV with nightly rows | Extend schema per `docs/CSV_SCHEMA.md` in spec patch |
-| Safety | Dose guardrails, sequence validation | No change (remains mandatory) |
-| Coaching/Audio | Not included | Explicitly out of scope for Phase A |
+| Export | CSV with nightly rows | Extended schema with override tracking (type, minutes, reason, source) |
+| Safety | Dose guardrails, sequence validation | Enhanced with gate routing, blocked sheets, and policy enforcement |
+| Coaching/Audio | Not included | Out of scope |
 
 ---
 
@@ -50,8 +52,19 @@ This document consolidates the current product definition, combining the v1.1.1c
 
 ## 6. Data Model Highlights
 - `DoseLog` (SwiftData): nightly record keyed by derived bedtime date.
+- **Smart Event Logging:**
+  - All primary events (In bed, Dose 1, Dose 2, Final wake) support **tap-to-log-now** (default) and **long-press for custom date/time**
+  - Date & time picker allows selection from **48 hours past to 6 hours future** (handles midnight crossovers, backdated logging)
+  - Haptic feedback on long-press for tactile confirmation
+  - All events track logging **source** (`tap_now`, `time_picker`, `override_early`, `override_late`) for audit trail
+- **Dose 2 Override System:**
+  - Dose 2 button always tappable (no UI blocking)
+  - Gate enforcement: Green checkmark (allowed), Red X (blocked), Yellow warning (override sheet)
+  - Override sheets for early/late with reason capture, policy adherence tracking
+  - Early override **enabled by default** (180 min max window)
+  - Full audit trail: override type, minutes deviation, reason, timestamp
 - Morning survey fields (Phase A): `morningAlertness`, `bathroomWakeTimesUTC`, `notes`.
-- CSV schema updates detailed in `review/DoseTrack_SpecPatch_v1.2_PhaseA/docs/CSV_SCHEMA.md`.
+- CSV schema updates include override tracking columns: `early_override`, `late_override`, `override_reason`, `override_minutes`, `event_source`.
 - App Group storage used for widget/app intent handoff; no remote storage.
 
 ---
@@ -76,6 +89,11 @@ This document consolidates the current product definition, combining the v1.1.1c
 - Final wake autofilled on ≥ **60%** of nights.
 - Clinician CSV acceptance ≥ **80%**.
 - Morning survey completion (Phase A target) ≥ **70%** of captured nights.
+- **Smart Event Logging Precision:**
+  - Long-press adoption ≥ **30%** for backdated/corrected events
+  - Date picker usage confirms midnight crossover handling
+  - Override system compliance (early/late adherence tracking via audit trail)
+  - Event source distribution tracked in CSV export for workflow analysis
 
 ---
 
