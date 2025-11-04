@@ -37,17 +37,17 @@ struct NightCardViewModern: View {
         ScrollView {
             VStack(spacing: DT.gap) {
                 if let night = night {
-                    // Plan card
+                    // Plan card (now includes WindowPill)
                     planCard(night)
                     
-                    // Window status pills
-                    windowPillsRow(night)
+                    // Next alert chip (if scheduled)
+                    nextAlertChipRow(night)
                     
                     // Status chips
                     statusChipsRow(night)
                     
-                    // Window bar (compact, replaces big ring)
-                    if night.currentLifecycleState.isActive {
+                    // Window bar (compact, only when window is active)
+                    if night.currentLifecycleState.isActive || night.currentLifecycleState == .windowOpen {
                         windowBarSection(night)
                     }
                     
@@ -190,6 +190,14 @@ struct NightCardViewModern: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
+            
+            // Window status pill (moved inside plan card)
+            WindowPill(
+                dose1At: night.dose1TimeUTC,
+                windowStartMin: prefs.windowStartMin,
+                windowEndMin: prefs.windowEndMin,
+                showSeconds: prefs.showSeconds
+            )
         }
         .padding(DT.lg)
         .background(
@@ -202,30 +210,21 @@ struct NightCardViewModern: View {
         )
     }
     
-    // MARK: - Window Pills Row
+    // MARK: - Next Alert Chip
     
     @ViewBuilder
-    private func windowPillsRow(_ night: DoseLog) -> some View {
-        HStack(spacing: 8) {
-            // Window status pill with live countdown
-            WindowPill(
-                dose1At: night.dose1TimeUTC,
-                windowStartMin: prefs.windowStartMin,
-                windowEndMin: prefs.windowEndMin,
-                showSeconds: prefs.showSeconds
-            )
-            
-            // Next alert chip (if scheduled)
-            if let nextAlert = nextScheduledAlert(for: night) {
+    private func nextAlertChipRow(_ night: DoseLog) -> some View {
+        // Next alert chip (if scheduled)
+        if let nextAlert = nextScheduledAlert(for: night) {
+            HStack {
                 NextAlertChip(
                     nextAlertTime: nextAlert,
                     alarmStyle: currentAlarmStyle()
                 )
+                Spacer()
             }
-            
-            Spacer()
+            .padding(.horizontal, DT.pad)
         }
-        .padding(.horizontal, DT.pad)
     }
     
     /// Get next scheduled alert time for this night
