@@ -129,7 +129,7 @@ enum Dose2LateReason: String, CaseIterable {
 #Preview {
     LateDose2Sheet(
         minutesLate: 12,
-        policy: Dose2Policy(startMin: 210, endMin: 245, allowEarly: true, maxEarlyMin: 45, allowLate: true, maxLateMin: 30),
+        policy: Dose2Policy(startMin: 210, endMin: 245, allowEarly: true, maxEarlyMin: 45, allowLate: true, maxLateMin: 30, workdayNoWakeBufferMin: 180, offdayNoWakeBufferMin: 120, allowGuardOverride: true),
         onConfirm: { _ in },
         onLogMissed: { }
     )

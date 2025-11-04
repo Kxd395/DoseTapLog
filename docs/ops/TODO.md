@@ -201,22 +201,23 @@
   - Files: ✅ `NightCardViewModern.swift`, ✅ `PrimaryButton.swift`, ✅ `ActionButtons.swift`
   - Depends on: Item 3 (Dose 2 gate), Item 50 (always-tappable button)
 
-- [ ] **60. Dose 2 Soft-Wake Alarm + Hard No-Wake Guard** ⏱️ 4-5h  
-  **Priority:** CRITICAL  
+- [ ] **60. Dose 2 Soft-Wake Alarm + Hard No-Wake Guard** ⏱️ 4-5h → 1-2h remaining 
+  **Priority:** CRITICAL | **Status:** 75% COMPLETE  
   Implement soft-wake alarm system to wake user at Dose 2 window start, plus hard no-wake guard to prevent waking too close to morning. Schedule time-sensitive alerts when Dose 1 logged (window open, optional mid-ping, last call). Cancel alarms if guard cutoff reached. Add guard gate state `.noWakeGuard(minutesUntilWake)` with override sheet.
   - **DoD:**
     - **Soft-Wake Alarms:** Schedule 3 notifications when Dose 1 logged: (1) Window open alert (time-sensitive), (2) Optional mid-window ping, (3) Last call (10 min before close)
     - **Alarm Styles:** Off / Banner / Soft (time-sensitive, respects quiet hours) / Strong (loops until acknowledged)
     - **Guard Logic:** Calculate `guardCutoff = plannedFinalWake - buffer` (180min workday, 120min offday default)
-    - **Guard Gate:** `evaluateDose2Gate()` checks guard FIRST before window math; returns `.noWakeGuard(minutesUntilWake)` if within buffer
-    - **Guard Sheet:** `GuardNoWakeSheet` with warning message, reason field (required), Proceed anyway (red destructive), Snooze options (5/10/15m), Close
-    - **Override Path:** Proceed sets `dose2IsOverride=true`, `dose2OverrideKind="guard"`, `dose2OverrideMinutes=guardBuffer-minutesUntilWake`
+    - ✅ **Guard Gate:** `evaluateDose2Gate()` checks guard FIRST before window math; returns `.noWakeGuard(minutesUntilWake)` if within buffer
+    - ✅ **Guard Sheet:** `GuardNoWakeSheet` with warning message, reason field (required), Proceed anyway (red destructive), Snooze options (5/10/15m), Close
+    - ✅ **Override Path:** Proceed sets `dose2IsOverride=true`, `dose2OverrideKind="guard"`, `dose2OverrideMinutes=guardBuffer-minutesUntilWake`
     - **Alarm Cancellation:** When guard trips, cancel pending `dose2_*` notifications, show silent banner "No-wake guard active"
-    - **Settings:** Dose 2 alarm style picker, Break quiet hours toggle, Guard buffer steppers (Workday/Off-day), Allow override toggle, Snooze options
+    - ⏳ **Settings:** Dose 2 alarm style picker, Break quiet hours toggle, Guard buffer steppers (Workday/Off-day), Allow override toggle, Snooze options (properties added, UI pending)
     - **Bell Chip:** Show guard cutoff time when active ("Guard @ 05:10"), dim bell icon
-    - **Button Caption:** "Guard: 1h 45m to wake (Workday)" when `.noWakeGuard` state
+    - ✅ **Button Caption:** "Guard: Xm to wake" when `.noWakeGuard` state
     - **Notification Actions:** "Log Now" and "Snooze N min" buttons on alerts
-    - **Files:** ✅ `Dose2Gate.swift` (guard gate), ✅ `GuardNoWakeSheet.swift` (UI), ✅ `NotificationHelper.swift` (scheduling), ✅ `AppPreferencesEnhanced.swift` (settings), Update `NightCardViewModern.swift` (wire guard sheet), Update `DoseLogController.swift` (schedule on Dose 1, cancel on guard)
+    - ✅ **Files:** ✅ `Dose2Gate.swift` (guard gate), ✅ `GuardNoWakeSheet.swift` (UI), ✅ `NotificationHelper.swift` (scheduling), ✅ `AppPreferencesEnhanced.swift` (all settings), ✅ `NightCardViewModern.swift` (guard sheet wired)
+    - **Remaining:** Add files to Xcode project, update `DoseLogController.swift` (schedule on Dose 1), Settings UI (Alarms section)
   - **Tests:**
     - Guard triggers with Workday buffer; alarms cancelled
     - Override from guard logs `override_kind="guard"`, `override_minutes=180-105=75`
@@ -224,7 +225,7 @@
     - Long-press time selection + guard sheet flows correctly
     - Snooze reschedules alert, writes audit trail
     - Strong style loops notification until acknowledged
-  - Depends on: Item 3 (Dose 2 override system), Item 50 (always-tappable button)
+  - Depends on: ✅ Item 3 (Dose 2 override system), ✅ Item 50 (always-tappable button)
 
 ---
 

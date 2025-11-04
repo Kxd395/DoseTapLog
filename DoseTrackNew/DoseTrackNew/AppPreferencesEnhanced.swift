@@ -102,6 +102,53 @@ final class AppPreferencesEnhanced: ObservableObject {
     @AppStorage("late_dose_quick_choices", store: suite)
     var lateQuickChoicesCSV: String = "5,10,15,30"
     
+    // MARK: - Dose 2 Soft-Wake Alarms & No-Wake Guard
+    
+    @AppStorage("dose2_alarm_enabled", store: suite)
+    var dose2AlarmEnabled: Bool = true {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("dose2_alarm_style_raw", store: suite)
+    var dose2AlarmStyleRaw: String = "soft" {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("dose2_break_quiet_hours", store: suite)
+    var breakQuietHoursForDose2: Bool = false {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("dose2_mid_ping_enabled", store: suite)
+    var dose2MidPingEnabled: Bool = false {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("dose2_snooze_options", store: suite)
+    var dose2SnoozeOptionsCSV: String = "5,10,15" {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("guard_workday_buffer_min", store: suite)
+    var guardBufferWorkdayMin: Int = 180 {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("guard_offday_buffer_min", store: suite)
+    var guardBufferOffdayMin: Int = 120 {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("guard_allow_override", store: suite)
+    var guardAllowOverride: Bool = true {
+        didSet { objectWillChange.send() }
+    }
+    
+    @AppStorage("guard_require_reason", store: suite)
+    var guardRequireReason: Bool = true {
+        didSet { objectWillChange.send() }
+    }
+    
     // MARK: - Notifications & Live Activity
     
     @AppStorage("alarm_style_raw", store: suite)

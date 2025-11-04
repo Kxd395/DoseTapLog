@@ -14,6 +14,24 @@ enum Dose2Gate {
     case tooEarly(minutes: Int)
     case tooLate(minutes: Int)
     case alreadyLogged
+    case noWakeGuard(minutesUntilWake: Int)  // NEW: Too close to morning wake
+}
+
+/// Alarm style for Dose 2 soft-wake notifications
+enum Dose2AlarmStyle: String, CaseIterable {
+    case off = "off"
+    case banner = "banner"          // Silent notification only
+    case soft = "soft"              // Time-sensitive, respects quiet hours
+    case strong = "strong"          // Loops until acknowledged
+    
+    var displayName: String {
+        switch self {
+        case .off: return "Off"
+        case .banner: return "Banner Only"
+        case .soft: return "Soft"
+        case .strong: return "Strong"
+        }
+    }
 }
 
 /// Policy configuration for Dose 2 timing
@@ -25,6 +43,11 @@ struct Dose2Policy {
     let allowLate: Bool
     let maxLateMin: Int
     
+    // NEW: No-Wake Guard settings
+    let workdayNoWakeBufferMin: Int
+    let offdayNoWakeBufferMin: Int
+    let allowGuardOverride: Bool
+    
     /// Create policy from AppPreferencesEnhanced
     static func from(_ prefs: AppPreferencesEnhanced) -> Dose2Policy {
         return Dose2Policy(
@@ -33,7 +56,10 @@ struct Dose2Policy {
             allowEarly: prefs.allowEarlyDose,
             maxEarlyMin: prefs.maxEarlyMinutes,
             allowLate: prefs.allowLateDose,
-            maxLateMin: prefs.maxLateMinutes
+            maxLateMin: prefs.maxLateMinutes,
+            workdayNoWakeBufferMin: prefs.guardBufferWorkdayMin,
+            offdayNoWakeBufferMin: prefs.guardBufferOffdayMin,
+            allowGuardOverride: prefs.guardAllowOverride
         )
     }
 }
@@ -50,6 +76,7 @@ struct Dose2Override {
     enum OverrideKind: String {
         case early = "early"
         case late = "late"
+        case noWakeGuard = "guard"      // NEW: Override from no-wake guard
     }
     
     enum OverrideSource: String {
@@ -64,11 +91,24 @@ func evaluateDose2Gate(
     now: Date,
     dose1At: Date?,
     dose2At: Date?,
-    policy: Dose2Policy
+    policy: Dose2Policy,
+    plannedFinalWake: Date?,
+    isWorkday: Bool
 ) -> Dose2Gate {
     if dose2At != nil { return .alreadyLogged }
     guard let dose1 = dose1At else { return .needDose1 }
     
+    // GUARD CHECK FIRST: Too close to morning wake?
+    if let wake = plannedFinalWake {
+        let minutesUntilWake = Int(wake.timeIntervalSince(now) / 60.0)
+        let guardBuffer = isWorkday ? policy.workdayNoWakeBufferMin : policy.offdayNoWakeBufferMin
+        
+        if minutesUntilWake <= guardBuffer && minutesUntilWake > 0 {
+            return .noWakeGuard(minutesUntilWake: minutesUntilWake)
+        }
+    }
+    
+    // STANDARD WINDOW MATH
     let elapsedMin = Int(now.timeIntervalSince(dose1) / 60.0)
     
     // Too early
@@ -94,6 +134,8 @@ func isOverrideAllowed(gate: Dose2Gate, policy: Dose2Policy) -> Bool {
         return policy.allowEarly && minutes <= policy.maxEarlyMin
     case .tooLate(let minutes):
         return policy.allowLate && minutes <= policy.maxLateMin
+    case .noWakeGuard:
+        return policy.allowGuardOverride
     default:
         return false
     }
@@ -112,5 +154,7 @@ func dose2AccessibilityHint(gate: Dose2Gate) -> String {
         return "Late by \(m) minutes"
     case .alreadyLogged:
         return "Already logged"
+    case .noWakeGuard(let m):
+        return "Guard: \(m) minutes to wake"
     }
 }

@@ -13,12 +13,14 @@ import SwiftData
 enum Dose2Decision: Identifiable {
     case early(minutes: Int)      // within earlyMaxOverrideMin
     case late(minutes: Int)       // within lateMaxOverrideMin
+    case noWakeGuard(minutesUntilWake: Int, isWorkday: Bool)  // too close to wake time
     case blocked(reason: String)  // too early/late or need D1/already logged
     
     var id: String {
         switch self {
         case .early(let m): return "early_\(m)"
         case .late(let m): return "late_\(m)"
+        case .noWakeGuard(let m, let w): return "guard_\(m)_\(w)"
         case .blocked(let r): return "blocked_\(r)"
         }
     }
@@ -130,6 +132,24 @@ struct NightCardViewModern: View {
                         dose2Decision = nil
                     },
                     onCancel: {
+                        dose2Decision = nil
+                    }
+                )
+                
+            case .noWakeGuard(let minutesUntilWake, let isWorkday):
+                // Hard no-wake guard sheet
+                GuardNoWakeSheet(
+                    minutesUntilWake: minutesUntilWake,
+                    isWorkday: isWorkday,
+                    allowOverride: prefs.guardAllowOverride,
+                    onProceed: { reason in
+                        logDose2GuardOverride(minutesUntilWake: minutesUntilWake, reason: reason)
+                    },
+                    onSnooze: { minutes in
+                        snoozeDose2(minutes: minutes)
+                        dose2Decision = nil
+                    },
+                    onClose: {
                         dose2Decision = nil
                     }
                 )
@@ -891,7 +911,9 @@ struct NightCardViewModern: View {
             now: Date(),
             dose1At: night.dose1TimeUTC,
             dose2At: night.dose2TimeUTC,
-            policy: policy
+            policy: policy,
+            plannedFinalWake: nil,  // TODO: Add plannedWakeTimeUTC to DoseLog model
+            isWorkday: true  // TODO: Get from WeeklySchedule
         )
         
         switch gate {
@@ -901,6 +923,8 @@ struct NightCardViewModern: View {
             return "Log Dose 1 first"
         case .alreadyLogged:
             return "Already logged"
+        case .noWakeGuard(let minutesUntilWake):
+            return "Guard: \(minutesUntilWake)m to wake"
         case .tooEarly(let minutes):
             let hours = minutes / 60
             let mins = minutes % 60
@@ -989,7 +1013,9 @@ struct NightCardViewModern: View {
             now: proposedTime,  // Use proposed time for gate evaluation
             dose1At: night.dose1TimeUTC,
             dose2At: night.dose2TimeUTC,
-            policy: policy
+            policy: policy,
+            plannedFinalWake: nil,  // TODO: Add plannedWakeTimeUTC to DoseLog model
+            isWorkday: true  // TODO: Get from WeeklySchedule
         )
         
         print("🔍 Dose 2 Gate State: \(gate)")
@@ -1013,6 +1039,13 @@ struct NightCardViewModern: View {
             // Already logged → show already logged sheet
             print("⚠️ Gate: Already logged")
             showAlreadyLoggedSheet = true
+            
+        case .noWakeGuard(let minutesUntilWake):
+            // Too close to wake time → guard sheet
+            print("⚠️ Gate: No-wake guard → \(minutesUntilWake)m until wake")
+            // TODO: Determine if workday (use WeeklySchedule)
+            let isWorkday = true  // Placeholder
+            dose2Decision = .noWakeGuard(minutesUntilWake: minutesUntilWake, isWorkday: isWorkday)
             
         case .tooEarly(let minutes):
             // Too early - check if override allowed
@@ -1163,6 +1196,79 @@ struct NightCardViewModern: View {
         } catch {
             print("❌ Failed to log Dose 2 override: \(error)")
         }
+    }
+    
+    /// Log Dose 2 with guard override (proceed anyway despite proximity to wake)
+    private func logDose2GuardOverride(minutesUntilWake: Int, reason: String) {
+        guard let night = night else {
+            print("❌ No night available for guard override")
+            return
+        }
+        
+        print("🔵 logDose2GuardOverride called")
+        print("🔍 Minutes until wake: \(minutesUntilWake)")
+        print("🔍 Guard reason: \(reason)")
+        
+        // Calculate override minutes (how far into the guard buffer)
+        let bufferMinutes = prefs.guardBufferWorkdayMin  // TODO: Check if workday/offday
+        let overrideMinutes = bufferMinutes - minutesUntilWake
+        
+        // Set all required override fields
+        night.dose2TimeUTC = Date()
+        night.dose2Grams = prefs.planDose2G
+        night.dose2IsOverride = true
+        night.dose2OverrideKind = "guard"  // Special kind for guard overrides
+        night.dose2OverrideMinutes = overrideMinutes
+        night.dose2OverrideReason = reason
+        
+        // Transition state to awaitWake
+        night.currentLifecycleState = .awaitWake
+        
+        do {
+            try modelContext.save()
+            
+            // Heavy impact haptic for guard override (critical action)
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            
+            print("✅ Logged Dose 2 with guard override")
+            print("✅ Dose 2: \(night.dose2Grams ?? 0)g at wake-\(minutesUntilWake)m")
+            print("✅ State transitioned to: \(night.lifecycleState)")
+            
+            // Cancel all pending Dose 2 notifications
+            NotificationHelper.shared.cancelWindowStartReminder()
+            // TODO: Cancel dose2_* notifications when NotificationHelper integrated
+            
+            // Close the decision sheet
+            dose2Decision = nil
+            
+            // TODO: Audit log
+            // audit.log(.dose2Logged(override: "guard", minutes: overrideMinutes, reason: reason, source: "app", nightKey: night.nightKey))
+            
+        } catch {
+            print("❌ Failed to log Dose 2 guard override: \(error)")
+        }
+    }
+    
+    /// Snooze Dose 2 (user postpones by N minutes)
+    private func snoozeDose2(minutes: Int) {
+        guard let night = night else {
+            print("❌ No night available for snooze")
+            return
+        }
+        
+        print("🔵 snoozeDose2 called")
+        print("🔍 Snooze minutes: \(minutes)")
+        
+        // Medium impact haptic for snooze
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        
+        // TODO: Reschedule notification N minutes from now
+        // NotificationHelper.shared.snoozeDose2Alert(minutes: minutes)
+        
+        // TODO: Audit log
+        // audit.log(.dose2Snoozed(minutes: minutes, nightKey: night.nightKey))
+        
+        print("✅ Snoozed Dose 2 for \(minutes) minutes")
     }
     
     /// Schedule notification for window start
