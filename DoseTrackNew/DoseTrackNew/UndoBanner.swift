@@ -45,7 +45,7 @@ struct UndoBanner: View {
         }
         .padding(DT.md)
         .background(
-            RoundedRectangle(cornerRadius: DT.cornerLg)
+            RoundedRectangle(cornerRadius: DT.corner)
                 .fill(Palette.surface)
                 .shadow(color: .black.opacity(0.2), radius: 8, y: 2)
         )
