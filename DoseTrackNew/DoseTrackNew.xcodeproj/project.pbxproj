@@ -54,6 +54,7 @@
 		A0000035 /* Dose2InfoSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000035 /* Dose2InfoSheets.swift */; };
 		A0000036 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000036 /* PrimaryButton.swift */; };
 		A0000037 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000037 /* NotificationHelper.swift */; };
+		A0000038 /* UndoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000038 /* UndoBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		B0000035 /* Dose2InfoSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2InfoSheets.swift; sourceTree = "<group>"; };
 		B0000036 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		B0000037 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		B0000038 /* UndoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBanner.swift; sourceTree = "<group>"; };
 		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -178,6 +180,7 @@
 				B0000023 /* SafetyBanner.swift */,
 				B0000024 /* SafetyBannerView.swift */,
 				B0000025 /* SettingsViewEnhanced.swift */,
+				B0000038 /* UndoBanner.swift */,
 			);
 			path = DoseTrackNew;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				A0000029 /* TodayViewModel+WakeEvents.swift in Sources */,
 				A0000030 /* WakeReason.swift in Sources */,
 				A0000031 /* Chip.swift in Sources */,
+				A0000038 /* UndoBanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

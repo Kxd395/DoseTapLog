@@ -31,44 +31,64 @@ struct NightCardViewModern: View {
     @State private var blockedReason: String = ""
     @State private var dose2Gate: Dose2Gate = .needDose1
     
+    // Undo window state
+    @State private var undoSecondsRemaining: Int = 0
+    @State private var undoAction: String = ""
+    @State private var undoTimer: Timer?
+    @State private var savedNightState: DoseLog?
+    
     private let prefs = AppPreferencesEnhanced.shared
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: DT.gap) {
-                if let night = night {
-                    // Plan card (now includes WindowPill)
-                    planCard(night)
-                    
-                    // Next alert chip (if scheduled)
-                    nextAlertChipRow(night)
-                    
-                    // Status chips
-                    statusChipsRow(night)
-                    
-                    // Window bar (compact, only when window is active)
-                    if night.currentLifecycleState.isActive || night.currentLifecycleState == .windowOpen {
-                        windowBarSection(night)
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack(spacing: DT.gap) {
+                    if let night = night {
+                        // Plan card (now includes WindowPill)
+                        planCard(night)
+                        
+                        // Next alert chip (if scheduled)
+                        nextAlertChipRow(night)
+                        
+                        // Status chips
+                        statusChipsRow(night)
+                        
+                        // Window bar (compact, only when window is active)
+                        if night.currentLifecycleState.isActive || night.currentLifecycleState == .windowOpen {
+                            windowBarSection(night)
+                        }
+                        
+                        // Actions section with hint
+                        SectionHeader(
+                            title: "Actions",
+                            hint: dose2Enabled(night) ? nil : dose2DisabledHint(night)
+                        )
+                        
+                        actionsGrid(night)
+                        
+                        // Recent events
+                        if horizon == .tonight || horizon == .lastNight {
+                            recentEventsCard(night)
+                        }
+                    } else {
+                        // No night yet (Tomorrow)
+                        emptyStateCard
                     }
-                    
-                    // Actions section with hint
-                    SectionHeader(
-                        title: "Actions",
-                        hint: dose2Enabled(night) ? nil : dose2DisabledHint(night)
-                    )
-                    
-                    actionsGrid(night)
-                    
-                    // Recent events
-                    if horizon == .tonight || horizon == .lastNight {
-                        recentEventsCard(night)
-                    }
-                } else {
-                    // No night yet (Tomorrow)
-                    emptyStateCard
                 }
+                .padding(DT.pad)
+                .padding(.bottom, undoSecondsRemaining > 0 ? 80 : 0) // Space for undo banner
             }
-            .padding(DT.pad)
+            
+            // Undo banner (floating at bottom)
+            if undoSecondsRemaining > 0 {
+                UndoBanner(
+                    actionName: undoAction,
+                    secondsRemaining: undoSecondsRemaining,
+                    onUndo: performUndo
+                )
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .animation(.spring(), value: undoSecondsRemaining)
+            }
         }
         .background(Palette.bg.ignoresSafeArea())
         .preferredColorScheme(.dark)
@@ -596,13 +616,18 @@ struct NightCardViewModern: View {
     }
     
     private func logDose2Now(_ night: DoseLog, override: Dose2Override?) {
+        // Save state snapshot for undo
+        let snapshot = createStateSnapshot(night)
+        
         night.dose2TimeUTC = Date()
         night.dose2Grams = prefs.planDose2G
         
         // Store override data if present
         if let override = override {
-            // TODO: Store override data in audit fields
-            print("Override: \(override.kind.rawValue), \(override.minutes)m, reason: \(override.reason)")
+            night.dose2IsOverride = true
+            night.dose2OverrideKind = override.kind.rawValue
+            night.dose2OverrideMinutes = override.minutes
+            night.dose2OverrideReason = override.reason
         }
         
         try? modelContext.save()
@@ -613,6 +638,12 @@ struct NightCardViewModern: View {
         // Haptic
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
+        
+        // Start undo window
+        let actionName = override != nil 
+            ? "Dose 2 (\(formatGrams(prefs.planDose2G)), \(override!.kind.rawValue))"
+            : "Dose 2 (\(formatGrams(prefs.planDose2G)))"
+        startUndoWindow(actionName: actionName, savedState: snapshot)
         
         print("Logged Dose 2")
     }
@@ -758,6 +789,87 @@ struct NightCardViewModern: View {
                 showWhyDose2Disabled = false
             }
         }
+    }
+    
+    // MARK: - Undo Window Logic
+    
+    /// Start undo countdown after logging an action
+    private func startUndoWindow(actionName: String, savedState: DoseLog) {
+        // Cancel any existing timer
+        undoTimer?.invalidate()
+        
+        // Save state for restoration
+        savedNightState = savedState
+        undoAction = actionName
+        undoSecondsRemaining = 30
+        
+        // Start countdown timer
+        undoTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] timer in
+            if undoSecondsRemaining > 0 {
+                undoSecondsRemaining -= 1
+            } else {
+                timer.invalidate()
+                savedNightState = nil
+                undoAction = ""
+            }
+        }
+    }
+    
+    /// Perform undo - restore saved state
+    private func performUndo() {
+        guard let savedState = savedNightState, let night = night else {
+            print("⚠️ No saved state to restore")
+            return
+        }
+        
+        // Restore previous state
+        night.dose1TimeUTC = savedState.dose1TimeUTC
+        night.dose1Grams = savedState.dose1Grams
+        night.dose2TimeUTC = savedState.dose2TimeUTC
+        night.dose2Grams = savedState.dose2Grams
+        night.dose2IsOverride = savedState.dose2IsOverride
+        night.dose2OverrideKind = savedState.dose2OverrideKind
+        night.dose2OverrideMinutes = savedState.dose2OverrideMinutes
+        night.dose2OverrideReason = savedState.dose2OverrideReason
+        night.finalWakeTimeUTC = savedState.finalWakeTimeUTC
+        night.bathroomWakeTimesUTC = savedState.bathroomWakeTimesUTC
+        
+        try? modelContext.save()
+        
+        // Clear undo state
+        undoTimer?.invalidate()
+        undoSecondsRemaining = 0
+        savedNightState = nil
+        undoAction = ""
+        
+        // Light haptic feedback
+        let impact = UIImpactFeedbackGenerator(style: .light)
+        impact.impactOccurred()
+        
+        print("✅ Undo successful")
+    }
+    
+    /// Create a snapshot of current night state
+    private func createStateSnapshot(_ night: DoseLog) -> DoseLog {
+        let snapshot = DoseLog(
+            nightKey: night.nightKey,
+            nightStartUTC: night.nightStartUTC,
+            timezoneOffsetMinutes: night.timezoneOffsetMinutes
+        )
+        snapshot.bedtimeUTC = night.bedtimeUTC
+        snapshot.dose1TimeUTC = night.dose1TimeUTC
+        snapshot.dose1Grams = night.dose1Grams
+        snapshot.dose2TimeUTC = night.dose2TimeUTC
+        snapshot.dose2Grams = night.dose2Grams
+        snapshot.dose2IsOverride = night.dose2IsOverride
+        snapshot.dose2OverrideKind = night.dose2OverrideKind
+        snapshot.dose2OverrideMinutes = night.dose2OverrideMinutes
+        snapshot.dose2OverrideReason = night.dose2OverrideReason
+        snapshot.finalWakeTimeUTC = night.finalWakeTimeUTC
+        snapshot.bathroomWakeTimesUTC = night.bathroomWakeTimesUTC
+        snapshot.morningAlertness = night.morningAlertness
+        snapshot.notes = night.notes
+        return snapshot
     }
 }
 
