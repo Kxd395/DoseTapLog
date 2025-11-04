@@ -64,8 +64,8 @@ struct Chip: View {
     VStack(spacing: DT.md) {
         HStack(spacing: DT.md) {
             Chip(icon: "exclamationmark.triangle.fill",
-                 text: "Per dose 1.50–4.50 g", tone: .warn)
-            Chip(icon: "sum", text: "Planned 8.50 g", tone: .neutral)
+                 text: "Per dose 1.50–4.50\u{2009}g", tone: .warn)
+            Chip(icon: "sum", text: "Planned 8.50\u{2009}g", tone: .neutral)
         }
         
         HStack(spacing: DT.md) {
@@ -77,7 +77,7 @@ struct Chip: View {
         
         HStack(spacing: DT.md) {
             Chip(icon: "book.closed.fill",
-                 text: "Logged 4.25 g", tone: .info)
+                 text: "Logged 4.25\u{2009}g", tone: .info)
             Chip(icon: "moon.zzz",
                  text: "In bed", tone: .neutral)
         }

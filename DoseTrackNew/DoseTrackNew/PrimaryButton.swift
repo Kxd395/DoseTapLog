@@ -15,35 +15,47 @@ struct PrimaryButton: View {
     let icon: String?
     let action: () -> Void
     var enabled: Bool = true
+    var caption: String? = nil
     
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: DT.sm) {
-                if let icon = icon {
-                    Image(systemName: icon)
+        VStack(spacing: 4) {
+            Button(action: action) {
+                HStack(spacing: DT.sm) {
+                    if let icon = icon {
+                        Image(systemName: icon)
+                            .font(.headline)
+                    }
+                    Text(title)
                         .font(.headline)
+                        .monospacedDigit()
                 }
-                Text(title)
-                    .font(.headline)
-                    .monospacedDigit()
+                .frame(maxWidth: .infinity)
+                .frame(height: DT.primaryButtonHeight)
+                .background(
+                    RoundedRectangle(cornerRadius: DT.corner)
+                        .fill(enabled ? Palette.primary.opacity(0.25) : Palette.surface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: DT.corner)
+                                .strokeBorder(
+                                    enabled ? Color.clear : Color.white.opacity(DT.strokeOpacity),
+                                    lineWidth: DT.strokeWidth
+                                )
+                        )
+                )
+                .foregroundStyle(enabled ? Palette.primary : Palette.dim)
             }
-            .frame(maxWidth: .infinity)
-            .frame(height: DT.primaryButtonHeight)
-            .background(
-                RoundedRectangle(cornerRadius: DT.corner)
-                    .fill(enabled ? Palette.primary.opacity(0.25) : Palette.surface)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: DT.corner)
-                            .strokeBorder(
-                                enabled ? Color.clear : Color.white.opacity(DT.strokeOpacity),
-                                lineWidth: DT.strokeWidth
-                            )
-                    )
-            )
-            .foregroundStyle(enabled ? Palette.primary : Palette.dim)
+            .buttonStyle(.plain)
+            .disabled(!enabled)
+            
+            // Show caption when disabled
+            if !enabled, let caption = caption {
+                Text(caption)
+                    .font(.footnote)
+                    .foregroundStyle(Palette.dim)
+                    .multilineTextAlignment(.center)
+                    .accessibilityHint(caption)
+            }
         }
-        .buttonStyle(.plain)
-        .disabled(!enabled)
     }
 }
 
@@ -59,7 +71,8 @@ struct PrimaryButton: View {
             title: "Dose 2",
             icon: "lock.fill",
             action: { print("Dose 2") },
-            enabled: false
+            enabled: false,
+            caption: "Log Dose 1 to start the window"
         )
         
         PrimaryButton(

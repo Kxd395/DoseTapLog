@@ -165,12 +165,12 @@ struct NightCardViewModern: View {
                 }
                 
                 GridRow {
-                    Text(formatGrams(night.dose1Grams ?? prefs.planDose1G) + " g")
+                    Text(formatGrams(night.dose1Grams ?? prefs.planDose1G))
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(Palette.text)
                         .monospacedDigit() // Prevents digit jitter
                     
-                    Text(formatGrams(night.dose2Grams ?? prefs.planDose2G) + " g")
+                    Text(formatGrams(night.dose2Grams ?? prefs.planDose2G))
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(Palette.text)
                         .monospacedDigit() // Prevents digit jitter
@@ -254,15 +254,15 @@ struct NightCardViewModern: View {
         HStack(spacing: DT.md) {
             Chip(
                 icon: "exclamationmark.triangle.fill",
-                text: "Per dose \(formatGrams(perDoseMin))–\(formatGrams(perDoseMax)) g",
+                text: "Per dose \(formatGrams(perDoseMin))–\(formatGrams(perDoseMax))",
                 tone: .warn
             )
             
             Chip(
                 icon: loggedTotal(night) > 0 ? "book.closed.fill" : "sum",
                 text: loggedTotal(night) > 0 
-                    ? "Logged \(formatGrams(loggedTotal(night))) g"
-                    : "Planned \(formatGrams(plannedTotal(night))) g",
+                    ? "Logged \(formatGrams(loggedTotal(night)))"
+                    : "Planned \(formatGrams(plannedTotal(night)))",
                 tone: .neutral
             )
         }
@@ -508,7 +508,7 @@ struct NightCardViewModern: View {
     }
     
     private func formatGrams(_ value: Double) -> String {
-        String(format: "%.2f", value)
+        String(format: "%.2f", value) + "\u{2009}g"  // Thin space + lowercase g
     }
     
     private func formatTime(_ date: Date) -> String {

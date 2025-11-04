@@ -2,46 +2,10 @@
 //  ActionButtons.swift
 //  DoseTrack
 //
-//  Primary and secondary action buttons for dose logging and wake events
+//  Secondary action buttons and action grid for dose logging and wake events
 //
 
 import SwiftUI
-
-/// Primary action button (for main dose/wake actions)
-struct PrimaryActionButton: View {
-    let title: String
-    let icon: String
-    let action: () -> Void
-    var disabled: Bool = false
-    var caption: String? = nil
-    
-    var body: some View {
-        VStack(spacing: 4) {
-            Button(action: action) {
-                Label(title, systemImage: icon)
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(
-                        RoundedRectangle(cornerRadius: DT.chipCorner)
-                            .fill(disabled ? Palette.surfaceHi : Palette.primary.opacity(0.25))
-                    )
-                    .foregroundStyle(disabled ? Palette.dim : Palette.primary)
-            }
-            .buttonStyle(.plain)
-            .disabled(disabled)
-            
-            // Show caption when disabled
-            if disabled, let caption = caption {
-                Text(caption)
-                    .font(.footnote)
-                    .foregroundStyle(Palette.dim)
-                    .multilineTextAlignment(.center)
-                    .accessibilityHint(caption)
-            }
-        }
-    }
-}
 
 /// Secondary action button (for events, reset, etc.)
 struct SecondaryActionButton: View {
@@ -88,20 +52,20 @@ struct ActionGrid: View {
                 ForEach(0..<(primaryActions.count + 1) / 2, id: \.self) { row in
                     GridRow {
                         if let first = primaryActions[safe: row * 2] {
-                            PrimaryActionButton(
+                            PrimaryButton(
                                 title: first.title,
                                 icon: first.icon,
                                 action: first.action,
-                                disabled: first.disabled,
+                                enabled: !first.disabled,
                                 caption: first.caption
                             )
                         }
                         if let second = primaryActions[safe: row * 2 + 1] {
-                            PrimaryActionButton(
+                            PrimaryButton(
                                 title: second.title,
                                 icon: second.icon,
                                 action: second.action,
-                                disabled: second.disabled,
+                                enabled: !second.disabled,
                                 caption: second.caption
                             )
                         }
