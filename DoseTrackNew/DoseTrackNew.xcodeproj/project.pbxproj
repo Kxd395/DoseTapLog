@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */; };
 		8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCF2EB944A2008532AA /* WindowBar.swift */; };
-		E7B701002EB94000008532AA /* WindowPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6694AD22EB94000008532AA /* WindowPill.swift */; };
-		F27864512EB94000008532AA /* NextAlertChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25315D52EB94000008532AA /* NextAlertChip.swift */; };
 		8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */; };
 		8089AFD32EB944A2008532AA /* ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCA2EB944A2008532AA /* ActionButtons.swift */; };
 		8089AFD42EB944A2008532AA /* DesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCB2EB944A2008532AA /* DesignTokens.swift */; };
@@ -56,6 +54,8 @@
 		A0000037 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000037 /* NotificationHelper.swift */; };
 		A0000038 /* UndoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000038 /* UndoBanner.swift */; };
 		A0000039 /* NightTurnoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000039 /* NightTurnoverController.swift */; };
+		E7B701002EB94000008532AA /* WindowPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6694AD22EB94000008532AA /* WindowPill.swift */; };
+		F27864512EB94000008532AA /* NextAlertChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25315D52EB94000008532AA /* NextAlertChip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,8 +65,6 @@
 		8089AFCD2EB944A2008532AA /* StatusChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusChip.swift; sourceTree = "<group>"; };
 		8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCardPlanningView.swift; sourceTree = "<group>"; };
 		8089AFCF2EB944A2008532AA /* WindowBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowBar.swift; sourceTree = "<group>"; };
-		E6694AD22EB94000008532AA /* WindowPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPill.swift; sourceTree = "<group>"; };
-		D25315D52EB94000008532AA /* NextAlertChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAlertChip.swift; sourceTree = "<group>"; };
 		8089AFD82EB9467F008532AA /* AppPreferencesEnhanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesEnhanced.swift; sourceTree = "<group>"; };
 		8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppPreferencesEnhanced+LateDose.swift"; sourceTree = "<group>"; };
 		8089AFDC2EB94764008532AA /* WeeklySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySchedule.swift; sourceTree = "<group>"; };
@@ -110,6 +108,8 @@
 		B0000039 /* NightTurnoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightTurnoverController.swift; sourceTree = "<group>"; };
 		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25315D52EB94000008532AA /* NextAlertChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAlertChip.swift; sourceTree = "<group>"; };
+		E6694AD22EB94000008532AA /* WindowPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPill.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,11 +146,11 @@
 				8089AFCF2EB944A2008532AA /* WindowBar.swift */,
 				E6694AD22EB94000008532AA /* WindowPill.swift */,
 				D25315D52EB94000008532AA /* NextAlertChip.swift */,
-			B0000100 /* Info.plist */,
-			B0000001 /* DoseTrackApp.swift */,
-			8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */,
-			8089AFE02EB94EEF008532AA /* NightServiceDay.swift */,
-			B0000002 /* Models.swift */,
+				B0000100 /* Info.plist */,
+				B0000001 /* DoseTrackApp.swift */,
+				8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */,
+				8089AFE02EB94EEF008532AA /* NightServiceDay.swift */,
+				B0000002 /* Models.swift */,
 				B0000003 /* Config.swift */,
 				B0000004 /* DoseLogController.swift */,
 				8089AFE32EB952D8008532AA /* project.pbxproj */,
@@ -447,7 +447,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ487S8PS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DoseTrackNew/Info.plist;
@@ -477,7 +477,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ487S8PS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = DoseTrackNew/Info.plist;

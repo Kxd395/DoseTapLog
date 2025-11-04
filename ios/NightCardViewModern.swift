@@ -22,6 +22,8 @@ struct NightCardViewModern: View {
     @State private var showNeedDose1Sheet = false
     @State private var showAlreadyLoggedSheet = false
     @State private var showWakeSheet = false
+    @State private var showResetNightSheet = false
+    @State private var wakeSheetIsFinal = false
     
     private let prefs = AppPreferencesEnhanced.shared
     
@@ -130,6 +132,59 @@ struct NightCardViewModern: View {
                 AlreadyLoggedSheet(
                     dose2Time: dose2Time,
                     dose2Grams: night.dose2Grams ?? 0
+                )
+            }
+        }
+        .sheet(isPresented: $showWakeSheet) {
+            if let night = night {
+                WakeSheetView(
+                    isPresented: $showWakeSheet,
+                    isFinalPreset: wakeSheetIsFinal,
+                    allowTimeEditMinutes: 15,
+                    showSeconds: false,
+                    onConfirm: { reason, isFinal, wasInterrupted, time, note in
+                        if isFinal {
+                            night.finalWakeTimeUTC = time
+                            night.finalWakeReason = reason.rawValue
+                        }
+                        // TODO: Add to events array when implemented
+                        
+                        do {
+                            try modelContext.save()
+                            UINotificationFeedbackGenerator().notificationOccurred(.success)
+                            print("✅ Logged \(isFinal ? "final" : "alarm") wake: \(reason.label)")
+                        } catch {
+                            print("❌ Failed to log wake: \(error)")
+                        }
+                    }
+                )
+            }
+        }
+        .sheet(isPresented: $showResetNightSheet) {
+            if let night = night {
+                ResetNightSheet(
+                    requireBiometric: true,
+                    allowHardReset: true,
+                    reasonRequired: true,
+                    hasFinalWake: night.finalWakeTimeUTC != nil,
+                    onConfirm: { mode, reason in
+                        if mode == .soft {
+                            // Archive and reset
+                            night.currentLifecycleState = .abandoned
+                            night.abandonedReason = reason
+                        } else {
+                            // Hard delete
+                            modelContext.delete(night)
+                        }
+                        
+                        do {
+                            try modelContext.save()
+                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                            print("✅ Reset night (\(mode.rawValue)): \(reason)")
+                        } catch {
+                            print("❌ Failed to reset night: \(error)")
+                        }
+                    }
                 )
             }
         }
@@ -594,11 +649,28 @@ struct NightCardViewModern: View {
     // MARK: - Action Handlers (Stubs)
     
     private func logInBed(_ night: DoseLog) {
-        print("Log in bed")
+        night.inBedTimeUTC = Date()
+        
+        do {
+            try modelContext.save()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            print("✅ Logged in bed at \(Date())")
+        } catch {
+            print("❌ Failed to log in bed: \(error)")
+        }
     }
     
     private func logDose1(_ night: DoseLog) {
-        print("Log Dose 1")
+        night.dose1TimeUTC = Date()
+        night.dose1Grams = prefs.planDose1G
+        
+        do {
+            try modelContext.save()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            print("✅ Logged Dose 1: \(night.dose1Grams ?? 0)g")
+        } catch {
+            print("❌ Failed to log Dose 1: \(error)")
+        }
     }
     
     // MARK: - Dose 2 Gate Logic
@@ -707,23 +779,37 @@ struct NightCardViewModern: View {
     }
     
     private func logFinalWake(_ night: DoseLog) {
-        print("Log final wake")
+        wakeSheetIsFinal = true
+        showWakeSheet = true
     }
     
     private func logAlarmWake(_ night: DoseLog) {
-        print("Log alarm wake")
+        wakeSheetIsFinal = false
+        showWakeSheet = true
     }
     
     private func logNaturalWake(_ night: DoseLog) {
-        print("Log natural wake")
+        night.finalWakeTimeUTC = Date()
+        night.finalWakeReason = WakeReason.natural.rawValue
+        
+        do {
+            try modelContext.save()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            print("✅ Logged natural wake")
+        } catch {
+            print("❌ Failed to log natural wake: \(error)")
+        }
     }
     
     private func logBathroom(_ night: DoseLog) {
-        print("Log bathroom")
+        // Log bathroom event (non-final wake)
+        // TODO: Add to events array when implemented
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        print("✅ Logged bathroom wake")
     }
     
     private func resetNight(_ night: DoseLog) {
-        print("Reset night")
+        showResetNightSheet = true
     }
 }
 
