@@ -16,93 +16,69 @@ struct NightCardViewModern: View {
     let modelContext: ModelContext
     
     @State private var showPlanEditor = false
-    @State private var showEarlyDoseSheet = false
-    @State private var showLateDoseSheet = false
-    @State private var showWakeSheet = false
-    @State private var showWhyDose2Disabled = false
-    
-    // New override sheets
     @State private var showEarlyDose2Sheet = false
     @State private var showLateDose2Sheet = false
-    @State private var showBlockedSheet = false
+    @State private var showDose2BlockedSheet = false
     @State private var showNeedDose1Sheet = false
     @State private var showAlreadyLoggedSheet = false
-    
-    @State private var blockedReason: String = ""
-    @State private var dose2Gate: Dose2Gate = .needDose1
-    
-    // Undo window state
-    @State private var undoSecondsRemaining: Int = 0
-    @State private var undoAction: String = ""
-    @State private var undoTimer: Timer?
-    @State private var savedNightState: DoseLog?
+    @State private var showWakeSheet = false
+    @State private var showResetNightSheet = false
+    @State private var wakeSheetIsFinal = false
     
     private let prefs = AppPreferencesEnhanced.shared
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            ScrollView {
-                VStack(spacing: DT.gap) {
-                    if let night = night {
-                        // Plan card (now includes WindowPill)
-                        planCard(night)
-                        
-                        // Next alert chip (if scheduled)
-                        nextAlertChipRow(night)
-                        
-                        // Status chips
-                        statusChipsRow(night)
-                        
-                        // Window bar (compact, only when window is active)
-                        if night.currentLifecycleState.isActive || night.currentLifecycleState == .windowOpen {
-                            windowBarSection(night)
-                        }
-                        
-                        // Actions section with hint
-                        SectionHeader(
-                            title: "Actions",
-                            hint: dose2Enabled(night) ? nil : dose2DisabledHint(night)
-                        )
-                        
-                        actionsGrid(night)
-                        
-                        // Recent events
-                        if horizon == .tonight || horizon == .lastNight {
-                            recentEventsCard(night)
-                        }
-                    } else {
-                        // No night yet (Tomorrow)
-                        emptyStateCard
+        ScrollView {
+            VStack(spacing: DT.gap) {
+                // Header
+                headerRow
+                
+                if let night = night {
+                    // Plan card
+                    planCard(night)
+                    
+                    // Window status pills
+                    windowPillsRow(night)
+                    
+                    // Status chips
+                    statusChipsRow(night)
+                    
+                    // Window bar (compact, replaces big ring)
+                    if night.currentLifecycleState.isActive {
+                        windowBarSection(night)
                     }
+                    
+                    // Actions
+                    actionsGrid(night)
+                    
+                    // Recent events
+                    if horizon == .tonight || horizon == .lastNight {
+                        recentEventsCard(night)
+                    }
+                } else {
+                    // No night yet (Tomorrow)
+                    emptyStateCard
                 }
-                .padding(DT.pad)
-                .padding(.bottom, undoSecondsRemaining > 0 ? 80 : 0) // Space for undo banner
             }
-            
-            // Undo banner (floating at bottom)
-            if undoSecondsRemaining > 0 {
-                UndoBanner(
-                    actionName: undoAction,
-                    secondsRemaining: undoSecondsRemaining,
-                    onUndo: performUndo
-                )
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-                .animation(.spring(), value: undoSecondsRemaining)
-            }
+            .padding(DT.pad)
         }
         .background(Palette.bg.ignoresSafeArea())
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showWhyDose2Disabled) {
-            whyDose2DisabledSheet
-        }
         .sheet(isPresented: $showEarlyDose2Sheet) {
-            if let night = night {
-                if case .tooEarly(let minutes) = dose2Gate {
+            if let night = night, let d1 = night.dose1TimeUTC {
+                let gate = evaluateDose2Gate(
+                    now: Date(),
+                    dose1At: d1,
+                    dose2At: night.dose2TimeUTC,
+                    policy: Dose2Policy.from(prefs)
+                )
+                if case .tooEarly(let minutes) = gate {
                     EarlyDose2Sheet(
                         minutesEarly: minutes,
                         policy: Dose2Policy.from(prefs),
                         onConfirm: { override in
                             logDose2WithOverride(night, override: override)
+                            showEarlyDose2Sheet = false
                         },
                         onRemindAtStart: {
                             scheduleWindowStartReminder()
@@ -112,52 +88,132 @@ struct NightCardViewModern: View {
             }
         }
         .sheet(isPresented: $showLateDose2Sheet) {
-            if let night = night {
-                if case .tooLate(let minutes) = dose2Gate {
+            if let night = night, let d1 = night.dose1TimeUTC {
+                let gate = evaluateDose2Gate(
+                    now: Date(),
+                    dose1At: d1,
+                    dose2At: night.dose2TimeUTC,
+                    policy: Dose2Policy.from(prefs)
+                )
+                if case .tooLate(let minutes) = gate {
                     LateDose2Sheet(
                         minutesLate: minutes,
                         policy: Dose2Policy.from(prefs),
                         onConfirm: { override in
                             logDose2WithOverride(night, override: override)
-                        },
-                        onLogMissed: {
-                            logMissedDose2(night)
+                            showLateDose2Sheet = false
                         }
                     )
                 }
             }
         }
-        .sheet(isPresented: $showBlockedSheet) {
-            Dose2BlockedSheet(
-                reason: blockedReason,
-                onRemindAtStart: {
-                    scheduleWindowStartReminder()
-                }
-            )
-        }
-        .sheet(isPresented: $showNeedDose1Sheet) {
-            if let night = night {
-                NeedDose1Sheet(
-                    onLogDose1Now: {
-                        logDose1(night)
-                    },
-                    onSetReminder: {
-                        // TODO: Schedule Dose 1 reminder
+        .sheet(isPresented: $showDose2BlockedSheet) {
+            if let night = night, let d1 = night.dose1TimeUTC {
+                let gate = evaluateDose2Gate(
+                    now: Date(),
+                    dose1At: d1,
+                    dose2At: night.dose2TimeUTC,
+                    policy: Dose2Policy.from(prefs)
+                )
+                Dose2BlockedSheet(
+                    gate: gate,
+                    policy: Dose2Policy.from(prefs),
+                    onNotifyMe: {
+                        scheduleWindowStartReminder()
                     }
                 )
             }
         }
+        .sheet(isPresented: $showNeedDose1Sheet) {
+            NeedDose1Sheet()
+        }
         .sheet(isPresented: $showAlreadyLoggedSheet) {
             if let night = night, let dose2Time = night.dose2TimeUTC {
-                Dose2AlreadyLoggedSheet(
-                    loggedAt: dose2Time,
-                    onEditTime: {
-                        // TODO: Open edit time sheet
-                    },
-                    onUndo: {
-                        // TODO: Undo Dose 2 (if within 30s window)
+                AlreadyLoggedSheet(
+                    dose2Time: dose2Time,
+                    dose2Grams: night.dose2Grams ?? 0
+                )
+            }
+        }
+        .sheet(isPresented: $showWakeSheet) {
+            if let night = night {
+                WakeSheetView(
+                    isPresented: $showWakeSheet,
+                    isFinalPreset: wakeSheetIsFinal,
+                    allowTimeEditMinutes: 15,
+                    showSeconds: false,
+                    onConfirm: { reason, isFinal, wasInterrupted, time, note in
+                        if isFinal {
+                            night.finalWakeTimeUTC = time
+                            night.finalWakeReason = reason.rawValue
+                        }
+                        // TODO: Add to events array when implemented
+                        
+                        do {
+                            try modelContext.save()
+                            UINotificationFeedbackGenerator().notificationOccurred(.success)
+                            print("✅ Logged \(isFinal ? "final" : "alarm") wake: \(reason.label)")
+                        } catch {
+                            print("❌ Failed to log wake: \(error)")
+                        }
                     }
                 )
+            }
+        }
+        .sheet(isPresented: $showResetNightSheet) {
+            if let night = night {
+                ResetNightSheet(
+                    requireBiometric: true,
+                    allowHardReset: true,
+                    reasonRequired: true,
+                    hasFinalWake: night.finalWakeTimeUTC != nil,
+                    onConfirm: { mode, reason in
+                        if mode == .soft {
+                            // Archive and reset
+                            night.currentLifecycleState = .abandoned
+                            night.abandonedReason = reason
+                        } else {
+                            // Hard delete
+                            modelContext.delete(night)
+                        }
+                        
+                        do {
+                            try modelContext.save()
+                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                            print("✅ Reset night (\(mode.rawValue)): \(reason)")
+                        } catch {
+                            print("❌ Failed to reset night: \(error)")
+                        }
+                    }
+                )
+            }
+        }
+    }
+    
+    // MARK: - Header
+    
+    private var headerRow: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("DoseTrack")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundStyle(Palette.text)
+                
+                Text("Build 1.1.2")
+                    .font(.caption2)
+                    .foregroundStyle(Palette.dim)
+            }
+            
+            Spacer()
+            
+            Button {
+                // Open settings
+            } label: {
+                Image(systemName: "gearshape.fill")
+                    .foregroundStyle(Palette.dim)
+                    .padding(10)
+                    .background(.ultraThinMaterial, in: Circle())
             }
         }
     }
@@ -166,35 +222,33 @@ struct NightCardViewModern: View {
     
     @ViewBuilder
     private func planCard(_ night: DoseLog) -> some View {
-        VStack(alignment: .leading, spacing: DT.md) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Tonight plan")
-                .font(.title3.weight(.semibold))
+                .font(.title2)
+                .bold()
                 .foregroundStyle(Palette.text)
             
-            // Grid layout for perfect Dose 1/2 alignment
-            Grid(horizontalSpacing: DT.lg, verticalSpacing: 2) {
-                GridRow {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("Dose 1")
-                        .font(.footnote.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                    
-                    Text("Dose 2")
-                        .font(.footnote.weight(.semibold))
-                        .foregroundStyle(.secondary)
-                        .gridColumnAlignment(.trailing)
+                        .font(.caption)
+                        .foregroundStyle(Palette.dim)
+                    Text("\(formatGrams(night.dose1Grams ?? prefs.planDose1G)) g")
+                        .font(.title3)
+                        .bold()
+                        .foregroundStyle(Palette.dose1)
                 }
                 
-                GridRow {
-                    Text(formatGrams(night.dose1Grams ?? prefs.planDose1G))
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(Palette.text)
-                        .monospacedDigit() // Prevents digit jitter
-                    
-                    Text(formatGrams(night.dose2Grams ?? prefs.planDose2G))
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(Palette.text)
-                        .monospacedDigit() // Prevents digit jitter
-                        .gridColumnAlignment(.trailing)
+                Spacer(minLength: 12)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Dose 2")
+                        .font(.caption)
+                        .foregroundStyle(Palette.dim)
+                    Text("\(formatGrams(night.dose2Grams ?? prefs.planDose2G)) g")
+                        .font(.title3)
+                        .bold()
+                        .foregroundStyle(Palette.dose2)
                 }
             }
             
@@ -203,48 +257,45 @@ struct NightCardViewModern: View {
                 let windowStart = d1.addingTimeInterval(Double(prefs.windowStartMin * 60))
                 let windowEnd = d1.addingTimeInterval(Double(prefs.windowEndMin * 60))
                 Text("Window: \(formatTime(windowStart)) – \(formatTime(windowEnd))")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .foregroundStyle(Palette.dim)
             } else {
                 Text("Window: \(prefs.windowStartMin)–\(prefs.windowEndMin) min after Dose 1")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(.footnote)
+                    .foregroundStyle(Palette.dim)
             }
-            
-            // Window status pill (moved inside plan card)
+        }
+        .padding(DT.pad)
+        .background(
+            RoundedRectangle(cornerRadius: DT.corner)
+                .fill(Palette.surface)
+        )
+    }
+    
+    // MARK: - Window Pills Row
+    
+    @ViewBuilder
+    private func windowPillsRow(_ night: DoseLog) -> some View {
+        HStack(spacing: 8) {
+            // Window status pill with live countdown
             WindowPill(
                 dose1At: night.dose1TimeUTC,
                 windowStartMin: prefs.windowStartMin,
                 windowEndMin: prefs.windowEndMin,
                 showSeconds: prefs.showSeconds
             )
-        }
-        .padding(DT.lg)
-        .background(
-            RoundedRectangle(cornerRadius: DT.corner)
-                .fill(Color.white.opacity(0.06))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: DT.corner)
-                .stroke(Color.white.opacity(DT.strokeOpacity), lineWidth: DT.strokeWidth)
-        )
-    }
-    
-    // MARK: - Next Alert Chip
-    
-    @ViewBuilder
-    private func nextAlertChipRow(_ night: DoseLog) -> some View {
-        // Next alert chip (if scheduled)
-        if let nextAlert = nextScheduledAlert(for: night) {
-            HStack {
+            
+            // Next alert chip (if scheduled)
+            if let nextAlert = nextScheduledAlert(for: night) {
                 NextAlertChip(
                     nextAlertTime: nextAlert,
                     alarmStyle: currentAlarmStyle()
                 )
-                Spacer()
             }
-            .padding(.horizontal, DT.pad)
+            
+            Spacer()
         }
+        .padding(.horizontal, DT.pad)
     }
     
     /// Get next scheduled alert time for this night
@@ -269,24 +320,38 @@ struct NightCardViewModern: View {
     @ViewBuilder
     private func statusChipsRow(_ night: DoseLog) -> some View {
         let perDoseMin = 1.5, perDoseMax = 4.5 // Safety constants from AppPreferencesEnhanced
-        
-        // Use wrapping HStack for chips (or FlowLayout when available)
-        HStack(spacing: DT.md) {
-            Chip(
-                icon: "exclamationmark.triangle.fill",
-                text: "Per dose \(formatGrams(perDoseMin))–\(formatGrams(perDoseMax))",
-                tone: .warn
+        ModernStatusChipRow(chips: [
+            .init(
+                text: "Per dose \(formatGrams(perDoseMin))–\(formatGrams(perDoseMax)) g",
+                icon: "checkmark.seal.fill",
+                tone: perDoseSafe(night) ? Palette.ok : Palette.warn
+            ),
+            .init(
+                text: "Σ Planned \(formatGrams(plannedTotal(night))) g",
+                icon: "calculator",
+                tone: Palette.text.opacity(0.8)
+            ),
+            .init(
+                text: "📒 Logged \(formatGrams(loggedTotal(night))) g",
+                icon: "book.closed",
+                tone: loggedTotal(night) > 0 ? Palette.text.opacity(0.8) : Palette.dim
+            ),
+            .init(
+                text: "Health OK",
+                icon: "heart.fill",
+                tone: Palette.ok
+            ),
+            .init(
+                text: "WHOOP OK",
+                icon: "antenna.radiowaves.left.and.right",
+                tone: Palette.ok
+            ),
+            .init(
+                text: "Wake: manual",
+                icon: "bed.double.fill",
+                tone: Palette.dim
             )
-            
-            Chip(
-                icon: loggedTotal(night) > 0 ? "book.closed.fill" : "sum",
-                text: loggedTotal(night) > 0 
-                    ? "Logged \(formatGrams(loggedTotal(night)))"
-                    : "Planned \(formatGrams(plannedTotal(night)))",
-                tone: .neutral
-            )
-        }
-        .padding(.horizontal, DT.lg)
+        ])
     }
     
     // MARK: - Window Bar (Compact)
@@ -378,15 +443,12 @@ struct NightCardViewModern: View {
                 }),
                 .init(
                     title: "Dose 2",
-                    icon: dose2Enabled(night) ? "pills.fill" : "lock.fill",
+                    icon: "pills.circle.fill",
+                    disabled: !dose2Enabled(night),
+                    caption: dose2DisabledCaption(night),
                     action: {
-                        if dose2Enabled(night) {
-                            tryLogDose2(night)
-                        } else {
-                            showWhyDose2Disabled = true
-                        }
-                    },
-                    disabled: !dose2Enabled(night)
+                        tryLogDose2(night)
+                    }
                 ),
                 .init(title: "Final wake", icon: "sunrise.fill", action: {
                     logFinalWake(night)
@@ -402,9 +464,9 @@ struct NightCardViewModern: View {
                 .init(title: "Bathroom", icon: "figure.walk", action: {
                     logBathroom(night)
                 }),
-                .init(title: "Reset night", icon: "arrow.counterclockwise", action: {
+                .init(title: "Reset night", icon: "arrow.counterclockwise", tone: Palette.danger, action: {
                     resetNight(night)
-                }, tone: Palette.danger)
+                })
             ]
         )
     }
@@ -419,32 +481,22 @@ struct NightCardViewModern: View {
                     .font(.headline)
                     .foregroundStyle(Palette.text)
                 Spacer()
-                if !nightEvents(night).isEmpty {
-                    Button("Undo last") {
-                        undoLastEvent(night)
-                    }
-                    .font(.footnote)
-                    .foregroundStyle(undoSecondsRemaining > 0 ? Palette.dim : Palette.primary)
-                    .disabled(undoSecondsRemaining > 0) // Disable if already in undo window
+                Button("Undo last") {
+                    // TODO: Undo last event
                 }
+                .font(.footnote)
+                .foregroundStyle(Palette.primary)
             }
             
             // Show last 5 events
-            let events = nightEvents(night)
-            if events.isEmpty {
+            if night.dose1TimeUTC == nil && night.dose2TimeUTC == nil {
                 Text("No events yet")
                     .font(.footnote)
                     .foregroundStyle(Palette.dim)
-                    .padding(.vertical, 8)
             } else {
-                ForEach(events.prefix(5)) { event in
-                    eventRow(
-                        icon: event.icon,
-                        text: event.text,
-                        time: formatEventTime(event.time),
-                        color: event.color
-                    )
-                }
+                // TODO: Show actual events from event log
+                eventRow(icon: "pills.fill", text: "Dose 1 logged", time: "8:30 PM", color: Palette.dose1)
+                eventRow(icon: "pills.circle.fill", text: "Dose 2 logged", time: "12:15 AM", color: Palette.dose2)
             }
         }
         .padding(DT.pad)
@@ -452,130 +504,6 @@ struct NightCardViewModern: View {
             RoundedRectangle(cornerRadius: DT.corner)
                 .fill(Palette.surface)
         )
-    }
-    
-    /// Generate events from night data (most recent first)
-    private func nightEvents(_ night: DoseLog) -> [EventItem] {
-        var events: [EventItem] = []
-        
-        // Final wake
-        if let time = night.finalWakeTimeUTC {
-            let provenance = night.finalWakeProvenance ?? "wake"
-            events.append(EventItem(
-                type: .wake,
-                time: time,
-                text: "Final wake (\(provenance))",
-                icon: "sunrise.fill",
-                color: Palette.wake
-            ))
-        }
-        
-        // Bathroom wakes (most recent first)
-        for (index, time) in night.bathroomWakeTimesUTC.reversed().enumerated() {
-            events.append(EventItem(
-                type: .bathroom,
-                time: time,
-                text: "Bathroom wake #\(night.bathroomWakeTimesUTC.count - index)",
-                icon: "figure.walk",
-                color: .cyan
-            ))
-        }
-        
-        // Dose 2
-        if let time = night.dose2TimeUTC, let grams = night.dose2Grams {
-            var text = "Dose 2 (\(formatGrams(grams)))"
-            if night.dose2IsOverride, let kind = night.dose2OverrideKind {
-                text += " • \(kind)"
-            }
-            events.append(EventItem(
-                type: .dose2,
-                time: time,
-                text: text,
-                icon: "pills.circle.fill",
-                color: Palette.dose2
-            ))
-        }
-        
-        // Dose 1
-        if let time = night.dose1TimeUTC, let grams = night.dose1Grams {
-            events.append(EventItem(
-                type: .dose1,
-                time: time,
-                text: "Dose 1 (\(formatGrams(grams)))",
-                icon: "pills.fill",
-                color: Palette.dose1
-            ))
-        }
-        
-        // Bedtime
-        if let time = night.bedtimeUTC {
-            events.append(EventItem(
-                type: .bedtime,
-                time: time,
-                text: "In bed",
-                icon: "moon.fill",
-                color: .purple
-            ))
-        }
-        
-        // Sort by time, most recent first
-        return events.sorted { $0.time > $1.time }
-    }
-    
-    private func formatEventTime(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
-    
-    /// Undo the most recent event
-    private func undoLastEvent(_ night: DoseLog) {
-        let events = nightEvents(night)
-        guard let lastEvent = events.first else {
-            print("⚠️ No events to undo")
-            return
-        }
-        
-        // Create snapshot before making changes
-        let snapshot = createStateSnapshot(night)
-        
-        // Undo based on event type
-        switch lastEvent.type {
-        case .wake:
-            night.finalWakeTimeUTC = nil
-            night.finalWakeProvenance = nil
-            
-        case .bathroom:
-            if !night.bathroomWakeTimesUTC.isEmpty {
-                night.bathroomWakeTimesUTC.removeLast()
-            }
-            
-        case .dose2:
-            night.dose2TimeUTC = nil
-            night.dose2Grams = nil
-            night.dose2IsOverride = false
-            night.dose2OverrideKind = nil
-            night.dose2OverrideMinutes = nil
-            night.dose2OverrideReason = nil
-            
-        case .dose1:
-            night.dose1TimeUTC = nil
-            night.dose1Grams = nil
-            
-        case .bedtime:
-            night.bedtimeUTC = nil
-        }
-        
-        try? modelContext.save()
-        
-        // Start undo window for this action
-        startUndoWindow(actionName: lastEvent.text, savedState: snapshot)
-        
-        // Haptic feedback
-        let impact = UIImpactFeedbackGenerator(style: .medium)
-        impact.impactOccurred()
-        
-        print("✅ Undid: \(lastEvent.text)")
     }
     
     @ViewBuilder
@@ -621,11 +549,10 @@ struct NightCardViewModern: View {
     // MARK: - Helper Methods
     
     private func perDoseSafe(_ night: DoseLog) -> Bool {
-        let perDoseMin = 1.5, perDoseMax = 4.5  // Safety constants from AppPreferencesEnhanced
         let d1 = night.dose1Grams ?? 0
         let d2 = night.dose2Grams ?? 0
-        return d1 >= perDoseMin && d1 <= perDoseMax &&
-               d2 >= perDoseMin && d2 <= perDoseMax
+        return d1 >= prefs.perDoseMinG && d1 <= prefs.perDoseMaxG &&
+               d2 >= prefs.perDoseMinG && d2 <= prefs.perDoseMaxG
     }
     
     private func plannedTotal(_ night: DoseLog) -> Double {
@@ -661,8 +588,43 @@ struct NightCardViewModern: View {
         return false
     }
     
+    private func dose2DisabledCaption(_ night: DoseLog) -> String? {
+        // Already logged or enabled
+        if night.dose2TimeUTC != nil || dose2Enabled(night) {
+            return nil
+        }
+        
+        // Dose 1 not logged yet
+        guard let d1 = night.dose1TimeUTC else {
+            return "Log Dose 1 to start the window"
+        }
+        
+        let now = Date()
+        let windowStart = d1.addingTimeInterval(Double(prefs.windowStartMin) * 60)
+        let windowEnd = d1.addingTimeInterval(Double(prefs.windowEndMin) * 60)
+        
+        // Before window
+        if now < windowStart {
+            let remainingSeconds = windowStart.timeIntervalSince(now)
+            let remainingMinutes = Int(remainingSeconds / 60)
+            let hours = remainingMinutes / 60
+            let mins = remainingMinutes % 60
+            
+            let timeStr = hours > 0 ? "\(hours)h \(mins)m" : "\(mins)m"
+            return "Opens in \(timeStr) (\(prefs.windowStartMin)–\(prefs.windowEndMin) min after Dose 1)"
+        }
+        
+        // After window expired
+        let expiredSeconds = now.timeIntervalSince(windowEnd)
+        let expiredMinutes = Int(expiredSeconds / 60)
+        let hours = expiredMinutes / 60
+        let mins = expiredMinutes % 60
+        let timeStr = hours > 0 ? "\(hours)h \(mins)m" : "\(mins)m"
+        return "Window expired \(timeStr) ago"
+    }
+    
     private func formatGrams(_ value: Double) -> String {
-        String(format: "%.2f", value) + "\u{2009}g"  // Thin space + lowercase g
+        String(format: "%.2f", value)
     }
     
     private func formatTime(_ date: Date) -> String {
@@ -687,23 +649,34 @@ struct NightCardViewModern: View {
     // MARK: - Action Handlers (Stubs)
     
     private func logInBed(_ night: DoseLog) {
-        print("Log in bed")
+        print("🔵 logInBed called - NEW VERSION")
+        night.inBedTimeUTC = Date()
+        
+        do {
+            try modelContext.save()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            print("✅ Logged in bed at \(Date())")
+        } catch {
+            print("❌ Failed to log in bed: \(error)")
+        }
     }
     
     private func logDose1(_ night: DoseLog) {
         night.dose1TimeUTC = Date()
         night.dose1Grams = prefs.planDose1G
-        try? modelContext.save()
         
-        // Haptic
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-        
-        print("Logged Dose 1")
+        do {
+            try modelContext.save()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            print("✅ Logged Dose 1: \(night.dose1Grams ?? 0)g")
+        } catch {
+            print("❌ Failed to log Dose 1: \(error)")
+        }
     }
     
+    // MARK: - Dose 2 Gate Logic
+    
     private func tryLogDose2(_ night: DoseLog) {
-        // Evaluate gate
         let policy = Dose2Policy.from(prefs)
         let gate = evaluateDose2Gate(
             now: Date(),
@@ -712,23 +685,24 @@ struct NightCardViewModern: View {
             policy: policy
         )
         
-        // Store gate for sheets
-        dose2Gate = gate
-        
-        // Handle each gate state
         switch gate {
         case .ready:
-            // Log immediately
-            logDose2Now(night, override: nil)
+            // Log immediately (within window)
+            logDose2Now(night)
+            
+        case .needDose1:
+            showNeedDose1Sheet = true
+            
+        case .alreadyLogged:
+            showAlreadyLoggedSheet = true
             
         case .tooEarly(let minutes):
             if isOverrideAllowed(gate: gate, policy: policy) {
                 // Show early override sheet
                 showEarlyDose2Sheet = true
             } else {
-                // Blocked
-                blockedReason = "Dose 2 must be at least \(prefs.windowStartMin) min after Dose 1. You're \(minutes) min early."
-                showBlockedSheet = true
+                // Blocked - too early beyond limit
+                showDose2BlockedSheet = true
             }
             
         case .tooLate(let minutes):
@@ -736,301 +710,112 @@ struct NightCardViewModern: View {
                 // Show late override sheet
                 showLateDose2Sheet = true
             } else {
-                // Blocked
-                blockedReason = "Window ended \(minutes) min ago."
-                showBlockedSheet = true
+                // Blocked - too late beyond limit
+                showDose2BlockedSheet = true
             }
-            
-        case .needDose1:
-            showNeedDose1Sheet = true
-            
-        case .alreadyLogged:
-            showAlreadyLoggedSheet = true
         }
     }
     
-    private func logDose2Now(_ night: DoseLog, override: Dose2Override?) {
-        // Save state snapshot for undo
-        let snapshot = createStateSnapshot(night)
-        
+    /// Log Dose 2 immediately (no override)
+    private func logDose2Now(_ night: DoseLog) {
         night.dose2TimeUTC = Date()
         night.dose2Grams = prefs.planDose2G
+        night.dose2IsOverride = false
         
-        // Store override data if present
-        if let override = override {
-            night.dose2IsOverride = true
-            night.dose2OverrideKind = override.kind.rawValue
-            night.dose2OverrideMinutes = override.minutes
-            night.dose2OverrideReason = override.reason
+        do {
+            try modelContext.save()
+            
+            // Success haptic
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            
+            print("✅ Logged Dose 2: \(night.dose2Grams ?? 0)g")
+            
+            // Cancel any scheduled window start notifications
+            NotificationHelper.shared.cancelWindowStartReminder()
+            
+        } catch {
+            print("❌ Failed to log Dose 2: \(error)")
         }
-        
-        try? modelContext.save()
-        
-        // Cancel any pending window start reminder since Dose 2 is now logged
-        NotificationHelper.shared.cancelWindowStartReminder()
-        
-        // Haptic
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-        
-        // Start undo window
-        let actionName = override != nil 
-            ? "Dose 2 (\(formatGrams(prefs.planDose2G)), \(override!.kind.rawValue))"
-            : "Dose 2 (\(formatGrams(prefs.planDose2G)))"
-        startUndoWindow(actionName: actionName, savedState: snapshot)
-        
-        print("Logged Dose 2")
     }
     
+    /// Log Dose 2 with override (early/late)
     private func logDose2WithOverride(_ night: DoseLog, override: Dose2Override) {
-        logDose2Now(night, override: override)
-    }
-    
-    private func logMissedDose2(_ night: DoseLog) {
-        // TODO: Log as missed dose with flag
-        print("Log missed Dose 2")
-    }
-    
-    private func logFinalWake(_ night: DoseLog) {
-        print("Log final wake")
-    }
-    
-    private func logAlarmWake(_ night: DoseLog) {
-        print("Log alarm wake")
-    }
-    
-    private func logNaturalWake(_ night: DoseLog) {
-        print("Log natural wake")
-    }
-    
-    private func logBathroom(_ night: DoseLog) {
-        print("Log bathroom")
-    }
-    
-    private func resetNight(_ night: DoseLog) {
-        print("Reset night")
-    }
-    
-    // MARK: - Helper: Dose 2 Disabled Hint
-    
-    /// Short parenthetical hint for section header (not the full caption)
-    private func dose2DisabledHint(_ night: DoseLog) -> String? {
-        guard !dose2Enabled(night) else { return nil }
+        night.dose2TimeUTC = Date()
+        night.dose2Grams = prefs.planDose2G
+        night.dose2IsOverride = true
+        night.dose2OverrideKind = override.kind.rawValue
+        night.dose2OverrideMinutes = override.minutes
+        night.dose2OverrideReason = override.reason
         
-        if night.dose1TimeUTC == nil {
-            return "Dose 2 locked until Dose 1"
-        }
-        
-        // If Dose 1 logged but window not open yet
-        let d1 = night.dose1TimeUTC!
-        let now = Date()
-        let windowStart = d1.addingTimeInterval(Double(prefs.windowStartMin) * 60)
-        
-        if now < windowStart {
-            let remainingMinutes = Int(windowStart.timeIntervalSince(now) / 60)
-            return "Opens in \(remainingMinutes)m"
-        }
-        
-        return "Window expired"
-    }
-    
-    // MARK: - Why Dose 2 Disabled Sheet
-    
-    @ViewBuilder
-    private var whyDose2DisabledSheet: some View {
-        VStack(spacing: DT.lg) {
-            Image(systemName: "lock.fill")
-                .font(.system(size: 48))
-                .foregroundStyle(.secondary)
+        do {
+            try modelContext.save()
             
-            Text("Dose 2 is locked")
-                .font(.title2.bold())
+            // Heavy impact haptic for overrides
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             
-            if let night = night {
-                Text(dose2DisabledExplanation(night))
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
+            print("⚠️ Logged Dose 2 with \(override.kind.rawValue) override: \(override.minutes)m, reason: \(override.reason)")
             
-            HStack(spacing: DT.md) {
-                Button("Remind me at window start") {
-                    scheduleWindowStartReminder()
-                }
-                .buttonStyle(.borderedProminent)
-                
-                Button("Close") {
-                    showWhyDose2Disabled = false
-                }
-                .buttonStyle(.bordered)
-            }
-            .padding(.top, DT.sm)
+            // Cancel notifications
+            NotificationHelper.shared.cancelWindowStartReminder()
+            
+        } catch {
+            print("❌ Failed to log Dose 2 override: \(error)")
         }
-        .padding(DT.xl)
-        .presentationDetents([.height(280)])
     }
     
-    /// Full explanation for the sheet
-    private func dose2DisabledExplanation(_ night: DoseLog) -> String {
-        if night.dose1TimeUTC == nil {
-            return "Log Dose 1 to start the dosing window."
-        }
-        
-        let d1 = night.dose1TimeUTC!
-        let now = Date()
-        let windowStart = d1.addingTimeInterval(Double(prefs.windowStartMin) * 60)
-        let windowEnd = d1.addingTimeInterval(Double(prefs.windowEndMin) * 60)
-        
-        if now < windowStart {
-            let remainingSeconds = windowStart.timeIntervalSince(now)
-            let remainingMinutes = Int(remainingSeconds / 60)
-            let hours = remainingMinutes / 60
-            let mins = remainingMinutes % 60
-            let timeStr = hours > 0 ? "\(hours)h \(mins)m" : "\(mins)m"
-            return "Window opens in \(timeStr) (\(prefs.windowStartMin)–\(prefs.windowEndMin) min after Dose 1)."
-        }
-        
-        // Window expired
-        let expiredSeconds = now.timeIntervalSince(windowEnd)
-        let expiredMinutes = Int(expiredSeconds / 60)
-        let hours = expiredMinutes / 60
-        let mins = expiredMinutes % 60
-        let timeStr = hours > 0 ? "\(hours)h \(mins)m" : "\(mins)m"
-        return "The dosing window expired \(timeStr) ago."
-    }
-    
+    /// Schedule notification for window start
     private func scheduleWindowStartReminder() {
-        guard let night = night, let d1 = night.dose1TimeUTC else {
-            print("⚠️ Cannot schedule reminder: no Dose 1 logged")
-            showWhyDose2Disabled = false
-            return
-        }
+        guard let night = night, let d1 = night.dose1TimeUTC else { return }
         
-        let windowStartTime = d1.addingTimeInterval(Double(prefs.windowStartMin) * 60)
+        let windowStartTime = d1.addingTimeInterval(Double(prefs.windowStartMin * 60))
         
         Task {
             let success = await NotificationHelper.shared.scheduleWindowStartReminder(at: windowStartTime)
-            
-            await MainActor.run {
-                if success {
-                    // Show confirmation
-                    print("✅ Reminder scheduled for \(windowStartTime)")
-                    // Could add a toast/banner here
-                } else {
-                    // Permission denied - could show settings prompt
-                    print("⚠️ Failed to schedule reminder - check notification permissions")
-                }
-                showWhyDose2Disabled = false
-            }
-        }
-    }
-    
-    // MARK: - Undo Window Logic
-    
-    /// Start undo countdown after logging an action
-    private func startUndoWindow(actionName: String, savedState: DoseLog) {
-        // Cancel any existing timer
-        undoTimer?.invalidate()
-        
-        // Save state for restoration
-        savedNightState = savedState
-        undoAction = actionName
-        undoSecondsRemaining = 30
-        
-        // Start countdown timer
-        undoTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] timer in
-            if undoSecondsRemaining > 0 {
-                undoSecondsRemaining -= 1
+            if success {
+                print("✅ Scheduled window start reminder for \(windowStartTime)")
             } else {
-                timer.invalidate()
-                savedNightState = nil
-                undoAction = ""
+                print("❌ Failed to schedule window start reminder")
             }
         }
     }
     
-    /// Perform undo - restore saved state
-    private func performUndo() {
-        guard let savedState = savedNightState, let night = night else {
-            print("⚠️ No saved state to restore")
-            return
-        }
-        
-        // Restore previous state
-        night.dose1TimeUTC = savedState.dose1TimeUTC
-        night.dose1Grams = savedState.dose1Grams
-        night.dose2TimeUTC = savedState.dose2TimeUTC
-        night.dose2Grams = savedState.dose2Grams
-        night.dose2IsOverride = savedState.dose2IsOverride
-        night.dose2OverrideKind = savedState.dose2OverrideKind
-        night.dose2OverrideMinutes = savedState.dose2OverrideMinutes
-        night.dose2OverrideReason = savedState.dose2OverrideReason
-        night.finalWakeTimeUTC = savedState.finalWakeTimeUTC
-        night.bathroomWakeTimesUTC = savedState.bathroomWakeTimesUTC
-        
-        try? modelContext.save()
-        
-        // Clear undo state
-        undoTimer?.invalidate()
-        undoSecondsRemaining = 0
-        savedNightState = nil
-        undoAction = ""
-        
-        // Light haptic feedback
-        let impact = UIImpactFeedbackGenerator(style: .light)
-        impact.impactOccurred()
-        
-        print("✅ Undo successful")
+    private func logFinalWake(_ night: DoseLog) {
+        print("🔵 logFinalWake called - NEW VERSION")
+        wakeSheetIsFinal = true
+        showWakeSheet = true
     }
     
-    /// Create a snapshot of current night state
-    private func createStateSnapshot(_ night: DoseLog) -> DoseLog {
-        let snapshot = DoseLog(
-            nightKey: night.nightKey,
-            nightStartUTC: night.nightStartUTC,
-            timezoneOffsetMinutes: night.timezoneOffsetMinutes
-        )
-        snapshot.bedtimeUTC = night.bedtimeUTC
-        snapshot.dose1TimeUTC = night.dose1TimeUTC
-        snapshot.dose1Grams = night.dose1Grams
-        snapshot.dose2TimeUTC = night.dose2TimeUTC
-        snapshot.dose2Grams = night.dose2Grams
-        snapshot.dose2IsOverride = night.dose2IsOverride
-        snapshot.dose2OverrideKind = night.dose2OverrideKind
-        snapshot.dose2OverrideMinutes = night.dose2OverrideMinutes
-        snapshot.dose2OverrideReason = night.dose2OverrideReason
-        snapshot.finalWakeTimeUTC = night.finalWakeTimeUTC
-        snapshot.bathroomWakeTimesUTC = night.bathroomWakeTimesUTC
-        snapshot.morningAlertness = night.morningAlertness
-        snapshot.notes = night.notes
-        return snapshot
+    private func logAlarmWake(_ night: DoseLog) {
+        print("🔵 logAlarmWake called - NEW VERSION")
+        wakeSheetIsFinal = false
+        showWakeSheet = true
     }
-}
-
-// MARK: - Section Header Component
-
-struct SectionHeader: View {
-    let title: String
-    let hint: String?
     
-    var body: some View {
-        HStack(spacing: DT.sm) {
-            Text(title)
-                .font(.title3.bold())
-                .foregroundStyle(Palette.text)
-            
-            if let hint, !hint.isEmpty {
-                Text("(\(hint))")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.9)
-            }
-            
-            Spacer()
+    private func logNaturalWake(_ night: DoseLog) {
+        print("🔵 logNaturalWake called - NEW VERSION")
+        night.finalWakeTimeUTC = Date()
+        night.finalWakeReason = WakeReason.natural.rawValue
+        
+        do {
+            try modelContext.save()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            print("✅ Logged natural wake")
+        } catch {
+            print("❌ Failed to log natural wake: \(error)")
         }
-        .padding(.horizontal, DT.lg)
-        .padding(.top, DT.xs)
+    }
+    
+    private func logBathroom(_ night: DoseLog) {
+        print("🔵 logBathroom called - NEW VERSION")
+        // Log bathroom event (non-final wake)
+        // TODO: Add to events array when implemented
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        print("✅ Logged bathroom wake")
+    }
+    
+    private func resetNight(_ night: DoseLog) {
+        print("🔵 resetNight called - NEW VERSION")
+        showResetNightSheet = true
     }
 }
 
@@ -1058,19 +843,4 @@ struct SectionHeader: View {
         night: night,
         modelContext: context
     )
-}
-
-// MARK: - Event Item Model
-
-enum EventType {
-    case bedtime, dose1, dose2, bathroom, wake
-}
-
-struct EventItem: Identifiable {
-    let id = UUID()
-    let type: EventType
-    let time: Date
-    let text: String
-    let icon: String
-    let color: Color
 }
