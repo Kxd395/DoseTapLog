@@ -419,22 +419,32 @@ struct NightCardViewModern: View {
                     .font(.headline)
                     .foregroundStyle(Palette.text)
                 Spacer()
-                Button("Undo last") {
-                    // TODO: Undo last event
+                if !nightEvents(night).isEmpty {
+                    Button("Undo last") {
+                        undoLastEvent(night)
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(undoSecondsRemaining > 0 ? Palette.dim : Palette.primary)
+                    .disabled(undoSecondsRemaining > 0) // Disable if already in undo window
                 }
-                .font(.footnote)
-                .foregroundStyle(Palette.primary)
             }
             
             // Show last 5 events
-            if night.dose1TimeUTC == nil && night.dose2TimeUTC == nil {
+            let events = nightEvents(night)
+            if events.isEmpty {
                 Text("No events yet")
                     .font(.footnote)
                     .foregroundStyle(Palette.dim)
+                    .padding(.vertical, 8)
             } else {
-                // TODO: Show actual events from event log
-                eventRow(icon: "pills.fill", text: "Dose 1 logged", time: "8:30 PM", color: Palette.dose1)
-                eventRow(icon: "pills.circle.fill", text: "Dose 2 logged", time: "12:15 AM", color: Palette.dose2)
+                ForEach(events.prefix(5)) { event in
+                    eventRow(
+                        icon: event.icon,
+                        text: event.text,
+                        time: formatEventTime(event.time),
+                        color: event.color
+                    )
+                }
             }
         }
         .padding(DT.pad)
@@ -442,6 +452,130 @@ struct NightCardViewModern: View {
             RoundedRectangle(cornerRadius: DT.corner)
                 .fill(Palette.surface)
         )
+    }
+    
+    /// Generate events from night data (most recent first)
+    private func nightEvents(_ night: DoseLog) -> [EventItem] {
+        var events: [EventItem] = []
+        
+        // Final wake
+        if let time = night.finalWakeTimeUTC {
+            let provenance = night.finalWakeProvenance ?? "wake"
+            events.append(EventItem(
+                type: .wake,
+                time: time,
+                text: "Final wake (\(provenance))",
+                icon: "sunrise.fill",
+                color: Palette.wake
+            ))
+        }
+        
+        // Bathroom wakes (most recent first)
+        for (index, time) in night.bathroomWakeTimesUTC.reversed().enumerated() {
+            events.append(EventItem(
+                type: .bathroom,
+                time: time,
+                text: "Bathroom wake #\(night.bathroomWakeTimesUTC.count - index)",
+                icon: "figure.walk",
+                color: .cyan
+            ))
+        }
+        
+        // Dose 2
+        if let time = night.dose2TimeUTC, let grams = night.dose2Grams {
+            var text = "Dose 2 (\(formatGrams(grams)))"
+            if night.dose2IsOverride, let kind = night.dose2OverrideKind {
+                text += " • \(kind)"
+            }
+            events.append(EventItem(
+                type: .dose2,
+                time: time,
+                text: text,
+                icon: "pills.circle.fill",
+                color: Palette.dose2
+            ))
+        }
+        
+        // Dose 1
+        if let time = night.dose1TimeUTC, let grams = night.dose1Grams {
+            events.append(EventItem(
+                type: .dose1,
+                time: time,
+                text: "Dose 1 (\(formatGrams(grams)))",
+                icon: "pills.fill",
+                color: Palette.dose1
+            ))
+        }
+        
+        // Bedtime
+        if let time = night.bedtimeUTC {
+            events.append(EventItem(
+                type: .bedtime,
+                time: time,
+                text: "In bed",
+                icon: "moon.fill",
+                color: .purple
+            ))
+        }
+        
+        // Sort by time, most recent first
+        return events.sorted { $0.time > $1.time }
+    }
+    
+    private func formatEventTime(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
+    }
+    
+    /// Undo the most recent event
+    private func undoLastEvent(_ night: DoseLog) {
+        let events = nightEvents(night)
+        guard let lastEvent = events.first else {
+            print("⚠️ No events to undo")
+            return
+        }
+        
+        // Create snapshot before making changes
+        let snapshot = createStateSnapshot(night)
+        
+        // Undo based on event type
+        switch lastEvent.type {
+        case .wake:
+            night.finalWakeTimeUTC = nil
+            night.finalWakeProvenance = nil
+            
+        case .bathroom:
+            if !night.bathroomWakeTimesUTC.isEmpty {
+                night.bathroomWakeTimesUTC.removeLast()
+            }
+            
+        case .dose2:
+            night.dose2TimeUTC = nil
+            night.dose2Grams = nil
+            night.dose2IsOverride = false
+            night.dose2OverrideKind = nil
+            night.dose2OverrideMinutes = nil
+            night.dose2OverrideReason = nil
+            
+        case .dose1:
+            night.dose1TimeUTC = nil
+            night.dose1Grams = nil
+            
+        case .bedtime:
+            night.bedtimeUTC = nil
+        }
+        
+        try? modelContext.save()
+        
+        // Start undo window for this action
+        startUndoWindow(actionName: lastEvent.text, savedState: snapshot)
+        
+        // Haptic feedback
+        let impact = UIImpactFeedbackGenerator(style: .medium)
+        impact.impactOccurred()
+        
+        print("✅ Undid: \(lastEvent.text)")
     }
     
     @ViewBuilder
@@ -924,4 +1058,19 @@ struct SectionHeader: View {
         night: night,
         modelContext: context
     )
+}
+
+// MARK: - Event Item Model
+
+enum EventType {
+    case bedtime, dose1, dose2, bathroom, wake
+}
+
+struct EventItem: Identifiable {
+    let id = UUID()
+    let type: EventType
+    let time: Date
+    let text: String
+    let icon: String
+    let color: Color
 }
