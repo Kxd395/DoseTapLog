@@ -47,6 +47,11 @@
 		A0000028 /* TodayViewModel+LateDose.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000028 /* TodayViewModel+LateDose.swift */; };
 		A0000029 /* TodayViewModel+WakeEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000029 /* TodayViewModel+WakeEvents.swift */; };
 		A0000030 /* WakeReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000030 /* WakeReason.swift */; };
+		A0000031 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000031 /* Chip.swift */; };
+		A0000032 /* Dose2Gate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000032 /* Dose2Gate.swift */; };
+		A0000033 /* EarlyDose2Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000033 /* EarlyDose2Sheet.swift */; };
+		A0000034 /* LateDose2Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000034 /* LateDose2Sheet.swift */; };
+		A0000035 /* Dose2InfoSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000035 /* Dose2InfoSheets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +95,11 @@
 		B0000028 /* TodayViewModel+LateDose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayViewModel+LateDose.swift"; sourceTree = "<group>"; };
 		B0000029 /* TodayViewModel+WakeEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayViewModel+WakeEvents.swift"; sourceTree = "<group>"; };
 		B0000030 /* WakeReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeReason.swift; sourceTree = "<group>"; };
+		B0000031 /* Chip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
+		B0000032 /* Dose2Gate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2Gate.swift; sourceTree = "<group>"; };
+		B0000033 /* EarlyDose2Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlyDose2Sheet.swift; sourceTree = "<group>"; };
+		B0000034 /* LateDose2Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateDose2Sheet.swift; sourceTree = "<group>"; };
+		B0000035 /* Dose2InfoSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2InfoSheets.swift; sourceTree = "<group>"; };
 		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -121,6 +131,7 @@
 				8089AFD92EB9467F008532AA /* AppPreferencesEnhanced+LateDose.swift */,
 				8089AFCA2EB944A2008532AA /* ActionButtons.swift */,
 				8089AFCB2EB944A2008532AA /* DesignTokens.swift */,
+				B0000031 /* Chip.swift */,
 				8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */,
 				8089AFCD2EB944A2008532AA /* StatusChip.swift */,
 				8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */,
@@ -147,10 +158,14 @@
 				B0000012 /* AppPreferences.swift */,
 				B0000014 /* AppPreferences+LateDose.swift */,
 				B0000015 /* CountdownRingView.swift */,
+				B0000032 /* Dose2Gate.swift */,
+				B0000035 /* Dose2InfoSheets.swift */,
 				B0000016 /* EarlyDoseSheet.swift */,
+				B0000033 /* EarlyDose2Sheet.swift */,
 				B0000017 /* EarlyDoseSheetView.swift */,
 				B0000018 /* EventStripView.swift */,
 				B0000019 /* LateDoseSheetView.swift */,
+				B0000034 /* LateDose2Sheet.swift */,
 				B0000020 /* NightPlanRecommender.swift */,
 				B0000021 /* ResetNightSheet.swift */,
 				B0000022 /* Rounding+Display.swift */,
@@ -261,11 +276,15 @@
 				A0000012 /* AppPreferences.swift in Sources */,
 				A0000014 /* AppPreferences+LateDose.swift in Sources */,
 				A0000015 /* CountdownRingView.swift in Sources */,
+				A0000032 /* Dose2Gate.swift in Sources */,
+				A0000035 /* Dose2InfoSheets.swift in Sources */,
 				A0000016 /* EarlyDoseSheet.swift in Sources */,
+				A0000033 /* EarlyDose2Sheet.swift in Sources */,
 				A0000017 /* EarlyDoseSheetView.swift in Sources */,
 				8089AFDD2EB94764008532AA /* WeeklySchedule.swift in Sources */,
 				A0000018 /* EventStripView.swift in Sources */,
 				A0000019 /* LateDoseSheetView.swift in Sources */,
+				A0000034 /* LateDose2Sheet.swift in Sources */,
 				8089AFE22EB94EEF008532AA /* NightAlarmPlan.swift in Sources */,
 				A0000020 /* NightPlanRecommender.swift in Sources */,
 				A0000021 /* ResetNightSheet.swift in Sources */,
@@ -277,6 +296,7 @@
 				A0000028 /* TodayViewModel+LateDose.swift in Sources */,
 				A0000029 /* TodayViewModel+WakeEvents.swift in Sources */,
 				A0000030 /* WakeReason.swift in Sources */,
+				A0000031 /* Chip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

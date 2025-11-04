@@ -11,31 +11,145 @@ struct SettingsViewEnhanced: View {
     @Environment(\.dismiss) var dismiss
     @State private var showResetConfirm = false
     @State private var showPurgeConfirm = false
-    @Bindable var prefs = AppPreferences.shared
+    
+    // Access AppPreferencesEnhanced properties directly via @AppStorage for bindings
+    private static let suite = UserDefaults(suiteName: "group.com.jefferson.dosetrack")!
+    
+    @AppStorage("plan_total_night_grams", store: suite) 
+    private var totalNightGrams: Double = 6.5
+    
+    @AppStorage("plan_split_strategy", store: suite) 
+    private var splitStrategy: String = "50/50"
+    
+    @AppStorage("plan_rounding_step_g", store: suite) 
+    private var roundingStepG: Double = 0.25
+    
+    @AppStorage("plan_allow_tonight_edit", store: suite) 
+    private var allowTonightEdit: Bool = true
+    
+    @AppStorage("plan_window_start_min", store: suite) 
+    private var windowStartMin: Int = 150
+    
+    @AppStorage("plan_window_end_min", store: suite) 
+    private var windowEndMin: Int = 240
+    
+    @AppStorage("early_allow", store: suite) 
+    private var allowEarlyDose: Bool = false
+    
+    @AppStorage("early_max_minutes", store: suite) 
+    private var maxEarlyMinutes: Int = 15
+    
+    @AppStorage("early_require_reason", store: suite) 
+    private var requireEarlyReason: Bool = true
+    
+    @AppStorage("live_activity_enabled", store: suite) 
+    private var liveActivityEnabled: Bool = true
+    
+    @AppStorage("notify_at_start", store: suite) 
+    private var notifyAtStart: Bool = true
+    
+    @AppStorage("notify_at_half", store: suite) 
+    private var notifyAtHalf: Bool = false
+    
+    @AppStorage("notify_at_end", store: suite) 
+    private var notifyAtEnd: Bool = true
+    
+    @AppStorage("quiet_hours_start", store: suite) 
+    private var quietHoursStart: Int = 22
+    
+    @AppStorage("quiet_hours_end", store: suite) 
+    private var quietHoursEnd: Int = 7
+    
+    @AppStorage("haptics_enabled", store: suite) 
+    private var hapticsEnabled: Bool = true
+    
+    @AppStorage("health_sample_window_min", store: suite) 
+    private var healthSampleWindowMin: Int = 120
+    
+    @AppStorage("whoop_proxy_url", store: suite) 
+    private var whoopProxyURL: String = ""
+    
+    @AppStorage("whoop_api_key", store: suite) 
+    private var whoopAPIKey: String = ""
+    
+    @AppStorage("wake_source_preference", store: suite) 
+    private var wakeSourcePreference: String = "health"
+    
+    @AppStorage("export_include_timezone", store: suite) 
+    private var exportIncludeTimezone: Bool = true
+    
+    @AppStorage("export_filename_pattern", store: suite) 
+    private var exportFilenamePattern: String = "dosetrack_{nightKey}"
+    
+    @AppStorage("export_include_notes", store: suite) 
+    private var exportIncludeNotes: Bool = true
+    
+    @AppStorage("export_include_event_log", store: suite) 
+    private var exportIncludeEventLog: Bool = false
+    
+    @AppStorage("export_default_email", store: suite) 
+    private var exportDefaultEmail: String = ""
+    
+    @AppStorage("require_biometric", store: suite) 
+    private var requireBiometric: Bool = false
+    
+    @AppStorage("mask_widget_doses", store: suite) 
+    private var maskWidgetDoses: Bool = false
+    
+    @AppStorage("retention_days", store: suite) 
+    private var retentionDays: Int = 365
+    
+    @AppStorage("reset_allow_hard", store: suite)
+    private var resetAllowHard: Bool = true
+    
+    @AppStorage("reset_require_biometric_hard", store: suite)
+    private var resetRequireBiometricHard: Bool = false
+    
+    @AppStorage("reset_undo_window_sec", store: suite)
+    private var resetUndoWindowSec: Int = 30
+    
+    @AppStorage("reset_reason_required", store: suite)
+    private var resetReasonRequired: Bool = true
+    
+    @AppStorage("show_internals", store: suite) 
+    private var showInternals: Bool = false
+    
+    // Reference to shared instance for computed properties
+    private let prefs = AppPreferencesEnhanced.shared
+    
+    // Helper to format minutes as "Xh Ym" or "Ym"
+    private func formatMinutes(_ minutes: Int) -> String {
+        let hours = minutes / 60
+        let mins = minutes % 60
+        if hours > 0 {
+            return "\(hours)h \(mins)m"
+        }
+        return "\(mins)m"
+    }
     
     var body: some View {
         NavigationStack {
             Form {
                 // MARK: - Section 1: Night Plan Defaults
                 Section("Night plan defaults") {
-                    Picker("Total night (g)", selection: $prefs.totalNightGrams) {
+                    Picker("Total night (g)", selection: $totalNightGrams) {
                         ForEach([3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0], id: \.self) { g in
                             Text(String(format: "%.1f g", g)).tag(g)
                         }
                     }
                     
-                    Picker("Split", selection: $prefs.splitStrategy) {
+                    Picker("Split", selection: $splitStrategy) {
                         Text("50/50").tag("50/50")
                         Text("60/40").tag("60/40")
                         Text("40/60").tag("40/60")
                     }
                     
-                    Picker("Rounding step", selection: $prefs.roundingStepG) {
+                    Picker("Rounding step", selection: $roundingStepG) {
                         Text("0.25 g").tag(0.25)
                         Text("0.5 g").tag(0.5)
                     }
                     
-                    Toggle("Allow editing tonight's plan", isOn: $prefs.allowTonightEdit)
+                    Toggle("Allow editing tonight's plan", isOn: $allowTonightEdit)
                     
                     // Live preview
                     let (d1, d2) = prefs.calculateDoses()
@@ -54,33 +168,33 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 2: Dose 2 Window
                 Section("Dose 2 window") {
-                    Stepper(value: $prefs.windowStartMin, in: 120...300, step: 5) {
-                        Text("Window starts at \(prefs.formatMinutes(prefs.windowStartMin))")
+                    Stepper(value: $windowStartMin, in: 120...300, step: 5) {
+                        Text("Window starts at \(formatMinutes(windowStartMin))")
                     }
                     
-                    Stepper(value: $prefs.windowEndMin, in: 150...360, step: 5) {
-                        Text("Window ends at \(prefs.formatMinutes(prefs.windowEndMin))")
+                    Stepper(value: $windowEndMin, in: 150...360, step: 5) {
+                        Text("Window ends at \(formatMinutes(windowEndMin))")
                     }
                     
-                    let duration = prefs.windowEndMin - prefs.windowStartMin
+                    let duration = windowEndMin - windowStartMin
                     HStack {
                         Text("Window duration")
                         Spacer()
-                        Text(prefs.formatMinutes(duration))
+                        Text(formatMinutes(duration))
                             .foregroundStyle(.secondary)
                     }
                 }
                 
                 // MARK: - Section 3: Early Dose 2 Policy
                 Section("Early dose 2 policy") {
-                    Toggle("Allow early Dose 2", isOn: $prefs.allowEarlyDose)
+                    Toggle("Allow early Dose 2", isOn: $allowEarlyDose)
                     
-                    if prefs.allowEarlyDose {
-                        Stepper(value: $prefs.maxEarlyMinutes, in: 0...60, step: 5) {
-                            Text("Max early: \(prefs.maxEarlyMinutes) minutes")
+                    if allowEarlyDose {
+                        Stepper(value: $maxEarlyMinutes, in: 0...60, step: 5) {
+                            Text("Max early: \(maxEarlyMinutes) minutes")
                         }
                         
-                        Toggle("Require reason for early dose", isOn: $prefs.requireEarlyReason)
+                        Toggle("Require reason for early dose", isOn: $requireEarlyReason)
                         
                         NavigationLink("Quick time-prior buttons") {
                             EarlyDoseQuickChoicesView()
@@ -90,21 +204,21 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 4: Notifications & Live Activity
                 Section("Notifications and Live Activity") {
-                    Toggle("Enable Live Activity", isOn: $prefs.liveActivityEnabled)
+                    Toggle("Enable Live Activity", isOn: $liveActivityEnabled)
                     
-                    Toggle("Notify at window start", isOn: $prefs.notifyAtStart)
-                    Toggle("Notify at halfway point", isOn: $prefs.notifyAtHalf)
-                    Toggle("Notify at window end", isOn: $prefs.notifyAtEnd)
+                    Toggle("Notify at window start", isOn: $notifyAtStart)
+                    Toggle("Notify at halfway point", isOn: $notifyAtHalf)
+                    Toggle("Notify at window end", isOn: $notifyAtEnd)
                     
-                    Stepper(value: $prefs.quietHoursStart, in: 0...23) {
-                        Text("Quiet hours start: \(prefs.quietHoursStart):00")
+                    Stepper(value: $quietHoursStart, in: 0...23) {
+                        Text("Quiet hours start: \(quietHoursStart):00")
                     }
                     
-                    Stepper(value: $prefs.quietHoursEnd, in: 0...23) {
-                        Text("Quiet hours end: \(prefs.quietHoursEnd):00")
+                    Stepper(value: $quietHoursEnd, in: 0...23) {
+                        Text("Quiet hours end: \(quietHoursEnd):00")
                     }
                     
-                    Toggle("Haptic feedback", isOn: $prefs.hapticsEnabled)
+                    Toggle("Haptic feedback", isOn: $hapticsEnabled)
                 }
                 
                 // MARK: - Section 5: Data Sources
@@ -122,22 +236,22 @@ struct SettingsViewEnhanced: View {
                         // TODO: Call HealthKitManager.requestAuthorization()
                     }
                     
-                    Stepper(value: $prefs.healthSampleWindowMin, in: 60...300, step: 15) {
-                        Text("Health sample window: \(prefs.healthSampleWindowMin) min")
+                    Stepper(value: $healthSampleWindowMin, in: 60...300, step: 15) {
+                        Text("Health sample window: \(healthSampleWindowMin) min")
                     }
                     
-                    TextField("WHOOP proxy URL", text: $prefs.whoopProxyURL)
+                    TextField("WHOOP proxy URL", text: $whoopProxyURL)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                     
-                    SecureField("WHOOP API key", text: $prefs.whoopAPIKey)
+                    SecureField("WHOOP API key", text: $whoopAPIKey)
                     
                     Button("Test WHOOP connection") {
                         // TODO: Call WHOOP proxy endpoint
                     }
-                    .disabled(prefs.whoopProxyURL.isEmpty)
+                    .disabled(whoopProxyURL.isEmpty)
                     
-                    Picker("Prefer wake source", selection: $prefs.wakeSourcePreference) {
+                    Picker("Prefer wake source", selection: $wakeSourcePreference) {
                         Text("HealthKit").tag("health")
                         Text("Manual entry").tag("manual")
                     }
@@ -145,57 +259,57 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 6: Exports
                 Section("Exports") {
-                    Toggle("Include timezone in CSV", isOn: $prefs.exportIncludeTimezone)
+                    Toggle("Include timezone in CSV", isOn: $exportIncludeTimezone)
                     
-                    TextField("Filename pattern", text: $prefs.exportFilenamePattern)
+                    TextField("Filename pattern", text: $exportFilenamePattern)
                         .textInputAutocapitalization(.never)
                     
                     Text("Available tokens: {nightKey}, {date}, {timezone}")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     
-                    Toggle("Include notes column", isOn: $prefs.exportIncludeNotes)
-                    Toggle("Include raw event log", isOn: $prefs.exportIncludeEventLog)
+                    Toggle("Include notes column", isOn: $exportIncludeNotes)
+                    Toggle("Include raw event log", isOn: $exportIncludeEventLog)
                     
-                    TextField("Default share email", text: $prefs.exportDefaultEmail)
+                    TextField("Default share email", text: $exportDefaultEmail)
                         .textInputAutocapitalization(.never)
                         .keyboardType(.emailAddress)
                 }
                 
                 // MARK: - Section 7: Privacy & Retention
                 Section("Privacy and retention") {
-                    Toggle("Require Face ID to open", isOn: $prefs.requireBiometric)
+                    Toggle("Require Face ID to open", isOn: $requireBiometric)
                     
-                    Toggle("Mask doses on widgets", isOn: $prefs.maskWidgetDoses)
+                    Toggle("Mask doses on widgets", isOn: $maskWidgetDoses)
                     
-                    Stepper(value: $prefs.retentionDays, in: 30...3650, step: 30) {
-                        Text("Keep data for \(prefs.retentionDays) days")
+                    Stepper(value: $retentionDays, in: 30...3650, step: 30) {
+                        Text("Keep data for \(retentionDays) days")
                     }
                     
                     Button("Purge old data now", role: .destructive) {
                         showPurgeConfirm = true
                     }
                     .confirmationDialog("Purge old data?", isPresented: $showPurgeConfirm) {
-                        Button("Delete data older than \(prefs.retentionDays) days", role: .destructive) {
+                        Button("Delete data older than \(retentionDays) days", role: .destructive) {
                             // TODO: Call DoseLogController.purgeOldData()
                         }
                         Button("Cancel", role: .cancel) {}
                     } message: {
-                        Text("This will permanently delete night records older than \(prefs.retentionDays) days.")
+                        Text("This will permanently delete night records older than \(retentionDays) days.")
                     }
                 }
                 
                 // MARK: - Section 7.5: Reset Night
                 Section {
-                    Toggle("Allow Hard Reset", isOn: $prefs.resetAllowHard)
+                    Toggle("Allow Hard Reset", isOn: $resetAllowHard)
                     
-                    Toggle("Require Face ID for Hard Reset", isOn: $prefs.resetRequireBiometricHard)
-                        .disabled(!prefs.resetAllowHard)
+                    Toggle("Require Face ID for Hard Reset", isOn: $resetRequireBiometricHard)
+                        .disabled(!resetAllowHard)
                     
-                    Toggle("Reason required", isOn: $prefs.resetReasonRequired)
+                    Toggle("Reason required", isOn: $resetReasonRequired)
                     
-                    Stepper(value: $prefs.resetUndoWindowSec, in: 10...120, step: 10) {
-                        Text("Undo window: \(prefs.resetUndoWindowSec) seconds")
+                    Stepper(value: $resetUndoWindowSec, in: 10...120, step: 10) {
+                        Text("Undo window: \(resetUndoWindowSec) seconds")
                     }
                 } header: {
                     Text("Reset Night")
@@ -210,7 +324,7 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Section 8: Debug & Developer
                 Section("Debug and developer") {
-                    Toggle("Show nightKey and offsets", isOn: $prefs.showInternals)
+                    Toggle("Show nightKey and offsets", isOn: $showInternals)
                     
                     Button("Simulate Dose 1 now") {
                         // TODO: Call DoseLogController test method

@@ -83,11 +83,7 @@ struct ActionGrid: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: DT.gap) {
-            // Primary actions
-            Text("Actions")
-                .font(.headline)
-                .foregroundStyle(Palette.text)
-            
+            // Primary actions grid
             Grid(horizontalSpacing: DT.gap, verticalSpacing: DT.gap) {
                 ForEach(0..<(primaryActions.count + 1) / 2, id: \.self) { row in
                     GridRow {

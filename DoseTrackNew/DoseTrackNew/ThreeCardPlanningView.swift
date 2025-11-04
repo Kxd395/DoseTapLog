@@ -18,6 +18,23 @@ struct ThreeCardPlanningView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                // Title row with settings gear
+                HStack {
+                    Text("DoseTrack")
+                        .font(.largeTitle.bold())
+                    Spacer()
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                            .font(.title2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 8)
+                .padding(.bottom, 12)
+                
                 // Segmented control for horizon selection
                 Picker("Planning Horizon", selection: $selectedHorizon) {
                     ForEach(PlanningHorizon.allCases, id: \.self) { horizon in
@@ -25,13 +42,8 @@ struct ThreeCardPlanningView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .padding()
-                
-                // Build label
-                Text("Build 1.1.2")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                    .padding(.bottom, 8)
+                .padding(.horizontal)
+                .padding(.bottom, 16)
                 
                 // Selected card
                 TabView(selection: $selectedHorizon) {
@@ -46,16 +58,7 @@ struct ThreeCardPlanningView: View {
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
-            .navigationTitle("DoseTrack")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showSettings = true
-                    } label: {
-                        Image(systemName: "gearshape.fill")
-                    }
-                }
-            }
+            .navigationBarHidden(true)
             .sheet(isPresented: $showSettings) {
                 SettingsViewEnhanced()
             }
