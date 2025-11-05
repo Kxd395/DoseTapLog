@@ -1,0 +1,85 @@
+{
+  "$id": "NightFeatures",
+  "type": "object",
+  "required": [
+    "night_key",
+    "adherence7d",
+    "overrideCount7d",
+    "bedtimeStdDevMin14d",
+    "isWorkday"
+  ],
+  "properties": {
+    "night_key": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "adherence7d": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fraction of nights with both doses in last 7 days"
+    },
+    "overrideCount7d": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of Dose 2 overrides in last 7 days"
+    },
+    "bedtimeStdDevMin14d": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Standard deviation of bedtime over 14 days (minutes)"
+    },
+    "isWorkday": {
+      "type": "boolean",
+      "description": "From WeeklySchedule (day-of-week)"
+    },
+    "sleepDurationMin": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Total sleep duration from HealthKit (minutes)"
+    },
+    "wakeCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Number of wake events logged"
+    },
+    "dose12IntervalMin7dAvg": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Average Dose 1→2 interval over 7 days (minutes)"
+    },
+    "dose12IntervalMin7dStd": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Std dev of Dose 1→2 interval over 7 days (minutes)"
+    },
+    "dow": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "description": "Day of week (0=Sunday, 6=Saturday)"
+    },
+    "whoopRecoveryPct": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "WHOOP daily recovery percentage (0-100)"
+    },
+    "hrvScore": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "HRV SDNN score from HealthKit (ms)"
+    }
+  }
+}

@@ -720,5 +720,84 @@
 ---
 
 **Last Updated:** November 4, 2025  
-**Status:** Item 1 COMPLETE (95%) | Item 60 FOUNDATION READY (60%) | 56 items PENDING | 30 CRITICAL | 20 HIGH | 8 MEDIUM  
+**Status:** Item 1 COMPLETE (95%) | Item 60 IN PROGRESS (75%) | 56 items PENDING | 30 CRITICAL | 20 HIGH | 8 MEDIUM  
 **Target Ship Date:** ~7-8 weeks (mid-late December 2025 - beta with foundations + soft-wake alarms)
+
+---
+
+## 🏥 Health Data Export & ML Features
+
+### P0 - Core Export Infrastructure
+
+- [ ] **61. HealthKit Export v2 (metrics + service-day)** ⏱️ 3h  
+  **Priority:** MEDIUM | **Status:** READY  
+  Upgrade `HealthExportBridge.swift` to export SpO₂, steps, respiratory rate, naps (in addition to existing sleep, HR, HRV). Write `service_day_key` (noon cutoff), `local_offset_min`, `tz_name`, `unit`, `device`, `source_app`, `record_id`, `sha1` per record. Implement incremental export via `lastExportAt` (UserDefaults). Fallback to local Documents if iCloud unavailable.
+  - **DoD:** All 7 record types exported; service-day keys use noon cutoff (not midnight); incremental mode only exports new records since last run; SHA1 dedupe across runs; iCloud → local fallback tested; unit tests for DST/timezone changes.
+  - Depends on: Item 41 (ClockProvider - for cutoff logic)
+  - Files: `ios/HealthExportBridge.swift` (CREATED ✅)
+
+- [ ] **62. DoseLogExporter (JSONL)** ⏱️ 2h  
+  **Priority:** MEDIUM | **Status:** READY  
+  Create `DoseLogExporter.swift` to export last 14 days of dose logs with: `night_key`, `bedtime_utc`, `dose1_utc`, `dose2_utc`, `final_wake_utc`, `dose2_is_override`, `dose2_override_kind`, `dose2_override_minutes`, `dose2_override_reason`, `wake_events` array. Output JSONL to same iCloud/local directory as HealthKit exports.
+  - **DoD:** Exports all fields needed for feature computation; joins with health data in agent via `night_key`; fallback to local Documents; unit tests verify all fields present.
+  - Files: `ios/DoseLogExporter.swift` (CREATED ✅)
+
+- [ ] **63. Normalizer v2 (service-day join + ajv)** ⏱️ 3h  
+  **Priority:** MEDIUM | **Status:** READY  
+  Rewrite `agent/dropins/health-data/src/util/normalize.js` to:
+  - Replace midnight bucketing with `service_day_key` from exports (NO date math in agent)
+  - Add `ajv` schema validation (unified_health.schema.json, night_features.schema.json)
+  - Compute real `adherence7d` (fraction with both doses), `overrideCount7d`, `bedtimeStdDevMin14d` from DoseLog export
+  - Compute `sleepDurationMin`, `wakeCount`, `dose12IntervalMin7dAvg`, `dose12IntervalMin7dStd`
+  - Join DoseLog + HealthKit by `night_key`
+  - **DoD:** Zero hardcoded values; all features computed from real data; ajv rejects malformed records; error log written if validation fails; unit tests verify 7d/14d rolling windows; integration test joins sample data.
+  - Depends on: Items 61, 62
+  - Files: `review/health-data-dropin/agent/dropins/health-data/src/util/normalize.js` (UPDATED ✅)
+
+### P1 - Dedupe & Cleanup
+
+- [ ] **64. Dedupe & Cleanup** ⏱️ 1.5h  
+  **Priority:** MEDIUM  
+  Track processed files in `ml/datasets/.processed` (list of `sha1` hashes). Skip duplicate records across runs. Add `--purge-older-than=30d` flag to cleanup script: deletes exports older than N days from iCloud/local. Add `--since=YYYY-MM-DD` flag to pull command for manual range control.
+  - **DoD:** Second run skips already-processed records; cleanup script removes old exports; `--since` flag overrides `lastExportAt`; unit tests verify dedupe logic.
+  - Depends on: Items 61, 62, 63
+
+### P2 - Settings UI
+
+- [ ] **65. Settings → Health Data section** ⏱️ 2h  
+  **Priority:** MEDIUM  
+  Add new Settings section: "Health Data"
+  - `Export Now` button → calls `HealthExportBridge.exportIncremental()` + `DoseLogExporter.exportLastNDays()`
+  - `Auto-export daily` toggle → enables BGTask (Item 66)
+  - `Last export:` timestamp (read-only, from UserDefaults)
+  - `Health permissions` status → shows HealthKit authorization, link to Settings if denied
+  - **DoD:** Manual export works; shows success/error alert with file path; permissions status accurate; VoiceOver labels present.
+  - Depends on: Items 61, 62
+
+- [ ] **66. Privacy controls** ⏱️ 1h  
+  **Priority:** MEDIUM  
+  Add Settings toggles:
+  - `Include anonymization (±10 min fuzz)` → fuzz timestamps before export
+  - `Keep exports for` segmented control: 7/30/90 days → auto-cleanup on export
+  - Implement timestamp fuzzing: add/subtract random 0-10 minutes to all timestamps
+  - **DoD:** Anonymize toggle fuzzes all timestamps ±10m; retention policy enforced on export; cleanup runs before new export; unit tests verify fuzz range.
+  - Depends on: Item 65
+
+### P3 - Testing & Documentation
+
+- [ ] **67. Unit + Integration tests** ⏱️ 3h  
+  **Priority:** MEDIUM  
+  Test coverage:
+  - **HealthExportBridge:** Service-day key across DST ±1h, timezone hop ±3h; incremental mode only exports new records; iCloud unavailable fallback; SHA1 dedupe
+  - **DoseLogExporter:** All fields present; empty nights don't crash; wake_events array serialization
+  - **Normalizer:** Service-day join (not midnight); adherence7d/overrideCount7d match hand-computed; bedtimeStdDevMin14d accurate; ajv rejects malformed records; dedupe across runs
+  - **DoD:** 80%+ coverage on exporters; integration test runs full pipeline (export → normalize → validate); DST/timezone tests pass.
+
+- [ ] **68. Docs** ⏱️ 1h  
+  **Priority:** MEDIUM  
+  Update documentation:
+  - `docs/PRD_v1.2.md` → Add "Health Data Export" feature section
+  - `docs/PRODUCT_DESCRIPTION.md` → Add "ML Features & Analytics" section
+  - Create `docs/ops/HEALTH_EXPORT_GUIDE.md` → User guide: how to export, privacy controls, troubleshooting
+  - Update `README.md` → Mention health export in features list
+  - **DoD:** PRD updated; user guide complete with screenshots; service-day rationale documented; privacy section explains anonymization.

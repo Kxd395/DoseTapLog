@@ -1,0 +1,27 @@
+name: health-data
+version: 0.1.0
+description: Ingest Health data (Apple Health/HealthKit, Health Connect/Google Fit) and normalize for ML.
+commands:
+  - name: health:status
+    run: node agent/dropins/health-data/src/ingest.js status
+  - name: health:pull ios
+    run: node agent/dropins/health-data/src/ingest.js pull --source=healthkit_json
+  - name: health:pull android
+    run: node agent/dropins/health-data/src/ingest.js pull --source=healthconnect_json
+  - name: health:ingest apple-xml
+    run: node agent/dropins/health-data/src/ingest.js pull --source=apple_health_xml --file=$APPLE_HEALTH_XML
+  - name: health:normalize
+    run: node agent/dropins/health-data/src/ingest.js normalize
+env:
+  - key: HEALTH_SYNC_DIR
+    required: true
+    example: ~/Library/Mobile\ Documents/com~apple~CloudDocs/DoseTrack/exports
+  - key: ANDROID_SYNC_DIR
+    required: false
+    example: ~/Downloads/DoseTrack/exports
+  - key: APP_GROUP_IDENTIFIER
+    required: false
+    example: group.com.yourco.dosetrack
+artifacts:
+  - path: ml/datasets/raw/health/
+  - path: ml/datasets/features/

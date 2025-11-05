@@ -1,0 +1,23 @@
+{
+  "name": "health-data-dropin",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Agent drop-in to ingest HealthKit/Health Connect and normalize to unified JSONL + night features.",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "xml2js": "^0.6.2",
+    "yargs": "^17.7.2",
+    "fast-glob": "^3.3.2",
+    "object-hash": "^3.0.0"
+  },
+  "scripts": {
+    "status": "node src/ingest.js status",
+    "pull:ios": "node src/ingest.js pull --source=healthkit_json",
+    "pull:android": "node src/ingest.js pull --source=healthconnect_json",
+    "ingest:apple-xml": "node src/ingest.js pull --source=apple_health_xml",
+    "normalize": "node src/ingest.js normalize",
+    "validate": "node src/ingest.js normalize --validate-only"
+  }
+}
