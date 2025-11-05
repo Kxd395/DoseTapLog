@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */; };
 		65E3703E5B444936A8B30538 /* Dose2OverrideSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */; };
+		6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */; };
 		8089AFD02EB944A2008532AA /* ThreeCardPlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCE2EB944A2008532AA /* ThreeCardPlanningView.swift */; };
 		8089AFD12EB944A2008532AA /* WindowBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCF2EB944A2008532AA /* WindowBar.swift */; };
 		8089AFD22EB944A2008532AA /* NightCardViewModern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */; };
@@ -20,6 +22,8 @@
 		8089AFE12EB94EEF008532AA /* NightServiceDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFE02EB94EEF008532AA /* NightServiceDay.swift */; };
 		8089AFE22EB94EEF008532AA /* NightAlarmPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */; };
 		8089AFE42EB952D8008532AA /* project.pbxproj in Resources */ = {isa = PBXBuildFile; fileRef = 8089AFE32EB952D8008532AA /* project.pbxproj */; };
+		81E0FDD24C4EE7200803C19C /* ServiceDayParityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913274A79F54C190FC447914 /* ServiceDayParityTests.swift */; };
+		914905F48951B54726A473A7 /* WindowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9FFBA45A82886549E6FE7E /* WindowState.swift */; };
 		A0000001 /* DoseTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000001 /* DoseTrackApp.swift */; };
 		A0000002 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000002 /* Models.swift */; };
 		A0000003 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000003 /* Config.swift */; };
@@ -55,12 +59,16 @@
 		A0000037 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000037 /* NotificationHelper.swift */; };
 		A0000038 /* UndoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000038 /* UndoBanner.swift */; };
 		A0000039 /* NightTurnoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000039 /* NightTurnoverController.swift */; };
+		C4FEF3FD7CE65CBD048D45F8 /* AlarmOrchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */; };
 		E7B701002EB94000008532AA /* WindowPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6694AD22EB94000008532AA /* WindowPill.swift */; };
 		F27864512EB94000008532AA /* NextAlertChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25315D52EB94000008532AA /* NextAlertChip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2OverrideSheet.swift; sourceTree = "<group>"; };
+		2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlarmOrchestrator.swift; path = ../../ios/AlarmOrchestrator.swift; sourceTree = "<group>"; };
+		44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GuardNoWakeSheet.swift; path = ../../ios/GuardNoWakeSheet.swift; sourceTree = "<group>"; };
+		6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WakeSheetView.swift; path = ../../ios/WakeSheetView.swift; sourceTree = "<group>"; };
 		8089AFCA2EB944A2008532AA /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
 		8089AFCB2EB944A2008532AA /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
 		8089AFCC2EB944A2008532AA /* NightCardViewModern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightCardViewModern.swift; sourceTree = "<group>"; };
@@ -73,6 +81,8 @@
 		8089AFE02EB94EEF008532AA /* NightServiceDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightServiceDay.swift; sourceTree = "<group>"; };
 		8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightAlarmPlan.swift; sourceTree = "<group>"; };
 		8089AFE32EB952D8008532AA /* project.pbxproj */ = {isa = PBXFileReference; lastKnownFileType = text.pbxproject; path = project.pbxproj; sourceTree = "<group>"; };
+		8F9FFBA45A82886549E6FE7E /* WindowState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WindowState.swift; path = ../../ios/WindowState.swift; sourceTree = "<group>"; };
+		913274A79F54C190FC447914 /* ServiceDayParityTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServiceDayParityTests.swift; sourceTree = "<group>"; };
 		B0000001 /* DoseTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseTrackApp.swift; sourceTree = "<group>"; };
 		B0000002 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B0000003 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -125,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8FD4EB282A7561E2A2A8E737 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				913274A79F54C190FC447914 /* ServiceDayParityTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		D0000001 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +205,11 @@
 				B0000024 /* SafetyBannerView.swift */,
 				B0000025 /* SettingsViewEnhanced.swift */,
 				B0000038 /* UndoBanner.swift */,
+				2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */,
+				44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */,
+				6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */,
+				8F9FFBA45A82886549E6FE7E /* WindowState.swift */,
+				8FD4EB282A7561E2A2A8E737 /* Tests */,
 			);
 			path = DoseTrackNew;
 			sourceTree = "<group>";
@@ -317,6 +340,11 @@
 				A0000031 /* Chip.swift in Sources */,
 				A0000039 /* NightTurnoverController.swift in Sources */,
 				A0000038 /* UndoBanner.swift in Sources */,
+				C4FEF3FD7CE65CBD048D45F8 /* AlarmOrchestrator.swift in Sources */,
+				6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */,
+				642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */,
+				914905F48951B54726A473A7 /* WindowState.swift in Sources */,
+				81E0FDD24C4EE7200803C19C /* ServiceDayParityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

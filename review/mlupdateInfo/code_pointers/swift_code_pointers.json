@@ -1,0 +1,67 @@
+{
+  "two_phase_commit": {
+    "feature": "Two-phase anchor commit (+ crash-safe manifest)",
+    "path": "ios/HealthExportBridge+TwoPhaseCommit.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 413,
+    "notes": "Commit anchors only after atomic file move & manifest OK."
+  },
+  "anchors_store": {
+    "feature": "Anchored queries with tombstones",
+    "path": "ios/HealthExportBridge+Anchors.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 486,
+    "notes": "HKAnchoredObjectQuery per type; emits deletions with {deleted:true}. ISSUE: Anchors in UserDefaults, should migrate to Keychain."
+  },
+  "service_day_overlap_swift": {
+    "feature": "Service-day max-overlap (Swift)",
+    "path": "ios/ServiceDayMaxOverlap.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 280,
+    "tests": 6,
+    "notes": "Deterministic max-overlap rule; ties → earlier day. 6 unit tests covering DST, ties, naps."
+  },
+  "steps_deoverlap": {
+    "feature": "Steps via HKStatisticsCollection (de-overlap)",
+    "path": "ios/HealthExportBridge+Steps.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 315,
+    "notes": "One aggregated record per service day; avoids double counting from watch+phone."
+  },
+  "core_exporter": {
+    "feature": "Core HealthKit exporter",
+    "path": "ios/HealthExportBridge.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 246,
+    "notes": "Exports all 7 types; dual offsets; SHA-256 canonical hashing. Outputs .jsonl (not gzipped yet)."
+  },
+  "doselog_exporter": {
+    "feature": "DoseLog exporter (14d)",
+    "path": "ios/DoseLogExporter.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 95,
+    "notes": "night_key, doses, overrides, wakes → JSONL. Dual storage (iCloud + local)."
+  },
+  "compression": {
+    "feature": "Gzip compression for exports",
+    "path": "ios/HealthExportBridge+Compression.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 102,
+    "notes": "ZLIB compression (gzip-compatible). Compresses .jsonl → .jsonl.gz."
+  },
+  "encryption_settings_ui": {
+    "feature": "Encryption Settings UI",
+    "path": "ios/EncryptionSettingsView.swift",
+    "expected": true,
+    "verified": true,
+    "lines": 468,
+    "notes": "PBKDF2 (100k iterations), AES-256-GCM, strength meter, key rotation, keychain storage, RAM wipe."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "2.0",
+  "exporter_version": "2.1.0",
+  "status": "pending",
+  "cutoff_hour_local": 12,
+  "tz_name": "America/New_York",
+  "anchored_since": "YYYY-MM-DDTHH:MM:SSZ",
+  "per_type_stats": {
+    "hr": {
+      "added": 0,
+      "deleted": 0,
+      "new_anchor_b64": "",
+      "old_anchor_b64": ""
+    },
+    "hrv": {
+      "added": 0,
+      "deleted": 0,
+      "new_anchor_b64": "",
+      "old_anchor_b64": ""
+    },
+    "sleep": {
+      "added": 0,
+      "deleted": 0,
+      "new_anchor_b64": "",
+      "old_anchor_b64": ""
+    },
+    "respiratory_rate": {
+      "added": 0,
+      "deleted": 0,
+      "new_anchor_b64": "",
+      "old_anchor_b64": ""
+    },
+    "spo2": {
+      "added": 0,
+      "deleted": 0,
+      "new_anchor_b64": "",
+      "old_anchor_b64": ""
+    },
+    "step": {
+      "added": 0,
+      "deleted": 0,
+      "new_anchor_b64": "",
+      "old_anchor_b64": ""
+    }
+  },
+  "files": [
+    {
+      "path": "healthkit_export_XXXXXXXX.jsonl.gz",
+      "sha256": "",
+      "size_bytes": 0
+    }
+  ],
+  "started_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "finished_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "notes": "Replace placeholders with real values from export run."
+}

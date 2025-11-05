@@ -1,0 +1,44 @@
+{
+  "service_day_overlap_js": {
+    "feature": "Service-day max-overlap (JS)",
+    "path": "review/health-data-dropin/agent/dropins/health-data/src/util/serviceDayMaxOverlap.js",
+    "expected": true,
+    "verified": true,
+    "lines": 183,
+    "tests": 6,
+    "notes": "Must match Swift algorithm exactly. Uses date-fns-tz. Includes 6 inline tests + parity test generator."
+  },
+  "normalizer_v2": {
+    "feature": "Normalizer v2 with tombstone cascade & rolling windows",
+    "path": "review/health-data-dropin/agent/dropins/health-data/src/util/normalize.js",
+    "expected": true,
+    "verified": true,
+    "lines": 154,
+    "notes": "Ajv validation, deletion cascade, rolling stats (adherence7d, overrideCount7d, bedtimeStdDev14d), dedupe by sha1, gzip support. Uses service_day_key from exports."
+  },
+  "parity_test_runner": {
+    "feature": "Parity test runner (100 cases)",
+    "path": "review/health-data-dropin/agent/dropins/health-data/scripts/run-parity.js",
+    "expected": true,
+    "verified": true,
+    "lines": 220,
+    "notes": "Generates 100 random cases, runs both Swift & JS implementations, compares results. Auto-creates Swift test harness if missing."
+  },
+  "ingest_cli": {
+    "feature": "CLI ingest/orchestrator",
+    "path": "review/health-data-dropin/agent/dropins/health-data/src/ingest.js",
+    "expected": true,
+    "verified": false,
+    "notes": "pull, normalize, validate commands; --since, --purge-older-than. NEEDS VERIFICATION."
+  },
+  "schemas": {
+    "feature": "JSON Schemas",
+    "paths": {
+      "unified_health": "review/health-data-dropin/agent/dropins/health-data/schemas/unified_health.schema.json",
+      "night_features": "review/health-data-dropin/agent/dropins/health-data/schemas/night_features.schema.json"
+    },
+    "expected": true,
+    "verified": false,
+    "notes": "Includes dual offsets, hk_uuid, start_tz/end_tz, unit enums. NEEDS VERIFICATION."
+  }
+}

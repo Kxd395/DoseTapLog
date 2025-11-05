@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence Manifest",
+  "type": "object",
+  "properties": {
+    "commit": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "p0_gates": {
+      "type": "object",
+      "properties": {
+        "two_phase_anchors": {
+          "type": "boolean"
+        },
+        "service_day_max_overlap_parity": {
+          "type": "boolean"
+        },
+        "compression_gzip_consistency": {
+          "type": "boolean"
+        },
+        "steps_statistics_collection": {
+          "type": "boolean"
+        },
+        "tombstone_cascade": {
+          "type": "boolean"
+        },
+        "encryption_ux": {
+          "type": "boolean"
+        },
+        "manifests_complete": {
+          "type": "boolean"
+        },
+        "join_invariant_enforced": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "two_phase_anchors",
+        "service_day_max_overlap_parity",
+        "compression_gzip_consistency",
+        "steps_statistics_collection",
+        "tombstone_cascade",
+        "encryption_ux",
+        "manifests_complete",
+        "join_invariant_enforced"
+      ],
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "path"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "commit",
+    "p0_gates",
+    "artifacts"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "parityReport": {
+      "type": "object",
+      "properties": {
+        "cases": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timezones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cutoffs": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "mismatches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "startISO": {
+                "type": "string"
+              },
+              "endISO": {
+                "type": "string"
+              },
+              "tz": {
+                "type": "string"
+              },
+              "cutoff": {
+                "type": "integer"
+              },
+              "swiftKey": {
+                "type": "string"
+              },
+              "jsKey": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "startISO",
+              "endISO",
+              "tz",
+              "cutoff",
+              "swiftKey",
+              "jsKey"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "cases",
+        "timezones",
+        "cutoffs",
+        "mismatches"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
