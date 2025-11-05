@@ -16,7 +16,7 @@ struct EncryptionSettingsView: View {
         Form {
             Section {
                 Toggle("Encrypt Health Exports", isOn: $encryptionEnabled)
-                    .onChange(of: encryptionEnabled) { newValue in
+                    .onChange(of: encryptionEnabled) { oldValue, newValue in
                         if newValue && !EncryptionManager.shared.hasKey() {
                             showingSetup = true
                         }
@@ -82,8 +82,8 @@ struct EncryptionSetupSheet: View {
                 Section {
                     SecureField("Passphrase", text: $passphrase)
                         .textContentType(.newPassword)
-                        .onChange(of: passphrase) { _ in
-                            strength = evaluateStrength(passphrase)
+                        .onChange(of: passphrase) { oldValue, newValue in
+                            strength = evaluateStrength(newValue)
                         }
                     
                     SecureField("Confirm Passphrase", text: $confirmPassphrase)
@@ -191,8 +191,8 @@ struct PassphraseRotationSheet: View {
                 Section {
                     SecureField("New Passphrase", text: $newPassphrase)
                         .textContentType(.newPassword)
-                        .onChange(of: newPassphrase) { _ in
-                            strength = evaluateStrength(newPassphrase)
+                        .onChange(of: newPassphrase) { oldValue, newValue in
+                            strength = evaluateStrength(newValue)
                         }
                     
                     SecureField("Confirm New Passphrase", text: $confirmPassphrase)
