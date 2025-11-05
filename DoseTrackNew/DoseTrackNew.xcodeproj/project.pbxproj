@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D27B874C75A34F2BBF8DCB22 /* EncryptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */; };
 		642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */; };
 		65E3703E5B444936A8B30538 /* Dose2OverrideSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */; };
 		6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionSettingsView.swift; sourceTree = "<group>"; };
 		2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2OverrideSheet.swift; sourceTree = "<group>"; };
 		2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlarmOrchestrator.swift; path = ../../ios/AlarmOrchestrator.swift; sourceTree = "<group>"; };
 		44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GuardNoWakeSheet.swift; path = ../../ios/GuardNoWakeSheet.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		D0000001 = {
 			isa = PBXGroup;
 			children = (
+				9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */,
 				D0000002 /* DoseTrackNew */,
 				D0000003 /* Products */,
 			);

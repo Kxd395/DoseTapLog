@@ -133,6 +133,12 @@ struct SettingsViewEnhanced: View {
                 
                 // MARK: - Data Management
                 Section {
+                    NavigationLink {
+                        EncryptionSettingsView()
+                    } label: {
+                        Label("Encryption", systemImage: "lock.shield")
+                    }
+                    
                     Button(role: .destructive) {
                         showResetConfirm = true
                     } label: {
@@ -203,8 +209,8 @@ struct SettingsViewEnhanced: View {
         prefs.splitStrategy = "50/50"
         prefs.windowStartMin = 150
         prefs.windowEndMin = 240
-        prefs.dose2AllowEarly = false
-        prefs.dose2AllowLate = false
+        prefs.allowEarlyDose = false
+        prefs.allowLateDose = false
     }
 }
 
