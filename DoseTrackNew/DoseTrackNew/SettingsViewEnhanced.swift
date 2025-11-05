@@ -391,7 +391,7 @@ struct EarlyDoseQuickChoicesView: View {
     @State private var selectedButtons: Set<Int>
     
     init() {
-        let buttons = AppPreferences.shared.defaultEarlyButtons
+        let buttons = AppPreferences.shared.earlyTimePriorOptions
         _selectedButtons = State(initialValue: Set(buttons))
     }
     
