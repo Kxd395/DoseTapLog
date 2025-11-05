@@ -72,9 +72,9 @@ enum WindowState: Equatable {
             return "No Dose 1 logged"
         case .waiting(let start):
             return "Window opens at \(start.formatted(date: .omitted, time: .shortened))"
-        case .open(let start, let end):
+        case .open(_, let end):
             return "Window open until \(end.formatted(date: .omitted, time: .shortened))"
-        case .grace(let end, let graceEnd):
+        case .grace(let end, _):
             return "Late grace period (ended \(end.formatted(date: .omitted, time: .shortened)))"
         case .closed(let end):
             return "Window closed at \(end.formatted(date: .omitted, time: .shortened))"

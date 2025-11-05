@@ -88,6 +88,10 @@ final class AppPreferences {
     var lateRequireReason: Bool = true
     
     @ObservationIgnored
+    @AppStorage("late_quick_choices")
+    var lateQuickChoicesCSV: String = "5,10,15,30"
+    
+    @ObservationIgnored
     @AppStorage("late_grace_minutes")
     var lateGraceMinutes: Int = 15
     
