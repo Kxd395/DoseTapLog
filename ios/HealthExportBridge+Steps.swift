@@ -223,3 +223,4 @@ extension HealthExportBridge {
         return merged.reduce(0.0) { $0 + $1.count }
     }
 }
+#endif
