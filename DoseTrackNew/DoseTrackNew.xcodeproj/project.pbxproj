@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		136A03D5FFC34F75CF6B57E4 /* DoseLogExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499A3A2E5A8663630F075646 /* DoseLogExporter.swift */; };
-		154020083F53A9BA9F8C211E /* ModernStatusChipRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AC07F0316026774E4EFC06 /* ModernStatusChipRow.swift */; };
-		21ED5E8167D664A3EF4DA5B4 /* HealthExportBridge+TwoPhaseCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80AD3E34A740016E3396A6E /* HealthExportBridge+TwoPhaseCommit.swift */; };
 		642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */; };
 		65E3703E5B444936A8B30538 /* Dose2OverrideSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */; };
 		6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */; };
@@ -26,7 +23,6 @@
 		8089AFE22EB94EEF008532AA /* NightAlarmPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */; };
 		8089AFE42EB952D8008532AA /* project.pbxproj in Resources */ = {isa = PBXBuildFile; fileRef = 8089AFE32EB952D8008532AA /* project.pbxproj */; };
 		914905F48951B54726A473A7 /* WindowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9FFBA45A82886549E6FE7E /* WindowState.swift */; };
-		9EBB7DBA6FD1FB30EDBA992D /* HealthExportBridge+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253897C5A3C48B4097C3DC14 /* HealthExportBridge+Compression.swift */; };
 		A0000001 /* DoseTrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000001 /* DoseTrackApp.swift */; };
 		A0000002 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000002 /* Models.swift */; };
 		A0000003 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000003 /* Config.swift */; };
@@ -62,27 +58,15 @@
 		A0000037 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000037 /* NotificationHelper.swift */; };
 		A0000038 /* UndoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000038 /* UndoBanner.swift */; };
 		A0000039 /* NightTurnoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000039 /* NightTurnoverController.swift */; };
-		B611AC3031D8ACD4BCDA5694 /* HealthExportBridge+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44590887A3C85B9DF951F452 /* HealthExportBridge+Anchors.swift */; };
-		C1601D8DE749A777E0C24B5F /* ServiceDayMaxOverlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5802352A6E113545D4A415 /* ServiceDayMaxOverlap.swift */; };
 		C4FEF3FD7CE65CBD048D45F8 /* AlarmOrchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */; };
-		D2A0297372BDAECCA536113E /* HealthExportBridge+Steps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7F2F732A3BAFEE2B2F5D2 /* HealthExportBridge+Steps.swift */; };
-		DB05B5F6D4626F87B2AE5DE6 /* EncryptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFCFD34B6BE08DFD7A26E84 /* EncryptionSettingsView.swift */; };
 		E7B701002EB94000008532AA /* WindowPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6694AD22EB94000008532AA /* WindowPill.swift */; };
-		EC57A3D0ED76206658D23EF9 /* HealthExportBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A36049699012693C1B73A9 /* HealthExportBridge.swift */; };
 		F27864512EB94000008532AA /* NextAlertChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25315D52EB94000008532AA /* NextAlertChip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		253897C5A3C48B4097C3DC14 /* HealthExportBridge+Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "HealthExportBridge+Compression.swift"; path = "../../ios/HealthExportBridge+Compression.swift"; sourceTree = "<group>"; };
-		28AC07F0316026774E4EFC06 /* ModernStatusChipRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModernStatusChipRow.swift; path = ../../ios/ModernStatusChipRow.swift; sourceTree = "<group>"; };
 		2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2OverrideSheet.swift; sourceTree = "<group>"; };
 		2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlarmOrchestrator.swift; path = ../../ios/AlarmOrchestrator.swift; sourceTree = "<group>"; };
-		44590887A3C85B9DF951F452 /* HealthExportBridge+Anchors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "HealthExportBridge+Anchors.swift"; path = "../../ios/HealthExportBridge+Anchors.swift"; sourceTree = "<group>"; };
 		44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GuardNoWakeSheet.swift; path = ../../ios/GuardNoWakeSheet.swift; sourceTree = "<group>"; };
-		499A3A2E5A8663630F075646 /* DoseLogExporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DoseLogExporter.swift; path = ../../ios/DoseLogExporter.swift; sourceTree = "<group>"; };
-		64B7F2F732A3BAFEE2B2F5D2 /* HealthExportBridge+Steps.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "HealthExportBridge+Steps.swift"; path = "../../ios/HealthExportBridge+Steps.swift"; sourceTree = "<group>"; };
-		6C5802352A6E113545D4A415 /* ServiceDayMaxOverlap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceDayMaxOverlap.swift; path = ../../ios/ServiceDayMaxOverlap.swift; sourceTree = "<group>"; };
-		6CFCFD34B6BE08DFD7A26E84 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EncryptionSettingsView.swift; path = ../../ios/EncryptionSettingsView.swift; sourceTree = "<group>"; };
 		6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WakeSheetView.swift; path = ../../ios/WakeSheetView.swift; sourceTree = "<group>"; };
 		8089AFCA2EB944A2008532AA /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
 		8089AFCB2EB944A2008532AA /* DesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokens.swift; sourceTree = "<group>"; };
@@ -134,9 +118,7 @@
 		B0000039 /* NightTurnoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightTurnoverController.swift; sourceTree = "<group>"; };
 		B0000100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0000001 /* DoseTrackNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoseTrackNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3A36049699012693C1B73A9 /* HealthExportBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HealthExportBridge.swift; path = ../../ios/HealthExportBridge.swift; sourceTree = "<group>"; };
 		D25315D52EB94000008532AA /* NextAlertChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAlertChip.swift; sourceTree = "<group>"; };
-		D80AD3E34A740016E3396A6E /* HealthExportBridge+TwoPhaseCommit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "HealthExportBridge+TwoPhaseCommit.swift"; path = "../../ios/HealthExportBridge+TwoPhaseCommit.swift"; sourceTree = "<group>"; };
 		E6694AD22EB94000008532AA /* WindowPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPill.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,16 +196,7 @@
 				B0000025 /* SettingsViewEnhanced.swift */,
 				B0000038 /* UndoBanner.swift */,
 				2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */,
-				499A3A2E5A8663630F075646 /* DoseLogExporter.swift */,
-				6CFCFD34B6BE08DFD7A26E84 /* EncryptionSettingsView.swift */,
 				44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */,
-				C3A36049699012693C1B73A9 /* HealthExportBridge.swift */,
-				44590887A3C85B9DF951F452 /* HealthExportBridge+Anchors.swift */,
-				253897C5A3C48B4097C3DC14 /* HealthExportBridge+Compression.swift */,
-				64B7F2F732A3BAFEE2B2F5D2 /* HealthExportBridge+Steps.swift */,
-				D80AD3E34A740016E3396A6E /* HealthExportBridge+TwoPhaseCommit.swift */,
-				28AC07F0316026774E4EFC06 /* ModernStatusChipRow.swift */,
-				6C5802352A6E113545D4A415 /* ServiceDayMaxOverlap.swift */,
 				6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */,
 				8F9FFBA45A82886549E6FE7E /* WindowState.swift */,
 			);
@@ -357,16 +330,7 @@
 				A0000039 /* NightTurnoverController.swift in Sources */,
 				A0000038 /* UndoBanner.swift in Sources */,
 				C4FEF3FD7CE65CBD048D45F8 /* AlarmOrchestrator.swift in Sources */,
-				136A03D5FFC34F75CF6B57E4 /* DoseLogExporter.swift in Sources */,
-				DB05B5F6D4626F87B2AE5DE6 /* EncryptionSettingsView.swift in Sources */,
 				6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */,
-				EC57A3D0ED76206658D23EF9 /* HealthExportBridge.swift in Sources */,
-				B611AC3031D8ACD4BCDA5694 /* HealthExportBridge+Anchors.swift in Sources */,
-				9EBB7DBA6FD1FB30EDBA992D /* HealthExportBridge+Compression.swift in Sources */,
-				D2A0297372BDAECCA536113E /* HealthExportBridge+Steps.swift in Sources */,
-				21ED5E8167D664A3EF4DA5B4 /* HealthExportBridge+TwoPhaseCommit.swift in Sources */,
-				154020083F53A9BA9F8C211E /* ModernStatusChipRow.swift in Sources */,
-				C1601D8DE749A777E0C24B5F /* ServiceDayMaxOverlap.swift in Sources */,
 				642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */,
 				914905F48951B54726A473A7 /* WindowState.swift in Sources */,
 			);
