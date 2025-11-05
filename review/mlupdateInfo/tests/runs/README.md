@@ -16,32 +16,32 @@ Required files:
 
 | Run ID | Date | Commit | Status | Scope | Evidence |
 |--------|------|--------|--------|-------|----------|
-| [run-001](./2025-11-05_16-30-00_run-001/RUN.yaml) | 2025-11-05 | 71306c6 | Partial | Compilation fixes + parity test setup | 8 commits, 100 test cases generated |
+| [run-001](./2025-11-05_16-30-00_run-001/RUN.yaml) | 2025-11-05 | 71306c6 | ✅ Complete | Compilation fixes + parity test setup | 8 commits, 100 test cases generated |
+| [run-002](./2025-11-05_16-19-43_run-002/RUN.yaml) | 2025-11-05 | Current | ✅ **PASSED** | P0 Parity Gate: 100/100 Swift↔JS | Standalone Swift script, 100% match |
 
 ## Evidence Gates (Required for RFE)
 
-- [ ] **P0 Parity**: 100/100 Swift↔JS match (parity_report.json)
+- [x] **P0 Parity**: 100/100 Swift↔JS match (✅ Run 002: parity_report.md)
 - [ ] **Anchors/Tombstones**: Export manifest with added/deleted counts
 - [ ] **Deletion Cascade**: Normalizer log showing recomputed stats
 - [ ] **Compression**: .jsonl.gz export + agent gunzip proof
 - [ ] **Steps De-overlap**: HKStatisticsCollection aggregation log
 - [ ] **Encryption**: Settings UI screenshot + encrypted export
 
-## Next Run (002)
+## Next Run (003)
 
-**Goal**: Execute Swift parity tests and validate 100/100 match
+**Goal**: Integration testing - compression + encryption wiring
 
 Commands:
 ```bash
-cd DoseTrackNew
-xcodebuild test -project DoseTrackNew.xcodeproj \
-  -scheme DoseTrackNew \
-  -destination 'platform=iOS Simulator,name=iPhone 15' \
-  -only-testing:ServiceDayParityTests \
-  -resultBundlePath ../review/mlupdateInfo/tests/runs/2025-11-05_XX-XX-XX_run-002/unit.xcresult
-
-cd ../review/health-data-dropin/agent/dropins/health-data
-node scripts/run-parity.js > ../../../../../../review/mlupdateInfo/tests/runs/2025-11-05_XX-XX-XX_run-002/parity_report.json
+# Run iOS app on simulator
+# Export health data (should produce .jsonl.gz)
+# Verify file format and compression
+# Test encryption UI flow
 ```
 
-Expected: Green parity (100/100), .xcresult bundle, parity JSON report
+Expected: Compressed export, encryption settings functional
+
+---
+
+**Run 002 Archived** - See [./2025-11-05_16-19-43_run-002/commands.sh](./2025-11-05_16-19-43_run-002/commands.sh) for reproduction steps

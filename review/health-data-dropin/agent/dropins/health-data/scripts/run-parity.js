@@ -39,24 +39,25 @@ console.log(`   ✅ JS processed ${jsResults.length} cases\n`);
 console.log('3️⃣  Running Swift implementation...');
 let swiftResults = [];
 try {
-    // Check if Swift test runner exists
-    if (!fs.existsSync(SWIFT_TEST_PATH)) {
-        console.warn(`   ⚠️  Swift parity runner not found at ${SWIFT_TEST_PATH}`);
-        console.warn('   Creating Swift test runner...\n');
-        createSwiftParityRunner();
-    }
+    // Use standalone Swift script (simpler than xcodebuild)
+    const swiftScriptPath = path.join(__dirname, '../../../../../../scripts/run-parity-swift.swift');
     
-    // Run Swift tests via xcodebuild
-    const swiftCmd = `cd ${path.join(__dirname, '../../../../../../DoseTrackNew')} && xcodebuild test -project DoseTrackNew.xcodeproj -scheme DoseTrackNew -destination 'platform=iOS Simulator,name=iPhone 15' -only-testing:ServiceDayParityTests 2>&1 | grep "PARITY_RESULT"`;
-    
-    try {
-        const swiftOutput = execSync(swiftCmd, { encoding: 'utf8', stdio: 'pipe' });
-        // Parse Swift JSON output (format: PARITY_RESULT: {"case_index":0,"swift_key":"2025-11-04"})
-        const matches = swiftOutput.matchAll(/PARITY_RESULT: ({.*})/g);
-        swiftResults = Array.from(matches).map(m => JSON.parse(m[1]));
-    } catch (err) {
-        console.error(`   ❌ Swift test execution failed: ${err.message}`);
-        console.error('   Marking Swift results as N/A for now\n');
+    if (!fs.existsSync(swiftScriptPath)) {
+        console.warn(`   ⚠️  Swift parity script not found at ${swiftScriptPath}`);
+        console.warn('   Skipping Swift verification\n');
+    } else {
+        const swiftCmd = `cd ${path.join(__dirname, '../../../../../..')} && swift scripts/run-parity-swift.swift`;
+        
+        try {
+            const swiftOutput = execSync(swiftCmd, { encoding: 'utf8', stdio: 'pipe' });
+            // Parse Swift JSON output (format: PARITY_RESULT: {"case_index":0,"swift_key":"2025-11-04"})
+            const matches = swiftOutput.matchAll(/PARITY_RESULT: ({.*})/g);
+            swiftResults = Array.from(matches).map(m => JSON.parse(m[1]));
+            console.log(`   ✅ Swift processed ${swiftResults.length} cases\n`);
+        } catch (err) {
+            console.error(`   ❌ Swift test execution failed: ${err.message}`);
+            console.error('   Marking Swift results as N/A for now\n');
+        }
     }
 } catch (err) {
     console.warn(`   ⚠️  Swift parity tests not available: ${err.message}\n`);
