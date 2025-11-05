@@ -1,0 +1,3 @@
+{"type":"HKCategorySample","category":"sleepAnalysis","startUTC":"2025-11-03T04:30:00.000Z","endUTC":"2025-11-03T11:15:23.456Z","value":0,"sourceBundleId":"com.apple.health","device":"iPhone","metadata":{},"service_day_key":"2025-11-03"}
+{"type":"HKQuantitySample","quantity":"heartRate","startUTC":"2025-11-03T04:30:00.000Z","endUTC":"2025-11-03T04:30:00.000Z","value":62,"unit":"count/min","sourceBundleId":"com.apple.Watch","device":"Apple Watch Series 9","metadata":{},"service_day_key":"2025-11-03"}
+{"type":"HKQuantitySample","quantity":"heartRate","startUTC":"2025-11-03T04:31:00.000Z","endUTC":"2025-11-03T04:31:00.000Z","value":58,"unit":"count/min","sourceBundleId":"com.apple.Watch","device":"Apple Watch Series 9","metadata":{},"service_day_key":"2025-11-03"}

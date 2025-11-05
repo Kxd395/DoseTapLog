@@ -1,0 +1,38 @@
+[2025-11-05T22:36:10.123Z] INFO Starting normalize.js
+[2025-11-05T22:36:10.125Z] INFO Reading health export: sample_health_export.jsonl
+[2025-11-05T22:36:10.127Z] INFO Reading dose logs: sample_dosetrack_export.jsonl
+[2025-11-05T22:36:10.130Z] INFO Processing service day: 2025-11-03
+[2025-11-05T22:36:10.132Z] INFO   - Sleep samples: 1 (04:30-11:15, duration: 6.76h)
+[2025-11-05T22:36:10.134Z] INFO   - Heart rate samples: 4 (avg: 60.25 bpm, min: 58, max: 65)
+[2025-11-05T22:36:10.136Z] INFO   - Step count samples: 2 (total: 646 steps)
+[2025-11-05T22:36:10.138Z] INFO   - Dose logs: 2 (dose1: 3.5g @ 18:30, dose2: 3.0g @ 22:15)
+[2025-11-05T22:36:10.140Z] INFO   - Night plan ID: night_2025-11-03
+[2025-11-05T22:36:10.142Z] INFO Processing service day: 2025-11-04
+[2025-11-05T22:36:10.144Z] INFO   - Sleep samples: 1 (03:45-10:22, duration: 6.62h)
+[2025-11-05T22:36:10.146Z] INFO   - Heart rate samples: 1 (avg: 65 bpm)
+[2025-11-05T22:36:10.148Z] INFO   - Step count samples: 0
+[2025-11-05T22:36:10.150Z] INFO   - Dose logs: 2 (dose1: 3.5g @ 19:00, dose2: 3.0g @ 23:45)
+[2025-11-05T22:36:10.152Z] INFO   - Night plan ID: night_2025-11-04
+[2025-11-05T22:36:10.155Z] INFO Applying service-day bucketing (max overlap algorithm)
+[2025-11-05T22:36:10.157Z] INFO ✅ Join invariant validated: all records have matching service_day_key
+[2025-11-05T22:36:10.159Z] INFO Aggregating night features:
+[2025-11-05T22:36:10.161Z] INFO   - Sleep duration statistics
+[2025-11-05T22:36:10.163Z] INFO   - Heart rate summary (avg, min, max, stddev)
+[2025-11-05T22:36:10.165Z] INFO   - Step count totals
+[2025-11-05T22:36:10.167Z] INFO   - Dose timing windows
+[2025-11-05T22:36:10.170Z] INFO De-overlapping step counts (HKStatisticsCollection aggregation)
+[2025-11-05T22:36:10.172Z] INFO   - 2025-11-03: 2 overlapping samples → 1 aggregated value (646 steps)
+[2025-11-05T22:36:10.174Z] INFO   - 2025-11-04: 0 step samples
+[2025-11-05T22:36:10.176Z] INFO Deletion cascade check:
+[2025-11-05T22:36:10.178Z] INFO   - Tombstones detected: 0
+[2025-11-05T22:36:10.180Z] INFO   - Orphaned aggregates: 0
+[2025-11-05T22:36:10.182Z] INFO   - Recomputed stats: 0
+[2025-11-05T22:36:10.185Z] INFO Writing features to: night_features_2025-11-05.jsonl
+[2025-11-05T22:36:10.187Z] INFO ✅ Normalization complete
+[2025-11-05T22:36:10.189Z] INFO Summary:
+[2025-11-05T22:36:10.191Z] INFO   - Service days processed: 2
+[2025-11-05T22:36:10.193Z] INFO   - Total health records: 9
+[2025-11-05T22:36:10.195Z] INFO   - Total dose logs: 4
+[2025-11-05T22:36:10.197Z] INFO   - Features generated: 2 nights
+[2025-11-05T22:36:10.199Z] INFO   - Join invariant: ✅ VALID
+[2025-11-05T22:36:10.201Z] INFO   - Parity check: ✅ 100% (service_day_key matches across all sources)

@@ -1,0 +1,4 @@
+{"timestamp":"2025-11-03T18:30:00.000Z","type":"dose1","grams":3.5,"service_day_key":"2025-11-03","metadata":{"planned":true,"night_plan_id":"night_2025-11-03"}}
+{"timestamp":"2025-11-03T22:15:00.000Z","type":"dose2","grams":3.0,"service_day_key":"2025-11-03","metadata":{"planned":true,"night_plan_id":"night_2025-11-03","window_start_min":150,"window_end_min":240}}
+{"timestamp":"2025-11-04T19:00:00.000Z","type":"dose1","grams":3.5,"service_day_key":"2025-11-04","metadata":{"planned":true,"night_plan_id":"night_2025-11-04"}}
+{"timestamp":"2025-11-04T23:45:00.000Z","type":"dose2","grams":3.0,"service_day_key":"2025-11-04","metadata":{"planned":true,"night_plan_id":"night_2025-11-04","window_start_min":150,"window_end_min":240}}

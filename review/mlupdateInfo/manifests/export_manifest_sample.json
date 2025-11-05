@@ -1,0 +1,54 @@
+{
+  "export_metadata": {
+    "timestamp": "2025-11-05T22:36:00.000Z",
+    "version": "2.0.0",
+    "export_type": "incremental",
+    "compression": "gzip",
+    "encryption": "none"
+  },
+  "health_data": {
+    "file": "sample_health_export.jsonl.gz",
+    "anchors": {
+      "sleepAnalysis": "HKAnchor:2025-11-04T10:22:15.789Z",
+      "heartRate": "HKAnchor:2025-11-04T03:45:00.000Z",
+      "stepCount": "HKAnchor:2025-11-03T14:30:00.000Z"
+    },
+    "record_counts": {
+      "sleepAnalysis": 2,
+      "heartRate": 5,
+      "stepCount": 2,
+      "total": 9
+    },
+    "date_range": {
+      "start": "2025-11-03T04:30:00.000Z",
+      "end": "2025-11-04T10:22:15.789Z"
+    },
+    "service_days": [
+      "2025-11-03",
+      "2025-11-04"
+    ]
+  },
+  "dose_logs": {
+    "file": "sample_dosetrack_export.jsonl",
+    "record_count": 4,
+    "date_range": {
+      "start": "2025-11-03T18:30:00.000Z",
+      "end": "2025-11-04T23:45:00.000Z"
+    },
+    "service_days": [
+      "2025-11-03",
+      "2025-11-04"
+    ]
+  },
+  "two_phase_commit": {
+    "status": "committed",
+    "health_data_watermark": "HKAnchor:2025-11-04T10:22:15.789Z",
+    "dose_log_watermark": "DoseLog:2025-11-04T23:45:00.000Z",
+    "commit_timestamp": "2025-11-05T22:36:05.123Z"
+  },
+  "integrity": {
+    "join_invariant_validated": true,
+    "service_day_parity": "100%",
+    "algorithm_version": "max_overlap_v1"
+  }
+}
