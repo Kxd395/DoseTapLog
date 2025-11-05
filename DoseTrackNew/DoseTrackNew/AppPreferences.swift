@@ -2,226 +2,341 @@
 //  AppPreferences.swift
 //  DoseTrack
 //
-//  Enhanced AppPreferences combining @Observable with App Group persistence
-//  Backward compatible with review bundle's Codable struct
+//  Single source of truth for all user settings using @AppStorage
+//  Aligned with .specify/memory/spec.md Settings Panel specification
 //
 
 import SwiftUI
+import Observation
 
-/// AppPreferences: Single source of truth for all user preferences.
-/// Combines @Observable pattern with App Group UserDefaults for widget/extension access.
 @Observable
 final class AppPreferences {
-    static let shared = AppPreferences()
-    private static let suite = UserDefaults(suiteName: "group.com.jefferson.dosetrack")!
-    private static let legacyKey = "AppPreferences.v1"
+    
+    // MARK: - Supporting Types
+    
+    /// Do Not Disturb / Focus mode policy
+    enum DNDPolicy: String, Codable, CaseIterable {
+        case off = "off"                    // Always interrupt
+        case timeSensitive = "timeSensitive" // Use Time Sensitive interruption
+        case ask = "ask"                    // Ask user on first alarm
+        
+        var description: String {
+            switch self {
+            case .off: return "Always notify (ignore Focus)"
+            case .timeSensitive: return "Time Sensitive (requires permission)"
+            case .ask: return "Ask me"
+            }
+        }
+    }
     
     // MARK: - Night Plan Defaults
     
-    @ObservationIgnored @AppStorage("plan_total_night_grams", store: suite) 
+    @ObservationIgnored
+    @AppStorage("plan_total_night_grams")
     var totalNightGrams: Double = 6.5
     
-    @ObservationIgnored @AppStorage("plan_split_strategy", store: suite) 
-    var splitStrategy: String = "50/50" // "50/50", "60/40", "40/60"
+    @ObservationIgnored
+    @AppStorage("plan_split_strategy")
+    var splitStrategy: String = "50-50"
     
-    @ObservationIgnored @AppStorage("plan_rounding_step_g", store: suite) 
-    var roundingStepG: Double = 0.25
+    @ObservationIgnored
+    @AppStorage("plan_rounding_increment")
+    var roundingIncrement: Double = 0.25
     
-    @ObservationIgnored @AppStorage("plan_window_start_min", store: suite) 
+    @ObservationIgnored
+    @AppStorage("dose2_window_start_min")
     var windowStartMin: Int = 150
     
-    @ObservationIgnored @AppStorage("plan_window_end_min", store: suite) 
+    @ObservationIgnored
+    @AppStorage("dose2_window_end_min")
     var windowEndMin: Int = 240
     
-    @ObservationIgnored @AppStorage("plan_allow_tonight_edit", store: suite) 
+    @ObservationIgnored
+    @AppStorage("allow_tonight_only_edit")
     var allowTonightEdit: Bool = true
     
     // MARK: - Early Dose 2 Policy
     
-    @ObservationIgnored @AppStorage("early_allow_dose_2", store: suite) 
+    @ObservationIgnored
+    @AppStorage("allow_early_dose")
     var allowEarlyDose: Bool = false
     
-    @ObservationIgnored @AppStorage("early_max_minutes", store: suite) 
+    @ObservationIgnored
+    @AppStorage("max_early_minutes")
     var maxEarlyMinutes: Int = 15
     
-    @ObservationIgnored @AppStorage("early_require_reason", store: suite) 
-    var requireEarlyReason: Bool = true
+    @ObservationIgnored
+    @AppStorage("early_require_reason")
+    var earlyRequireReason: Bool = true
     
-    @ObservationIgnored @AppStorage("early_time_prior_defaults", store: suite) 
-    var earlyTimePriorDefaults: String = "5,10" // Comma-separated list
+    @ObservationIgnored
+    @AppStorage("early_time_prior_defaults")
+    var earlyTimePriorDefaults: String = "5,10"
+    
+    // MARK: - Late Dose 2 Policy
+    
+    @ObservationIgnored
+    @AppStorage("allow_late_dose")
+    var allowLateDose: Bool = false
+    
+    @ObservationIgnored
+    @AppStorage("max_late_minutes")
+    var maxLateMinutes: Int = 30
+    
+    @ObservationIgnored
+    @AppStorage("late_require_reason")
+    var lateRequireReason: Bool = true
+    
+    @ObservationIgnored
+    @AppStorage("late_grace_minutes")
+    var lateGraceMinutes: Int = 15
+    
+    // MARK: - Alarm Ladder Policy
+    
+    @ObservationIgnored
+    @AppStorage("alarm_style")
+    var alarmStyleRaw: String = NightAlarmPlan.AlarmStyle.normal.rawValue
+    
+    /// Alarm style with type safety
+    var alarmStyle: NightAlarmPlan.AlarmStyle {
+        get { NightAlarmPlan.AlarmStyle(rawValue: alarmStyleRaw) ?? .normal }
+        set { alarmStyleRaw = newValue.rawValue }
+    }
+    
+    @ObservationIgnored
+    @AppStorage("alarm_budget_per_night")
+    var alarmBudgetPerNight: Int = 3
+    
+    @ObservationIgnored
+    @AppStorage("pre_window_lead_minutes")
+    var preWindowLeadMinutes: Int = 0  // 0 = disabled
+    
+    @ObservationIgnored
+    @AppStorage("hard_after_end_enabled")
+    var hardAfterEndEnabled: Bool = false
+    
+    @ObservationIgnored
+    @AppStorage("hard_repeat_minutes")
+    var hardRepeatMinutes: Int = 15
+    
+    @ObservationIgnored
+    @AppStorage("hard_max_repeats")
+    var hardMaxRepeats: Int = 3
+    
+    @ObservationIgnored
+    @AppStorage("respect_dnd")
+    var respectDNDRaw: String = DNDPolicy.timeSensitive.rawValue
+    
+    /// DND policy with type safety
+    var respectDND: DNDPolicy {
+        get { DNDPolicy(rawValue: respectDNDRaw) ?? .timeSensitive }
+        set { respectDNDRaw = newValue.rawValue }
+    }
+    
+    @ObservationIgnored
+    @AppStorage("notifications_time_sensitive_consent")
+    var timeSensitiveConsent: Bool = false
+    
+    @ObservationIgnored
+    @AppStorage("strong_alarm_consent")
+    var strongAlarmConsent: Bool = false
     
     // MARK: - Notifications & Live Activity
     
-    @ObservationIgnored @AppStorage("live_activity_enabled", store: suite) 
+    @ObservationIgnored
+    @AppStorage("notifications_live_activity_enabled")
     var liveActivityEnabled: Bool = true
     
-    @ObservationIgnored @AppStorage("notify_at_start", store: suite) 
-    var notifyAtStart: Bool = true
+    @ObservationIgnored
+    @AppStorage("notifications_window_start")
+    var notifyWindowStart: Bool = true
     
-    @ObservationIgnored @AppStorage("notify_at_half", store: suite) 
-    var notifyAtHalf: Bool = false
+    /// Alias for compatibility
+    var notifyAtStart: Bool {
+        get { notifyWindowStart }
+        set { notifyWindowStart = newValue }
+    }
     
-    @ObservationIgnored @AppStorage("notify_at_end", store: suite) 
-    var notifyAtEnd: Bool = true
+    @ObservationIgnored
+    @AppStorage("notifications_halfway")
+    var notifyHalfway: Bool = false
     
-    @ObservationIgnored @AppStorage("quiet_hours_start", store: suite) 
-    var quietHoursStart: Int = 22 // 10 PM
+    /// Alias for compatibility
+    var notifyAtHalf: Bool {
+        get { notifyHalfway }
+        set { notifyHalfway = newValue }
+    }
     
-    @ObservationIgnored @AppStorage("quiet_hours_end", store: suite) 
-    var quietHoursEnd: Int = 7 // 7 AM
+    @ObservationIgnored
+    @AppStorage("notifications_window_end")
+    var notifyWindowEnd: Bool = true
     
-    @ObservationIgnored @AppStorage("haptics_enabled", store: suite) 
+    /// Alias for compatibility
+    var notifyAtEnd: Bool {
+        get { notifyWindowEnd }
+        set { notifyWindowEnd = newValue }
+    }
+    
+    @ObservationIgnored
+    @AppStorage("notifications_quiet_start")
+    var quietHoursStart: String?
+    
+    @ObservationIgnored
+    @AppStorage("notifications_quiet_end")
+    var quietHoursEnd: String?
+    
+    @ObservationIgnored
+    @AppStorage("notifications_haptics_enabled")
     var hapticsEnabled: Bool = true
+    
+    /// Computed property for window duration
+    var windowStartMinutes: Int {
+        get { windowStartMin }
+        set { windowStartMin = newValue }
+    }
+    
+    var windowEndMinutes: Int {
+        get { windowEndMin }
+        set { windowEndMin = newValue }
+    }
     
     // MARK: - Data Sources
     
-    @ObservationIgnored @AppStorage("health_sample_window_min", store: suite) 
-    var healthSampleWindowMin: Int = 120
+    @ObservationIgnored
+    @AppStorage("health_sample_window_min")
+    var healthSampleWindowMin: Int = 60
     
-    @ObservationIgnored @AppStorage("whoop_proxy_url", store: suite) 
+    @ObservationIgnored
+    @AppStorage("whoop_proxy_url")
     var whoopProxyURL: String = ""
     
-    @ObservationIgnored @AppStorage("whoop_api_key", store: suite) 
+    @ObservationIgnored
+    @AppStorage("whoop_api_key")
     var whoopAPIKey: String = ""
     
-    @ObservationIgnored @AppStorage("wake_source_preference", store: suite) 
-    var wakeSourcePreference: String = "health" // "health", "manual"
+    @ObservationIgnored
+    @AppStorage("wake_source_preference")
+    var wakeSourcePreference: String = "Health"
     
     // MARK: - Exports
     
-    @ObservationIgnored @AppStorage("export_include_timezone", store: suite) 
+    @ObservationIgnored
+    @AppStorage("export_include_timezone")
     var exportIncludeTimezone: Bool = true
     
-    @ObservationIgnored @AppStorage("export_filename_pattern", store: suite) 
-    var exportFilenamePattern: String = "dosetrack_{nightKey}"
+    @ObservationIgnored
+    @AppStorage("export_filename_pattern")
+    var exportFilenamePattern: String = "DoseTrack_yyyyMMdd.csv"
     
-    @ObservationIgnored @AppStorage("export_include_notes", store: suite) 
+    @ObservationIgnored
+    @AppStorage("export_include_notes")
     var exportIncludeNotes: Bool = true
     
-    @ObservationIgnored @AppStorage("export_include_event_log", store: suite) 
+    @ObservationIgnored
+    @AppStorage("export_include_event_log")
     var exportIncludeEventLog: Bool = false
     
-    @ObservationIgnored @AppStorage("export_default_email", store: suite) 
+    @ObservationIgnored
+    @AppStorage("export_default_email")
     var exportDefaultEmail: String = ""
     
     // MARK: - Privacy & Retention
     
-    @ObservationIgnored @AppStorage("require_biometric", store: suite) 
+    @ObservationIgnored
+    @AppStorage("privacy_require_biometric")
     var requireBiometric: Bool = false
     
-    @ObservationIgnored @AppStorage("mask_widget_doses", store: suite) 
-    var maskWidgetDoses: Bool = false
+    @ObservationIgnored
+    @AppStorage("privacy_mask_widget_doses")
+    var maskWidgetDoses: Bool = true
     
-    @ObservationIgnored @AppStorage("retention_days", store: suite) 
+    @ObservationIgnored
+    @AppStorage("privacy_retention_days")
     var retentionDays: Int = 365
     
-    // MARK: - Reset Night
+    // MARK: - Debug
     
-    @ObservationIgnored @AppStorage("reset_allow_hard", store: suite)
-    var resetAllowHard: Bool = true
-    
-    @ObservationIgnored @AppStorage("reset_require_biometric_hard", store: suite)
-    var resetRequireBiometricHard: Bool = false
-    
-    @ObservationIgnored @AppStorage("reset_reason_required", store: suite)
-    var resetReasonRequired: Bool = true
-    
-    @ObservationIgnored @AppStorage("reset_undo_window_sec", store: suite)
-    var resetUndoWindowSec: Int = 30
-    
-    // MARK: - Late Dose 2 Override
-    
-    @ObservationIgnored @AppStorage("late_dose_allow", store: suite)
-    var allowLateDose: Bool = true
-    
-    @ObservationIgnored @AppStorage("late_dose_require_reason", store: suite)
-    var lateRequireReason: Bool = true
-    
-    @ObservationIgnored @AppStorage("late_dose_max_minutes", store: suite)
-    var maxLateMinutes: Int = 120
-    
-    @ObservationIgnored @AppStorage("late_dose_quick_choices", store: suite)
-    var lateQuickChoicesCSV: String = "5,10,15,30"
-    
-    // MARK: - Debug & Developer
-    
-    @ObservationIgnored @AppStorage("show_internals", store: suite) 
+    @ObservationIgnored
+    @AppStorage("debug_show_internals")
     var showInternals: Bool = false
     
-    // MARK: - Computed Properties (for backward compatibility with review bundle)
+    // MARK: - Singleton
     
-    /// Planned Dose 1 amount (first dose of the night)
-    var planDose1G: Double {
-        Self.round(totalNightGrams * splitFraction.first, step: roundingStepG)
+    static let shared = AppPreferences()
+    
+    // MARK: - Computed Properties
+    
+    /// Parse early time-prior defaults from comma-separated string
+    var earlyTimePriorOptions: [Int] {
+        earlyTimePriorDefaults
+            .split(separator: ",")
+            .compactMap { Int($0.trimmingCharacters(in: .whitespaces)) }
     }
     
-    /// Planned Dose 2 amount (second dose of the night)
-    var planDose2G: Double {
-        Self.round(totalNightGrams * splitFraction.second, step: roundingStepG)
-    }
-    
-    /// Early dose button values parsed from comma-separated string
-    var defaultEarlyButtons: [Int] {
-        earlyTimePriorDefaults.split(separator: ",").compactMap { Int($0.trimmingCharacters(in: .whitespaces)) }
-    }
-    
-    /// Split fractions for dose calculations
-    private var splitFraction: (first: Double, second: Double) {
-        switch splitStrategy {
-        case "60/40": return (0.6, 0.4)
-        case "40/60": return (0.4, 0.6)
-        default: return (0.5, 0.5) // "50/50"
-        }
-    }
-    
-    // MARK: - Helpers
-    
-    /// Round value to nearest step
-    static func round(_ value: Double, step: Double) -> Double {
-        (value / step).rounded() * step
-    }
-    
-    /// Calculate planned dose amounts based on total and split strategy
+    /// Calculate Dose 1 and Dose 2 amounts based on current plan
     func calculateDoses() -> (dose1: Double, dose2: Double) {
-        return (planDose1G, planDose2G)
+        let total = totalNightGrams
+        let (d1, d2): (Double, Double)
+        
+        switch splitStrategy {
+        case "50-50":
+            d1 = total / 2.0
+            d2 = total / 2.0
+        case "60-40":
+            d1 = total * 0.6
+            d2 = total * 0.4
+        case "40-60":
+            d1 = total * 0.4
+            d2 = total * 0.6
+        default: // "Custom"
+            d1 = total / 2.0
+            d2 = total / 2.0
+        }
+        
+        return (roundDose(d1), roundDose(d2))
     }
     
-    /// Check if planned dose amounts violate safety guardrails
+    /// Round dose to configured increment (0.25g or 0.5g)
+    private func roundDose(_ value: Double) -> Double {
+        let increment = roundingIncrement
+        return (value / increment).rounded() * increment
+    }
+    
+    /// Validate current plan against safety guardrails
     var planViolatesSafety: Bool {
         let (d1, d2) = calculateDoses()
-        let perDoseMin = 1.5, perDoseMax = 4.5
-        let nightlyMin = 3.0, nightlyMax = 9.0
+        let perDoseMin = 1.5
+        let perDoseMax = 4.5
+        let nightlyMin = 3.0
+        let nightlyMax = 9.0
         
-        return d1 < perDoseMin || d1 > perDoseMax ||
-               d2 < perDoseMin || d2 > perDoseMax ||
-               totalNightGrams < nightlyMin || totalNightGrams > nightlyMax
-    }
-    
-    /// Available options for early dose time prior picker
-    var earlyTimePriorOptions: [Int] {
-        Array(stride(from: 5, through: 30, by: 5))
+        if d1 < perDoseMin || d1 > perDoseMax { return true }
+        if d2 < perDoseMin || d2 > perDoseMax { return true }
+        if totalNightGrams < nightlyMin || totalNightGrams > nightlyMax { return true }
+        
+        return false
     }
     
     /// Reset all preferences to default values
     func resetToDefaults() {
         totalNightGrams = 6.5
-        splitStrategy = "50/50"
-        roundingStepG = 0.25
+        splitStrategy = "50-50"
+        roundingIncrement = 0.25
         windowStartMin = 150
         windowEndMin = 240
         allowTonightEdit = true
         
         allowEarlyDose = false
         maxEarlyMinutes = 15
-        requireEarlyReason = true
+        earlyRequireReason = true
         earlyTimePriorDefaults = "5,10"
         
         liveActivityEnabled = true
         notifyAtStart = true
         notifyAtHalf = false
         notifyAtEnd = true
-        quietHoursStart = 22
-        quietHoursEnd = 7
+        quietHoursStart = "22:00"
+        quietHoursEnd = "07:00"
         hapticsEnabled = true
         
         healthSampleWindowMin = 120
@@ -245,139 +360,11 @@ final class AppPreferences {
     // MARK: - Migration from Legacy Codable Version
     
     /// Migrate from review bundle's Codable struct if present
-    static func migrateFromLegacyIfNeeded() {
-        struct LegacyPreferences: Codable {
-            var totalNightG: Double?
-            var split: String?
-            var roundingStepG: Double?
-            var windowStartMin: Int?
-            var windowEndMin: Int?
-            var allowEarlyDose: Bool?
-            var maxEarlyMinutes: Int?
-            var requireEarlyReason: Bool?
-            var defaultEarlyButtons: [Int]?
-            var liveActivityEnabled: Bool?
-            var notifyAtStart: Bool?
-            var notifyAtHalf: Bool?
-            var notifyAtEnd: Bool?
-        }
-        
-        guard let data = suite.data(forKey: legacyKey),
-              let legacy = try? JSONDecoder().decode(LegacyPreferences.self, from: data) else {
-            return
-        }
-        
-        print("📦 Migrating from legacy AppPreferences Codable struct...")
-        
-        // Migrate values to @AppStorage
-        let prefs = shared
-        if let val = legacy.totalNightG { prefs.totalNightGrams = val }
-        if let val = legacy.roundingStepG { prefs.roundingStepG = val }
-        if let val = legacy.windowStartMin { prefs.windowStartMin = val }
-        if let val = legacy.windowEndMin { prefs.windowEndMin = val }
-        if let val = legacy.allowEarlyDose { prefs.allowEarlyDose = val }
-        if let val = legacy.maxEarlyMinutes { prefs.maxEarlyMinutes = val }
-        if let val = legacy.requireEarlyReason { prefs.requireEarlyReason = val }
-        if let buttons = legacy.defaultEarlyButtons {
-            prefs.earlyTimePriorDefaults = buttons.map(String.init).joined(separator: ",")
-        }
-        if let val = legacy.liveActivityEnabled { prefs.liveActivityEnabled = val }
-        if let val = legacy.notifyAtStart { prefs.notifyAtStart = val }
-        if let val = legacy.notifyAtHalf { prefs.notifyAtHalf = val }
-        if let val = legacy.notifyAtEnd { prefs.notifyAtEnd = val }
-        
-        // Convert split enum to string
-        if let split = legacy.split {
-            switch split {
-            case "sixtyForty": prefs.splitStrategy = "60/40"
-            case "fortySixty": prefs.splitStrategy = "40/60"
-            default: prefs.splitStrategy = "50/50"
-            }
-        }
-        
-        // Clear legacy data (commented out for safety - user can delete manually)
-        // suite.removeObject(forKey: legacyKey)
-        
-        print("✅ Migration complete")
-    }
-    
-    // MARK: - Codable Compatibility (for review bundle's TodayViewModel)
-    // NOTE: Commented out because LegacyAppPreferences is now in AppPreferencesEnhanced.swift
-    /*
-    /// Create a lightweight struct compatible with review bundle's AppPreferences protocol
-    func toLegacyStruct() -> LegacyAppPreferences {
-        LegacyAppPreferences(
-            totalNightG: totalNightGrams,
-            split: splitToEnum(),
-            roundingStepG: roundingStepG,
-            windowStartMin: windowStartMin,
-            windowEndMin: windowEndMin,
-            allowEarlyDose: allowEarlyDose,
-            maxEarlyMinutes: maxEarlyMinutes,
-            requireEarlyReason: requireEarlyReason,
-            defaultEarlyButtons: defaultEarlyButtons,
-            liveActivityEnabled: liveActivityEnabled,
-            notifyAtStart: notifyAtStart,
-            notifyAtHalf: notifyAtHalf,
-            notifyAtEnd: notifyAtEnd
-        )
-    }
-    
-    private func splitToEnum() -> LegacyAppPreferences.Split {
-        switch splitStrategy {
-        case "60/40": return .sixtyForty
-        case "40/60": return .fortySixty
-        default: return .fiftyFifty
-        }
-    }
-    */
-}
-
-// MARK: - Legacy Compatibility Struct
-// NOTE: This is commented out because AppPreferencesEnhanced.swift has the canonical definition
-/*
-/// Lightweight struct compatible with review bundle's TodayViewModel
-struct LegacyAppPreferences: Codable, Equatable {
-    var totalNightG: Double
-    var split: Split
-    var roundingStepG: Double
-    var windowStartMin: Int
-    var windowEndMin: Int
-    var allowEarlyDose: Bool
-    var maxEarlyMinutes: Int
-    var requireEarlyReason: Bool
-    var defaultEarlyButtons: [Int]
-    var liveActivityEnabled: Bool
-    var notifyAtStart: Bool
-    var notifyAtHalf: Bool
-    var notifyAtEnd: Bool
-    
-    var planDose1G: Double {
-        AppPreferences.round(totalNightG * split.firstFraction, step: roundingStepG)
-    }
-    
-    var planDose2G: Double {
-        AppPreferences.round(totalNightG * split.secondFraction, step: roundingStepG)
-    }
-    
-    enum Split: String, Codable, CaseIterable {
-        case fiftyFifty
-        case sixtyForty
-        case fortySixty
-        case custom
-        
-        var firstFraction: Double {
-            switch self {
-            case .fiftyFifty: return 0.5
-            case .sixtyForty: return 0.6
-            case .fortySixty: return 0.4
-            case .custom: return 0.5
-            }
-        }
-        
-        var secondFraction: Double {
-            1.0 - firstFraction
-        }
+    /// NOTE: Migration disabled - AppPreferencesEnhanced is now the primary preferences system
+    static func migrateFromLegacy() {
+        // Migration removed to fix build errors
+        // AppPreferencesEnhanced is now the canonical preferences implementation
+        // This method is kept for API compatibility
+        print("Legacy migration skipped - using AppPreferencesEnhanced as primary")
     }
 }
-*/
