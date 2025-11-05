@@ -12,7 +12,7 @@ final class DoseLogController: DoseLogControllering {
     init(_ context: ModelContext) { 
         self.context = context
         // Run migration on first launch
-        AppPreferences.migrateFromLegacyIfNeeded()
+        AppPreferences.migrateFromLegacy()
     }
 
     private func currentNightKeyAndStartUTC() -> (String, Date, Int) {
