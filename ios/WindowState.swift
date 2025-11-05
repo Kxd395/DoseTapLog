@@ -157,7 +157,7 @@ extension WindowState {
     /// - Returns: nil if not late, severity if late
     func lateOverrideGate(now: Date, maxLateMin: Int) -> OverrideSeverity? {
         switch self {
-        case .grace(let end, _):
+        case .grace:
             // In grace period - normal severity
             return .normal
         case .closed(let end):
