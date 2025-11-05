@@ -313,9 +313,9 @@ actor AlarmOrchestrator: AlarmOrchestrating {
         content.categoryIdentifier = "DOSE2_ALARM"
         
         // Time Sensitive only if user opted in AND setting is enabled
-        if appPreferences.respectDND == .timeSensitive && settings.timeSensitiveSetting == .enabled {
+        if appPreferences.respectDND == AppPreferences.DNDPolicy.timeSensitive && settings.timeSensitiveSetting == .enabled {
             content.interruptionLevel = .timeSensitive
-        } else if appPreferences.respectDND == .off {
+        } else if appPreferences.respectDND == AppPreferences.DNDPolicy.off {
             content.interruptionLevel = .active
         } else {
             content.interruptionLevel = .active
