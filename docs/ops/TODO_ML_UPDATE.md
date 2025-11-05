@@ -43,26 +43,38 @@ Complete Health Export v2 implementation to enable ML-driven night planning feat
 
 ## 🚧 In Progress (Critical Path)
 
-### 1. Fix Xcode Project Issues (URGENT - 1h)
+### 1. Fix Xcode Project Issues ✅ COMPLETE (Run 001)
+**Evidence**: [Run 001](../review/mlupdateInfo/tests/runs/2025-11-05_16-30-00_run-001/RUN.yaml) | Commits: c7796bc → bd305ae (6 commits)
+
 - [x] Add missing files to DoseTrackNew.xcodeproj: ✅ COMPLETE
   - [x] GuardNoWakeSheet.swift ✅
   - [x] HealthExportBridge+Compression.swift ✅
   - [x] EncryptionSettingsView.swift ✅
   - [x] All 13 Health Export v2 files added ✅
 - [x] Fix compilation errors: ✅ COMPLETE
-  - [x] NightCardViewModern.swift:1254 - unused `night` variable ✅
-  - [x] NightCardViewModern.swift:141 - GuardNoWakeSheet embedded inline ✅
-  - [x] HealthExportBridge+Steps.swift:229 - XCTest import removed ✅
-  - [x] ServiceDayMaxOverlap.swift:125 - XCTest import removed ✅
+  - [x] AppPreferences property mismatches (windowStartMinutes, lateGraceMinutes, etc.) ✅
+  - [x] DNDPolicy enum qualification ✅
+  - [x] Method name corrections (migrateFromLegacy) ✅
+  - [x] Property name corrections (earlyTimePriorOptions) ✅
+  - [x] Missing lateQuickChoicesCSV property ✅
+  - [x] Unused variable warnings ✅
 - [x] Verify DoseTrackNew builds successfully: ✅ No errors found
 
-### 2. Swift Parity Test Harness (HIGH - 2h)
-- [ ] Create `ios/Tests/ServiceDayParityTests.swift`
-- [ ] Read test cases from `review/mlupdateInfo/tests/parity/parity_cases_100.json`
-- [ ] Output results in parseable format: `PARITY_RESULT: {"case_index":0,"swift_key":"2025-11-04"}`
-- [ ] Add test target to Xcode project
-- [ ] Run parity tests: `node scripts/run-parity.js`
-- [ ] Verify 100/100 pass rate (Swift keys == JS keys)
+**Artifacts**: 8 commits, clean compilation (no errors/warnings)
+
+### 2. Swift Parity Test Harness ✅ HARNESS COMPLETE | ⏳ EXECUTION PENDING (Run 001 → Run 002)
+**Evidence**: [Run 001](../review/mlupdateInfo/tests/runs/2025-11-05_16-30-00_run-001/RUN.yaml) | Commits: b46cbf0, 71306c6
+
+- [x] Create `ios/Tests/ServiceDayParityTests.swift` ✅
+- [x] Copy to `DoseTrackNew/DoseTrackNew/Tests/ServiceDayParityTests.swift` ✅
+- [x] Add to Xcode project ✅
+- [x] Generate 100 test cases → `parity_cases_100.json` ✅
+- [x] Fix run-parity.js paths ✅
+- [ ] Run parity tests: `node scripts/run-parity.js` ⏳ NEXT
+- [ ] Verify 100/100 pass rate (Swift keys == JS keys) ⏳ NEXT
+
+**Artifacts**: ServiceDayParityTests.swift (172 lines), parity_cases_100.json (100 cases), run-parity.js
+**Status**: Harness ready, test execution pending (Run 002)
 
 ### 3. Integration (MEDIUM - 2h)
 - [ ] **Compression Integration:**
