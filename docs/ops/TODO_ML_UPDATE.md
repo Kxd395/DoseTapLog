@@ -62,19 +62,25 @@ Complete Health Export v2 implementation to enable ML-driven night planning feat
 
 **Artifacts**: 8 commits, clean compilation (no errors/warnings)
 
-### 2. Swift Parity Test Harness ✅ HARNESS COMPLETE | ⏳ EXECUTION PENDING (Run 001 → Run 002)
-**Evidence**: [Run 001](../review/mlupdateInfo/tests/runs/2025-11-05_16-30-00_run-001/RUN.yaml) | Commits: b46cbf0, 71306c6
+### 2. Swift Parity Test Harness ✅ COMPLETE (Run 002)
+**Evidence**: [Run 002](../review/mlupdateInfo/tests/runs/2025-11-05_16-19-43_run-002/RUN.yaml) | Commit: 506e6de
 
 - [x] Create `ios/Tests/ServiceDayParityTests.swift` ✅
 - [x] Copy to `DoseTrackNew/DoseTrackNew/Tests/ServiceDayParityTests.swift` ✅
 - [x] Add to Xcode project ✅
 - [x] Generate 100 test cases → `parity_cases_100.json` ✅
 - [x] Fix run-parity.js paths ✅
-- [ ] Run parity tests: `node scripts/run-parity.js` ⏳ NEXT
-- [ ] Verify 100/100 pass rate (Swift keys == JS keys) ⏳ NEXT
+- [x] Create standalone Swift parity script (scripts/run-parity-swift.swift) ✅
+- [x] Fix timezone formatting bug (use target timezone for component extraction) ✅
+- [x] Run parity tests: `node scripts/run-parity.js` ✅
+- [x] **Verify 100/100 pass rate (Swift keys == JS keys)** ✅ **PASSED**
 
-**Artifacts**: ServiceDayParityTests.swift (172 lines), parity_cases_100.json (100 cases), run-parity.js
-**Status**: Harness ready, test execution pending (Run 002)
+**Artifacts**: 
+- run-parity-swift.swift (standalone validation script)
+- parity_report.md (100/100 PASSED)
+- Run 002 evidence directory with RUN.yaml + commands.sh
+
+**Status**: ✅ **P0 PARITY GATE COMPLETE** - 100% algorithm match across 5 timezones
 
 ### 3. Integration (MEDIUM - 2h)
 - [ ] **Compression Integration:**
