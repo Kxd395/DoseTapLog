@@ -44,15 +44,15 @@ Complete Health Export v2 implementation to enable ML-driven night planning feat
 ## 🚧 In Progress (Critical Path)
 
 ### 1. Fix Xcode Project Issues (URGENT - 1h)
-- [ ] Add missing files to DoseTrackNew.xcodeproj:
-  - [ ] GuardNoWakeSheet.swift (exists in filesystem, not in project)
-  - [ ] HealthExportBridge+Compression.swift
-  - [ ] EncryptionSettingsView.swift
-  - [ ] Any other new Swift files
-- [ ] Fix compilation errors:
-  - [x] NightCardViewModern.swift:1254 - unused `night` variable (FIXED)
-  - [ ] NightCardViewModern.swift:141 - Cannot find 'GuardNoWakeSheet' (pending project file add)
-- [ ] Verify DoseTrackNew builds successfully
+- [x] Add missing files to DoseTrackNew.xcodeproj: ✅ COMPLETE
+  - [x] GuardNoWakeSheet.swift ✅
+  - [x] HealthExportBridge+Compression.swift ✅
+  - [x] EncryptionSettingsView.swift ✅
+  - [x] All 13 Health Export v2 files added ✅
+- [x] Fix compilation errors:
+  - [x] NightCardViewModern.swift:1254 - unused `night` variable ✅
+  - [x] NightCardViewModern.swift:141 - GuardNoWakeSheet embedded inline ✅
+- [ ] Verify DoseTrackNew builds successfully (pending manual Xcode build)
 
 ### 2. Swift Parity Test Harness (HIGH - 2h)
 - [ ] Create `ios/Tests/ServiceDayParityTests.swift`
