@@ -82,26 +82,31 @@ Complete Health Export v2 implementation to enable ML-driven night planning feat
 
 **Status**: ✅ **P0 PARITY GATE COMPLETE** - 100% algorithm match across 5 timezones
 
-### 3. Integration (MEDIUM - 2h)
-- [ ] **Compression Integration:**
-  ```swift
-  // Update HealthExportBridge.swift
-  func exportIncrementalCompressed() async throws -> URL {
-      let jsonlURL = try await exportIncremental()
-      return try compressExport(jsonlURL: jsonlURL)
-  }
-  ```
-- [ ] **Encryption Integration:**
-  ```swift
-  // In SettingsViewEnhanced.swift
-  Section("Data Export") {
-      NavigationLink("Encryption") {
-          EncryptionSettingsView()
-      }
-  }
-  ```
+### 3. Integration ⏳ IN PROGRESS (MEDIUM - 2h)
+**Status**: Partially complete | Commit: 18016a3
+
+- [x] **Compression Integration:** ✅ COMPLETE
+  - Method `exportIncrementalCompressed()` exists in HealthExportBridge+Compression.swift
+  - Properly wired to call `compressExport(jsonlURL:)`
+  
+- [x] **Encryption UI Integration:** ✅ NAVIGATION ADDED
+  - Added NavigationLink in SettingsViewEnhanced → "Encryption"  
+  - Fixed resetToDefaults() property names (allowEarlyDose/allowLateDose)
+  - EncryptionSettingsView.swift copied to DoseTrackNew directory
+  
+- [ ] **Xcode Build Issues:** ⚠️ BLOCKING
+  - EncryptionSettingsView added to project.pbxproj
+  - File exists in DoseTrackNew/DoseTrackNew/
+  - Build error: "cannot find 'EncryptionSettingsView' in scope"
+  - Issue: May need clean build or project file repair
+  
 - [ ] Wire up encryption toggle to export flow
 - [ ] Test end-to-end: Export → Compress → Encrypt
+
+**Next Steps:**
+1. Debug Xcode scope resolution (try clean build, restart Xcode)
+2. Alternative: Test encryption UI manually via Xcode GUI
+3. Once building, test full export flow
 
 ### 4. Runtime Artifacts (MEDIUM - 2h)
 - [ ] Run iOS app on simulator with sample HealthKit data
