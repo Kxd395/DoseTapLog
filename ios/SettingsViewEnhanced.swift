@@ -134,6 +134,12 @@ struct SettingsViewEnhanced: View {
                 // MARK: - Data Management
                 Section {
                     NavigationLink {
+                        HealthDataExportView()
+                    } label: {
+                        Label("Health Data Export", systemImage: "heart.text.square")
+                    }
+                    
+                    NavigationLink {
                         EncryptionSettingsView()
                     } label: {
                         Label("Encryption", systemImage: "lock.shield")

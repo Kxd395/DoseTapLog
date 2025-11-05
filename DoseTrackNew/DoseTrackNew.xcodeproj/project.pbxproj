@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D27B874C75A34F2BBF8DCB22 /* EncryptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */; };
+		3A540D4CFF9C1958B376C154 /* HealthDataExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2E62796FDE8A2F12F6791 /* HealthDataExportView.swift */; };
 		642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */; };
 		65E3703E5B444936A8B30538 /* Dose2OverrideSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */; };
 		6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */; };
@@ -60,14 +60,15 @@
 		A0000038 /* UndoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000038 /* UndoBanner.swift */; };
 		A0000039 /* NightTurnoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000039 /* NightTurnoverController.swift */; };
 		C4FEF3FD7CE65CBD048D45F8 /* AlarmOrchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */; };
+		D27B874C75A34F2BBF8DCB22 /* EncryptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */; };
 		E7B701002EB94000008532AA /* WindowPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6694AD22EB94000008532AA /* WindowPill.swift */; };
 		F27864512EB94000008532AA /* NextAlertChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25315D52EB94000008532AA /* NextAlertChip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EncryptionSettingsView.swift; path = DoseTrackNew/EncryptionSettingsView.swift; sourceTree = "<group>"; };
 		2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2OverrideSheet.swift; sourceTree = "<group>"; };
 		2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlarmOrchestrator.swift; path = ../../ios/AlarmOrchestrator.swift; sourceTree = "<group>"; };
+		31C2E62796FDE8A2F12F6791 /* HealthDataExportView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HealthDataExportView.swift; path = ../../ios/HealthDataExportView.swift; sourceTree = "<group>"; };
 		44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GuardNoWakeSheet.swift; path = ../../ios/GuardNoWakeSheet.swift; sourceTree = "<group>"; };
 		6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WakeSheetView.swift; path = ../../ios/WakeSheetView.swift; sourceTree = "<group>"; };
 		8089AFCA2EB944A2008532AA /* ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtons.swift; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		8089AFE32EB94EEF008532AA /* NightAlarmPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightAlarmPlan.swift; sourceTree = "<group>"; };
 		8089AFE32EB952D8008532AA /* project.pbxproj */ = {isa = PBXFileReference; lastKnownFileType = text.pbxproject; path = project.pbxproj; sourceTree = "<group>"; };
 		8F9FFBA45A82886549E6FE7E /* WindowState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WindowState.swift; path = ../../ios/WindowState.swift; sourceTree = "<group>"; };
+		9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EncryptionSettingsView.swift; path = DoseTrackNew/EncryptionSettingsView.swift; sourceTree = "<group>"; };
 		B0000001 /* DoseTrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseTrackApp.swift; sourceTree = "<group>"; };
 		B0000002 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B0000003 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				6E9105FEE7417AF8D3717D64 /* WakeSheetView.swift */,
 				8F9FFBA45A82886549E6FE7E /* WindowState.swift */,
 				8FD4EB282A7561E2A2A8E737 /* Tests */,
+				31C2E62796FDE8A2F12F6791 /* HealthDataExportView.swift */,
 			);
 			path = DoseTrackNew;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				6751B4940509258B7D733321 /* GuardNoWakeSheet.swift in Sources */,
 				642A28C3BAD1E03BCC0B7BEB /* WakeSheetView.swift in Sources */,
 				914905F48951B54726A473A7 /* WindowState.swift in Sources */,
+				3A540D4CFF9C1958B376C154 /* HealthDataExportView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
