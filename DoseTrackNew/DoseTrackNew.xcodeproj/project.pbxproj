@@ -65,7 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionSettingsView.swift; sourceTree = "<group>"; };
+		9D838AD92EB44224AD251384 /* EncryptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EncryptionSettingsView.swift; path = DoseTrackNew/EncryptionSettingsView.swift; sourceTree = "<group>"; };
 		2B66BC71CC70456FAD863F61 /* Dose2OverrideSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dose2OverrideSheet.swift; sourceTree = "<group>"; };
 		2D64A5A36122C2E807E1DCEF /* AlarmOrchestrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlarmOrchestrator.swift; path = ../../ios/AlarmOrchestrator.swift; sourceTree = "<group>"; };
 		44A58E665D2E2022C8B2E4FB /* GuardNoWakeSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GuardNoWakeSheet.swift; path = ../../ios/GuardNoWakeSheet.swift; sourceTree = "<group>"; };
@@ -333,6 +333,7 @@
 				A0000023 /* SafetyBanner.swift in Sources */,
 				A0000024 /* SafetyBannerView.swift in Sources */,
 				A0000025 /* SettingsViewEnhanced.swift in Sources */,
+				D27B874C75A34F2BBF8DCB22 /* EncryptionSettingsView.swift in Sources */,
 				8089AFE12EB94EEF008532AA /* NightServiceDay.swift in Sources */,
 				A0000028 /* TodayViewModel+LateDose.swift in Sources */,
 				A0000029 /* TodayViewModel+WakeEvents.swift in Sources */,
