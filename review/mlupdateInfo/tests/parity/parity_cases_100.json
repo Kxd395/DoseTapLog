@@ -1,0 +1,602 @@
+[
+  {
+    "start_utc": "2025-11-20T21:10:00.000Z",
+    "end_utc": "2025-11-21T01:26:48.987Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-25T18:45:00.000Z",
+    "end_utc": "2025-11-26T03:38:06.492Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-15T21:40:00.000Z",
+    "end_utc": "2025-11-16T06:06:11.276Z",
+    "cutoff": 13,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-06T20:28:00.000Z",
+    "end_utc": "2025-11-07T01:54:20.318Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-02T21:37:00.000Z",
+    "end_utc": "2025-11-03T02:44:37.027Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-08T19:12:00.000Z",
+    "end_utc": "2025-11-09T03:40:52.518Z",
+    "cutoff": 10,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-23T00:33:00.000Z",
+    "end_utc": "2025-11-23T08:00:24.177Z",
+    "cutoff": 11,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-29T20:56:00.000Z",
+    "end_utc": "2025-11-30T06:11:47.680Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-05T02:25:00.000Z",
+    "end_utc": "2025-11-05T06:57:19.079Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-19T00:50:00.000Z",
+    "end_utc": "2025-11-19T06:31:28.045Z",
+    "cutoff": 14,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-23T23:16:00.000Z",
+    "end_utc": "2025-11-24T03:29:16.442Z",
+    "cutoff": 11,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-23T21:35:00.000Z",
+    "end_utc": "2025-11-24T06:08:12.878Z",
+    "cutoff": 14,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-28T20:03:00.000Z",
+    "end_utc": "2025-11-29T04:00:16.993Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-11T20:41:00.000Z",
+    "end_utc": "2025-11-12T03:37:51.769Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-14T22:44:00.000Z",
+    "end_utc": "2025-11-15T08:13:01.833Z",
+    "cutoff": 11,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-02T00:18:00.000Z",
+    "end_utc": "2025-11-02T05:09:04.486Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-11T20:05:00.000Z",
+    "end_utc": "2025-11-12T03:03:38.146Z",
+    "cutoff": 10,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-03T22:39:00.000Z",
+    "end_utc": "2025-11-04T05:59:51.326Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-15T01:58:00.000Z",
+    "end_utc": "2025-11-15T09:14:09.629Z",
+    "cutoff": 12,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-02T23:41:00.000Z",
+    "end_utc": "2025-11-03T07:49:14.290Z",
+    "cutoff": 10,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-01T20:03:00.000Z",
+    "end_utc": "2025-11-02T03:37:17.770Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-08T02:26:00.000Z",
+    "end_utc": "2025-11-08T11:05:23.938Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-02T18:29:00.000Z",
+    "end_utc": "2025-11-03T00:01:25.547Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-02T20:06:00.000Z",
+    "end_utc": "2025-11-03T05:56:16.442Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-08T00:12:00.000Z",
+    "end_utc": "2025-11-08T06:46:17.996Z",
+    "cutoff": 12,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-26T02:26:00.000Z",
+    "end_utc": "2025-11-26T06:28:29.689Z",
+    "cutoff": 10,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-18T02:59:00.000Z",
+    "end_utc": "2025-11-18T09:06:29.409Z",
+    "cutoff": 12,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-06T18:25:00.000Z",
+    "end_utc": "2025-11-07T03:14:55.724Z",
+    "cutoff": 14,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-08T19:21:00.000Z",
+    "end_utc": "2025-11-09T00:18:52.015Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-08T19:42:00.000Z",
+    "end_utc": "2025-11-09T04:52:05.082Z",
+    "cutoff": 12,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-22T23:06:00.000Z",
+    "end_utc": "2025-11-23T08:19:39.603Z",
+    "cutoff": 12,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-02T00:06:00.000Z",
+    "end_utc": "2025-11-02T06:54:41.341Z",
+    "cutoff": 10,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-23T01:40:00.000Z",
+    "end_utc": "2025-11-23T08:52:25.618Z",
+    "cutoff": 13,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-22T21:10:00.000Z",
+    "end_utc": "2025-11-23T02:09:13.304Z",
+    "cutoff": 10,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-11T01:49:00.000Z",
+    "end_utc": "2025-11-11T11:28:55.670Z",
+    "cutoff": 11,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-01T22:15:00.000Z",
+    "end_utc": "2025-11-02T04:49:13.728Z",
+    "cutoff": 14,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-26T23:38:00.000Z",
+    "end_utc": "2025-11-27T09:13:40.976Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-17T02:42:00.000Z",
+    "end_utc": "2025-11-17T07:34:14.276Z",
+    "cutoff": 14,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-01T02:58:00.000Z",
+    "end_utc": "2025-11-01T10:59:01.754Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-18T19:32:00.000Z",
+    "end_utc": "2025-11-19T04:41:24.929Z",
+    "cutoff": 12,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-30T18:21:00.000Z",
+    "end_utc": "2025-11-30T23:20:34.845Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-24T22:36:00.000Z",
+    "end_utc": "2025-11-25T02:49:12.960Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-06T21:42:00.000Z",
+    "end_utc": "2025-11-07T04:26:54.414Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-12T23:42:00.000Z",
+    "end_utc": "2025-11-13T06:04:14.938Z",
+    "cutoff": 14,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-22T18:16:00.000Z",
+    "end_utc": "2025-11-22T23:25:23.933Z",
+    "cutoff": 11,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-27T18:53:00.000Z",
+    "end_utc": "2025-11-28T02:33:12.227Z",
+    "cutoff": 13,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-05T22:11:00.000Z",
+    "end_utc": "2025-11-06T02:25:56.716Z",
+    "cutoff": 11,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-15T18:06:00.000Z",
+    "end_utc": "2025-11-16T03:41:49.206Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-21T01:29:00.000Z",
+    "end_utc": "2025-11-21T08:34:10.080Z",
+    "cutoff": 12,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-19T21:57:00.000Z",
+    "end_utc": "2025-11-20T05:01:15.097Z",
+    "cutoff": 10,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-21T19:20:00.000Z",
+    "end_utc": "2025-11-22T03:17:31.785Z",
+    "cutoff": 11,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-05T22:51:00.000Z",
+    "end_utc": "2025-11-06T02:51:03.713Z",
+    "cutoff": 10,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-18T23:06:00.000Z",
+    "end_utc": "2025-11-19T07:51:07.582Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-22T00:29:00.000Z",
+    "end_utc": "2025-11-22T07:01:38.444Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-18T01:47:00.000Z",
+    "end_utc": "2025-11-18T07:51:55.735Z",
+    "cutoff": 14,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-29T02:20:00.000Z",
+    "end_utc": "2025-11-29T06:59:41.571Z",
+    "cutoff": 12,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-06T21:06:00.000Z",
+    "end_utc": "2025-11-07T01:53:10.604Z",
+    "cutoff": 12,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-05T18:19:00.000Z",
+    "end_utc": "2025-11-06T01:58:26.552Z",
+    "cutoff": 11,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-12T22:41:00.000Z",
+    "end_utc": "2025-11-13T05:20:41.493Z",
+    "cutoff": 11,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-09T02:32:00.000Z",
+    "end_utc": "2025-11-09T06:34:04.418Z",
+    "cutoff": 14,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-04T19:59:00.000Z",
+    "end_utc": "2025-11-05T01:34:38.237Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-02T23:46:00.000Z",
+    "end_utc": "2025-11-03T09:30:15.951Z",
+    "cutoff": 10,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-06T23:42:00.000Z",
+    "end_utc": "2025-11-07T06:20:21.779Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-23T01:08:00.000Z",
+    "end_utc": "2025-11-23T05:39:24.773Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-30T21:37:00.000Z",
+    "end_utc": "2025-12-01T06:35:58.624Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-12T23:47:00.000Z",
+    "end_utc": "2025-11-13T06:51:21.992Z",
+    "cutoff": 14,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-16T22:39:00.000Z",
+    "end_utc": "2025-11-17T04:27:04.088Z",
+    "cutoff": 12,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-11T21:34:00.000Z",
+    "end_utc": "2025-11-12T06:58:46.443Z",
+    "cutoff": 14,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-02T20:43:00.000Z",
+    "end_utc": "2025-11-03T02:03:58.880Z",
+    "cutoff": 10,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-09T21:01:00.000Z",
+    "end_utc": "2025-11-10T05:13:54.368Z",
+    "cutoff": 11,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-22T19:34:00.000Z",
+    "end_utc": "2025-11-22T23:59:30.501Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-12T20:03:00.000Z",
+    "end_utc": "2025-11-13T04:29:20.902Z",
+    "cutoff": 14,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-09T20:10:00.000Z",
+    "end_utc": "2025-11-10T04:04:53.026Z",
+    "cutoff": 14,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-24T20:21:00.000Z",
+    "end_utc": "2025-11-25T06:17:58.992Z",
+    "cutoff": 10,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-09T00:19:00.000Z",
+    "end_utc": "2025-11-09T10:04:40.426Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-08T20:25:00.000Z",
+    "end_utc": "2025-11-09T01:18:51.090Z",
+    "cutoff": 12,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-12T23:05:00.000Z",
+    "end_utc": "2025-11-13T07:38:49.214Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-24T23:23:00.000Z",
+    "end_utc": "2025-11-25T06:40:18.038Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-15T19:22:00.000Z",
+    "end_utc": "2025-11-15T23:26:29.425Z",
+    "cutoff": 12,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-16T19:44:00.000Z",
+    "end_utc": "2025-11-17T01:31:07.233Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-11T20:47:00.000Z",
+    "end_utc": "2025-11-12T01:54:30.599Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-14T01:46:00.000Z",
+    "end_utc": "2025-11-14T08:10:20.902Z",
+    "cutoff": 11,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-07T23:39:00.000Z",
+    "end_utc": "2025-11-08T07:43:31.256Z",
+    "cutoff": 10,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-27T20:04:00.000Z",
+    "end_utc": "2025-11-28T02:35:20.749Z",
+    "cutoff": 11,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-19T21:39:00.000Z",
+    "end_utc": "2025-11-20T01:40:21.560Z",
+    "cutoff": 10,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-19T21:37:00.000Z",
+    "end_utc": "2025-11-20T04:26:58.669Z",
+    "cutoff": 10,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-28T21:38:00.000Z",
+    "end_utc": "2025-11-29T06:57:35.760Z",
+    "cutoff": 12,
+    "tz": "Asia/Tokyo"
+  },
+  {
+    "start_utc": "2025-11-21T02:08:00.000Z",
+    "end_utc": "2025-11-21T07:34:05.834Z",
+    "cutoff": 12,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-16T01:01:00.000Z",
+    "end_utc": "2025-11-16T05:45:06.193Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  },
+  {
+    "start_utc": "2025-11-01T22:48:00.000Z",
+    "end_utc": "2025-11-02T08:44:32.117Z",
+    "cutoff": 10,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-14T20:34:00.000Z",
+    "end_utc": "2025-11-15T02:16:43.365Z",
+    "cutoff": 14,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-17T20:10:00.000Z",
+    "end_utc": "2025-11-18T00:45:43.988Z",
+    "cutoff": 11,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-17T00:02:00.000Z",
+    "end_utc": "2025-11-17T05:14:16.269Z",
+    "cutoff": 14,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-07T21:23:00.000Z",
+    "end_utc": "2025-11-08T04:03:39.137Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-27T21:11:00.000Z",
+    "end_utc": "2025-11-28T02:49:49.187Z",
+    "cutoff": 13,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-28T19:40:00.000Z",
+    "end_utc": "2025-11-29T00:11:18.158Z",
+    "cutoff": 10,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-14T21:41:00.000Z",
+    "end_utc": "2025-11-15T06:10:23.260Z",
+    "cutoff": 11,
+    "tz": "Europe/London"
+  },
+  {
+    "start_utc": "2025-11-23T21:04:00.000Z",
+    "end_utc": "2025-11-24T01:25:00.839Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-23T21:00:00.000Z",
+    "end_utc": "2025-11-24T04:32:32.171Z",
+    "cutoff": 13,
+    "tz": "America/New_York"
+  },
+  {
+    "start_utc": "2025-11-08T22:42:00.000Z",
+    "end_utc": "2025-11-09T05:18:01.827Z",
+    "cutoff": 13,
+    "tz": "America/Denver"
+  }
+]
