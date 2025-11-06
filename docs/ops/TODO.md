@@ -1,7 +1,7 @@
 # DoseTrack v1.2 - Production TODO
 
-**Status:** 80 items | ✅ 12 complete | 🔄 68 pending  
-**Estimated Effort:** 123-167 hours  
+**Status:** 80 items | ✅ 13 complete | 🔄 67 pending  
+**Estimated Effort:** 122.5-166.5 hours  
 **Last Updated:** November 5, 2025
 **Scope:** Beta-ready foundation + safety rails + soft-wake alarms + Health/WHOOP integrations (defer analytics/comfort to Phase 2-3)
 
@@ -987,24 +987,42 @@
     - `Info.plist` ✅ (CFBundleURLTypes added)
   - **Reference:** `docs/WHOOP_INTEGRATION_PLAN.md` Section 4.4
 
-- [ ] **74. SettingsViewEnhanced Integration** ⏱️ 0.5h  
-  **Priority:** MEDIUM  
-  Add WHOOP navigation link to Data Integrations section:
+- [x] **74. SettingsViewEnhanced Integration** ⏱️ 0.5h  
+  **Priority:** MEDIUM | **Status:** ✅ COMPLETE  
+  Added WHOOP navigation link to Data Management section in Settings:
+  - ✅ NavigationLink to WhoopIntegrationView()
+  - ✅ Label with ECG waveform icon: "WHOOP" + systemImage: "waveform.path.ecg"
+  - ✅ Connection status indicator: green checkmark when session_id exists
+  - ✅ Reads UserDefaults.standard.string(forKey: "whoop_session_id")
+  - ✅ Positioned between Health Data Export and Encryption
+  
+  **Implementation:**
   ```swift
-  NavigationLink(destination: WhoopIntegrationView()) {
+  NavigationLink {
+      WhoopIntegrationView()
+  } label: {
       HStack {
           Label("WHOOP", systemImage: "waveform.path.ecg")
           Spacer()
-          if whoopConnectionStatus == .connected {
+          if let sessionId = UserDefaults.standard.string(forKey: "whoop_session_id"),
+             !sessionId.isEmpty {
               Image(systemName: "checkmark.circle.fill")
                   .foregroundColor(.green)
+                  .font(.caption)
           }
       }
   }
   ```
-  - **DoD:** Link appears below Health Data Export; connection status indicator; tappable → opens WhoopIntegrationView.
-  - Depends on: Item 72
-  - Files: `ios/SettingsViewEnhanced.swift` (modify)
+  
+  - **DoD:** ✅ All criteria met
+    - Link appears in Data Management section below Health Data Export
+    - Green checkmark icon when connected
+    - Tappable → opens WhoopIntegrationView
+    - Follows existing navigation pattern
+  - **Build Status:** ✅ BUILD SUCCEEDED
+  - Depends on: Item 72 ✅
+  - Files Modified:
+    - `ios/SettingsViewEnhanced.swift` ✅ (13 lines added)
 
 ### P2 - Data Integration
 

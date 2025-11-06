@@ -140,6 +140,21 @@ struct SettingsViewEnhanced: View {
                     }
                     
                     NavigationLink {
+                        WhoopIntegrationView()
+                    } label: {
+                        HStack {
+                            Label("WHOOP", systemImage: "waveform.path.ecg")
+                            Spacer()
+                            if let sessionId = UserDefaults.standard.string(forKey: "whoop_session_id"),
+                               !sessionId.isEmpty {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                    
+                    NavigationLink {
                         EncryptionSettingsView()
                     } label: {
                         Label("Encryption", systemImage: "lock.shield")
