@@ -30,6 +30,19 @@
 	<array>
 		<string>com.dosetrack.cutoff.rollover</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.dosetrack.oauth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>dosetrack</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

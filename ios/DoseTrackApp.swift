@@ -23,6 +23,9 @@ struct DoseTrackApp: App {
         .backgroundTask(.appRefresh("com.dosetrack.cutoff.rollover")) { task in
             await handleCutoffRollover(task: task as! BGAppRefreshTask)
         }
+        .onOpenURL { url in
+            handleOpenURL(url)
+        }
     }
     
     // MARK: - Background Task Registration
@@ -90,4 +93,72 @@ struct DoseTrackApp: App {
         // Mark task complete
         task.setTaskCompleted(success: true)
     }
+    
+    // MARK: - URL Handling (OAuth Callbacks)
+    
+    /// Handle OAuth redirect URLs
+    private func handleOpenURL(_ url: URL) {
+        guard url.scheme == "dosetrack" else { return }
+        
+        // Handle WHOOP OAuth callback
+        if url.host == "oauth" && url.pathComponents.contains("whoop") {
+            handleWhoopOAuthCallback(url)
+        }
+    }
+    
+    /// Process WHOOP OAuth callback
+    private func handleWhoopOAuthCallback(_ url: URL) {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let code = components.queryItems?.first(where: { $0.name == "code" })?.value else {
+            print("❌ WHOOP OAuth: No authorization code in callback")
+            // Post notification for UI to show error
+            NotificationCenter.default.post(name: .whoopConnectionFailed, object: nil)
+            return
+        }
+        
+        print("✅ WHOOP OAuth: Received authorization code")
+        
+        Task {
+            do {
+                // Exchange code for session
+                let session = try await WhoopAPIClient.shared.exchangeCode(code)
+                
+                await MainActor.run {
+                    // Store session ID
+                    UserDefaults.standard.set(session.sessionId, forKey: "whoop_session_id")
+                    UserDefaults.standard.set(session.whoopUserId, forKey: "whoop_user_id")
+                    UserDefaults.standard.set(session.expiresAt.timeIntervalSince1970, forKey: "whoop_expires_at")
+                    
+                    print("✅ WHOOP OAuth: Session created (expires: \(session.expiresAt))")
+                    
+                    // Notify UI
+                    NotificationCenter.default.post(
+                        name: .whoopConnected,
+                        object: nil,
+                        userInfo: ["session": session]
+                    )
+                }
+            } catch {
+                print("❌ WHOOP OAuth: Failed to exchange code - \(error.localizedDescription)")
+                
+                await MainActor.run {
+                    NotificationCenter.default.post(
+                        name: .whoopConnectionFailed,
+                        object: nil,
+                        userInfo: ["error": error]
+                    )
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Notification Names
+
+extension Notification.Name {
+    /// Posted when WHOOP connection succeeds
+    static let whoopConnected = Notification.Name("WhoopConnected")
+    
+    /// Posted when WHOOP connection fails
+    static let whoopConnectionFailed = Notification.Name("WhoopConnectionFailed")
 }

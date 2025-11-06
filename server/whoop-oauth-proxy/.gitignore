@@ -1,0 +1,32 @@
+# Environment variables (contains secrets)
+.env
+.env.local
+.env.production
+
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+dist/
+build/
+
+# Session storage (in-memory for now, but future DB files)
+*.db
+*.sqlite
+sessions/
