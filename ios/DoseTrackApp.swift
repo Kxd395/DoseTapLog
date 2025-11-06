@@ -19,7 +19,7 @@ struct DoseTrackApp: App {
         WindowGroup {
             ThreeCardPlanningView()
         }
-        .modelContainer(for: [DoseLog.self])
+        .modelContainer(for: [DoseLog.self, NightFeatures.self])
         .backgroundTask(.appRefresh("com.dosetrack.cutoff.rollover")) { task in
             await handleCutoffRollover(task: task as! BGAppRefreshTask)
         }
@@ -70,7 +70,7 @@ struct DoseTrackApp: App {
         }
         
         // Create model context
-        let container = try! ModelContainer(for: DoseLog.self)
+        let container = try! ModelContainer(for: DoseLog.self, NightFeatures.self)
         let context = ModelContext(container)
         
         // Run turnover logic

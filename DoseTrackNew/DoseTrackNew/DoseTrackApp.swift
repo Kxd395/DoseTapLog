@@ -14,6 +14,6 @@ struct DoseTrackApp: App {
         WindowGroup {
             ThreeCardPlanningView()
         }
-        .modelContainer(for: [DoseLog.self])
+        .modelContainer(for: [DoseLog.self, NightFeatures.self])
     }
 }
