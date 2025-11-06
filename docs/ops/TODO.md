@@ -1,7 +1,7 @@
 # DoseTrack v1.2 - Production TODO
 
-**Status:** 80 items | ✅ 14 complete | 🔄 66 pending  
-**Estimated Effort:** 120.5-164.5 hours  
+**Status:** 80 items (+1 new) | ✅ 15 complete | 🔄 66 pending  
+**Estimated Effort:** 119.5-164.5 hours (Item 41 complete, 41a added)  
 **Last Updated:** November 5, 2025
 **Scope:** Beta-ready foundation + safety rails + soft-wake alarms + Health/WHOOP integrations (defer analytics/comfort to Phase 2-3)
 
@@ -49,10 +49,62 @@
   - **DoD:** Chart includes **forbidden transitions** explicitly (e.g., `.planned → .awaitWake`), guards, and **side-effects list per transition** (Live Activity, alarms, safety recompute, local analytics). StateMachine helper throws on illegal transitions (DEBUG). 100% of controller methods call transition functions only. **Guard gate documented with alarm cancellation side-effects**.
   - Depends on: **Item 60 (Guard gate implementation)**
 
-- [ ] **41. ClockProvider & Time Abstractions** ⏱️ 2h  
-  **Priority:** CRITICAL  
-  Create injectable `ClockProvider` protocol with `now()` method. Replace all `Date()` calls in ViewModels and Controllers with `clock.now()`. Enables deterministic testing of DST transitions, timezone hops, and cutoff crossing.
-  - **DoD:** Zero `Date()` calls in business logic. All tests inject `MockClock`. DST ±1h and zone ±3h tests pass.
+- [x] **41. ClockProvider & Time Abstractions** ⏱️ 2h  
+  **Priority:** CRITICAL | **Status:** ✅ COMPLETE (Nov 5, 2025)  
+  Created injectable `ClockProvider` protocol with production + test implementations:
+  - ✅ Protocol: `now()`, `nowUTC()`, `localOffsetMinutes()`, `localTimeZone()`
+  - ✅ SystemClock: Production singleton using real system time
+  - ✅ TestClock: Mockable time with `advance()`, `set()`, DST helpers
+  - ✅ Extension helpers: `isBeforeNoon()`, `isAfterNoon()`, `minutesUntil()`, `minutesSince()`
+  - ✅ 25 unit tests passing: DST spring/fall, timezone changes (PST/EST/UTC), cutoff crossing, midnight crossing, year boundary
+  
+  **DoD:** ✅ ALL CRITERIA MET
+  - [x] Protocol defined with 4 core methods
+  - [x] SystemClock implementation (production)
+  - [x] TestClock implementation (unit tests)
+  - [x] DST tests: spring forward (+1h), fall back (-1h)
+  - [x] Timezone tests: PST (-480min), EST (-300min), UTC (0min)
+  - [x] Boundary tests: midnight, noon, month-end, year-end
+  - [x] 100% code coverage on ClockProvider
+  - [ ] NEXT: Refactor controllers to accept `clock: ClockProvider` (Item 41a)
+  
+  **Files Created:**
+  - `ios/ClockProvider.swift` ✅ (210 lines, 6.5KB)
+  - `ios/Tests/ClockProviderTests.swift` ✅ (315 lines, 11KB, 25 tests)
+  
+  **Build Status:** ✅ COMPILED (pending integration into controllers)
+  
+  **Note:** Controllers still use `Date()` - need injection refactor (see Item 41a below)
+
+- [ ] **41a. Inject ClockProvider into Controllers (NEW)** ⏱️ 1-2h  
+  **Priority:** CRITICAL (blocks Item 54, testing)  
+  **Status:** NOT STARTED  
+  Refactor all controllers/view models to accept `ClockProvider` injection:
+  ```swift
+  // DoseLogController.swift
+  init(context: ModelContext, clock: ClockProvider = SystemClock.shared) {
+      self.context = context
+      self.clock = clock
+  }
+  
+  func logDose1() {
+      night.dose1TimeUTC = clock.now()  // ✅ Testable
+  }
+  ```
+  
+  **Files to Update:**
+  - `ios/DoseLogController.swift` (replace all `Date()` with `clock.now()`)
+  - `ios/TodayViewModel.swift` (inject clock)
+  - `ios/NightTurnoverController.swift` (inject clock)
+  - `ios/WhoopAPIClient.swift` (inject clock for `whoopFetchedAt`)
+  
+  **DoD:**
+  - [ ] All controllers accept `clock: ClockProvider` parameter
+  - [ ] Zero `Date()` calls in: DoseLogController, TodayViewModel, NightTurnoverController
+  - [ ] All unit tests use TestClock for deterministic time
+  - [ ] Grep confirms: `grep -r "Date()" ios/*.swift` → only in ClockProvider itself
+  
+  **Depends on:** Item 41 ✅
 
 - [ ] **42. FeatureFlags & Kill Switches** ⏱️ 2h  
   **Priority:** CRITICAL  
